@@ -1,0 +1,10 @@
+{
+  "name": "trenders-client",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json --format stylish"
+  },
+  "devDependencies": {
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  }
+}

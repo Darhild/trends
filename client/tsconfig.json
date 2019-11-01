@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "jsx": "react",
+        "strict": true,
+        "removeComments": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "es2015",
+            "dom"
+        ]
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
