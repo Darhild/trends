@@ -1,6 +1,6 @@
 import React from 'react';
 import './Card.scss';
-import { data } from './../../feed'
+import data from './../../feed.json'
 
 const Card: React.FC = () => {
     const item: any = data.items[0].includes[0];
