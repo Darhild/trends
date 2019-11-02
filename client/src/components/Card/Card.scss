@@ -1,0 +1,14 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.Card {
+    min-width: 117px;
+    max-width: 162px;
+  
+    &-Thumb {
+        height: 175px;
+        background-size: cover;
+    }
+}
