@@ -1,0 +1,29 @@
+.SmallCard {
+    height: 160px;
+    width: 100px;
+    border-radius: 6px;
+    margin-right: 8px;
+    position: relative;
+
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 28.93%, rgba(0, 0, 0, 0.9) 100%);
+    background-size: cover;
+
+    &-Icon {
+        top: 10px;
+        left: 10px;
+        height: 28px;
+
+        
+        position: absolute;
+    }
+
+    &-Footer {
+        margin: 10px;
+        bottom: 0;
+        position: absolute;
+
+        font-size: 13px;
+        color: #fff;
+        text-shadow: 0px 1.35088px 0px rgba(0, 0, 0, 0.15);
+    }
+}
