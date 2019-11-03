@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Carousel.scss';
 
 interface CarouselProps {
@@ -16,12 +15,12 @@ class Carousel extends React.Component<CarouselProps> {
         return (
             <div className="Carousel">
                 <div className="Carousel-Header">
-                    <div className="Carousel-HeaderTitle">{this.props.title}</div>
-                    <div className="Carousel-HeaderHide"></div>
+                    <div className="Carousel-Title">{this.props.title}</div>
+                    <div className="Carousel-Hide"></div>
                 </div>
                 <div className="Carousel-List">
                     {React.Children.map(children, (child, num) =>
-                        <div className="Carousel-ListItem" key={num}>{child}</div>)}
+                        <div className="Carousel-Item" key={num}>{child}</div>)}
                 </div>
             </div>
         );

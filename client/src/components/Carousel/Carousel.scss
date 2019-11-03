@@ -1,5 +1,5 @@
 .Carousel {
-    &-HeaderTitle {
+    &-Title {
         margin: 8px 0;
         font-weight: 500;
         font-size: 18px;
@@ -13,12 +13,12 @@
         margin-left: -16px;
         margin-right: -16px;
 
-        &Item:first-child {
-            margin-left: 16px;
-        }
-
         &::-webkit-scrollbar {
             display: none;
         }
+    }
+
+    &-Item:first-child {
+        margin-left: 16px;
     }
 }
