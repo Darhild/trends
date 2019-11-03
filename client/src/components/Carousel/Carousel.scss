@@ -18,15 +18,19 @@
         }
     }
 
-    &-Item:first-child {
-        margin-left: 16px;
-    }
+    &-Item {
+        &_margin {
+            &_s {
+                margin-left: 8px;
+            }
 
-    &-Item_margin_8:not(:first-child) {
-        margin-left: 8px;
-    }
+            &_m {
+                margin-left: 12px;
+            }
+        }
 
-    &-Item_margin_12:not(:first-child) {
-        margin-left: 12px;
+        &:first-child {
+            margin-left: 16px;
+        }
     }
 }

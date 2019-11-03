@@ -2,15 +2,21 @@ import React from 'react';
 import './Carousel.scss';
 
 interface CarouselProps {
-    title: string;
+    title?: string;
     margin: string;
     children: unknown;
 }
 
+const CarouselTitle = ({title}: {title?: string}) => {
+    if (title) {
+        return <div className="Carousel-Title">{title}</div>
+    }
+    return null;
+}
+
 class Carousel extends React.Component<CarouselProps> {
     public static defaultProps = {
-        title: '',
-        margin: '12',
+        margin: 'm',
     };
     public render() {
         const children = this.props.children;
@@ -18,7 +24,7 @@ class Carousel extends React.Component<CarouselProps> {
         return (
             <div className="Carousel">
                 <div className="Carousel-Header">
-                    <div className="Carousel-Title">{this.props.title}</div>
+                    <CarouselTitle title={this.props.title} />
                     <div className="Carousel-Hide"></div>
                 </div>
                 <div className="Carousel-List">
