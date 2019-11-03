@@ -7,13 +7,6 @@ interface CarouselProps {
     children: unknown;
 }
 
-const CarouselTitle = ({title}: {title?: string}) => {
-    if (title) {
-        return <div className="Carousel-Title">{title}</div>
-    }
-    return null;
-}
-
 class Carousel extends React.Component<CarouselProps> {
     public static defaultProps = {
         margin: 'm',
@@ -24,7 +17,7 @@ class Carousel extends React.Component<CarouselProps> {
         return (
             <div className="Carousel">
                 <div className="Carousel-Header">
-                    <CarouselTitle title={this.props.title} />
+                    {this.props.title && <div className="Carousel-Title">{this.props.title}</div>}
                     <div className="Carousel-Hide"></div>
                 </div>
                 <div className="Carousel-List">
