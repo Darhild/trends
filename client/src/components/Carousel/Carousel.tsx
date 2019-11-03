@@ -3,15 +3,18 @@ import './Carousel.scss';
 
 interface CarouselProps {
     title: string;
+    margin: string;
     children: unknown;
 }
 
 class Carousel extends React.Component<CarouselProps> {
     public static defaultProps = {
         title: '',
+        margin: '12',
     };
     public render() {
         const children = this.props.children;
+        const modName = 'Carousel-Item_margin_' + this.props.margin;
         return (
             <div className="Carousel">
                 <div className="Carousel-Header">
@@ -20,7 +23,7 @@ class Carousel extends React.Component<CarouselProps> {
                 </div>
                 <div className="Carousel-List">
                     {React.Children.map(children, (child, num) =>
-                        <div className="Carousel-Item" key={num}>{child}</div>)}
+                        <div className={"Carousel-Item " + modName} key={num}>{child}</div>)}
                 </div>
             </div>
         );

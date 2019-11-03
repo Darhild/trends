@@ -21,4 +21,12 @@
     &-Item:first-child {
         margin-left: 16px;
     }
+
+    &-Item_margin_8:not(:first-child) {
+        margin-left: 8px;
+    }
+
+    &-Item_margin_12:not(:first-child) {
+        margin-left: 12px;
+    }
 }
