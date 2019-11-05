@@ -1,8 +1,47 @@
-.Search {
+.Search { 
   box-sizing: border-box;
 
   &-Icon {
     cursor: pointer;
+  }
+
+  &-Form {
+    display: flex;    
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  &-Input {    
+    padding: 10px 24px;
+    font-size: 16px;
+    color: var(--text-primary);
+    background: transparent;       
+    border: none;
+
+    &::-webkit-input-placeholder {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      outline: none;
+    }
+  }
+
+  &-Submit {
+    padding: 7px 12px;
+    font-size: 17px;
+    color: var(--text-dark);
+    background-color: var(--color-border-accent);
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 6px;
   }
 }
 
@@ -47,66 +86,7 @@
   }
 }
 
-.Search { 
-  &-Form {
-    display: flex;    
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  &-Input {    
-    padding: 10px 24px;
-    font-size: 16px;
-    color: var(--text-primary);
-    background: transparent;       
-    border: none;
-
-    &::-webkit-input-placeholder {
-      font-size: 16px;
-      color: var(--text-secondary);
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &:active {
-      outline: none;
-    }
-  }
-
-  &-Submit {
-    padding: 7px 12px;
-    font-size: 17px;
-    color: var(--text-dark);
-    background-color: var(--color-border-accent);
-    border: none;
-    cursor: pointer;
-    box-sizing: border-box;
-    border-radius: 6px;
-  }
-}
-
-@media(min-width: 440px) {
-  .Search:not(.Search_state_mobile) {
-    .Search-Form {
-      display: flex;      
-    }
-  }
-
-  .Search_state_mobile {
-    background: transparent;
-
-    .Search-Form {
-      align-items: stretch;
-    }
-
-    .Search-Close {
-      display: none;
-    }
-  }
-
+@media(min-width: 440px) { 
   .Search {
     width: 100%;    
     max-width: 640px;
@@ -175,6 +155,24 @@
       &:active {
         outline: none;
       }
+    }
+  }
+
+  .Search_state_mobile {
+    background: transparent;
+
+    .Search-Form {
+      align-items: stretch;
+    }
+
+    .Search-Close {
+      display: none;
+    }
+  }
+
+  .Search:not(.Search_state_mobile) {
+    .Search-Form {
+      display: flex;      
     }
   }
 }
