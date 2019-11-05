@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './Header.scss';
-import Icon from '../Icon/Icon';
-import { ReactComponent as Search } from '../../images/svg/search.svg';
 import { ReactComponent as Logo } from '../../images/svg/logo.svg';
+import Search from './../Search/Search';
 
 class Header extends Component {
     public render() {
@@ -11,7 +10,7 @@ class Header extends Component {
                 <div className="Header-Logo">
                     <Logo />
                 </div>
-                <Icon className="Header-Search"><Search /></Icon>
+                <Search />
             </div>
         );
     }
