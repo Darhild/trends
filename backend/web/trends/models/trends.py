@@ -20,15 +20,20 @@ metadata = MetaData(naming_convention=convention)
 @as_declarative(metadata=metadata)
 class Base:
     """Base class for all models"""
+
     @declared_attr
     def created_at(cls):
         return Column(DateTime(timezone=True),
                       server_default=text('clock_timestamp()'),
                       nullable=False)
 
-class Import(Base):
-    __tablename__ = 'imports'
+
+class Trends(Base):
+    __tablename__ = 'trends'
 
     id = sa.Column(sa.Integer, primary_key=True)
+    data = sa.Column(sa.JSON)
+    source = sa.Column(sa.String(256), nullable=False)
 
-import_id_table = Import.__table__
+
+trends_table = Trends.__table__

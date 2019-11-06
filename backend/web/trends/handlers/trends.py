@@ -26,6 +26,6 @@ mock_json = '''{
 
 
 @trends.route('/trends', methods=['GET'])
-def import_trends():
+def trends_handler():
     # user = request.args.get('user')
     return Response(mock_json, status=200)
