@@ -1,22 +1,25 @@
-FROM python:3.7 as builder
 
-ADD requirements.txt /tmp/
-RUN pip install --install-option="--prefix=/install" -r /tmp/requirements.txt
+FROM snakepacker/python:all as builder
+
+# Create virtualenv
+RUN python3 -m venv /app
+ENV PATH="/app/bin:${PATH}"
+
+WORKDIR /tmp
+# Install requirements on separate step for better cache
+COPY requirements.txt /tmp
+RUN pip install -r requirements.txt
+
+# Install app as python module
+COPY . /tmp
+RUN python setup.py build install
 
 # App layer
-FROM python:3.7-alpine as app
+FROM snakepacker/python:3.7 as app
 
-COPY --from=builder /install /usr/local
-RUN apk update && apk add bash --no-cache bash
-
-ADD dist/ /opt/app/
-ADD app.py /opt/app/
-ADD requirements.txt /opt/app/
-
-# SHELL ["/bin/bash", "-c"]
-WORKDIR /opt/app/
-
-RUN pip install -v trends-service*
+ENV PATH="/app/bin:${PATH}"
+COPY --from=builder /app /app
+COPY --from=builder /tmp /app
 
 EXPOSE 8080
-CMD ["python3", "app.py"]
+CMD ["python3", "/app/app.py"]
