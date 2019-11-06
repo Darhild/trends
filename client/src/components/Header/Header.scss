@@ -6,6 +6,7 @@
     align-items: center;
     height: 48px;
     padding: 0 16px;
+    box-sizing: border-box;
 
     &-Logo {        
         font-size: 28px;
@@ -20,7 +21,7 @@
     &-Search {
         position: absolute;
         margin-right: 16px;
-        right: 14px;
+        right: 0;
         width: auto;
         height: 100%;
         display: flex;
@@ -31,7 +32,8 @@
 @media(min-width: 440px) {
     .Header {
         justify-content: flex-start;
-        padding: 12px 16px;
+        height: 66px;
+        padding: 14px 16px;
 
         &-Logo {
             margin-right: 16px;
