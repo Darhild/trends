@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classnames from 'classnames';
 import './Card.scss';
 import CardDetails from '../CardDetails/CardDetails';
+import StarRating from './../StarRating/StarRating';
 import {dateUtils} from './../../utils';
 
 export interface CardProps {
@@ -23,6 +24,7 @@ export default class Card extends Component<CardProps> {
                 <div className={cardCn}>
                     <div className="Card-Thumb" style={{backgroundImage: `url(${img})`}}>
                         <CardDetails card={card} content={content}/>
+                        {content === 'series' ? <StarRating /> : null}
                     </div>
                     <div className="Card-Content">
                         <div className="Card-Title" >

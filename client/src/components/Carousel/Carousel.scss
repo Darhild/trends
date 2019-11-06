@@ -6,6 +6,7 @@
         padding-left: 16px;
         margin-left: -16px;
         margin-right: -16px;
+        padding-top: 6px;
 
         &:after {
             content: '';
@@ -50,7 +51,7 @@
     &-TitleWrapper {
         min-height: 50px;
         box-sizing: border-box;
-        padding: 8px 0 14px;
+        padding: 8px 0;
 
         &_hidden {
             opacity: .4;
