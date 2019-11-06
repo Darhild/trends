@@ -1,5 +1,5 @@
 .Card { 
-    border-radius: 6px;
+    border-radius: 6px;    
     
     &-Link {
         text-align: left;
@@ -80,11 +80,26 @@
     }
 
     &_width_small {
-        width: 100px;
+        width: 117px;
+
+        .Card-Thumb {
+            height: 175px;
+            border-radius: 4px;
+        }
+    
+        .Card-Thumb:hover {
+            transform: translateY(-6px);
+        }
     }
 
     &_width_medium {
         width: 184px;
+        height: 172px;
+        background-color: var(--color-layout);
+
+        .Card-Thumb {
+            height: 104px;
+        }
     }
 
     &_width_full {
@@ -95,25 +110,16 @@
             height: 184px;
         }
     }    
-}
 
-.Card_width_medium {
-    height: 172px;
-    background-color: var(--color-layout);
+    &_content_series {
+        &:hover {
+            .Card-Details {
+                display: none;
+            }
 
-    .Card-Thumb {
-        height: 104px;
-    }
-}
-
-.Card_width_small {
-
-    .Card-Thumb {
-        height: 175px;
-        border-radius: 4px;
-    }
-
-    .Card-Thumb:hover {
-        transform: translateY(-6px);
+            .StarRating {
+                display: flex;
+            }
+        }
     }
 }

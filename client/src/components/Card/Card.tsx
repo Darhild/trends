@@ -16,7 +16,7 @@ export default class Card extends Component<CardProps> {
         const cardCn = classnames(
             'Card',
             content === 'blogers' && 'Card_width_medium',
-            content === 'series' && 'Card_width_small',
+            content === 'series' && 'Card_width_small Card_content_series',
         );
         const img = card.onto_poster || card.thumbnail;
         return (
