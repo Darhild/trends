@@ -1,31 +1,76 @@
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router';
+import { TParam } from './../../pages/Main';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import Carousel from '../Carousel/Carousel';
 import './Categories.scss';
 
+const categories = [
+    {
+        name: 'Что посмотреть',
+        value: 'main',
+    },
+    {
+        name: 'Фильмы',
+        value: 'film',
+    },
+    {
+        name: 'Сериалы',
+        value: 'series',
+    },
+    {
+        name: 'Мультфильмы',
+        value: 'kids',
+    },
+    {
+        name: 'Блогеры',
+        value: 'blogers',
+    },
+    {
+        name: 'Спорт',
+        value: 'sport',
+    },
+    {
+        name: 'Музыка',
+        value: 'music',
+    },
+    {
+        name: 'Игры',
+        value: 'games',
+    },
+];
 
-const categories = ['Что посмотреть', 'Фильмы', 'Сериалы', 'Мультфильмы', 'Блогеры', 'Спорт', 'Музыка', 'Игры'];
-
-class Categories extends Component {
+class Categories extends Component<RouteComponentProps<TParam>> {
     public state = {
-        activeCategory: 0,
+        activeCategory: this.props.match.params.category,
     };
+
+    public componentDidUpdate() {
+        if (this.props.match.params.category !== this.state.activeCategory) {
+            this.setState({
+                activeCategory: this.props.match.params.category,
+            });
+        }
+    }
 
     public render() {
         return (
             <div className="Categories">
                 <Carousel canBeHidden={false}>
                 {
-                    categories.map((item, index) => {
+                    categories.map(({ name, value }) => {
                         const itemCn = classnames(
                             'Categories-Item',
-                            index === this.state.activeCategory && 'Categories-Item_state_active',
+                            value === this.state.activeCategory && 'Categories-Item_state_active',
                         );
 
                         return(
-                            <div className={itemCn}>
-                                {item}
-                            </div>
+                            <Link to={value}>
+                                <div className={itemCn}>
+                                    {name}
+                                </div>
+                            </Link>
                         );
                     })
                 }

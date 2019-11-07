@@ -9,7 +9,7 @@ import { items as blogersItems } from '../../blogers.json';
 const dramas: any[] = items[3].includes;
 const blogers: any[] = blogersItems[0].includes;
 
-interface TParam { category?: string; }
+export interface TParam { category?: string; }
 
 class Main extends Component<RouteComponentProps<TParam>> {
     public render() {
