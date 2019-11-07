@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import Trends from '../../components/Trends/Trends';
 import List from '../../components/List/List';
+import { connect } from 'react-redux';
+import { State } from '../../store/createStore';
 
 import { items } from '../../feed.json';
 import { items as blogersItems } from '../../blogers.json';
@@ -9,9 +11,21 @@ import { items as blogersItems } from '../../blogers.json';
 const dramas: any[] = items[3].includes;
 const blogers: any[] = blogersItems[0].includes;
 
-interface TParam { category?: string; }
+export interface TParam { category?: string; }
 
-class Main extends Component<RouteComponentProps<TParam>> {
+interface MainProps extends RouteComponentProps<TParam> {
+    content: any;
+}
+
+const mapStateToProps = (state: State, ownProps: MainProps) => {
+    const category: any  =  ownProps.match.params.category;
+
+    return {
+        content: state[category],
+    };
+};
+
+class Main extends Component<MainProps> {
     public render() {
         const category = this.props.match.params.category || 'main';
 
@@ -25,4 +39,4 @@ class Main extends Component<RouteComponentProps<TParam>> {
     }
 }
 
-export default Main;
+export default connect(mapStateToProps)(Main);

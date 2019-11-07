@@ -18,7 +18,7 @@ const App: React.FC = () => {
             <Router>
                 <div className="App">
                     <Header />
-                    <Categories />
+                    <Route path="/:category?" component={Categories} />
                     <div className="App-Content">
                         <Switch>
                             <Route path="/:category/trends" component={TrendsPage} />
