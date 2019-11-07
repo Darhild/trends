@@ -43,13 +43,14 @@ const categories = [
 
 class Categories extends Component<RouteComponentProps<TParam>> {
     public state = {
-        activeCategory: this.props.match.params.category,
+        activeCategory: this.props.match.params.category || 'main',
     };
 
     public componentDidUpdate() {
         if (this.props.match.params.category !== this.state.activeCategory) {
+            const category = this.props.match.params.category;
             this.setState({
-                activeCategory: this.props.match.params.category,
+                activeCategory: category,
             });
         }
     }
@@ -66,7 +67,7 @@ class Categories extends Component<RouteComponentProps<TParam>> {
                         );
 
                         return(
-                            <Link to={value}>
+                            <Link to={value} key={value}>
                                 <div className={itemCn}>
                                     {name}
                                 </div>
@@ -75,7 +76,6 @@ class Categories extends Component<RouteComponentProps<TParam>> {
                     })
                 }
                 </Carousel>
-
             </div>
         );
     }
