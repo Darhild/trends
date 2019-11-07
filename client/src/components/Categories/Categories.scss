@@ -11,8 +11,7 @@
         line-height: 16px;
         white-space: nowrap;
         padding: 5px 6px;
-        // пока не прикрутили react-router
-        cursor: pointer;
+        text-decoration: none;
 
         &_state_active {
             background-color: var(--color-accent);
