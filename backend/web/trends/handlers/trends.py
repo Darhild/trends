@@ -1,4 +1,4 @@
-from flask import Blueprint, Response
+from flask import Blueprint, request, Response, current_app, json
 
 trends = Blueprint('trends', __name__)
 
@@ -29,3 +29,4 @@ mock_json = '''{
 def trends_handler():
     # user = request.args.get('user')
     return Response(mock_json, status=200)
+

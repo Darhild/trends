@@ -2,3 +2,6 @@ Flask
 sqlalchemy
 psycopg2-binary
 alembic>=1.2
+apscheduler
+flask_caching
+requests
