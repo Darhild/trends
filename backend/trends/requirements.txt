@@ -5,3 +5,5 @@ alembic>=1.2
 apscheduler
 pytrends
 Flask-Caching
+PyYaml
+coloredlogs

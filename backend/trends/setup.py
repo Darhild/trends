@@ -18,6 +18,8 @@ setuptools.setup(name='trends',
                      'alembic',
                      'apscheduler',
                      'pytrends',
-                     'Flask-Caching'
+                     'Flask-Caching',
+                     'PyYaml',
+                     'coloredlogs'
                  ],
                  )
