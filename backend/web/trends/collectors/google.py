@@ -21,4 +21,4 @@ class GoogleCollector(BaseCollector):
         logging.info("google collect")
         response = requests.get(self.source_link)
         print("google collect response {0}".format(response.content))
-        return response.content
+        return self.insert(response.content)

@@ -6,7 +6,7 @@ class Repository:
     def __init__(self, db):
         self.db = db
 
-    def insert(self, trend_json):
+    def insert(self, trend_json, source):
         with self.db.begin() as conn:
             with conn.begin():
                 print("repo insert", trend_json)
