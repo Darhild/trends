@@ -7,6 +7,7 @@ class Repository:
         self.db = db
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def insert(self, trend_json, source):
         with self.db.begin() as conn:
             with conn.begin():
@@ -14,6 +15,9 @@ class Repository:
                 # conn.execute(trends_table.insert())
 =======
     def insert(self, trend_json):
+=======
+    def insert(self, trend_json, source):
+>>>>>>> Adding repo and collectors
         with self.db.begin() as conn:
             with conn.begin():
                 print("repo insert", trend_json)

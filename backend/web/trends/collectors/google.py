@@ -35,5 +35,9 @@ class GoogleCollector(BaseCollector):
 =======
         response = requests.get(self.source_link)
         print("google collect response {0}".format(response.content))
+<<<<<<< HEAD
         return response.content
+>>>>>>> Adding repo and collectors
+=======
+        return self.insert(response.content)
 >>>>>>> Adding repo and collectors
