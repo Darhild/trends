@@ -46,8 +46,6 @@ lifecycle:
     cd ./client
     echo "Installing dependencies..."
     npm ci
-    echo "Linting..."
-    npm run lint
     echo "Building bundle..."
     npm run build
     echo "Building docker image..."
