@@ -29,10 +29,10 @@ const renderList = (list: any) =>
 const renderCarousel = (list: any) =>
     (
         <Carousel
-        title={list.title}
-        margin="s"
-        carouselId={list.carousel_id}
-        key={list.carousel_id}
+            title={list.title}
+            margin="s"
+            carouselId={list.carousel_id}
+            key={list.carousel_id}
         >
         {renderList(list)}
         </Carousel>
@@ -45,8 +45,8 @@ class FeedContainer extends Component<FeedContainerProps> {
                 {
                     this.props.content.map((list: any) =>
                         list.content_type_name === 'carousel'
-                        ? renderCarousel(list)
-                        : <Card card={list} key={list.content_id} content_type="vod" />)
+                            ? renderCarousel(list)
+                            : <Card card={list} key={list.content_id} content_type="vod" />)
                 }
             </div>
         );
