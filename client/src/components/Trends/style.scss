@@ -1,7 +1,7 @@
 .Trends {
     margin-bottom: 20px;
 
-    @media(min-width: 440px) {
+    @media(min-width: 768px) {
         margin-top: 26px;
     }
 
@@ -21,7 +21,7 @@
             background: var(--color-background-button-hover);
         }
 
-        @media(min-width: 440px) {
+        @media(min-width: 768px) {
             display: none;
         }
     }
