@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Trend from '../../types/trend';
-import { ReactComponent as Grow } from '../../images/svg/grow.svg';
+import TrendDetails from './TrendDetails/TrendDetails';
 import './style.scss';
 
 
@@ -24,13 +24,7 @@ class TrendCard extends Component<Props> {
             <div className={cn}>
                 <div className="TrendCard-Poster" style={{ backgroundImage: `url(${img})` }}>
                 </div>
-                <div className="TrendCard-Details TrendDetails">
-                    <div className="TrendDetails-Label"><Grow className="TrendDetails-Icon"/>
-                        <span>Сейчас популярно</span>
-                    </div>
-                    <div className="TrendDetails-Title">{desc}</div>
-                    <div className="TrendDetails-Count">123 видео и 2 тыс. историй</div>
-                </div>
+                <TrendDetails desc={desc} variant={variant} />
                 <div className="TrendCard-Placeholder"></div>
                 <div className="TrendCard-Number">{ratingPosition}</div>
             </div>

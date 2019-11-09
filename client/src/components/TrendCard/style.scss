@@ -28,40 +28,7 @@ $_: '.TrendCard';
     &-Number {
         display: none;
     }
-
-    .TrendDetails {
-        position: absolute;
-        bottom: 12px;
-        padding-left: 10px;
-        z-index: 100;
-
-        &-Label {
-            display: flex;
-            align-items: center;
-            font-size: 13px;
-            line-height: 16px;
-            margin-bottom: 6px;
-        }
-
-        &-Icon {
-            height: 16px;
-            
-            margin-right: 8px;
-            border-radius: 50%;
-            color: var(--color-accent-red);
-        }
-
-        &-Title {
-            font-size: 15px;
-            line-height: 18px;
-            font-weight: 500;
-        }
-
-        &-Count {
-            color: var(--text-gray);
-        }
-    }
-
+  
     &_variant_second {
         display: flex;
         height: 92px;
@@ -91,25 +58,6 @@ $_: '.TrendCard';
             font-size: 14px;
             border-radius: 50%;
             background-color: var(--color-accent-red);
-        }
-
-        .TrendDetails {
-            position: static;
-            padding-left: 12px;
-
-            &-Label {
-                display: none;
-            }
-
-            &-Title {
-                font-size: 14px;
-                line-height: 20px;
-            }
-
-            &-Count {
-                font-size: 13px;
-                line-height: 16px;
-            }
         }
     }
 }
