@@ -26,7 +26,7 @@ env:
 lifecycle:
   script:
   - |
-    if [[ "$TRENDBOX_BRANCH" != 'frontend.ci' ]]; then
+    if [[ "$TRENDBOX_BRANCH" != 'master' ]]; then
       echo "CI для мастера"
       exit 0
     fi
