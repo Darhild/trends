@@ -6,8 +6,8 @@ import logging
 feed_logger = logging.getLogger(__name__)
 
 
-class FeedRequest:
-    url = "https://frontend.vh.yandex.ru/v23/feed.json"
+class CarouselsRequest:
+    url = "https://frontend.vh.yandex.ru/v23/carousels_videohub.json"
 
     headers = {
         'Origin': "https://yandex.ru",
@@ -25,14 +25,14 @@ class FeedRequest:
         "locale": "ru",
         "from": "efir",
         "service": "ya-main",
-        "disable_trackings": "1"}
+        "disable_trackings": "1",
+        "vitrina_limit": "1"}
 
     @classmethod
-    def get_response(cls, tag, offset, limit, num_docs, cache_hash=None):
+    def get_response(cls, tag, offset, limit, num_docs=None, cache_hash=None):
 
         params = cls.query_params.copy()
         params.update({"offset": f"{offset}",
-                       "num_docs": f"{num_docs}",
                        "limit": f"{limit}"})
 
         if tag:
@@ -42,45 +42,43 @@ class FeedRequest:
             params["cache_hash"] = cache_hash
 
         response = requests.request("GET", cls.url, headers=cls.headers, params=params)
-        return FeedData(response)
+        return CarouselsData(response)
 
 
-class FeedData:
+class CarouselsData:
     def __init__(self, response):
         self.response = response
-        self.documents = dict()
+        self.carousels = dict()
 
-    def _extract_documents_from_response(self):
+    def _extract_carousels_from_response(self):
         try:
             data = self.response.json()
         except JSONDecodeError as e:
             feed_logger.debug(type(e), ',', e)
             return {}
 
-        for carousel in data['items']:
-            for document in carousel['includes']:
-                try:
-                    content_id = document['content_id']
-                except KeyError as e:
-                    feed_logger.debug(type(e), ',', e)
-                    continue
+        for carousel in data['carousels']:
+            try:
+                carousel_id = carousel['carousel_id']
+            except KeyError as e:
+                feed_logger.debug(type(e), ',', e)
+                continue
 
-                self.documents[content_id] = document
+            self.carousels[carousel_id] = carousel
 
-        return self.documents
+        return self.carousels
 
-    def get_documents(self):
-        if self.documents:
-            return self.documents
+    def get_carousels(self):
+        if self.carousels:
+            return self.carousels
 
-        return self._extract_documents_from_response()
+        return self._extract_carousels_from_response()
 
     def get_cache_hash(self):
         pass
 
 
 if __name__ == '__main__':
-    fr = FeedRequest()
-    result = fr.get_response(tag='movie', offset=0, limit=100, num_docs=1)
-    pprint(result.get_documents())
-    pprint(result.response.json())
+    cr = CarouselsRequest()
+    result = cr.get_response(tag='sport', offset=0, limit=100)
+    pprint(result.get_carousels().keys())
