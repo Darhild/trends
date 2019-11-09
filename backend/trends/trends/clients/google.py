@@ -25,11 +25,12 @@ def get_trends(cache_=None):
     Gets trends from google-trend, makes json, an put then to cache
     """
     # TODO: resolve problems with logging from another thread
+    logger = logging.getLogger(__name__)
     logging.basicConfig()
     logging.getLogger('apscheduler').setLevel(logging.DEBUG)
     try:
         response = make_json_response()
-        logging.debug("Got trends %s", response)
+        logger.debug("Got trends %s", response)
         cache_.set('trends', response)
     except Exception as e:
         logging.error("Can't get trends from google due to %s", e)
