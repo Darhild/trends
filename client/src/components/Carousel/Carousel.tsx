@@ -2,12 +2,14 @@ import React from 'react';
 import classnames from 'classnames';
 import debounce from 'debounce';
 import Title from '../Title/Title';
-import Scroller from '../Scroller/Scroller';
+import scroll from 'scroll';
 import { ReactComponent as Close } from '../../images/svg/close.svg';
 import { ReactComponent as Undo } from '../../images/svg/undo.svg';
 import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
 import Icon from '../Icon/Icon';
 import './Carousel.scss';
+
+const SCROLL_SIZE = 400;
 
 
 interface CarouselProps {
@@ -20,8 +22,7 @@ interface CarouselProps {
 
 interface CarouselState {
     isHidden: boolean;
-    marginLeft: number;
-    scrollLength: number;
+    scrollLeft: number;
 }
 
 class Carousel extends React.Component<CarouselProps, CarouselState> {
@@ -32,13 +33,18 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
 
     public state = {
         isHidden: false,
-        marginLeft: 0,
-        scrollLength: 250,
+        scrollLeft: 0,
     };
 
     public list = React.createRef<HTMLDivElement>();
 
-    public scroller = React.createRef<HTMLDivElement>();
+    public updateScrollLeft = debounce(() => {
+        if (this.list.current) {
+            this.setState({
+                scrollLeft: this.list.current.scrollLeft,
+            });
+        }
+    }, 150);
 
     public handleHide = () => {
         this.setState((state) => ({
@@ -46,43 +52,67 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
         }));
     }
 
-    public calculateMinMargin = () => {
-        if (this.list.current && this.scroller.current) {
-            return this.list.current.offsetWidth - this.scroller.current.scrollWidth + 16;
-        }
-
-        return 1;
-    }
-
     public handleScrollLeft = () => {
-        const { marginLeft, scrollLength } = this.state;
-        this.setState({
-            marginLeft: Math.min(marginLeft + scrollLength, 0),
-        });
+        if (this.list.current) {
+            scroll.left(this.list.current, this.list.current.scrollLeft - SCROLL_SIZE);
+        }
     }
 
     public handleScrollRight = () => {
-        const { marginLeft, scrollLength } = this.state;
-        this.setState({
-            marginLeft: Math.max(marginLeft - scrollLength, this.calculateMinMargin()),
-        });
+        if (this.list.current) {
+            scroll.left(this.list.current, this.list.current.scrollLeft + SCROLL_SIZE);
+        }
     }
 
-    public componentDidMount = () => {
-        window.addEventListener('resize', debounce(() => {
-            this.setState({
-                marginLeft: 0,
-            });
-        }, 250));
+    public handleScroll = () => {
+        this.updateScrollLeft();
     }
 
-    public render() {
-        const { children, margin, title, carouselId, canBeHidden } = this.props;
-        const { isHidden, marginLeft } = this.state;
+    public renderList = () => {
+        const { children, margin } = this.props;
         const itemCn = classnames(
             'Carousel-Item',
             margin && `Carousel-Item_margin_${margin}`,
         );
+
+        const { current } = this.list;
+        const maxScrollLeft = current ? current.scrollWidth - current.clientWidth : 100;
+        const scrollLeft = this.state.scrollLeft;
+
+        return  (
+            <div className="Carousel-Wrapper">
+                <div ref={this.list} onScroll={this.handleScroll} className="Carousel-List">
+                    {
+                        React.Children.map(children, (child, num) => (
+                            <div className={itemCn} key={num}>{child}</div>
+                        ))
+                    }
+                </div>
+                {
+                    scrollLeft > 0  &&
+                    <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_left')}
+                        onClick={this.handleScrollLeft}
+                    >
+                        <Arrow />
+                    </div>
+                }
+                {
+                    maxScrollLeft > scrollLeft &&
+                    <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_right')}
+                        onClick={this.handleScrollRight}
+                    >
+                        <Arrow />
+                    </div>
+                }
+            </div>
+        );
+    }
+
+    public render() {
+        const { title, carouselId, canBeHidden } = this.props;
+        const { isHidden } = this.state;
+
+
         const titleCn = classnames(
             'Carousel-TitleWrapper',
             isHidden && 'Carousel-TitleWrapper_hidden',
@@ -105,22 +135,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                         }
                     </Icon>
                 </div>}
-                {!isHidden && <div ref={this.list} className="Carousel-List">
-                    <Scroller ref={this.scroller} style={{ marginLeft: `${marginLeft - 16}px` }}>
-                            {React.Children.map(children, (child, num) =>
-                                <div className={itemCn} key={num}>{child}</div>)}
-                    </Scroller>
-                    {marginLeft !== 0
-                        && <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_left')}
-                                onClick={this.handleScrollLeft}>
-                            <Arrow />
-                        </div>}
-                    {marginLeft !== this.calculateMinMargin()
-                        && <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_right')}
-                                onClick={this.handleScrollRight}>
-                            <Arrow />
-                        </div>}
-                </div>}
+                { !isHidden && this.renderList() }
             </div>
         );
     }

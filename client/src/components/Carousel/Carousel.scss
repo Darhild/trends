@@ -1,6 +1,27 @@
 .Carousel {
-    &-List {
+    &-Wrapper {
         position: relative;
+    }
+
+    &-List {
+        display: flex;
+        overflow-x: scroll;
+    
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    
+        @media(max-width: 768px) {
+            padding-left: 16px;
+            margin-left: -16px;
+            margin-right: -16px;
+
+            &:after {
+                content: '';
+                flex: 0 0 16px;
+            }
+        }
+
         z-index: 0;
     }
     
@@ -53,7 +74,7 @@
         display: none;
     }
 
-    @media(min-width: 440px) {
+    @media(min-width: 768px) {
         .Carousel {
             &-Arrow {
                 display: block;
@@ -64,17 +85,34 @@
                 height: 44px;
                 box-sizing: border-box;
                 padding: 10px;
-                background: var(--color-background-button);
-                border-radius: 50%;
                 cursor: pointer;
+
+                &:before {
+                    content: '';
+                    z-index: -1;
+                    position: absolute;
+                    transition: transform .15s ease-out;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 44px;
+                    height: 44px;
+                    background: var(--color-background);
+                }
+
+                &:hover:before {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+
 
                 &_left {
                     transform: rotate(180deg);
-                    left: -16px;
+                    left: -22px;
                 }
 
                 &_right {
-                    right: -16px;
+                    right: -22px;
                 }
             }
         }
