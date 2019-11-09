@@ -6,45 +6,51 @@ import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
 
 interface OwnProps {
-  category: string;
+    category: string;
 }
 
 interface StateProps {
-  content: any;
+    content: any;
 }
 
 type FeedContainerProps = OwnProps & StateProps;
 
 const renderList = (list: any) =>
-(
-  list.includes.map((card: any) => {
-    if (card.includes && card.includes[0].banned) {
-      return null;
-    }
+    (
+        list.includes.map((card: any) => {
+            if (card.includes && card.includes[0].banned) {
+                return null;
+            }
 
-    return <Card card={card} content_type={card.supertag || 'series'} key={card.content_id}/>;
-  })
-);
+            return <Card card={card} content_type={card.supertag || 'series'} key={card.content_id}/>;
+        })
+    );
 
 const renderCarousel = (list: any) =>
-  (
-    <Carousel
-      title={list.title}
-      margin="s"
-      carouselId={list.carousel_id}
-      key={list.carousel_id}
-    >
-    {renderList(list)}
-    </Carousel>
-  );
+    (
+        <Carousel
+        title={list.title}
+        margin="s"
+        carouselId={list.carousel_id}
+        key={list.carousel_id}
+        >
+        {renderList(list)}
+        </Carousel>
+    );
 
 class FeedContainer extends Component<FeedContainerProps> {
-  public render() {
-    return (
-      this.props.content.map((list: any) =>
-        list.content_type_name === 'carousel' ? renderCarousel(list) : <Card card={list} key={list.content_id} />)
-    );
-  }
+    public render() {
+        return (
+            <div className="Feed">
+                {
+                    this.props.content.map((list: any) =>
+                        list.content_type_name === 'carousel'
+                        ? renderCarousel(list)
+                        : <Card card={list} key={list.content_id} content_type="vod" />)
+                }
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => ({

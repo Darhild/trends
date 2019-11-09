@@ -1,7 +1,9 @@
 .Card { 
+    background-color: var(--color-layout);
     border-radius: 6px;
     
     &-Link {
+        display: block;
         text-align: left;
         text-decoration: none;
         color: inherit;
@@ -13,7 +15,15 @@
         height: 104px;
         background-size: cover;
         border-radius: 6px 6px 0 0;
-    }    
+    }  
+    
+    &-Poster {
+        position: absolute;
+        right: 10px;
+        bottom: -10px;
+        width: 100px;
+        border-radius: 4px;
+    }
 
     &-Details {
         position: absolute;
@@ -59,8 +69,15 @@
     }
 
     &-Content {
-        padding: 7px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 10px 12px;
         text-align: left;
+    }
+
+    &-Text {
+        overflow: hidden;
     }
 
     &-Title {
@@ -77,43 +94,61 @@
         color: var(--text-subtitle);
         overflow: hidden;
         text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &-LikeOrNot {
+        display: flex;
+        padding-left: 10px;
+    }
+
+    &-Dislike {
+        margin-left: 15px;
+        transform: rotate(180deg);
     }
 
     &_width_small {
-        width: 100px;
+        width: 117px;
+        background-color: transparent;
+
+        .Card-Thumb {
+            height: 175px;
+            border-radius: 4px;
+        }
+    
+        .Card-Thumb:hover {
+            transform: translateY(-6px);
+        }
+
+        .Card-Content {
+            padding-right: 0;
+            padding-left: 0;
+        }
     }
 
     &_width_medium {
         width: 184px;
+
+        .Card-Thumb {
+            height: 104px;
+        }
     }
 
     &_width_full {
         width: 100%;
-        height: 281px;
 
-        &-Thumb {
+        .Card-Thumb {
             height: 184px;
+        }
+
+        .Card-Score {
+            display: none;
         }
     }    
 }
 
-.Card_width_medium {
-    height: 172px;
-    background-color: var(--color-layout);
-
-    .Card-Thumb {
-        height: 104px;
-    }
-}
-
-.Card_width_small {
-
-    .Card-Thumb {
-        height: 175px;
-        border-radius: 4px;
-    }
-
-    .Card-Thumb:hover {
-        transform: translateY(-6px);
+@media(min-width: 440px) {
+    .Card_width_full {
+        display: none;
     }
 }

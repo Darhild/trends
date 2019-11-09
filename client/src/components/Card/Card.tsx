@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Card.scss';
-import CardDetails from './CardDetails/CardDetails';
-import { dateUtils } from './../../utils';
+import CardContent from './CardContent/CardContent';
+import CardThumb from './CardThumb/CardThumb';
 
 export interface CardProps {
     card: any;
@@ -14,10 +14,10 @@ export default class Card extends Component<CardProps> {
         const { card, content_type } = this.props;
         const cardCn = classnames(
             'Card',
+            content_type === 'vod' && 'Card_width_full Feed-Item',
             content_type === 'blogger' && 'Card_width_medium',
-            content_type === 'series' && 'Card_width_small',
+            (content_type === 'series' || content_type === 'movie') && 'Card_width_small',
         );
-        const img = card.onto_poster || card.thumbnail;
 
         return (
             <a
@@ -27,17 +27,8 @@ export default class Card extends Component<CardProps> {
                 rel="noopener noreferrer"
             >
                 <div className={cardCn}>
-                    <div className="Card-Thumb" style={{ backgroundImage: `url(${img})` }}>
-                        <CardDetails card={card} content_type={content_type}/>
-                    </div>
-                    <div className="Card-Content">
-                        <div className="Card-Title" >
-                            {content_type === 'blogger' ? card.computed_title : card.title}
-                        </div>
-                        <div className="Card-Subtitle">
-                            {content_type === 'blogger' ? dateUtils(card.release_date_ut) : ''}
-                        </div>
-                    </div>
+                    <CardThumb card={card} content_type={content_type}/>
+                    <CardContent card={card} content_type={content_type}/>
                 </div>
             </a>
         );
