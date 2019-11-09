@@ -1,5 +1,115 @@
+$_: '.TrendCard';
+
 .TrendCard {
     height: 144px;
+    position: relative;
+    
+    &-Poster {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: center no-repeat var(--color-placeholder);
+        background-size: cover;
+        border-radius: 6px;
+    }
 
-    background-size: cover;
+    &-Placeholder {
+        height: 100%;
+        width: 100%;
+        display: block;
+        position: absolute;
+        border-radius: 6px;
+
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 28.93%, rgba(0, 0, 0, 0.9) 100%);
+    }
+
+    &-Number {
+        display: none;
+    }
+
+    .TrendDetails {
+        position: absolute;
+        bottom: 12px;
+        padding-left: 10px;
+        z-index: 100;
+
+        &-Label {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            line-height: 16px;
+            margin-bottom: 6px;
+        }
+
+        &-Icon {
+            height: 16px;
+            
+            margin-right: 8px;
+            border-radius: 50%;
+            color: var(--color-accent-red);
+        }
+
+        &-Title {
+            font-size: 15px;
+            line-height: 18px;
+            font-weight: 500;
+        }
+
+        &-Count {
+            color: var(--text-gray);
+        }
+    }
+
+    &_variant_second {
+        display: flex;
+        height: 92px;
+
+        #{$_}-Poster {
+            position: inherit;
+            min-width: 164px;
+            width: 164px;
+            height: 100%;
+        }
+
+        #{$_}-Placeholder {
+            width: 164px;
+            height: 100%;
+        }
+
+        #{$_}-Number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+
+            width: 22px;
+            height: 22px;
+            font-size: 14px;
+            border-radius: 50%;
+            background-color: var(--color-accent-red);
+        }
+
+        .TrendDetails {
+            position: static;
+            padding-left: 12px;
+
+            &-Label {
+                display: none;
+            }
+
+            &-Title {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            &-Count {
+                font-size: 13px;
+                line-height: 16px;
+            }
+        }
+    }
 }

@@ -1,29 +1,23 @@
 import React, { Component } from 'react';
-import { State } from '../../store/createStore';
-import { connect } from 'react-redux';
-import TrendCard from '../../components/TrendCard/TrendCard';
-import Trend from '../../types/trend';
+import queryString from 'query-string';
+import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
+import TrendsList from '../../components/TrendsList/TrendsList';
 
-interface Props {
-    trends: Trend[];
-}
-
-class TrendsPage extends Component<Props> {
+class TrendsPage extends Component<RouteComponentProps> {
     public render() {
-        const { trends } = this.props;
+        const params = queryString.parse(this.props.location.search);
+        const variant = params.variant && !Array.isArray(params.variant)
+            ? params.variant
+            : 'default';
 
         return (
             <>
                 <Title>Сейчас популярно</Title>
-                {trends.map((props) => <TrendCard {...props} />)}
+                <TrendsList variant={variant} />
             </>
         );
     }
 }
 
-const mapStateToProps = (state: State) => ({
-    trends: state.trends,
-});
-
-export default connect(mapStateToProps)(TrendsPage);
+export default TrendsPage;

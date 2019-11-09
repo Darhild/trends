@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
 import { State } from '../../store/createStore';
 import { connect } from 'react-redux';
+
 interface TrendsProps {
     trends: SmallCardProps[];
     category: string;

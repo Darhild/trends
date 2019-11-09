@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "scroll": "^3.0.1"
+    "scroll": "^3.0.1",
+    "query-string": "^6.8.3"
   },
   "eslintConfig": {
     "extends": "react-app"

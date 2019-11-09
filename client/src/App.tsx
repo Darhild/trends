@@ -22,6 +22,7 @@ const App: React.FC = () =>
                     <div className="App-Content">
                         <Switch>
                             <Route path="/:category/trends" component={TrendsPage} />
+
                             <Route path="/:category?" component={Main} />
                         </Switch>
                     </div>

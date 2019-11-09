@@ -48,6 +48,7 @@
     &-Header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     &-TitleWrapper {
@@ -61,9 +62,7 @@
     }
 
     &-Hide {
-        padding: 10px 0;
         width: 13px;
-        height: 13px;
     }
 
     &-HideInfo {

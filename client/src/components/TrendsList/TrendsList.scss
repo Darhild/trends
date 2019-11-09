@@ -1,0 +1,23 @@
+
+$_: '.TrendsList';
+
+.TrendsList {
+    &-Item {
+        margin-bottom: 8px;
+
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &_variant_second {
+        #{$_}-Item {
+            margin-bottom: 16px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
