@@ -1,4 +1,6 @@
 from trends.models.trends import trends_table
+import sqlalchemy
+
 
 class Repository:
 
@@ -10,6 +12,11 @@ class Repository:
             with conn.begin():
                 print("repo insert", trend_json)
                 # conn.execute(trends_table.insert())
+                data = {
+                    "source": source,
+                    "data": str(trend_json),
+                }
+                conn.execute(trends_table.insert(), **data)
 
     def read_all(self, limit=10):
         with self.db.begin() as conn:
