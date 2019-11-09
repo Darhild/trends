@@ -11,7 +11,8 @@
     "lint:fix": "tslint --project tsconfig.json --format stylish --fix"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "scroll": "^3.0.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,6 +30,7 @@
     ]
   },
   "devDependencies": {
+    "@types/scroll": "^3.0.0",
     "@types/classnames": "^2.2.9",
     "@types/debounce": "^1.2.0",
     "@types/jest": "24.0.21",
