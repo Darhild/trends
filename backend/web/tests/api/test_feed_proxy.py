@@ -23,7 +23,7 @@ def test_feed_proxy(client):
         "tag": 'blogger'
     }
     resp = client.get(
-        url_for('content.feed_proxy', **data),
+        url_for('trends.feed_proxy', **data),
     )
     assert resp.status_code == 200
 
@@ -44,6 +44,6 @@ def test_feed_proxy(client):
 )
 def test_feed_proxy_bad_request(client, data, status):
     resp = client.get(
-        url_for('content.feed_proxy', **data),
+        url_for('trends.feed_proxy', **data),
     )
     assert resp.status_code == status
