@@ -1,10 +1,9 @@
 {
+  "private": true,
   "name": "trenders",
-  "dependencies": {
-    "express": "^4.16.4"
-  },
   "scripts": {
-    "deploy": "echo 'Добавьте сюда скрипты сборки'",
-    "start": "node index.js"
+    "frontend:install": "cd ./client && npm ci",
+    "frontend:lint": "cd ./client && npm run lint",
+    "frontend:build": "cd ./client && npm run build"
   }
 }

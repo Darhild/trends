@@ -11,23 +11,7 @@
     "lint:fix": "tslint --project tsconfig.json --format stylish --fix"
   },
   "dependencies": {
-    "@types/debounce": "^1.2.0",
-    "@types/jest": "24.0.21",
-    "@types/node": "12.12.5",
-    "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.3",
-    "@types/react-redux": "^7.1.5",
-    "classnames": "^2.2.6",
-    "debounce": "^1.2.0",
-    "node-sass": "^4.13.0",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
-    "react-redux": "^7.1.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
-    "typescript": "3.6.4"
+    "express": "^4.17.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -48,6 +32,23 @@
     "@types/classnames": "^2.2.9",
     "@types/react-router-dom": "^5.1.2",
     "tslint": "^5.20.0",
-    "tslint-eslint-rules": "^5.4.0"
+    "tslint-eslint-rules": "^5.4.0",
+    "@types/debounce": "^1.2.0",
+    "@types/jest": "24.0.21",
+    "@types/node": "12.12.5",
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.3",
+    "@types/react-redux": "^7.1.5",
+    "classnames": "^2.2.6",
+    "debounce": "^1.2.0",
+    "node-sass": "^4.13.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "typescript": "3.6.4"
   }
 }

@@ -1,65 +1,61 @@
-language: node_js
-node_js: 8
+format: 0.2
 
-sandbox:
-  vault:
-    group:
-      SHRI_DEPLOY
+preset:
+  name: node_js
+  node_js: 10
+
+cloud:
+  type: sandbox
+  owner: SHRI_DEPLOY
+
+container:
+  type: LXC
+  storage: sandbox-resource
+  resource:
+    owner: TRENDBOX_CI_TEAM
+    attrs:
+      released: stable
+      components: base,docker,node_js
 
 env:
-  - TRENDBOX_JOB_NAME="Deploy"
-    SANDBOX_PRIVILEGED_CONTAINER=1
-    IS_DEPLOY=1
-    IS_BUILD=1
-    PROJECT=trenders
+  SANDBOX_PRIVILEGED_CONTAINER: 1
+  PROJECT: trenders
+  TAG: master
+  DOCKER_REGISTRY_PATH: registry.yandex.net/shri
 
-install:
-  - echo "empty"
+lifecycle:
+  script:
+  - |
+    if [[ "$TRENDBOX_BRANCH" != 'frontend.ci' ]]; then
+      echo "CI для мастера"
+      exit 0
+    fi
+    echo "Cloning source code..."
+    cat <<< "$SSH_PRIVATE_KEY" > id_rsa
+    chmod 400 id_rsa
+    ssh-add id_rsa
+    git clone ssh://git@bb.yandex-team.ru/SHRI-2019/"$PROJECT".git sources
+    cd sources
+    git checkout "$TRENDBOX_BRANCH"
+    echo "Preparing environment..."
+    sudo service docker start
+    docker login -u "$DOCKER_USER" -p "$DOCKER_TOKEN" registry.yandex.net
+    curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+    python get-pip.py
+    pip install -i https://pypi.yandex-team.ru/simple/ citclient
+    cd ./client
+    echo "Installing dependencies..."
+    npm ci
+    echo "Linting..."
+    npm run lint
+    echo "Building bundle..."
+    npm run build
+    echo "Building docker image..."
+    cd ../
+    docker build --network=host -t "$DOCKER_REGISTRY_PATH/$PROJECT:$TAG" ./client
+    echo "Pushing docker image..."
+    docker push "$DOCKER_REGISTRY_PATH/$PROJECT:$TAG"
+    echo "Deploying new container..."
+    citclient --custom-context '{"DOCKER":{"tag":"'$TAG'","registry_path":"'$DOCKER_REGISTRY_PATH'/'$PROJECT'", "project": "'$PROJECT'"}}' qloud.deploy --sync
+    sudo service docker stop
 
-script:
-  - |
-    if [[ -n $IS_DEPLOY ]]; then
-      docker build --network=host -t $DOCKER_REGISTRY_PATH_WITH_VERSION .
-      docker push $DOCKER_REGISTRY_PATH_WITH_VERSION
-      citclient --custom-context '{"DOCKER":{"tag":"'$TAG'","registry_path":"'$DOCKER_REGISTRY_PATH'", "project": "'$PROJECT'"}}' qloud.deploy --sync
-    else
-      echo "Skip build";
-    fi
-
-before_script:
-  - export TAG=$TRENDBOX_BRANCH
-  - |
-    if [[ $TAG != 'master' ]]; then
-      export IS_DEPLOY=
-      export IS_BUILD=
-    else
-      echo "Skip check master";
-    fi
-  - |
-    if [[ -n $IS_BUILD ]]; then
-      cat <<< "$SSH_PRIVATE_KEY" > id_rsa
-      chmod 400 id_rsa
-      ssh-add id_rsa
-      git clone ssh://git@bb.yandex-team.ru/SHRI-2019/"$PROJECT".git sources
-      cd sources
-    else
-      echo "Skip build";
-    fi
-  - |
-    if [[ -n $SANDBOX_PRIVILEGED_CONTAINER ]]; then
-      export DOCKER_REGISTRY_PATH="registry.yandex.net/shri/$PROJECT"
-      export DOCKER_REGISTRY_PATH_WITH_VERSION="$DOCKER_REGISTRY_PATH:$TAG"
-      sudo service docker start;
-      docker login -u "$DOCKER_USER" -p "$DOCKER_TOKEN" registry.yandex.net
-    else
-      echo "Skip Docker";
-    fi
-  - |
-    if [[ -n $IS_DEPLOY ]]; then
-      sudo pip install -i https://pypi.yandex-team.ru/simple/ citclient
-    else
-      echo "Skip install citclient";
-    fi
-
-after_script:
-  - if [[ -n $SANDBOX_PRIVILEGED_CONTAINER ]]; then sudo service docker stop; else echo "skip"; fi

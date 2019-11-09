@@ -20,7 +20,12 @@ export default class Card extends Component<CardProps> {
         const img = card.onto_poster || card.thumbnail;
 
         return (
-            <a className="Card-Link" href={`https://yandex.ru/efir?from=efir&stream_id=${card.content_id}`} target="_blank">
+            <a
+                className="Card-Link"
+                href={`https://yandex.ru/efir?from=efir&stream_id=${card.content_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 <div className={cardCn}>
                     <div className="Card-Thumb" style={{ backgroundImage: `url(${img})` }}>
                         <CardDetails card={card} content={content}/>
