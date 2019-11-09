@@ -1,8 +1,10 @@
 .App {
     overflow-x: hidden;
 
-    &-Main {
-        display: flex;
+    @media screen and (min-width: 768px) {
+        &-Main {
+            display: flex;
+        }
     }
 
     &-Content {
@@ -15,4 +17,3 @@
         }
     }
 }
-
