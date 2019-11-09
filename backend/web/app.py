@@ -4,19 +4,11 @@ from trends.app import create_app
 from trends.collectors.efir import EfirCollector
 from trends.collectors.google import GoogleCollector
 from trends.models.trends_repo import Repository
-
-
-def get_environ_or_default(env, default):
-    try:
-        value = os.environ[env]
-        if value == '':
-            return default
-        return value
-    except Exception as e:
-        return default
+from trends.utils.get_db_environ import get_environ_or_default
 
 
 my_ip = "84.201.160.40"
+
 
 if __name__ == '__main__':
     # export DATABASE_URL=postgresql://me:hackme@0.0.0.0/trends

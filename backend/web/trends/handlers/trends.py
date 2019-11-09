@@ -1,9 +1,12 @@
 from flask import Blueprint, request, Response, current_app, json
 
+from trends.utils.get_db_environ import get_environ_or_default
+from trends.models.trends_repo import Repository
 from trends.utils.feed_request import FeedRequest
 
-trends = Blueprint('trends', __name__)
 
+trends = Blueprint('trends', __name__)
+db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
 mock_json = '''{
 "trends": [
     {
@@ -29,8 +32,10 @@ mock_json = '''{
 
 @trends.route('/trends', methods=['GET'])
 def trends_handler():
-    # user = request.args.get('user')
-    return Response(mock_json, status=200)
+    data = {
+        "data": list(Repository(current_app.db).read_all())
+    }
+    return Response(json.dumps(data), status=200)
 
 
 @trends.route('/api/feed', methods=['GET'],)

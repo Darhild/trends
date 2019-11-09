@@ -1,5 +1,5 @@
 from trends.models.trends import trends_table
-import sqlalchemy
+import json
 
 
 class Repository:
@@ -14,7 +14,7 @@ class Repository:
                 # conn.execute(trends_table.insert())
                 data = {
                     "source": source,
-                    "data": str(trend_json),
+                    "data": str(json.loads(trend_json)['data']),
                 }
                 conn.execute(trends_table.insert(), **data)
 
@@ -22,3 +22,7 @@ class Repository:
         with self.db.begin() as conn:
             with conn.begin():
                 pass
+                a = conn.execute(trends_table.select().where(
+                        trends_table.c.source == 'efir'
+                )).fetchone()
+                return a
