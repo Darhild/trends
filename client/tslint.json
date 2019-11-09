@@ -9,7 +9,6 @@
         "binary-expression-operand-order": true,
         "cyclomatic-complexity": true,
         "interface-name": [true, "never-prefix"],
-        "linebreak-style": [true, "CRLF"],
         "quotemark": [
             true, "single", "jsx-double", "avoid-template", "avoid-escape"
         ],
