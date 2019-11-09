@@ -1,19 +1,19 @@
 .App {
-    overflow-x: hidden;
+  overflow-x: hidden;
 
-    @media screen and (min-width: 768px) {
-        &-Main {
-            display: flex;
-        }
-    }
+  @media screen and (min-width: 768px) {
+      &-Main {
+          display: flex;
+      }
+  }
 
-    &-Content {
-        background-color: var(--color-background-content);
-        min-height: 100vh;
-        padding: 0 16px;
-        overflow-x: hidden;
-        @media screen and (min-width: 768px) {
-            padding: 20px 38px;
-        }
-    }
+  &-Content {
+      background-color: var(--color-background-content);
+      min-height: 100vh;
+      padding: 0 16px;
+      overflow-x: hidden;
+      @media screen and (min-width: 768px) {
+          padding: 20px 38px;
+      }
+  }
 }
