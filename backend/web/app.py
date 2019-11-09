@@ -16,6 +16,8 @@ def get_environ_or_default(env, default):
         return default
 
 
+my_ip = "84.201.160.40"
+
 if __name__ == '__main__':
     # export DATABASE_URL=postgresql://me:hackme@0.0.0.0/trends
     db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
@@ -24,8 +26,11 @@ if __name__ == '__main__':
     app = create_app(db_url)
 
     repo = Repository(app.db)
-    collectors = [EfirCollector(repo, get_environ_or_default('EFIR_URL', 'http://localhost:8081')),
-                  GoogleCollector(repo, get_environ_or_default('GOOGLE_URL', 'http://localhost:8082'))]
+    collectors = [
+        EfirCollector(repo,
+                      get_environ_or_default('EFIR_URL', "http://{0}:8081/fetch/movies".format(my_ip))),
+        GoogleCollector(repo,
+                        get_environ_or_default('GOOGLE_URL', "http://{0}:8082/fetch".format(my_ip)))]
     for c in collectors:
         c.start()
 
