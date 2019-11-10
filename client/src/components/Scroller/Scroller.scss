@@ -1,21 +1,22 @@
 .Scroller {
-	display: flex;
-	flex-direction: row;
-	overflow-x: scroll;
-	padding-top: 6px;
-	padding-left: 16px;
-	margin-left: -16px;
-	margin-right: -16px;
-	transition: margin-left 0.25s linear;
+    display: flex;
+    flex-direction: row;
+    margin-right: -16px;
+    margin-left: -16px;
+    padding-top: 6px;
+    padding-left: 16px;
+    overflow-x: scroll;
+    transition: margin-left .25s linear;
 
-	&::-webkit-scrollbar {
-		display: none;
-	}
+    @media(max-width: 440px) {
 
-	@media(max-width: 440px) {
-		&:after {
-			content: '';
-			flex: 0 0 16px;
-		}
-	}
+        &:after {
+            content: '';
+            flex: 0 0 16px;
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }

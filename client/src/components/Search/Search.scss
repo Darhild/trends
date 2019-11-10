@@ -1,49 +1,6 @@
 .Search { 
     box-sizing: border-box;
 
-    &-Icon {
-        cursor: pointer;
-    }
-
-    &-Form {
-        display: flex;
-        flex-grow: 1;
-        height: 100%;
-        border: none;
-    }
-
-    &-Input {    
-        padding: 10px 24px;
-        font-size: 16px;
-        color: var(--text-primary);
-        background: transparent;       
-        border: none;
-
-        &::-webkit-input-placeholder {
-            font-size: 16px;
-            color: var(--text-secondary);
-        }
-
-        &:focus {
-            outline: none;
-        }
-
-        &:active {
-            outline: none;
-        }
-    }
-
-    &-Submit {
-        padding: 7px 12px;
-        font-size: 17px;
-        color: var(--text-dark);
-        background-color: var(--color-border-accent);
-        border: none;        
-        box-sizing: border-box;
-        border-radius: 6px;
-        cursor: pointer;
-    }
-
     &_state_mobile {
         top: 0;  
         right: 0;
@@ -63,8 +20,8 @@
         }
 
         .Search-Input {
-            padding-left: 40px;
             padding-right: 0;
+            padding-left: 40px;
 
             &::-webkit-input-placeholder {
                 font-size: 14px;
@@ -84,18 +41,85 @@
             cursor: pointer;
         }
     }
+
+    &-Icon {
+        cursor: pointer;
+    }
+
+    &-Form {
+        display: flex;
+        flex-grow: 1;
+        height: 100%;
+        border: none;
+    }
+
+    &-Input {    
+        padding: 10px 24px;
+        font-size: 16px;
+        color: var(--text-primary);
+        background: transparent;       
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:active {
+            outline: none;
+        }
+
+        &::-webkit-input-placeholder {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+    }
+
+    &-Submit {        
+        box-sizing: border-box;
+        padding: 7px 12px;
+        font-size: 17px;
+        color: var(--text-dark);
+        background-color: var(--color-border-accent);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 }
 
 .Search:not(.Search_state_mobile) {
+
     .Search-Form {
         display: none;
     }
 }
 
 @media(min-width: 440px) { 
+
     .Search {
         width: 100%;    
         max-width: 640px;
+
+        &_state_mobile {
+            height: 100%;
+            background: transparent;
+
+            .Search-Form {
+                align-items: stretch;
+            }
+
+            .Search-Input {
+                padding-right: 24px;
+                padding-left: 24px;
+    
+                &::-webkit-input-placeholder {
+                    font-size: 16px;
+                }
+            }
+
+            .Search-Close {
+                display: none;
+            }
+        }
 
         &-Icon {
             display: none;
@@ -141,14 +165,14 @@
             border-radius: 0;      
 
             &:after {        
-                content: "";
+                content: '';
                 position: absolute;
                 top: 7px;
-                right: -24px;
+                right: -24px;        
+                display: block;
                 width: 0;
                 height: 0;
-                height: 0;        
-                display: block;
+                height: 0;
                 border: 12px solid transparent;
                 border-left: 12px solid var(--color-background-content);
                 transform: scaleY(1.6);
@@ -162,31 +186,10 @@
                 outline: none;
             }
         }
-
-        &_state_mobile {
-            height: 100%;
-            background: transparent;
-
-            .Search-Form {
-                align-items: stretch;
-            }
-
-            .Search-Input {
-                padding-left: 24px;
-                padding-right: 24px;
-    
-                &::-webkit-input-placeholder {
-                    font-size: 16px;
-                }
-            }
-
-            .Search-Close {
-                display: none;
-            }
-        }
     }
 
     .Search:not(.Search_state_mobile) {
+
         .Search-Form {
             display: flex;      
         }

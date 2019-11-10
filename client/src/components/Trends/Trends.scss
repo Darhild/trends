@@ -6,23 +6,23 @@
     }
 
     &-More {
-        padding: 10px 12px;
         display: block;
         margin-top: 12px;
+        padding: 10px 12px;
+        font-size: 13px;
+        text-align: center;
+        color: var(--text-primary);
+        text-decoration: none;
+        background: var(--color-background-button);
 
         border-radius: 4px;
-        font-size: 13px;
-        text-decoration: none;
-        color: var(--text-primary);
-        background: var(--color-background-button);
-        text-align: center;
-
-        &:hover {
-            background: var(--color-background-button-hover);
-        }
 
         @media(min-width: 768px) {
             display: none;
+        }
+
+        &:hover {
+            background: var(--color-background-button-hover);
         }
     }
 

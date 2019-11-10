@@ -1,90 +1,90 @@
 .Player {
-	border-radius: 6px;
+    border-radius: 6px;
 
-	&-Container {
-		height: calc(100% - 60px);
-	}
+    @media(max-width: 440px) {
+        display: none;
+    }
 
-	&-Info {
-		display: flex;
-		justify-content: space-between;
-		padding: 12px;
-		text-align: left;
-		background: var(--color-background);
-	}
+    @media(min-width: 1441px) {
+        width: 586px;
+        height: 390px;
+    }
 
-	&-Text {
-		overflow: hidden;
-	}
+    @media(min-width: 1301px) and (max-width: 1440px) {
+        width: 498px;
+        height: 340px;
+    }
 
-	&-Title {
-		overflow: hidden;
-		font-size: 15px;
-		font-weight: 500;
-		line-height: 1.3em;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
+    @media(min-width: 851px) and (max-width: 1300px) {
+        width: 380px;
+        height: 274px;
+    }
 
-	&-Channel {
-		font-size: 13px;
-		line-height: 1.2em;
-		color: var(--text-subtitle);
-	}
+    &-Container {
+        height: calc(100% - 60px);
+    }
 
-	&-Avatar {
-		width: 32px;
-		height: 32px;
-		flex-basis: 32px;
-		border-radius: 50%;
-		margin-right: 10px;
-	}
+    &-Info {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        text-align: left;
+        background: var(--color-background);
+    }
 
-	&-Controls {
-		display: flex;
-	}
+    &-Text {
+        overflow: hidden;
+    }
 
-	&-Icon {
-		display: inline-block;
-		width: 32px;
-		height: 32px;
-		box-sizing: border-box;
-		margin-left: 12px;
-		padding: 6px 8px 10px;
-		border-radius: 50%;
+    &-Title {
+        overflow: hidden;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 1.3em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 
-		&_like {
-			margin-left: 6px;
-			background: var(--color-blue);
-		}
+    &-Channel {
+        font-size: 13px;
+        line-height: 1.2em;
+        color: var(--text-subtitle);
+    }
 
-		&_dislike {
-			background: var(--color-red);
-			transform: rotate(180deg);
-		}
+    &-Avatar {
+        flex-basis: 32px;
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
 
-		&_next {
-			background: var(--color-background-button);
-			padding: 4px;
-		}
-	}
+    &-Controls {
+        display: flex;
+    }
 
-	@media(max-width: 440px) {
-		display: none;
-	}
+    &-Icon {
+        display: inline-block;
+        box-sizing: border-box;
+        width: 32px;
+        height: 32px;
+        margin-left: 12px;
+        padding: 6px 8px 10px;
+        border-radius: 50%;
 
-	@media(min-width: 1441px) {
-		width: 586px;
-		height: 390px
-	}
+        &_like {
+            margin-left: 6px;
+            background: var(--color-blue);
+        }
 
-	@media(min-width: 1301px) and (max-width: 1440px) {
-		width: 498px;
-		height: 340px
-	}
+        &_dislike {
+            background: var(--color-red);
+            transform: rotate(180deg);
+        }
 
-	@media(min-width: 851px) and (max-width: 1300px) {
-		width: 380px;
-		height: 274px;
-	}
+        &_next {
+            padding: 4px;
+            background: var(--color-background-button);
+        }
+    }
 }

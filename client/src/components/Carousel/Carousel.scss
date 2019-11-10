@@ -1,32 +1,86 @@
 .Carousel {
+
+    @media(min-width: 768px) {
+
+        .Carousel {
+
+            &-Arrow {
+                position: absolute;
+                top: calc(50% - 22px);
+                z-index: 1;
+                display: block;
+                box-sizing: border-box;
+                width: 44px;
+                height: 44px;
+                padding: 10px;
+                cursor: pointer;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    z-index: -1;
+                    width: 44px;
+                    height: 44px;
+                    background: var(--color-background);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    transition: transform .15s ease-out;
+                }
+
+                &:hover:before {
+                    transform: translate(-50%, -50%) scale(1.1);
+                }
+
+
+                &_left {
+                    left: 0;
+                    transform: rotate(180deg) translateX(50%);
+                }
+
+                &_right {
+                    right: 0;
+                    transform: translateX(50%);
+                }
+            }
+        }
+    }
+
     &-Wrapper {
         position: relative;
     }
 
     &-List {
+
+        z-index: 0;
         display: flex;
         overflow-x: scroll;
     
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    
         @media(max-width: 768px) {
-            padding-left: 16px;
-            margin-left: -16px;
             margin-right: -16px;
+            margin-left: -16px;
+            padding-left: 16px;            
 
             &:after {
                 content: '';
                 flex: 0 0 16px;
             }
         }
-
-        z-index: 0;
+    
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
     
     &-Item {
+
+        &:first-child {
+            margin-left: 0;
+        }
+
         &_margin {
+
             &_s {
                 margin-left: 8px;
             }
@@ -39,10 +93,6 @@
                 margin-left: 16px;
             }
         }
-
-        &:first-child {
-            margin-left: 0;
-        }
     }
 
     &-Header {
@@ -52,8 +102,8 @@
     }
 
     &-TitleWrapper {
-        min-height: 50px;
         box-sizing: border-box;
+        min-height: 50px;
         padding: 8px 0;
 
         &_hidden {
@@ -71,50 +121,5 @@
 
     &-Arrow {
         display: none;
-    }
-
-    @media(min-width: 768px) {
-        .Carousel {
-            &-Arrow {
-                display: block;
-                position: absolute;
-                z-index: 1;
-                top: calc(50% - 22px);
-                width: 44px;
-                height: 44px;
-                box-sizing: border-box;
-                padding: 10px;
-                cursor: pointer;
-
-                &:before {
-                    content: '';
-                    z-index: -1;
-                    position: absolute;
-                    transition: transform .15s ease-out;
-                    border-radius: 50%;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 44px;
-                    height: 44px;
-                    background: var(--color-background);
-                }
-
-                &:hover:before {
-                    transform: translate(-50%, -50%) scale(1.1);
-                }
-
-
-                &_left {
-                    transform: rotate(180deg) translateX(50%);
-                    left: 0;
-                }
-
-                &_right {
-                    transform: translateX(50%);
-                    right: 0;
-                }
-            }
-        }
     }
 }

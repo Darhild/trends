@@ -1,37 +1,37 @@
 :root {
-  --color-background: #21212C;
-  --color-background-content: #292B3A;
-  --color-layout: #343447;
-  --color-layout-medium: rgba(64, 64, 64, .8);
-  --color-layout-dark: rgba(31, 31, 31, .9);
-  --color-layout-rate: #89c939;
-  --color-background-button: #373a50;
-  --color-background-button-hover: #34364D;
+    --color-background: #21212C;
+    --color-background-content: #292B3A;
+    --color-layout: #343447;
+    --color-layout-medium: rgba(64, 64, 64, .8);
+    --color-layout-dark: rgba(31, 31, 31, .9);
+    --color-layout-rate: #89c939;
+    --color-background-button: #373a50;
+    --color-background-button-hover: #34364D;
 
-  --text-primary: #fff;
-  --text-secondary: #6A6C81;
-  --text-subtitle: rgba(255, 255, 255, .45);
-  --text-gray: rgba(236, 237, 246, 0.7);
-  --text-dark: #000;
+    --text-primary: #fff;
+    --text-secondary: #6A6C81;
+    --text-subtitle: rgba(255, 255, 255, .45);
+    --text-gray: rgba(236, 237, 246, .7);
+    --text-dark: #000;
 
-  --color-accent: #5C40F4;
-  --color-accent-red: #FF3A6A;
+    --color-accent: #5C40F4;
+    --color-accent-red: #FF3A6A;
   
-  --color-border-accent: #fc0;
+    --color-border-accent: #fc0;
 
-  --color-placeholder: #6b6c85;
-  --color-blue: #0c6be7;
-  --color-red: #e32c2c;
+    --color-placeholder: #6b6c85;
+    --color-blue: #0c6be7;
+    --color-red: #e32c2c;
 }
 
 body {
-  margin: 0;
-  background-color: var(--color-background);
-  color: var(--text-primary);
+    margin: 0;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    color: var(--text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

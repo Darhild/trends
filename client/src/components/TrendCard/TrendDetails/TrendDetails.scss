@@ -3,34 +3,8 @@ $_: '.TrendDetails';
 .TrendDetails {
     position: absolute;
     bottom: 12px;
-    padding-left: 10px;
     z-index: 100;
-
-    &-Label {
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        line-height: 16px;
-        margin-bottom: 6px;
-    }
-
-    &-Icon {
-        height: 16px;
-        
-        margin-right: 8px;
-        border-radius: 50%;
-        color: var(--color-accent-red);
-    }
-
-    &-Title {
-        font-size: 15px;
-        line-height: 18px;
-        font-weight: 500;
-    }
-
-    &-Count {
-        color: var(--text-gray);
-    }
+    padding-left: 10px;
 
     &_variant_second {
         position: static;
@@ -49,5 +23,31 @@ $_: '.TrendDetails';
             font-size: 13px;
             line-height: 16px;
         }
+    }
+
+    &-Label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+        font-size: 13px;
+        line-height: 16px;
+    }
+
+    &-Icon {
+        height: 16px;
+        
+        margin-right: 8px;
+        color: var(--color-accent-red);
+        border-radius: 50%;
+    }
+
+    &-Title {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
+    }
+
+    &-Count {
+        color: var(--text-gray);
     }
 }
