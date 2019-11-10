@@ -1,4 +1,2 @@
-* text=auto
-
 *.tsx text eol=crlf
 *.ts text eol=crlf
