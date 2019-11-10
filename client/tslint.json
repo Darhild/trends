@@ -12,6 +12,7 @@
         "quotemark": [
             true, "single", "jsx-double", "avoid-template", "avoid-escape"
         ],
+        "linebreak-style": [true, "CRLF"],
         "newline-before-return": true,
         "no-consecutive-blank-lines": [true, 2],
         "no-console": {
