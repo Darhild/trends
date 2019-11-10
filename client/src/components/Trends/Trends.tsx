@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.scss';
+import './Trends.scss';
 import SmallCard, { SmallCardProps } from '../SmallCard/SmallCard';
 import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
