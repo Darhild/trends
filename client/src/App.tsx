@@ -9,8 +9,8 @@ import {
 import Header from './components/Header/Header';
 import Categories from './components/Categories/Categories';
 import Channels from './components/Channels/Channels';
-import Main from './pages/Main';
-import TrendsPage from './pages/TrendsPage';
+import Main from './pages/Main/Main';
+import TrendsPage from './pages/TrendsPage/TrendsPage';
 import store from './store/createStore';
 
 const App: React.FC = () =>

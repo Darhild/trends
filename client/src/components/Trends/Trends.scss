@@ -1,0 +1,29 @@
+.Trends {
+    margin-bottom: 20px;
+
+    @media(min-width: 768px) {
+        margin-top: 26px;
+    }
+
+    &-More {
+        padding: 10px 12px;
+        display: block;
+        margin-top: 12px;
+
+        border-radius: 4px;
+        font-size: 13px;
+        text-decoration: none;
+        color: var(--text-primary);
+        background: var(--color-background-button);
+        text-align: center;
+
+        &:hover {
+            background: var(--color-background-button-hover);
+        }
+
+        @media(min-width: 768px) {
+            display: none;
+        }
+    }
+
+}

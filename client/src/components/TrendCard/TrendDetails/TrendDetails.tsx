@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ReactComponent as Grow } from '../../../images/svg/grow.svg';
-import './style.scss';
+import './TrendDetails.scss';
 
 interface Props {
     desc: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as Grow } from '../../images/svg/grow.svg';
-import './style.scss';
+import './SmallCard.scss';
 
 export interface SmallCardProps {
     img: string;

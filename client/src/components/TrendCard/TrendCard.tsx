@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import Trend from '../../types/trend';
 import TrendDetails from './TrendDetails/TrendDetails';
-import './style.scss';
+import './TrendCard.scss';
 
 
 interface Props extends Trend {
