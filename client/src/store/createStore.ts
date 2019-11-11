@@ -19,7 +19,13 @@ interface StoreExtension {
 
 const trends: any[] = items[0].includes;
 const initialState = {
-    trends: trends.map(({ title, thumbnail }: any) => ({ desc: title, img: thumbnail }) ),
+    trends: trends.map(({ title, thumbnail, onto_poster }: any) => (
+        {
+            desc: title,
+            img: thumbnail,
+            poster: onto_poster,
+        } ),
+    ),
     main: mainFeed,
     film: seriesFeed,
     series: seriesFeed,

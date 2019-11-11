@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .Channels {
     position: relative;
     box-sizing: border-box;
@@ -7,11 +8,14 @@
     font-size: .81em;
     line-height: 16px;
     color: var(--text-primary);
+=======
+@import './../../variables';
+>>>>>>> trenspage desktop version  and breakpoints
 
-    @media (max-width: 768px) {
-        display: none;
-    }
+.Channels {
+    display: none;    
 
+<<<<<<< HEAD
     &:before {
         content: '';
         position: absolute;
@@ -79,4 +83,38 @@
         background-image: url('https://yastatic.net/s3/home-static/_/V/o/VnJsK_KHhpNZeHJ2fl04KeQQc.svg');
         background-size: auto 26px;
     }
+=======
+    @media (min-width: $width-m) {
+        display: block;
+        width: 240px;
+        padding-top: 20px;
+        background-color: var(--color-background-content);
+
+        &-Item {
+            display: block;
+            padding: 16px 13px 16px 32px;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: .55px;
+            white-space: nowrap;
+            opacity: .6;
+        }
+    
+        &-Link {
+            display: inline-block;
+            padding: 0 12px;
+            vertical-align: middle;
+            color: var(--text-subtitle);
+            text-decoration: none;
+        }
+    
+        &-Icon {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            vertical-align: middle;
+            background-size: auto 26px;
+        }        
+    }    
+>>>>>>> trenspage desktop version  and breakpoints
 }

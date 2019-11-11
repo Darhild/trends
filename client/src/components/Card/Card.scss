@@ -1,3 +1,5 @@
+@import './../../variables';
+
 .Card { 
     background-color: var(--color-layout);
     border-radius: 6px;
@@ -6,9 +8,17 @@
         width: 117px;
         background-color: transparent;
 
+        @media(min-width: $width-xxl) {
+            width: 162px;
+        }
+
         .Card-Thumb {
             height: 175px;
             border-radius: 4px;
+
+            @media(min-width: $width-xxl) {
+                height: 243px;
+            }
         }
     
         .Card-Thumb:hover {
@@ -24,13 +34,25 @@
     &_width_medium {
         width: 184px;
 
+        @media(min-width: $width-xxl) {
+            width: 248px;
+        }
+
         .Card-Thumb {
             height: 104px;
+
+            @media(min-width: $width-xxl) {
+                height: 140px;
+            }
         }
     }
 
     &_width_full {
         width: 100%;
+
+        @media(min-width: $width-s) {
+            display: none;
+        }
 
         .Card-Thumb {
             height: 184px;
@@ -148,9 +170,3 @@
     }    
 }
 
-@media(min-width: 440px) {
-
-    .Card_width_full {
-        display: none;
-    }
-}

@@ -1,90 +1,100 @@
+@import './../../variables';
+
 .Player {
-    border-radius: 6px;
+    display: none;    
 
-    @media(max-width: 440px) {
-        display: none;
-    }
+    @media(min-width: $width-s) {
+        display: block;    
+        border-radius: 6px;    
 
-    @media(min-width: 1441px) {
-        width: 586px;
-        height: 390px;
-    }
+        &-Container {
+            height: calc(100% - 60px);
+        }
 
-    @media(min-width: 1301px) and (max-width: 1440px) {
-        width: 498px;
-        height: 340px;
-    }
+        &-Info {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            text-align: left;
+            background: var(--color-background);
+        }
 
+<<<<<<< HEAD
     @media(min-width: 440px) and (max-width: 1300px) {
         width: 380px;
         height: 274px;
     }
+=======
+        &-Text {
+            overflow: hidden;
+        }
+>>>>>>> trenspage desktop version  and breakpoints
 
-    &-Container {
-        height: calc(100% - 60px);
-    }
-
-    &-Info {
-        display: flex;
-        justify-content: space-between;
-        padding: 12px;
-        text-align: left;
-        background: var(--color-background);
-    }
-
-    &-Text {
-        overflow: hidden;
-    }
-
-    &-Title {
-        overflow: hidden;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 1.3em;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    &-Channel {
-        font-size: 13px;
-        line-height: 1.2em;
-        color: var(--text-subtitle);
-    }
-
-    &-Avatar {
-        flex-basis: 32px;
-        width: 32px;
-        height: 32px;
-        margin-right: 10px;
-        border-radius: 50%;
-    }
-
-    &-Controls {
-        display: flex;
-    }
-
-    &-Icon {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 32px;
-        height: 32px;
-        margin-left: 12px;
-        padding: 6px 8px 10px;
-        border-radius: 50%;
-
-        &_like {
-            margin-left: 6px;
-            background: var(--color-blue);
+        &-Title {
+            overflow: hidden;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.3em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
         }
 
-        &_dislike {
-            background: var(--color-red);
-            transform: rotate(180deg);
+        &-Channel {
+            font-size: 13px;
+            line-height: 1.2em;
+            color: var(--text-subtitle);
         }
 
-        &_next {
-            padding: 4px;
-            background: var(--color-background-button);
+        &-Avatar {
+            flex-basis: 32px;
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+        &-Controls {
+            display: flex;
+        }
+
+        &-Icon {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 32px;
+            height: 32px;
+            margin-left: 12px;
+            padding: 6px 8px 10px;
+            border-radius: 50%;
+
+            &_like {
+                margin-left: 6px;
+                background: var(--color-blue);
+            }
+
+            &_dislike {
+                background: var(--color-red);
+                transform: rotate(180deg);
+            }
+
+            &_next {
+                padding: 4px;
+                background: var(--color-background-button);
+            }
         }
     }
+
+    @media(min-width: $width-l) {
+        width: 380px;
+        height: 274px;
+    }
+
+    @media(min-width: $width-xl) {
+        width: 498px;
+        height: 340px;
+    }
+
+    @media(min-width: $width-xxl) {
+        width: 586px;
+        height: 390px;
+    }    
 }

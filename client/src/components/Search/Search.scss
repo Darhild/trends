@@ -1,3 +1,5 @@
+@import './../../variables';
+
 .Search { 
     box-sizing: border-box;
 
@@ -93,7 +95,7 @@
     }
 }
 
-@media(min-width: 440px) { 
+@media(min-width: $width-s) { 
 
     .Search {
         width: 100%;    

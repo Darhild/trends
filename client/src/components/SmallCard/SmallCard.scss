@@ -1,13 +1,19 @@
+@import './../../variables';
+
 .SmallCard {
     position: relative;
     display: flex;
     width: 100px;
     height: 160px;
     overflow: hidden;
-
     background: center no-repeat var(--color-placeholder);
     background-size: cover;
     border-radius: 6px;
+
+    @media(min-width: $width-xxl) {
+        width: 126px;
+        height: 200px;
+    }
 
     &-Placeholder {
         position: absolute;

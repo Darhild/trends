@@ -1,3 +1,5 @@
+@import './../../variables';
+
 .Header {
     position: relative;
     display: flex;
@@ -8,10 +10,20 @@
     height: 48px;
     padding: 0 16px;
 
+    @media(min-width: $width-s) {
+        justify-content: flex-start;
+        height: 66px;
+        padding: 14px 16px;
+    }
+
     &-Logo {
         font-weight: 300;        
         font-size: 28px;
         line-height: 16px;
+
+        @media(min-width: $width-s) {
+            margin-right: 16px;
+        }
     }
 
     .Ya-Logo {
@@ -26,21 +38,8 @@
         width: auto;
         height: 100%;
         margin-right: 16px;
-    }
-}
 
-@media(min-width: 440px) {
-
-    .Header {
-        justify-content: flex-start;
-        height: 66px;
-        padding: 14px 16px;
-
-        &-Logo {
-            margin-right: 16px;
-        }
-
-        &-Search {
+        @media(min-width: $width-s) {
             position: relative;
             right: initial;
         }

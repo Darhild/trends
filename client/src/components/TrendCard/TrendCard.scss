@@ -1,8 +1,14 @@
+@import './../../variables';
+
 $_: '.TrendCard';
 
 .TrendCard {
     position: relative;
     height: 144px;
+
+    @media(min-width: $width-l) {
+        height: 212px;
+    }
   
     &_variant_second {
         display: flex;
@@ -61,3 +67,4 @@ $_: '.TrendCard';
         display: none;
     }
 }
+

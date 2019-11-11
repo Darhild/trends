@@ -1,61 +1,16 @@
+@import './../../variables';
+
 .Carousel {
-
-    @media(min-width: 768px) {
-
-        .Carousel {
-
-            &-Arrow {
-                position: absolute;
-                top: calc(50% - 22px);
-                z-index: 1;
-                display: block;
-                box-sizing: border-box;
-                width: 44px;
-                height: 44px;
-                padding: 10px;
-                cursor: pointer;
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    z-index: -1;
-                    width: 44px;
-                    height: 44px;
-                    background: var(--color-background);
-                    border-radius: 50%;
-                    transform: translate(-50%, -50%);
-                    transition: transform .15s ease-out;
-                }
-
-                &:hover:before {
-                    transform: translate(-50%, -50%) scale(1.1);
-                }
-
-
-                &_left {
-                    left: 0;
-                    transform: rotate(180deg) translateX(50%);
-                }
-
-                &_right {
-                    right: 0;
-                    transform: translateX(50%);
-                }
-            }
-        }
-    }
-
+    
     &-Wrapper {
         position: relative;
     }
 
     &-List {
-
         z-index: 0;
         display: flex;
-        overflow-x: scroll;
+        padding-top: 6px;
+        overflow-x: scroll;        
     
         @media(max-width: 768px) {
             margin-right: -16px;
@@ -121,5 +76,46 @@
 
     &-Arrow {
         display: none;
-    }
+
+        @media(min-width: $width-m) {
+            position: absolute;
+            top: calc(50% - 22px);
+            z-index: 1;
+            display: block;
+            box-sizing: border-box;
+            width: 44px;
+            height: 44px;
+            padding: 10px;
+            cursor: pointer;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: -1;
+                width: 44px;
+                height: 44px;
+                background: var(--color-background);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: transform .15s ease-out;
+            }
+
+            &:hover:before {
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+
+
+            &_left {
+                left: 0;
+                transform: rotate(180deg) translateX(50%);
+            }
+
+            &_right {
+                right: 0;
+                transform: translateX(50%);
+            }
+        }
+    }    
 }

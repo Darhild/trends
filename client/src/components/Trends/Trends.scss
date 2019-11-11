@@ -1,7 +1,9 @@
+@import './../../variables';
+
 .Trends {
     margin-bottom: 20px;
 
-    @media(min-width: 768px) {
+    @media(min-width: $width-m) {
         margin-top: 26px;
     }
 
@@ -17,7 +19,7 @@
 
         border-radius: 4px;
 
-        @media(min-width: 768px) {
+        @media(min-width: $width-m) {
             display: none;
         }
 
