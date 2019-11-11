@@ -30,7 +30,7 @@ const initialState = {
     games: seriesFeed,
     channels: channels.map(({ channel_id, title, channel_category }: any) =>
                             ({ channelId: channel_id, title, channelCategory: channel_category })),
-    channelIcons,
+    channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
 };
 const store = createStore<State, AnyAction, StoreExtension, void>(reducer, initialState, applyMiddleware(thunk));
 

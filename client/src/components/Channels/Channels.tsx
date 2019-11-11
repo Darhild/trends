@@ -1,6 +1,7 @@
 import React from 'react';
 import { State } from '../../store/createStore';
 import { connect } from 'react-redux';
+import { channelCategories } from './channelCategories';
 import './Channels.scss';
 
 interface Channel {
@@ -18,8 +19,7 @@ interface Icons {
     position: {
         [keys: string]: number,
     };
-    'url-black': string;
-    'url-white': string;
+    iconUrl: string;
 }
 
 interface ChannelProps {
@@ -27,77 +27,30 @@ interface ChannelProps {
     icons: Icons[];
 }
 
-const channelCategories = [
-    {
-        id: 'own_region',
-        title: 'МОЙ РЕГИОН',
-    },
-    {
-        id: 'yandex',
-        title: 'КАНАЛЫ ЯНДЕКСА',
-    },
-    {
-        id: 'inform',
-        title: 'ИНФОРМАЦИОННЫЕ',
-    },
-    {
-        id: 'entertain',
-        title: 'РАЗВЛЕКАТЕЛЬНЫЕ',
-    },
-    {
-        id: 'business',
-        title: 'БИЗНЕС',
-    },
-    {
-        id: 'спорт',
-        title: 'СПОРТИВНЫЕ',
-    },
-    {
-        id: 'music',
-        title: 'МУЗЫКАЛЬНЫЕ',
-    },
-    {
-        id: 'educate',
-        title: 'ПОЗНАВАТЕЛЬНЫЕ',
-    },
-    {
-        id: 'films',
-        title: 'КИНО И СЕРИАЛЫ',
-    },
-    {
-        id: 'foreign',
-        title: 'МЕЖДУНАРОДНЫЕ',
-    },
-    {
-        id: 'region',
-        title: 'РЕГИОНАЛЬНЫЕ',
-    },
-];
-
 class Channels extends React.Component<ChannelProps> {
     public renderItem(channel?: Channel) {
-        let iconUrl = '';
-        let position = 0;
+        if (!channel) {
+            return (
+                <div className="Channels-Item">
+                    <div className="Channels-Icon" />
+                    <a className="Channels-Link"
+                        href="https://yandex.ru/efir?stream_active=channels-list%26from=efir">Список каналов</a>
+                </div>
+            );
+        }
         const { icons } = this.props;
-        icons.forEach((item) => {
-            for (const key in item.position) {
-                if (channel && key === channel.channelId) {
-                    iconUrl = `url('${item['url-white']}')`;
-                    position = item.position[key] * 2.04;
-                }
-            }
-        });
-        const url = channel
-            ? `https://yandex.ru/efir?stream_channel=${channel.channelId}%26from=efir`
-            : 'https://yandex.ru/efir?stream_active=channels-list%26from=efir';
-        const title = channel ? channel.title : 'Список каналов';
+        const iconsItem = icons.find((item) => item.position.hasOwnProperty(channel.channelId));
+        const iconUrl = iconsItem && `url('${iconsItem.iconUrl}')`;
+        const position = iconsItem && iconsItem.position[channel.channelId] * 2.04;
+        const url = `https://yandex.ru/efir?stream_channel=${channel.channelId}%26from=efir`;
+        const title = channel.title;
 
         return (
             <div className="Channels-Item">
                 <div className="Channels-Icon" style={{
                     backgroundImage: iconUrl,
                     backgroundPosition: position + '% 0',
-                }}></div>
+                }} />
                 <a className="Channels-Link" href={url}>{title}</a>
             </div>
         );
@@ -123,12 +76,14 @@ class Channels extends React.Component<ChannelProps> {
         const { channels } = this.props;
         const myEfir = channels.find((channel) => channel.channelId === '1550142789');
 
-        return (<div className="Channels">
-            {this.renderItem()}
-            <div className="Channels-Category">РЕКОМЕНДАЦИИ</div>
-            {this.renderItem(myEfir)}
-            {channelCategories.map((category) => this.renderCategory(category))}
-        </div>);
+        return (
+            <div className="Channels">
+                {this.renderItem()}
+                <div className="Channels-Category">РЕКОМЕНДАЦИИ</div>
+                {this.renderItem(myEfir)}
+                {channelCategories.map(this.renderCategory.bind(this))}
+            </div>
+        );
     }
 }
 
