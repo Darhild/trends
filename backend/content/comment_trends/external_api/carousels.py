@@ -3,10 +3,19 @@ from pprint import pprint
 from json import JSONDecodeError
 import logging
 
-feed_logger = logging.getLogger(__name__)
+carousels_logger = logging.getLogger(__name__)
 
 
 class CarouselsRequest:
+    """
+    Ручка возвращает список каруселей, принадлежащих разделу
+    tag - название раздела
+    (limit - offset) число каруселей, который должен вернуть запрос
+
+    vitrina_limit - задаёт число документов, которые будут возвращаться в данных карусели
+    поскольку данная ручка в коде используется для получения id каруселей,
+    числу документов присвоено минимальное значение по умолчанию
+    """
     url = "https://frontend.vh.yandex.ru/v23/carousels_videohub.json"
 
     headers = {
@@ -54,14 +63,14 @@ class CarouselsData:
         try:
             data = self.response.json()
         except JSONDecodeError as e:
-            feed_logger.debug(type(e), ',', e)
+            carousels_logger.debug(type(e), ',', e)
             return {}
 
         for carousel in data['carousels']:
             try:
                 carousel_id = carousel['carousel_id']
             except KeyError as e:
-                feed_logger.debug(type(e), ',', e)
+                carousels_logger.debug(type(e), ',', e)
                 continue
 
             self.carousels[carousel_id] = carousel
@@ -73,9 +82,6 @@ class CarouselsData:
             return self.carousels
 
         return self._extract_carousels_from_response()
-
-    def get_cache_hash(self):
-        pass
 
 
 if __name__ == '__main__':

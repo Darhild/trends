@@ -16,5 +16,5 @@ def create_app(db_url, is_start_get_trends=True):
 
 
 if __name__ == '__main__':
-    app = create_app(None)
-    app.run(host='0.0.0.0', port=8080)
+    app_ = create_app(None)
+    app_.run(host='0.0.0.0', port=8080)

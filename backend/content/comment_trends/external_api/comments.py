@@ -7,6 +7,10 @@ comments_logger = logging.getLogger(__name__)
 
 
 class CommentsRequest:
+    """
+    возвращается список, состоящий из timestamp всех комментариев документа
+    document_id - id документа(видео)
+    """
     api_key = "3a223f7e-69e6-4347-99e7-7a9aeea34053"
 
     url = "https://yandex.ru/comments/api/v1/tree"

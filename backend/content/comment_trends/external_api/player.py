@@ -7,6 +7,9 @@ player_logger = logging.getLogger(__name__)
 
 
 class PlayerRequest:
+    """
+    Ручка используется для получения тем документа(видео)
+    """
     url = 'https://frontend.vh.yandex.ru/v23/player/'
 
     query_params = {"synchronous_scheme": "1", "locale": "ru",
