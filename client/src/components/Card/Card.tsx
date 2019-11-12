@@ -3,15 +3,11 @@ import classnames from 'classnames';
 import './Card.scss';
 import CardContent from './CardContent/CardContent';
 import CardThumb from './CardThumb/CardThumb';
-
-export interface CardProps {
-    card: any;
-    content_type?: string;
-}
+import CardProps from './../../types/CardProps';
 
 export default class Card extends Component<CardProps> {
     public render() {
-        const { card, content_type } = this.props;
+        const { onto_poster, thumbnail, content_type } = this.props;
         const cardCn = classnames(
             'Card',
             content_type === 'vod' && 'Card_width_full Feed-Item',
@@ -27,8 +23,8 @@ export default class Card extends Component<CardProps> {
                 rel="noopener noreferrer"
             >
                 <div className={cardCn}>
-                    <CardThumb card={card} content_type={content_type}/>
-                    <CardContent card={card} content_type={content_type}/>
+                    <CardThumb thumbnail={thumbnail} poster={onto_poster} content_type={content_type}/>
+                    <CardContent {...this.props.card} content_type={content_type}/>
                 </div>
             </a>
         );
