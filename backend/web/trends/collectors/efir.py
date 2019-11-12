@@ -9,7 +9,7 @@ REQUEST_JITTER = 1
 
 class EfirCollector(BaseCollector):
     def __init__(self, repo, url):
-        super().__init__(repo, "efir", REQUEST_INTERVAL, REQUEST_JITTER)
+        super().__init__(repo, REQUEST_INTERVAL, REQUEST_JITTER)
         self.source_link = url
 
     def collect(self):
@@ -17,7 +17,7 @@ class EfirCollector(BaseCollector):
         try:
             response = requests.get(self.source_link)
             print("efir collect response {0}".format(response.content))
-            return self.insert(response.content)
+            return self.insert_content(response.content)
         except Exception as e:
             logging.error("failed to collect efir {0}".format(str(e)))
 

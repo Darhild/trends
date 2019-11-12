@@ -28,12 +28,22 @@ class Base:
                       nullable=False)
 
 
-class Trends(Base):
-    __tablename__ = 'trends'
+class Trend(Base):
+    __tablename__ = 'trend'
 
     id = sa.Column(sa.Integer, primary_key=True)
     data = sa.Column(sa.JSON)
-    source = sa.Column(sa.String(256), nullable=False)
 
 
-trends_table = Trends.__table__
+trend_table = Trend.__table__
+
+
+class Content(Base):
+    __tablename__ = 'content'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    category = sa.Column(sa.String(256), nullable=False)
+    data = sa.Column(sa.JSON)
+
+
+content_table = Content.__table__

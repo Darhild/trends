@@ -9,7 +9,8 @@ from trends.models.trends_repo import Repository
 from trends.utils.get_db_environ import get_environ_or_default
 
 
-my_ip = "84.201.160.40"
+# my_ip = "84.201.160.40"
+my_ip = "127.0.0.1"
 
 
 def create_app(db_url):
@@ -28,10 +29,15 @@ if __name__ == '__main__':
 
     repo = Repository(app.db)
     collectors = [
-        EfirCollector(repo,
-                      get_environ_or_default('EFIR_URL', "http://{0}:8081/fetch/movies".format(my_ip))),
-        GoogleCollector(repo,
-                        get_environ_or_default('GOOGLE_URL', "http://{0}:8082/fetch".format(my_ip)))]
+        EfirCollector(
+            repo,
+            get_environ_or_default('EFIR_URL', "http://{0}:8081/fetch".format(my_ip))
+        ),
+        GoogleCollector(
+            repo,
+            get_environ_or_default('GOOGLE_URL', "http://{0}:8082/fetch".format(my_ip))
+        )
+    ]
     for c in collectors:
         c.start()
 
