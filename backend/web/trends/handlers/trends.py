@@ -1,9 +1,7 @@
-from flask import Blueprint, request, Response, current_app, json
-
+from flask import Blueprint, request, Response, abort, json
 from trends.utils.get_db_environ import get_environ_or_default
-from trends.models.trends_repo import Repository
 from trends.utils.feed_request import FeedRequest
-
+from trends.utils.trend_request import handle_trends_request
 
 trends = Blueprint('trends', __name__)
 db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
@@ -30,15 +28,36 @@ mock_json = '''{
 }'''
 
 
+# заглушки функций читающих БД.
+def get_google_trends(tag=None, num_docs=20, period=1):
+    return "google"
+
+
+def get_efir_trends(tag=None, num_docs=20, period=1):
+    print("Get efir trends")
+    return "efir"
+
+
+def get_mixed_trends(tag=None, num_docs=20, period=1):
+    print("Get mixed trends")
+    return "mixed"
+
+
 @trends.route('/trends', methods=['GET'])
 def trends_handler():
-    data = {
-        "data": list(Repository(current_app.db).read_all())
-    }
-    return Response(json.dumps(data), status=200)
+    tag, num_docs, period, source = \
+        handle_trends_request(request)
+
+    switch = {'google': get_google_trends, 'efir': get_efir_trends, 'all': get_mixed_trends}
+    try:
+        resp = switch[source]()
+        response = Response(response=resp, status=200)
+    except Exception as e:
+        abort(500, str(e))  # не очень секьюрно
+    return response
 
 
-@trends.route('/api/feed', methods=['GET'],)
+@trends.route('/api/feed', methods=['GET'], )
 def feed_proxy():
     limit = request.args.get('limit')
     tag = request.args.get('tag')
