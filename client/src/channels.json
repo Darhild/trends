@@ -410,7 +410,7 @@
                 "sport"
             ],
             "description": "Канал для трансляции матчей НХЛ",
-            "channel_id": 1568185892,
+            "channel_id": "1568185892",
             "computed_title": "НХЛ ",
             "views_count": 0,
             "supertag": "sport",

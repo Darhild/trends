@@ -11,8 +11,9 @@ interface Channel {
 }
 
 interface ChannelCategory {
-    id: string;
+    id?: string;
     title: string;
+    channelId?: string[];
 }
 
 interface Icons {
@@ -22,66 +23,87 @@ interface Icons {
     iconUrl: string;
 }
 
-interface ChannelProps {
+interface ChannelsProps {
     channels: Channel[];
     icons: Icons[];
 }
 
-class Channels extends React.Component<ChannelProps> {
-    public renderItem(channel?: Channel) {
-        if (!channel) {
-            return (
-                <div className="Channels-Item">
-                    <div className="Channels-Icon" />
-                    <a className="Channels-Link"
-                        href="https://yandex.ru/efir?stream_active=channels-list%26from=efir">Список каналов</a>
-                </div>
-            );
-        }
+interface ChannelsItemProps {
+    title: string;
+    url: string;
+    iconUrl?: string;
+    position?: number;
+}
+
+const ChannelsItem = ({ title, url, iconUrl, position }: ChannelsItemProps) => (
+    <div className="Channels-Item">
+        <div className="Channels-Icon"
+        style={{
+            backgroundImage: iconUrl,
+            backgroundPosition: position + '% 0',
+        }}/>
+        <a className="Channels-Link" href={url}>{title}</a>
+    </div>
+);
+
+class Channels extends React.Component<ChannelsProps> {
+    public getIconProps = (channelId: string) => {
         const { icons } = this.props;
-        const iconsItem = icons.find((item) => item.position.hasOwnProperty(channel.channelId));
+        const iconsItem = icons.find((item) => item.position.hasOwnProperty(channelId));
         const iconUrl = iconsItem && `url('${iconsItem.iconUrl}')`;
-        const position = iconsItem && iconsItem.position[channel.channelId] * 2.04;
+        const position = iconsItem && iconsItem.position[channelId] * 2.04;
+
+        return { iconUrl, position };
+    }
+
+    public getCategoryChannels = (category: ChannelCategory) => {
+        const { id, channelId } = category;
+        const { channels } = this.props;
+        if (channelId) {
+            return channelId.map((item) => channels.find((channel) => (channel.channelId === item)));
+        }
+        if (id) {
+            return channels.filter((item) => (item.channelCategory && item.channelCategory.includes(id)));
+        }
+
+        return null;
+    }
+
+    public renderItem = (channel?: Channel) => {
+        if (!channel) {
+            return <ChannelsItem
+                title="Список каналов"
+                url="https://yandex.ru/efir?stream_active=channels-list%26from=efir" />;
+        }
+        const { iconUrl, position } = this.getIconProps(channel.channelId);
         const url = `https://yandex.ru/efir?stream_channel=${channel.channelId}%26from=efir`;
-        const title = channel.title;
 
         return (
-            <div className="Channels-Item">
-                <div className="Channels-Icon" style={{
-                    backgroundImage: iconUrl,
-                    backgroundPosition: position + '% 0',
-                }} />
-                <a className="Channels-Link" href={url}>{title}</a>
-            </div>
+            <ChannelsItem
+                title={channel.title}
+                url={url}
+                iconUrl={iconUrl}
+                position={position} />
         );
     }
 
-    public renderCategory(category: ChannelCategory) {
-        const { id, title } = category;
-        const { channels } = this.props;
+    public renderCategory = (category: ChannelCategory) => {
+        const { title } = category;
+        const categoryChannels = this.getCategoryChannels(category);
 
-        return (
+        return (categoryChannels &&
             <>
                 <div className="Channels-Category">{title}</div>
-                {channels.map((channel) => {
-                    const { channelCategory } = channel;
-
-                    return channelCategory && channelCategory.includes(id) && this.renderItem(channel);
-                })}
+                {categoryChannels.map(this.renderItem)}
             </>
         );
     }
 
     public render() {
-        const { channels } = this.props;
-        const myEfir = channels.find((channel) => channel.channelId === '1550142789');
-
         return (
             <div className="Channels">
                 {this.renderItem()}
-                <div className="Channels-Category">РЕКОМЕНДАЦИИ</div>
-                {this.renderItem(myEfir)}
-                {channelCategories.map(this.renderCategory.bind(this))}
+                {channelCategories.map(this.renderCategory)}
             </div>
         );
     }

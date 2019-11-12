@@ -1,4 +1,5 @@
 .Channels {
+    position: relative;
     box-sizing: border-box;
     width: 240px;
     padding: 20px 13px 20px 0;
@@ -6,10 +7,21 @@
     font-size: .81em;
     line-height: 16px;
     color: var(--text-primary);
-    background-image: linear-gradient(-180deg,var(--color-background-content) 0,var(--color-background) 100%);
 
     @media (max-width: 768px) {
         display: none;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 800px;
+        background-image: linear-gradient(-180deg,var(--color-background-content) 0,var(--color-background) 100%);
     }
 
     &-Category {
