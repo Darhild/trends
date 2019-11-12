@@ -6,7 +6,7 @@ $_: '.TrendCard';
     position: relative;
     height: 144px;
 
-    @media(min-width: $width-l) {
+    @media(min-width: $screen-m) {
         height: 212px;
     }
   

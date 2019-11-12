@@ -14,7 +14,7 @@
         content: '';
         flex: 0 0 16px;
 
-        @media(min-width: $width-s) {
+        @media(min-width: $screen-s) {
             display: none;
         }
     }    

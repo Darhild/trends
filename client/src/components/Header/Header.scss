@@ -10,7 +10,7 @@
     height: 48px;
     padding: 0 16px;
 
-    @media(min-width: $width-s) {
+    @media(min-width: $screen-s) {
         justify-content: flex-start;
         height: 66px;
         padding: 14px 16px;
@@ -21,7 +21,7 @@
         font-size: 28px;
         line-height: 16px;
 
-        @media(min-width: $width-s) {
+        @media(min-width: $screen-s) {
             margin-right: 16px;
         }
     }
@@ -39,7 +39,7 @@
         height: 100%;
         margin-right: 16px;
 
-        @media(min-width: $width-s) {
+        @media(min-width: $screen-s) {
             position: relative;
             right: initial;
         }

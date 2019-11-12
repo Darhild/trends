@@ -3,7 +3,7 @@
 .App {
     overflow-x: hidden;
 
-    @media screen and (min-width: $width-m) {
+    @media screen and (min-width: $screen-m) {
 
         &-Main {
             display: flex;

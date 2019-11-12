@@ -3,7 +3,7 @@
 .Player {
     display: none;    
 
-    @media(min-width: $width-s) {
+    @media(min-width: $screen-s) {
         display: block;    
         border-radius: 6px;    
 
@@ -83,17 +83,17 @@
         }
     }
 
-    @media(min-width: $width-l) {
+    @media(min-width: $screen-m) {
         width: 380px;
         height: 274px;
     }
 
-    @media(min-width: $width-xl) {
+    @media(min-width: $screen-l) {
         width: 498px;
         height: 340px;
     }
 
-    @media(min-width: $width-xxl) {
+    @media(min-width: $screen-xl) {
         width: 586px;
         height: 390px;
     }    

@@ -10,7 +10,7 @@
     background-size: cover;
     border-radius: 6px;
 
-    @media(min-width: $width-xxl) {
+    @media(min-width: $screen-l) {
         width: 126px;
         height: 200px;
     }

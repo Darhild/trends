@@ -8,7 +8,7 @@
         width: 117px;
         background-color: transparent;
 
-        @media(min-width: $width-xxl) {
+        @media(min-width: $screen-l) {
             width: 162px;
         }
 
@@ -16,7 +16,7 @@
             height: 175px;
             border-radius: 4px;
 
-            @media(min-width: $width-xxl) {
+            @media(min-width: $screen-l) {
                 height: 243px;
             }
         }
@@ -34,14 +34,14 @@
     &_width_medium {
         width: 184px;
 
-        @media(min-width: $width-xxl) {
+        @media(min-width: $screen-l) {
             width: 248px;
         }
 
         .Card-Thumb {
             height: 104px;
 
-            @media(min-width: $width-xxl) {
+            @media(min-width: $screen-l) {
                 height: 140px;
             }
         }
@@ -50,7 +50,7 @@
     &_width_full {
         width: 100%;
 
-        @media(min-width: $width-s) {
+        @media(min-width: $screen-s) {
             display: none;
         }
 
