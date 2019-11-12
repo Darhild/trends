@@ -3,7 +3,7 @@ import { CardProps } from '../../Card/Card';
 import { dateUtils } from './../../../utils';
 import { ReactComponent as Like } from './../../../images/svg/like.svg';
 
-const CardContent = ({ card, content_type }: CardProps) => {
+const CardContent = ({ title, computed_title, release_date_ut, release_year, genres, content_type }: CardProps) => {
     const LikeIcons = (
         <div className="Card-LikeOrNot">
             <div className="Card-Like">
