@@ -1,27 +1,28 @@
-export interface CardProps {
-    title: string;
-    computed_title: string;
+export interface CardCommonProps {
     content_id: string;
-    supertag: string;
-    content_type?: string;
-    release_date_ut: number;
-    genres: string[];
-    rating_kp: number;
-    percentage_score: number;
-    duration: number;
-    poster: string;
-    thumbnail: string;
+    supertag?: string;
     includes?: any;
 }
 
 export interface CardThumbProps {
-    poster: string;
+    onto_poster: string;
     thumbnail: string;
 }
 
 export interface CardDetailsProps {
-    rating_kp: number;
-    percentage_score: number;
-    duration: number;
     content_type: string;
+    duration: number;
+    rating_kp?: number;
+    percentage_score?: number;
 }
+
+export interface CardContentProps {
+    content_type: string;
+    title: string;
+    computed_title?: string;
+    release_date_ut?: number;
+    release_year?: number;
+    genres?: string[];
+}
+
+export type CardProps = CardCommonProps & CardThumbProps & CardDetailsProps & CardContentProps;
