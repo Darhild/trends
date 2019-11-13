@@ -1,7 +1,6 @@
 from collections import defaultdict, namedtuple
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
-from pprint import pprint
 import json
 import time
 
@@ -14,8 +13,10 @@ from comment_trends.external_api.carousel import CarouselRequest
 
 Counts = namedtuple('Counts', ['day', 'week', 'month'])
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
+
+# TODO вынести в конфиг
 config = {'offset': 0, 'limit': 2, 'num_docs': 2}
-tags = {"movie", "series", "kids", "sport", "blogger"}
+tags = {"movie", "series", "kids", "sport", "blogger", "common"}
 
 
 def get_trends_cached():
@@ -122,6 +123,8 @@ def count_comments_from(comment_ts, start):
 
 if __name__ == '__main__':
     t1 = time.time()
-    pprint(get_sorted_trends('movie'))
+    for t in tags:
+        print(t, get_sorted_trends(t)[:10])
+    # print(get_sorted_trends('movie')[:10])
     print(time.time() - t1)
 

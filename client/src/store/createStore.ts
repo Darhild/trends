@@ -6,7 +6,7 @@ import { items } from '../feed.json';
 import { items as seriesFeed } from '../mobile_series.json';
 import { items as blogersFeed } from '../blogers.json';
 import { items as mainFeed } from '../desktop_all.json';
-import { set as channels } from '../channels.json';
+import { set as channels, icons as channelIcons } from '../channels.json';
 
 export interface State {
     trends: Trend[];
@@ -28,7 +28,9 @@ const initialState = {
     sport: seriesFeed,
     music: seriesFeed,
     games: seriesFeed,
-    channels: channels.map(({ channel_id, computed_title }: any) => ({ channelId: channel_id, title: computed_title })),
+    channels: channels.map(({ channel_id, title, channel_category }: any) =>
+                            ({ channelId: channel_id, title, channelCategory: channel_category })),
+    channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
 };
 const store = createStore<State, AnyAction, StoreExtension, void>(reducer, initialState, applyMiddleware(thunk));
 
