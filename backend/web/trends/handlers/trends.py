@@ -45,6 +45,7 @@ def get_mixed_trends(tag=None, num_docs=20, period=1):
 
 @trends.route('/trends', methods=['GET'])
 def trends_handler():
+<<<<<<< HEAD
     tag, num_docs, period, source = \
         handle_trends_request(request)
 
@@ -55,6 +56,12 @@ def trends_handler():
     except Exception as e:
         abort(500, str(e))  # не очень секьюрно
     return response
+=======
+    data = {
+        "data": list(Repository(current_app.db).read_all())
+    }
+    return Response(json.dumps(data), status=200, mimetype="application/json")
+>>>>>>> Read in progress
 
 
 @trends.route('/api/feed', methods=['GET'], )
