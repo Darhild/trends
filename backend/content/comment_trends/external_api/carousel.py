@@ -1,4 +1,5 @@
 import requests
+from requests import ConnectionError, Response
 from pprint import pprint
 from json import JSONDecodeError
 import logging
@@ -43,7 +44,13 @@ class CarouselRequest:
                        "limit": f"{limit}",
                        "carousel_id": f"{carousel_id}"})
 
-        response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+        # TODO обернуть в блок try когда будет известен вид исключения
+        try:
+            response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+        except ConnectionError:
+            response = Response()
+            response.status_code = 500
+
         return CarouselData(response)
 
 
@@ -91,6 +98,6 @@ class CarouselData:
 
 if __name__ == '__main__':
     cr_id = 'ChJoaHhpbnJnbHN6Zmdra2dkaGgSBW1vdmllGiFtb3ZpZSZyZWdpb25fZXVyb3BlJnBvc3Rlcl9leGlzdHMgAQ=='
-    cr = CarouselRequest.get_response(cr_id, offset=0, limit=2)
+    cr = CarouselRequest.get_response(cr_id, offset=0, limit=100)
     pprint(cr.get_documents())
     print(cr.get_cache_hash())

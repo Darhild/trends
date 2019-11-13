@@ -44,7 +44,7 @@ class CarouselsRequest:
         params.update({"offset": f"{offset}",
                        "limit": f"{limit}"})
 
-        if tag:
+        if tag != 'common':
             params["tag"] = tag
 
         if cache_hash:
