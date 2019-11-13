@@ -12,7 +12,7 @@ const CardDetails = ({ duration, rating_kp, percentage_score, content_type }: Ca
   const seriesDetails = (
     <>
       <div className="Card-Rating">
-          {Math.round(rating_kp * 10) / 10 || null}
+          {rating_kp ? Math.round(rating_kp * 10) / 10 : null}
       </div>
       <div className="Card-Score">
           {percentage_score && `${percentage_score}%`}

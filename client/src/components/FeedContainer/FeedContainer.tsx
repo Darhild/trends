@@ -4,26 +4,16 @@ import Carousel from '../Carousel/Carousel';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
-import CardProps from './../../types/CardProps';
+import { CardProps } from './../../types/CardProps';
+import { ListProps, ListCardProps } from '../../types/ListCardProps';
 
 interface OwnProps {
     category: string;
 }
 
 interface StateProps {
-    content: any;
+    content: ListCardProps[];
 }
-
-interface ListProps {
-    title: string;
-    carousel_id: string;
-    content_type_name: string;
-    content_id: string;
-    includes: CardProps[];
-    card?: CardProps;
-}
-
-type ListCardProps = ListProps & CardProps;
 
 type FeedContainerProps = OwnProps & StateProps;
 

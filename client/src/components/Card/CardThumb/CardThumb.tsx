@@ -1,11 +1,16 @@
 import React from 'react';
 import { CardProps } from './../../../types/CardProps';
-
 import CardDetails from './../CardDetails/CardDetails';
 
-const CardThumb = ({ thumbnail, poster, duration, content_type, rating_kp, percentage_score }: CardProps) => {
-    const cardPoster  = ( <img src={poster} className="Card-Poster" alt="" /> );
-    const img = (content_type === 'vod' || content_type === 'blogger') ? thumbnail : poster;
+const CardThumb = ({
+        thumbnail,
+        onto_poster,
+        duration, rating_kp,
+        percentage_score,
+        content_type,
+    }: CardProps) => {
+    const cardPoster  = ( <img src={onto_poster} className="Card-Poster" alt="" /> );
+    const img = (content_type === 'vod' || content_type === 'blogger') ? thumbnail : onto_poster;
 
     return (
         <div className="Card-Thumb" style={{ backgroundImage: `url(${img})` }}>
