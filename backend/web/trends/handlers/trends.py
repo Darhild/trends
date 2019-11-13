@@ -1,7 +1,9 @@
-from flask import Blueprint, request, Response, abort, json
+from flask import Blueprint, request, Response, abort, json, current_app
 from trends.utils.get_db_environ import get_environ_or_default
 from trends.utils.feed_request import FeedRequest
 from trends.utils.trend_request import handle_trends_request
+
+from trends.models.trends_repo import Repository
 
 trends = Blueprint('trends', __name__)
 db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
@@ -28,36 +30,59 @@ mock_json = '''{
 }'''
 
 
-# заглушки функций читающих БД.
-def get_google_trends(tag=None, num_docs=20, period=1):
-    return "google"
+def sort_and_limit(result, limit):
+    result_data = []
 
+    if result is None or len(result) == 0:
+        return result_data
+    # Сортируем по day
+    result = sorted(result, key=lambda x: x["day"], reverse=True)
 
-def get_efir_trends(tag=None, num_docs=20, period=1):
-    print("Get efir trends")
-    return "efir"
+    # Лимитируем по limit
+    result = result[:limit]
 
+    # Выбираем только "data"
+    for r in result:
+        result_data.append(r["data"])
 
-def get_mixed_trends(tag=None, num_docs=20, period=1):
-    print("Get mixed trends")
-    return "mixed"
+    return result_data
 
 
 @trends.route('/trends', methods=['GET'])
 def trends_handler():
-    tag, num_docs, period, source = \
-        handle_trends_request(request)
+    tag, num_docs, period, source = handle_trends_request(request)
 
-    switch = {'google': get_google_trends, 'efir': get_efir_trends, 'all': get_mixed_trends}
     try:
-        resp = switch[source]()
-        response = Response(response=resp, status=200)
+        if num_docs == 0:
+            num_docs = 20
+        if period == 0:
+            period = 1
+        tag = "movie"
+
+        repo = Repository(current_app.db)
+        if source == "efir":
+            if tag == "":
+                raise Exception("tag should be set for efir query")
+
+            resp = sort_and_limit(repo.read_content(period, tag), num_docs)
+
+        elif source == "google":
+            resp = sort_and_limit(repo.read_trend(period), num_docs)
+
+        else:
+            ratio_factor = 5
+            external_ratio = int(num_docs / ratio_factor)
+            internal_ratio = num_docs - external_ratio
+            resp = sort_and_limit(repo.read_content(period, tag), internal_ratio)
+            resp += sort_and_limit(repo.read_trend(period), external_ratio)
+
+        return Response(response=json.dumps(resp), status=200, mimetype='application/json')
+
     except Exception as e:
         abort(500, str(e))  # не очень секьюрно
-    return response
 
 
-@trends.route('/api/feed', methods=['GET'],)
+@trends.route('/api/feed', methods=['GET'], )
 def feed_proxy():
     limit = request.args.get('limit')
     tag = request.args.get('tag')
