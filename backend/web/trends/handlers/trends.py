@@ -57,13 +57,12 @@ def trends_handler():
             num_docs = 20
         if period == 0:
             period = 1
-        tag = "movie"
+
+        if tag == "":
+            tag = "kids"  # oh ...
 
         repo = Repository(current_app.db)
         if source == "efir":
-            if tag == "":
-                raise Exception("tag should be set for efir query")
-
             resp = sort_and_limit(repo.read_content(period, tag), num_docs)
 
         elif source == "google":
