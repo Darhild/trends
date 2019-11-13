@@ -15,7 +15,7 @@ Counts = namedtuple('Counts', ['day', 'week', 'month'])
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
 
 # TODO вынести в конфиг
-config = {'offset': 0, 'limit': 10, 'num_docs': 10}
+config = {'offset': 0, 'limit': 2, 'num_docs': 2}
 tags = {"movie", "series", "kids", "sport", "blogger", "common"}
 
 
