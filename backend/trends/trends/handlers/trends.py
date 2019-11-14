@@ -18,7 +18,7 @@ def import_trends():
     logger.debug("Handler %s was triggered", request.path)
     json = get_trends_cached(cache)
     if json is not None:
-        response = Response(response=json, status=200)
+        response = Response(response=json, status=200, mimetype="application/json")
     else:
         response = Response(response="Cache is empty", status=400)
     logger.debug("Send to user %s", response)
