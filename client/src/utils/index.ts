@@ -21,6 +21,6 @@ export function dateUtils(date: number) {
   return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
-export function excludeBanned(list: ListCardProps[]) {
-  return list.filter((card) => !card.includes.banned);
+export function excludeBanned(list: ListCardProps) {
+  return list;
 }
