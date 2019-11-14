@@ -5,7 +5,7 @@ import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
 import { CardProps } from './../../types/CardProps';
-import { ListProps, ListCardProps } from '../../types/ListCardProps';
+import { ListProps, ListCardProps } from './../../types/ListCardProps';
 import { excludeBanned } from './../../utils';
 
 interface OwnProps {
@@ -20,10 +20,15 @@ type FeedContainerProps = OwnProps & StateProps;
 
 const renderList = (list: ListProps) =>
     (
-        list.includes.map((card: CardProps) => (
-            <Card content_type={card.supertag || 'series'} key={card.content_id} {...card}/>
-        ))
+        list.includes.map((card: CardProps) => {
+            if (card.includes && card.includes[0].banned) {
+                return null;
+            }
+
+            return <Card content_type={card.supertag || 'series'} key={card.content_id} {...card}/>;
+        })
     );
+
 
 const renderCarousel = (list: ListProps) =>
     (
@@ -42,9 +47,9 @@ class FeedContainer extends Component<FeedContainerProps> {
         return (
             <div className="Feed">
                 {
-                    this.props.content.map((list: ListCardProps[]) =>
+                    this.props.content.map((list: ListCardProps) =>
                         list.content_type_name === 'carousel'
-                            ? renderCarousel(excludeBanned(list))
+                            ? renderCarousel(list)
                             : <Card {...list} key={list.content_id} content_type="vod" />)
                 }
             </div>
