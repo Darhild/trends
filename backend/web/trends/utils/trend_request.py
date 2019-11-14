@@ -16,6 +16,9 @@ def handle_trends_request(request):
     # или возврщаеть пустой ответ в случае несуществующего тэга
     tag = request.args.get('tag')
 
+    if tag == "":
+        tag = "kids"  # oh ...
+
     num_docs = request.args.get('num_docs')
     if num_docs is None:
         num_docs = 20
@@ -29,8 +32,10 @@ def handle_trends_request(request):
     period = parameter_to_int(period, 'period')
 
     source = request.args.get('source')
-    if source is None:
-        source = 'all'
-    if source not in ('all', 'google', 'efir'):
-        abort(400, "Parameter source should be 'efir' or 'google'")
+    if source is None or source == '':
+        source = 'mixed'
+
+    if source not in ('mixed', 'google', 'efir'):
+        abort(400, "Parameter source should be 'efir', 'google' or empty (for mixed query)")
+
     return tag, num_docs, period, source

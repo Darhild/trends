@@ -15,8 +15,9 @@ class EfirCollector(BaseCollector):
     def collect(self):
         logging.info("efir collect")
         try:
+            # print("efir collect url {0}".format(self.source_link))
             response = requests.get(self.source_link)
-            print("efir collect response {0}".format(response.content))
+            # print("efir collect {0}".format(response.content))
             return self.insert_content(response.content)
         except Exception as e:
             logging.error("failed to collect efir {0}".format(str(e)))

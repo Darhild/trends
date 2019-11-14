@@ -37,6 +37,8 @@ class Repository:
 
     def trend_record_row_to_dict(self, trend_rec):
         """
+        Returns:
+
         [
         {
             "day": 1,
@@ -46,15 +48,18 @@ class Repository:
         },
         {
             "day": 22,
-            {
+            "data": {
                 ...
             }
         }
         ]"""
+
         result = []
 
         for trend in trend_rec[0]:
             d = dict(trend)
+
+            # Надо ли мапить поля? Если каких то нет, то не добавлять этот тренд?
 
             # d['id'] = d['id']
             # d['title'] = d['title'].value
@@ -83,7 +88,7 @@ class Repository:
                 for trend in rows:
                     result += self.trend_record_row_to_dict(trend)
 
-                logging.error("google trends selected rows {0}".format(len(result)))
+                logging.getLogger(__name__).info("google trends num rows: {0}".format(len(result)))
                 return result
 
     def read_content(self, period, tag):
@@ -102,4 +107,5 @@ class Repository:
                 for trend in rows:
                     result += self.trend_record_row_to_dict(trend)
 
-                logging.error("content trends selected rows {0}".format(len(result)))
+                logging.getLogger(__name__).info("efir trends num rows: {0}".format(len(result)))
+                return result

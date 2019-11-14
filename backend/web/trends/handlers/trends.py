@@ -5,6 +5,8 @@ from trends.utils.trend_request import handle_trends_request
 
 from trends.models.trends_repo import Repository
 
+import logging
+
 trends = Blueprint('trends', __name__)
 db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
 mock_json = '''{
@@ -53,13 +55,8 @@ def trends_handler():
     tag, num_docs, period, source = handle_trends_request(request)
 
     try:
-        if num_docs == 0:
-            num_docs = 20
-        if period == 0:
-            period = 1
-
-        if tag == "":
-            tag = "kids"  # oh ...
+        logging.getLogger(__name__).info("New request, tag:{0}, num_docs:{1}, period:{2}, source:{3}".
+                                         format(tag, num_docs, period, source))
 
         repo = Repository(current_app.db)
         if source == "efir":
@@ -70,12 +67,14 @@ def trends_handler():
 
         else:
             ratio_factor = 5
-            external_ratio = int(num_docs / ratio_factor)
+            external_ratio = num_docs // ratio_factor
             internal_ratio = num_docs - external_ratio
-            resp = sort_and_limit(repo.read_content(period, tag), internal_ratio)
-            resp += sort_and_limit(repo.read_trend(period), external_ratio)
 
-        return Response(response=json.dumps(resp), status=200, mimetype='application/json')
+            resp = sort_and_limit(repo.read_trend(period), external_ratio)
+            resp.extend(sort_and_limit(repo.read_content(period, tag), internal_ratio))
+
+        return Response(response=json.dumps(resp, ensure_ascii=False),
+                        status=200, mimetype='application/json')
 
     except Exception as e:
         abort(500, str(e))  # не очень секьюрно

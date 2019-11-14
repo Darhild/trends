@@ -18,8 +18,9 @@ class GoogleCollector(BaseCollector):
     def collect(self):
         logging.info("google collect")
         try:
+            # print("google collect url {0}".format(self.source_link))
             response = requests.get(self.source_link)
-            print("google collect response {0}".format(response.content))
+            # print("google collect response {0}".format(response.content))
             return self.insert_trend(response.content)
         except Exception as e:
             logging.error("failed to collect google {0}".format(str(e)))
