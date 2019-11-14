@@ -16,7 +16,7 @@ def handle_trends_request(request):
     # или возврщаеть пустой ответ в случае несуществующего тэга
     tag = request.args.get('tag')
 
-    if tag == "":
+    if tag is None or tag == "":
         tag = "kids"  # oh ...
 
     num_docs = request.args.get('num_docs')
