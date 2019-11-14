@@ -4,7 +4,9 @@
     display: none;    
 
     @media(min-width: $screen-s) {
-        display: block;    
+        display: block; 
+        width: 380px;
+        height: 274px;
         border-radius: 6px;    
 
         &-Container {
@@ -74,11 +76,6 @@
                 background: var(--color-background-button);
             }
         }
-    }
-
-    @media(min-width: $screen-m) {
-        width: 380px;
-        height: 274px;
     }
 
     @media(min-width: $screen-l) {
