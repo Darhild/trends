@@ -1,10 +1,10 @@
 version: 1
-disable_existing_loggers: false
+disable_existing_loggers: true
 
 formatters:
   standard:
-    format: '%(asctime)s: %(levelname)s in %(funcName)s: %(message)s'
-    datefmt: '%Y-%m-%d %I:%M:%S %Z'
+    format: '%(asctime)s: %(levelname)s in %(funcName)s, logger %(name)s: %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
 
 handlers:
   console:

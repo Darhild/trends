@@ -17,7 +17,7 @@ class GoogleCollector(BaseCollector):
         self.source_link = url
 
     def collect(self):
-        logging.info("google collect")
+        logging.getLogger(__name__).info("google collect")
         try:
             # print("google collect url {0}".format(self.source_link))
             response = requests.get(self.source_link)
