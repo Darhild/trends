@@ -20,15 +20,10 @@ type FeedContainerProps = OwnProps & StateProps;
 
 const renderList = (list: ListProps) =>
     (
-        list.includes.map((card: CardProps) => {
-            if (card.includes && card.includes[0].banned) {
-                return null;
-            }
-
-            return <Card content_type={card.supertag || 'series'} key={card.content_id} {...card}/>;
-        })
+        list.includes.map((card: CardProps) => (
+            <Card content_type={card.supertag || 'series'} key={card.content_id} {...card}/>
+        ))
     );
-
 
 const renderCarousel = (list: ListProps) =>
     (
@@ -42,6 +37,13 @@ const renderCarousel = (list: ListProps) =>
         </Carousel>
     );
 
+const renderCard = (card: CardProps) =>
+    (
+        card.includes && card.includes[0].banned
+            ? null
+            : <Card {...card} key={card.content_id} content_type="vod" />
+    );
+
 class FeedContainer extends Component<FeedContainerProps> {
     public render() {
         return (
@@ -49,8 +51,8 @@ class FeedContainer extends Component<FeedContainerProps> {
                 {
                     this.props.content.map((list: ListCardProps) =>
                         list.content_type_name === 'carousel'
-                            ? renderCarousel(list)
-                            : <Card {...list} key={list.content_id} content_type="vod" />)
+                            ? renderCarousel(excludeBanned(list))
+                            : renderCard(list))
                 }
             </div>
         );

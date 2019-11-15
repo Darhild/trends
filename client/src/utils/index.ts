@@ -1,4 +1,4 @@
-import { ListProps, ListCardProps } from './../types/ListCardProps';
+import { ListProps } from './../types/ListCardProps';
 import { CardProps } from './../types/CardProps';
 
 export function convertTime(duration: number) {
@@ -21,6 +21,14 @@ export function dateUtils(date: number) {
   return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
-export function excludeBanned(list: ListCardProps) {
+export function excludeBanned(list: ListProps) {
+  list.includes = list.includes.filter((card: CardProps) => {
+    if (card.includes) {
+      return !card.includes[0].banned;
+    }
+
+    return card;
+  });
+
   return list;
 }
