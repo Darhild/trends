@@ -116,7 +116,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
         const carouselCn = classnames(
             'Carousel',
             this.props.className,
-        )
+        );
 
         const titleCn = classnames(
             'Carousel-TitleWrapper',
