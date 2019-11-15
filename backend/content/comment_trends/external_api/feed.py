@@ -54,7 +54,7 @@ class FeedData:
         try:
             data = self.response.json()
         except JSONDecodeError as e:
-            feed_logger.debug(type(e), ',', e)
+            feed_logger.debug("%s %s", type(e), e)
             return {}
 
         for carousel in data['items']:
@@ -62,7 +62,7 @@ class FeedData:
                 try:
                     content_id = document['content_id']
                 except KeyError as e:
-                    feed_logger.debug(type(e), ',', e)
+                    feed_logger.debug("%s %s", type(e), e)
                     continue
 
                 self.documents[content_id] = document

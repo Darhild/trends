@@ -1,7 +1,7 @@
 import requests
 from requests import ConnectionError, Response
 from pprint import pprint
-from json import JSONDecodeError
+from comment_trends.external_api.utils import parse_json
 import logging
 
 carousel_logger = logging.getLogger(__name__)
@@ -56,17 +56,8 @@ class CarouselRequest:
 
 class CarouselData:
     def __init__(self, response):
-        self.response_data = CarouselData.parse_json(response)
+        self.response_data = parse_json(response, logger=carousel_logger)
         self.documents = dict()
-
-    @staticmethod
-    def parse_json(response):
-        try:
-            data = response.json()
-        except JSONDecodeError as e:
-            carousel_logger.debug(type(e), ',', e)
-            return {}
-        return data
 
     def _extract_documents_from_response(self):
         if not self.response_data:
@@ -76,7 +67,7 @@ class CarouselData:
             try:
                 content_id = document['content_id']
             except KeyError as e:
-                carousel_logger.debug(type(e), ',', e)
+                carousel_logger.debug("%s %s", type(e), e)
                 continue
 
             self.documents[content_id] = document
