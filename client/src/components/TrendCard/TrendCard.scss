@@ -51,6 +51,10 @@ $_: '.TrendCard';
         background: center no-repeat var(--color-placeholder);
         background-size: cover;
         border-radius: 6px;
+
+        .OneTrendPage_TrendCard & {
+            border-radius: 0;
+        }
     }
 
     &-Placeholder {

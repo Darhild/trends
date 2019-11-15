@@ -11,6 +11,7 @@ import Categories from './components/Categories/Categories';
 import Channels from './components/Channels/Channels';
 import Main from './pages/Main/Main';
 import TrendsPage from './pages/TrendsPage/TrendsPage';
+import OneTrendPage from './pages/OneTrendPage/OneTrendPage';
 import store from './store/createStore';
 
 const App: React.FC = () =>
@@ -24,6 +25,7 @@ const App: React.FC = () =>
                         <Channels />
                         <div className="App-Content">
                             <Switch>
+                                <Route path="/:category/trends/:ratingPosition" component={OneTrendPage} />
                                 <Route path="/:category/trends" component={TrendsPage} />
                                 <Route path="/:category?" component={Main} />
                             </Switch>

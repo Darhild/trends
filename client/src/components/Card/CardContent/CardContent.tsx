@@ -35,6 +35,20 @@ const CardContent = ({
         </>
     );
 
+    const trendContent = (
+        <>
+            <div className="Card-Text">
+                <div className="Card-Title" >
+                    {computed_title}
+                </div>
+                <div className="Card-Subtitle">
+                    <div>187 тыс. просмотров</div>
+                    {release_date_ut && dateUtils(release_date_ut)}
+                </div>
+            </div>
+        </>
+    );
+
     const seriesContent = (
         <>
             <div className="Card-Text">
@@ -52,7 +66,9 @@ const CardContent = ({
 
     return (
         <div className="Card-Content" >
-            {content_type === 'blogger' ? blogersContent : seriesContent}
+            {content_type === 'blogger' && blogersContent}
+            {content_type === 'trend' && trendContent}
+            {content_type !== 'blogger' && content_type !== 'trend' && seriesContent}
         </div>
     );
   };

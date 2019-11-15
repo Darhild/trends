@@ -24,7 +24,10 @@ class Trends extends Component<TrendsProps> {
         return (
             <div className="Trends">
                 <Carousel title="Сейчас популярно" margin="s">
-                    {trends.map((props) => <SmallCard {...props}/>)}
+                    {trends.map((props, index) =>
+                    <Link className="Trends-Link" to={`/${category}/trends/${index + 1}`}>
+                        <SmallCard {...props}/>
+                    </Link>)}
                 </Carousel>
                 <Link to={`/${category}/trends`} className="Trends-More">Показать все популярные темы</Link>
             </div>
