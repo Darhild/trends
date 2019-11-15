@@ -43,7 +43,7 @@ class PlayerData:
             data = self.response.json()
             return data['content']['themes']
         except (KeyError, JSONDecodeError) as e:
-            player_logger.debug(type(player_logger), ',', e)
+            player_logger.debug("%s %s", type(e), e)
             return []
 
     def get_themes(self):

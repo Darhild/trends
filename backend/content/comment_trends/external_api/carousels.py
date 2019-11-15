@@ -63,14 +63,14 @@ class CarouselsData:
         try:
             data = self.response.json()
         except JSONDecodeError as e:
-            carousels_logger.debug(type(e), ',', e)
+            carousels_logger.debug("%s %s", type(e), e)
             return {}
 
         for carousel in data['carousels']:
             try:
                 carousel_id = carousel['carousel_id']
             except KeyError as e:
-                carousels_logger.debug(type(e), ',', e)
+                carousels_logger.debug(f"%s %s", type(e), e)
                 continue
 
             self.carousels[carousel_id] = carousel

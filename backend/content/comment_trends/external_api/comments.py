@@ -4,6 +4,7 @@ from json import JSONDecodeError
 from pprint import pprint
 
 comments_logger = logging.getLogger(__name__)
+comments_logger.exc_info = False
 
 
 class CommentsRequest:
@@ -41,15 +42,15 @@ class CommentsData:
         try:
             data = self.response.json()
             timestamps = data['tree']['0']['children']['after']
-        except (KeyError, JSONDecodeError) as e:
-            comments_logger.debug(type(e), ',', e)
+        except (TypeError, KeyError, JSONDecodeError) as e:
+            comments_logger.debug("%s %s", type(e), e)
             return []
 
         try:
             other_ts = data['tree']['0']['children']['visible']
             timestamps.extend(other_ts)
         except KeyError as e:
-            comments_logger.debug(type(e), ',', e)
+            comments_logger.debug("%s %s", type(e), e)
 
         return timestamps
 

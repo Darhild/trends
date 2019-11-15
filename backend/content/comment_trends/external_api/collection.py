@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from json import JSONDecodeError
+from comment_trends.external_api.utils import parse_json
 import logging
 
 collection_logger = logging.getLogger(__name__)
@@ -44,17 +44,8 @@ class CollectionRequest:
 class CollectionData:
     def __init__(self, response):
         self.resp = response
-        self.response_data = CollectionData.parse_json(response)
+        self.response_data = parse_json(response, logger=collection_logger)
         self.documents = dict()
-
-    @staticmethod
-    def parse_json(response):
-        try:
-            data = response.json()
-        except JSONDecodeError as e:
-            collection_logger.debug(type(e), ',', e)
-            return {}
-        return data
 
     def _extract_documents_from_response(self):
         if not self.response_data:
@@ -64,7 +55,7 @@ class CollectionData:
             try:
                 content_id = document['content_id']
             except KeyError as e:
-                collection_logger.debug(type(e), ',', e)
+                collection_logger.debug("%s %s", type(e), e)
                 continue
 
             self.documents[content_id] = document

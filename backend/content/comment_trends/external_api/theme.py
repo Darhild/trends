@@ -1,6 +1,6 @@
 import requests
 from pprint import pprint
-from json import JSONDecodeError
+from comment_trends.external_api.utils import parse_json
 import logging
 
 theme_logger = logging.getLogger(__name__)
@@ -38,16 +38,7 @@ class ThemeRequest:
 
 class ThemeData:
     def __init__(self, response):
-        self.response_data = ThemeData.parse_json(response)
-
-    @staticmethod
-    def parse_json(response):
-        try:
-            data = response.json()
-        except JSONDecodeError as e:
-            theme_logger.debug(type(e), ',', e)
-            return {}
-        return data
+        self.response_data = parse_json(response, logger=theme_logger)
 
     def get_info(self):
         return self.response_data
