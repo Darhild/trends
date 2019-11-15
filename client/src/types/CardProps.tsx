@@ -1,7 +1,12 @@
-export interface CardCommonProps {
+export interface CardBanned {
+    banned?: boolean;
+}
+
+export interface CardCommonProps extends CardBanned {
     content_id: string;
+    className?: string;
     supertag?: string;
-    includes?: any;
+    includes?: CardBanned[];
 }
 
 export interface CardThumbProps {

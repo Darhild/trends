@@ -4,7 +4,7 @@ $_: '.TrendsList';
 
 .TrendsList {
 
-    @media(min-width: $screen-m) {
+    @media(min-width: $screen-s) {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 12px;
