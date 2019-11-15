@@ -32,6 +32,7 @@ const renderCarousel = (list: ListProps) =>
             margin="s"
             carouselId={list.carousel_id}
             key={list.carousel_id}
+            className="Feed-Item"
         >
         {renderList(list)}
         </Carousel>
@@ -41,7 +42,7 @@ const renderCard = (card: CardProps) =>
     (
         card.includes && card.includes[0].banned
             ? null
-            : <Card {...card} key={card.content_id} content_type="vod" />
+            : <Card className="Feed-Item" {...card} key={card.content_id} content_type="vod" />
     );
 
 class FeedContainer extends Component<FeedContainerProps> {

@@ -8,16 +8,21 @@ import { CardProps } from './../../types/CardProps';
 export default class Card extends Component<CardProps> {
     public render() {
         const content_type = this.props.content_type;
+        const cardLinkCn = classnames(
+            'Card-Link',
+            this.props.className,
+        );
         const cardCn = classnames(
             'Card',
-            content_type === 'vod' && 'Card_width_full Feed-Item',
+            this.props.className,
+            content_type === 'vod' && 'Card_width_full',
             content_type === 'blogger' && 'Card_width_medium',
             (content_type === 'series' || content_type === 'movie') && 'Card_width_small',
         );
 
         return (
             <a
-                className="Card-Link"
+                className={cardLinkCn}
                 href={`https://yandex.ru/efir?from=efir&stream_id=${this.props.content_id}`}
                 target="_blank"
                 rel="noopener noreferrer"

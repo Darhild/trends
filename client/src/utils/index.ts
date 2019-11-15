@@ -27,7 +27,7 @@ export function excludeBanned(list: ListProps) {
       return !card.includes[0].banned;
     }
 
-    return card;
+    return !card.banned;
   });
 
   return list;
