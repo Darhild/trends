@@ -15,6 +15,6 @@ handlers:
 
 loggers:
   comment_trends:
-    level: DEBUG
+    level: WARNING
     handlers: [console]
 
