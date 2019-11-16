@@ -7,17 +7,18 @@ def sort(result):
     return sorted(result, key=lambda x: x["day"], reverse=True)
 
 
-def sort_and_limit(result, limit):
-    result_data = sort(result)
+def sort_and_limit(data, limit):
+    result_data = sort(data)
 
     # Лимитируем по limit
-    result = result[:limit]
+    data = result_data[:limit]
 
     # Выбираем только "data"
-    for r in result:
-        result_data.append(r["data"])
+    result = []
+    for r in data:
+        result.append(r["data"])
 
-    return result_data
+    return result
 
 
 def merge(src1, src2, factor1, factor2, limit):
