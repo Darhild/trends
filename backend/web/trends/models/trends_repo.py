@@ -6,6 +6,7 @@ import logging
 from sqlalchemy.sql import select
 
 from datetime import datetime, timedelta
+from collections import defaultdict
 
 
 class Repository:
@@ -89,7 +90,9 @@ class Repository:
             d['source'] = source
             result.append({
                 "day": day,
-                "data": d}
+                "data": d,
+                "title": d["title"]
+            }
             )
         return result
 
@@ -106,8 +109,7 @@ class Repository:
                 result = []
                 # Выбираем все, что вернули: строка - один день
                 for trend in rows:
-                    result += self.trend_record_row_to_dict(trend, source='google')
-
+                    result.extend(self.trend_record_row_to_dict(trend, source='google'))
                 logging.getLogger(__name__).info("google trends num rows: {0}".format(len(result)))
                 return result
 
@@ -125,6 +127,26 @@ class Repository:
                 result = []
                 # Выбираем все, что вернули: строка - один день
                 for trend in rows:
-                    result += self.trend_record_row_to_dict(trend, source='efir')
+                    result.extend(self.trend_record_row_to_dict(trend, source='efir'))
+                result = group_by_title(result)
                 logging.getLogger(__name__).info("efir trends num rows: {0}".format(len(result)))
                 return result
+
+
+def group_by_title(data):
+    title_score = defaultdict(int)
+    for d in data:
+        title = d['title']
+        title_score[title] += d['day']
+    titles = set()
+    result = list()
+    for d in data:
+        title = d['title']
+        if title not in titles:
+            titles.add(title)
+            result.append({'title': title, 'data': d['data'], 'day': title_score[title]})
+    return result
+
+        
+
+
