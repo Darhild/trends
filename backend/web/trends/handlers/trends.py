@@ -44,9 +44,8 @@ def trends_handler():
                 else:
                     external_ratio = num_docs // ratio_factor
                     internal_ratio = num_docs - external_ratio
-
-                efir_trends = sort(repo.read_trend(period))
-                google_trends = sort(repo.read_content(period, "common"))
+                efir_trends = [x["data"] for x in sort(repo.read_trend(period))]
+                google_trends = [x["data"] for x in sort(repo.read_content(period, "common"))]
                 resp = merge(efir_trends, google_trends, internal_ratio, external_ratio, num_docs)
             else:
                 resp = sort_and_limit(repo.read_content(period, tag), num_docs)
