@@ -17,7 +17,7 @@ def handle_trends_request(request):
     tag = request.args.get('tag')
 
     if tag is None or tag == "":
-        tag = "kids"  # oh ...
+        tag = None  # oh ...
 
     num_docs = request.args.get('num_docs')
     if num_docs is None:
