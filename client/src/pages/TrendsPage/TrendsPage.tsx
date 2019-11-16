@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
 import TrendsList from '../../components/TrendsList/TrendsList';
@@ -16,7 +15,6 @@ interface TParam {
 
 class TrendsPage extends Component<TrendsPageProps> {
     public render() {
-        const params = queryString.parse(this.props.location.search);
         const { category } = this.props.match.params;
         const { variant } = this.props;
 

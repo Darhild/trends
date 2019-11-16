@@ -26,10 +26,9 @@ class TrendsList extends Component<Props> {
             <div className={cn}>
                 {
                     trends.map((props, index) =>
-                    <Link className="TrendsList-Link" to={`/${category}/trends/${index + 1}`}>
+                    <Link className="TrendsList-Link TrendsList-Item" to={`/${category}/trends/${index + 1}`}>
                         <TrendCard
                             {...props}
-                            className="TrendsList-Item"
                             variant={variant}
                             ratingPosition={index + 1}
                         />
