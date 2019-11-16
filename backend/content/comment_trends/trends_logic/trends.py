@@ -10,6 +10,7 @@ from comment_trends.external_api.player import PlayerRequest
 from comment_trends.external_api.comments import CommentsRequest
 from comment_trends.external_api.carousels import CarouselsRequest
 from comment_trends.external_api.carousel import CarouselRequest
+from comment_trends.external_api.theme import ThemeRequest
 
 Counts = namedtuple('Counts', ['day', 'week', 'month'])
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
@@ -38,10 +39,15 @@ def get_sorted_trends(tag):
     result = []
     # TODO добавить поле video_count
     for (theme_id, theme_title), counts in sorted_themes:
+        theme_info = get_theme_info(theme_id)
         result.append({
             'id': theme_id,
             'title': theme_title,
             'day': counts.day,
+            'avatar': theme_info['avatar'],
+            'bg': theme_info['bg'],
+            'description': theme_info['description']
+
         })
 
     return result
@@ -119,6 +125,11 @@ def count_comments_from(comment_ts, start):
             break
 
     return count
+
+
+def get_theme_info(theme_id):
+    response = ThemeRequest.get_response(theme_id)
+    return response.get_info()
 
 
 if __name__ == '__main__':

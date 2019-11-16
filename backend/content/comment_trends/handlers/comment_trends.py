@@ -1,7 +1,7 @@
 from flask import Blueprint, Response
 from comment_trends.trends_logic.trends import get_trends_cached, tags
 
-comment_trends = Blueprint('trends', __name__)
+comment_trends = Blueprint('comment_trends', __name__)
 
 
 @comment_trends.route('/fetch', methods=['GET'])

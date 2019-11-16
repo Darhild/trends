@@ -41,7 +41,18 @@ class ThemeData:
         self.response_data = parse_json(response, logger=theme_logger)
 
     def get_info(self):
-        return self.response_data
+
+        try:
+            content = self.response_data["content"]
+        except (TypeError, KeyError) as e:
+            theme_logger.debug("%s %s", type(e), e)
+            content = {}
+
+        for field in ('bg', 'avatar', 'description'):
+            if field not in content:
+                content[field] = ""
+
+        return content
 
 
 if __name__ == '__main__':

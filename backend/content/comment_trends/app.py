@@ -4,7 +4,7 @@ import os
 import yaml
 from flask import Flask
 
-from comment_trends.trends_logic.trends import cache, compute_trends
+from comment_trends.trends_logic.trends import cache
 from comment_trends.trends_logic.trends_process import start_get_trends
 from comment_trends.handlers.comment_trends import comment_trends
 
@@ -32,7 +32,6 @@ def create_app(db_url, is_start_get_trends=True):
     app.register_blueprint(comment_trends, url_prefix='/')
     cache.init_app(app)
     if is_start_get_trends:
-        # compute_trends()
         start_get_trends()
     return app
 
