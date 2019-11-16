@@ -11,7 +11,7 @@ from trends.collectors.efir import EfirCollector
 from trends.collectors.google import GoogleCollector
 from trends.models.trends_repo import Repository
 from trends.utils.get_db_environ import get_environ_or_default
-
+from flask_cors import CORS
 
 # my_ip = "84.201.160.40"
 my_ip = "127.0.0.1"
@@ -35,6 +35,7 @@ def create_app(db_url):
     logger = logging.getLogger("trends")
     logger.debug("About to create service mixer")
     app = Flask(__name__)
+    CORS(app)
 
     app.db = create_engine(db_url)
     app.register_blueprint(trends, url_prefix='/')

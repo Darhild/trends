@@ -6,3 +6,4 @@ apscheduler
 flask_caching
 requests
 PyYaml
+flask_cors
