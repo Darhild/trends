@@ -11,4 +11,3 @@ export const selectTime = (value: number) => ({ type: SELECT_TIME, value });
 
 export const selectSource = (value: string) => ({ type: SELECT_SOURCE, value });
 
-export const DEFAULT = 'DEFAULT';

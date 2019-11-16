@@ -8,28 +8,32 @@ interface SettingProps {
     experiment: string;
     time: number;
     source: string;
-    selectExperiment: (value: string) => void;
-    selectTime: (value: number) => void;
-    selectSource: (value: string) => void;
+    onChangeSelectExperiment: (value: string) => void;
+    onChangeSelectTime: (value: number) => void;
+    onChangeSelectSource: (value: string) => void;
 }
 
 class SettingsPage extends Component<SettingProps> {
-    constructor(props: SettingProps) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-      }
 
-    public handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    public handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const {
+            onChangeSelectExperiment,
+            onChangeSelectTime,
+            onChangeSelectSource,
+        } = this.props;
+
         if (event.target.name === 'variant') {
-            this.props.selectExperiment(event.target.value);
+            onChangeSelectExperiment(event.target.value);
         } else if (event.target.name === 'time') {
-            this.props.selectTime(+event.target.value);
+            onChangeSelectTime(Number(event.target.value));
         } else if (event.target.name === 'source') {
-            this.props.selectSource(event.target.value);
+            onChangeSelectSource(event.target.value);
         }
     }
 
     public render() {
+        const { experiment, time, source } = this.props;
+
         return (
             <div className="Settings">
                 <div className="Settings-Item">
@@ -37,7 +41,7 @@ class SettingsPage extends Component<SettingProps> {
                     <select
                         className="Settings-Select"
                         name="variant"
-                        value={this.props.experiment}
+                        value={experiment}
                         onChange={this.handleChange}
                     >
                         <option value="default">Дефолтный вариант</option>
@@ -49,7 +53,7 @@ class SettingsPage extends Component<SettingProps> {
                     <select
                         className="Settings-Select"
                         name="time"
-                        value={this.props.time}
+                        value={time}
                         onChange={this.handleChange}
                     >
                         <option value="1" >День</option>
@@ -62,7 +66,7 @@ class SettingsPage extends Component<SettingProps> {
                     <select
                         className="Settings-Select"
                         name="source"
-                        value={this.props.source}
+                        value={source}
                         onChange={this.handleChange}
                     >
                         <option value="efir" >Яндекс.Эфир</option>
@@ -82,9 +86,9 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = {
-    selectExperiment,
-    selectTime,
-    selectSource,
+    onChangeSelectExperiment: selectExperiment,
+    onChangeSelectTime: selectTime,
+    onChangeSelectSource: selectSource,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
