@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import json
 import time
+# TODO первая картинка в теме / обрезать постер / яндекс апи
+# по видео показывать последние видео / наиболее комментируемые
+# возможно проксировать collection
 
 from flask_caching import Cache
 
@@ -34,13 +37,14 @@ def compute_trends():
 
 
 def get_sorted_trends(tag):
-    themes = get_potential_trends(tag, config)
+    themes, docs = get_potential_trends(tag, config)
     sorted_themes = sorted(themes.items(), key=lambda x: x[1].day, reverse=True)
-    result = []
-    # TODO добавить поле video_count
+    theme_result = []
+    # TODO добавить поле video_count по release date
+    # get_sorted_themes
     for (theme_id, theme_title), counts in sorted_themes:
         theme_info = get_theme_info(theme_id)
-        result.append({
+        theme_result.append({
             'id': theme_id,
             'title': theme_title,
             'day': counts.day,
@@ -50,10 +54,17 @@ def get_sorted_trends(tag):
 
         })
 
-    return result
+    # get_sorted_documents
+    # docs_result = []
+    # sorted_docs = sorted(docs[0].items(), key=lambda x: x[1], reverse=True)
+    # for doc_id, doc_count in sorted_docs:
+    #     docs_result.append({'id': doc_id,
+    #                         'data': docs[1][doc_id]})
+
+    return theme_result
 
 
-def get_potential_trends(tag, feed_params) -> Dict[Tuple[str, str], Counts]:
+def get_potential_trends(tag, feed_params):
 
     documents = dict()
     carousels = CarouselsRequest.get_response(tag=tag, **feed_params).get_carousels()
@@ -65,7 +76,11 @@ def get_potential_trends(tag, feed_params) -> Dict[Tuple[str, str], Counts]:
     theme_to_comments = group_comments_by_themes(documents, doc_to_comments)
     theme_to_count = count_comments_by_themes(theme_to_comments)
 
-    return theme_to_count
+    # TODO count_comments_by_documents
+
+    doc_to_count = {doc_id: len(doc_to_comments[doc_id]) for doc_id in doc_to_comments}
+    doc_data = documents, doc_to_count
+    return theme_to_count, doc_data
 
 
 def get_documents_from_carousel(carousel_id, feed_params):
@@ -74,6 +89,7 @@ def get_documents_from_carousel(carousel_id, feed_params):
 
 
 def get_comments(documents):
+    # TODO получить текст топового комментария
     doc_to_comments = dict()
     for doc_id in documents:
         response = CommentsRequest.get_response(doc_id)
