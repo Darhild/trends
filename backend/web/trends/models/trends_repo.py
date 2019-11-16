@@ -116,6 +116,8 @@ class Repository:
     def read_content(self, period, tag):
         with self.db.begin() as conn:
             with conn.begin():
+                print(tag)
+
                 p = datetime.today() - timedelta(days=period)
                 s = select([content_table.c.data]). \
                     where(content_table.c.created_at >= p). \
