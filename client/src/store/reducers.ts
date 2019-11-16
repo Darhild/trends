@@ -3,13 +3,13 @@ import { State } from '../store/createStore';
 import { items as seriesFeed } from '../mobile_series.json';
 import { items as blogersFeed } from '../blogers.json';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_MAIN_FEED } from './actionTypes';
+import { SET_TRENDS, SET_MAIN_FEED, SELECT_EXPERIMENT, SELECT_TIME, SELECT_SOURCE } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
 }
 
-const initialState = {
+const defaultState = {
     trends: [],
     main: [],
     film: seriesFeed,
@@ -21,7 +21,38 @@ const initialState = {
     games: seriesFeed,
     channels: channels.map(({ channel_id, computed_title }: any) => ({ channelId: channel_id, title: computed_title })),
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
+    experiment: 'default',
+    time: 7,
+    source: 'efir',
 };
+
+export const saveState = (state: State) => {
+    try {
+        const serialisedState = JSON.stringify(state);
+
+        window.localStorage.setItem('appState', serialisedState);
+    } catch (err) {
+
+        return;
+    }
+};
+
+const loadStateFromLocalStorage = (state = {}) => {
+    try {
+      const serialisedState = window.localStorage.getItem('appState');
+
+      if (!serialisedState) {
+        return state;
+      }
+
+      return JSON.parse(serialisedState);
+    } catch (err) {
+
+        return state;
+    }
+};
+
+const initialState = loadStateFromLocalStorage(defaultState);
 
 export const reducer: Reducer = (state: State = initialState, action: redux.AnyAction) => {
     switch (action.type) {
@@ -34,6 +65,21 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
             return {
                 ...state,
                 main: action.payload,
+            };
+        case SELECT_EXPERIMENT:
+            return {
+                ...state,
+                experiment: action.value,
+            };
+        case SELECT_TIME:
+            return {
+                ...state,
+                time: action.value,
+            };
+        case SELECT_SOURCE:
+            return {
+                ...state,
+                source: action.value,
             };
         default:
             return state;

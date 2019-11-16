@@ -3,6 +3,7 @@ import { reducer } from './reducers';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import logger from 'redux-logger';
 import Trend from '../types/trend';
+import { saveState } from './reducers';
 
 export interface State {
     trends: Trend[];
@@ -22,5 +23,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const store = createStore<State, AnyAction, StoreExtension, void>(reducer, applyMiddleware(...middlewares));
+
+store.subscribe(() => {
+    saveState(store.getState());
+});
 
 export default store;

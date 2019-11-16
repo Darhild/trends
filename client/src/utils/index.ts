@@ -29,3 +29,4 @@ export function excludeBannedCards(cards: CardProps[]) {
     return !card.banned;
   });
 }
+
