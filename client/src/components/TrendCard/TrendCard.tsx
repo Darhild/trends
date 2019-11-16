@@ -5,7 +5,7 @@ import TrendDetails from './TrendDetails/TrendDetails';
 import './TrendCard.scss';
 
 
-interface Props extends Trend {
+interface Props extends Omit<Trend, 'videos' | 'stories'> {
     ratingPosition: number;
     className?: string;
     variant?: string;

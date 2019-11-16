@@ -1,0 +1,39 @@
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    background: var(--color-accent);
+
+    &_type_addVideo {
+        position: fixed;
+        bottom: 22px;
+        left: calc(50% - 75px);
+        width: 174px;
+        padding: 10px 20px;
+        font-size: 14px;
+        line-height: 20px;
+        border-radius: 100px;
+    }
+
+    &_type_subscribe {
+        position: relative;
+        top: -16px;
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+        line-height: 16px;
+        border-radius: 4px;
+    }
+
+    &_subscribe_off {
+        background: var(--color-background-button);
+    }
+
+    &-Icon {
+        margin-right: 6px;
+    }
+}

@@ -5,6 +5,8 @@ $_: '.TrendDetails';
     bottom: 12px;
     z-index: 100;
     padding-left: 10px;
+    font-size: 13px;
+    line-height: 16px;
 
     &_variant_second {
         position: static;
@@ -25,26 +27,44 @@ $_: '.TrendDetails';
         }
     }
 
+    .OneTrendPage_TrendCard & {
+        bottom: 25px;
+        padding-left: 16px;
+    }
+
     &-Label {
         display: flex;
         align-items: center;
         margin-bottom: 6px;
-        font-size: 13px;
-        line-height: 16px;
+
+        .OneTrendPage_TrendCard & {
+            display: block;
+            margin-bottom: 3px;
+        }
     }
 
     &-Icon {
         height: 16px;
-        
         margin-right: 8px;
         color: var(--color-accent-red);
         border-radius: 50%;
+
+        .OneTrendPage_TrendCard & {
+            display: block;
+            height: 32px;
+            margin-bottom: 9px;
+        }
     }
 
     &-Title {
         font-weight: 500;
         font-size: 15px;
         line-height: 18px;
+
+        .OneTrendPage_TrendCard & {
+            font-size: 16px;
+            line-height: 20px;
+        }
     }
 
     &-Count {

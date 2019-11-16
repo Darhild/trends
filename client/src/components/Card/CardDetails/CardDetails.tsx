@@ -22,7 +22,7 @@ const CardDetails = ({ duration, rating_kp, percentage_score, content_type }: Ca
 
   return (
     <div className="Card-Details">
-      { content_type === 'blogger' ? blogersDetails : seriesDetails }
+      { content_type === 'blogger' || content_type === 'trend' ? blogersDetails : seriesDetails }
     </div>
   );
 };
