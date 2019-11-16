@@ -14,14 +14,9 @@ class Repository:
         self.db = db
 
     @staticmethod
-    def get_utc_date(date):  # sort of
-        return date - date.tzinfo.utcoffset(date)
-
-    @staticmethod
-    def is_current_day(date):
-        now = datetime.utcnow()
-        date -= date.tzinfo.utcoffset(date)
-        return not (now.day - date.day)
+    def get_time_zero(tz_delta):
+        now = datetime.now()
+        return now.replace(hour=tz_delta, minute=0)
 
     def insert_trend(self, trend_json):
         with self.db.begin() as conn:
@@ -29,19 +24,14 @@ class Repository:
                 data = {
                     "data": json.loads(trend_json)['data'],
                 }
-                s = select([trend_table.c.id, trend_table.c.created_at]). \
-                    order_by(trend_table.c.id.desc()).limit(1)
-                last_entry = conn.execute(s).fetchone()
-                date = self.get_utc_date(last_entry['created_at'])
-                if self.is_current_day(date):
-                    logging.getLogger(__name__).\
-                        debug("About to change entry for current day for the new one")
-                    id_to_delete = last_entry['id']
-                    delete_stmt = trend_table.delete(). \
-                        where(trend_table.c.id == id_to_delete)
-                    result = conn.execute(delete_stmt)
-                    logging.getLogger(__name__).\
-                        debug("%s entry were deleted", result.rowcount)
+
+                time_zero = self.get_time_zero(0)
+                delete_stmt = trend_table.delete() \
+                    .where(trend_table.c.created_at > time_zero)
+                result = conn.execute(delete_stmt)
+                logging.getLogger(__name__). \
+                    debug("%s entry were deleted", result.rowcount)
+                data['created_at'] = datetime.utcnow()
                 conn.execute(trend_table.insert(), **data)
 
     def insert_content(self, content_json):
@@ -52,6 +42,12 @@ class Repository:
                     {"category": key, "data": value}
                     for key, value in json.loads(content_json).items()
                 ]
+                time_zero = self.get_time_zero(0)
+                delete_stmt = content_table.delete() \
+                    .where(content_table.c.created_at > time_zero)
+                result = conn.execute(delete_stmt)
+                logging.getLogger(__name__). \
+                    debug("%s entry were deleted", result.rowcount)
                 conn.execute(content_table.insert(), *data)
 
     def read_all(self, limit, period):

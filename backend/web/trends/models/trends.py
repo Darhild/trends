@@ -1,3 +1,4 @@
+from datetime import timedelta, datetime
 import sqlalchemy as sa
 from sqlalchemy import MetaData, Column, DateTime, text
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
@@ -20,12 +21,7 @@ metadata = MetaData(naming_convention=convention)
 @as_declarative(metadata=metadata)
 class Base:
     """Base class for all models"""
-
-    @declared_attr
-    def created_at(cls):
-        return Column(DateTime(timezone=True),
-                      server_default=text('clock_timestamp()'),
-                      nullable=False)
+    pass
 
 
 class Trend(Base):
@@ -33,6 +29,7 @@ class Trend(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     data = sa.Column(sa.JSON)
+    created_at = sa.Column(sa.DateTime)
 
 
 trend_table = Trend.__table__
@@ -44,6 +41,12 @@ class Content(Base):
     id = sa.Column(sa.Integer, primary_key=True)
     category = sa.Column(sa.String(256), nullable=False)
     data = sa.Column(sa.JSON)
+
+    @declared_attr
+    def created_at(cls):
+        return Column(DateTime(timezone=True),
+                      server_default=text('clock_timestamp()'),
+                      nullable=False)
 
 
 content_table = Content.__table__
