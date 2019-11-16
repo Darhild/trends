@@ -1,41 +1,26 @@
-import { createStore, applyMiddleware, AnyAction } from 'redux';
+import { createStore, applyMiddleware, AnyAction, Middleware } from 'redux';
 import { reducer } from './reducers';
 import thunk, { ThunkDispatch } from 'redux-thunk';
+import logger from 'redux-logger';
 import Trend from '../types/trend';
-import { items } from '../feed.json';
-import { items as seriesFeed } from '../mobile_series.json';
-import { items as blogersFeed } from '../blogers.json';
-import { items as mainFeed } from '../desktop_all.json';
-import { set as channels, icons as channelIcons } from '../channels.json';
 
 export interface State {
     trends: Trend[];
     [name: string]: any;
 }
 
+export type Dispatch = ThunkDispatch<State, void, AnyAction>;
+
 interface StoreExtension {
-    dispatch: ThunkDispatch<State, void, AnyAction>;
+    dispatch: Dispatch;
 }
 
-const trends: any[] = items[0].includes;
-const initialState = {
-    trends: trends.map(({ title, thumbnail, onto_poster }: any) => ({
-            desc: title,
-            img: thumbnail,
-            poster: onto_poster,
-        })),
-    main: mainFeed,
-    film: seriesFeed,
-    series: seriesFeed,
-    kids: seriesFeed,
-    blogers: blogersFeed,
-    sport: seriesFeed,
-    music: seriesFeed,
-    games: seriesFeed,
-    channels: channels.map(({ channel_id, title, channel_category }: any) =>
-                            ({ channelId: channel_id, title, channelCategory: channel_category })),
-    channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
-};
-const store = createStore<State, AnyAction, StoreExtension, void>(reducer, initialState, applyMiddleware(thunk));
+const middlewares: Middleware[] = [thunk];
+
+if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
+}
+
+const store = createStore<State, AnyAction, StoreExtension, void>(reducer, applyMiddleware(...middlewares));
 
 export default store;
