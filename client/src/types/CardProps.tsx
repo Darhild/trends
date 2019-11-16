@@ -10,7 +10,7 @@ export interface CardCommon extends CardBanned {
 }
 
 export interface CardThumbProps {
-    onto_poster: string;
+    onto_poster?: string;
     thumbnail: string;
 }
 

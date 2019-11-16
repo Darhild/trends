@@ -1,56 +1,20 @@
+import logging
+
 from flask import Blueprint, request, Response, abort, json, current_app
-from trends.utils.get_db_environ import get_environ_or_default
-from trends.utils.feed_request import FeedRequest
-from trends.utils.trend_request import handle_trends_request
 
 from trends.models.trends_repo import Repository
+from trends.utils.feed_request import FeedRequest
+from trends.utils.get_db_environ import get_environ_or_default
+from trends.utils.trend_request import handle_trends_request
 
-import logging
+from trends.handlers.trends_algs import sort, sort_and_limit, merge
+from random import shuffle
 
 trends = Blueprint('trends', __name__)
 db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
-mock_json = '''{
-"trends": [
-    {
-        "id":"ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB",
-        "title":"Какой то заголовок",
-        "avatar":"https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
-        "description":"",
-        "bg":"https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_DET.png",
-        "source": "efir"
-    },
-    {
-        "id":"ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB",
-        "title":"Еще какой то заголовок",
-        "avatar":"https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
-        "description":"",
-        "bg":"https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_DET.png",
-        "source": "efir"
-    },
-],
-"length": 2
-}'''
 
 
-def sort_and_limit(result, limit):
-    result_data = []
-
-    if result is None or len(result) == 0:
-        return result_data
-    # Сортируем по day
-    result = sorted(result, key=lambda x: x["day"], reverse=True)
-
-    # Лимитируем по limit
-    result = result[:limit]
-
-    # Выбираем только "data"
-    for r in result:
-        result_data.append(r["data"])
-
-    return result_data
-
-
-@trends.route('/trends', methods=['GET'])
+@trends.route('/api/trends', methods=['GET'])
 def trends_handler():
     tag, num_docs, period, source = handle_trends_request(request)
 
@@ -61,17 +25,25 @@ def trends_handler():
         repo = Repository(current_app.db)
         if source == "efir":
             resp = sort_and_limit(repo.read_content(period, tag), num_docs)
+            shuffle(resp)
 
         elif source == "google":
             resp = sort_and_limit(repo.read_trend(period), num_docs)
+            shuffle(resp)
 
         else:
             ratio_factor = 5
-            external_ratio = num_docs // ratio_factor
-            internal_ratio = num_docs - external_ratio
+            if num_docs < 20:
+                external_ratio = 3
+                internal_ratio = 1
+            else:
+                external_ratio = num_docs // ratio_factor
+                internal_ratio = num_docs - external_ratio
 
-            resp = sort_and_limit(repo.read_trend(period), external_ratio)
-            resp.extend(sort_and_limit(repo.read_content(period, tag), internal_ratio))
+            efir_trends = sort(repo.read_trend(period))
+            google_trends = sort(repo.read_content(period, tag))
+            resp = merge(efir_trends, google_trends, internal_ratio, external_ratio, num_docs)
+            shuffle(resp)
 
         return Response(response=json.dumps(resp, ensure_ascii=False),
                         status=200, mimetype='application/json')
