@@ -15,5 +15,6 @@ export interface TrendVideo {
     title: string;
     duration: number;
     release_date_ut: number;
+    onto_poster: string;
     thumbnail: string;
 }

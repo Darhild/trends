@@ -64,11 +64,20 @@ const CardContent = ({
         </>
     );
 
+    const content = (contentType: string) => {
+        switch (contentType) {
+            case 'blogger':
+                return blogersContent;
+            case 'trend':
+                return trendContent;
+            default:
+                return seriesContent;
+        }
+    };
+
     return (
         <div className="Card-Content" >
-            {content_type === 'blogger' && blogersContent}
-            {content_type === 'trend' && trendContent}
-            {content_type !== 'blogger' && content_type !== 'trend' && seriesContent}
+            {content(content_type)}
         </div>
     );
   };

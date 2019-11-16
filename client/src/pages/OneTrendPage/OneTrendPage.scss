@@ -13,45 +13,4 @@
     &-Item {
         margin-bottom: 12px;
     }
-
-    &-Button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        text-align: center;
-        color: inherit;
-        text-decoration: none;
-
-        &_subscribe {
-            position: relative;
-            top: -16px;
-            width: 100%;
-            padding: 10px;
-            font-size: 13px;
-            line-height: 16px;
-            background: var(--color-accent);
-            border-radius: 4px;
-
-            &_off {
-                background: var(--color-background-button);
-            }
-        }
-
-        &_addVideo {
-            position: fixed;
-            bottom: 22px;
-            left: calc(50% - 75px);
-            width: 174px;
-            padding: 10px 20px;
-            font-size: 14px;
-            line-height: 20px;
-            background: var(--color-accent);
-            border-radius: 100px;
-        }
-    }
-
-    &-Icon {
-        margin-right: 6px;
-    }
 }

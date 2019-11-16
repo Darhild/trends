@@ -34,7 +34,6 @@ const renderCarousel = (list: ListProps) =>
             margin="s"
             carouselId={list.carousel_id}
             key={list.carousel_id}
-            className="Feed-Item"
         >
         {renderList(list)}
         </Carousel>
