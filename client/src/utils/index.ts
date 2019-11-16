@@ -1,3 +1,5 @@
+import { CardProps } from './../types/CardProps';
+
 export function convertTime(duration: number) {
   let minutes = Math.floor(duration / 60);
   const seconds = duration - (minutes * 60);
@@ -16,4 +18,14 @@ export function convertTime(duration: number) {
 
 export function dateUtils(date: number) {
   return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+}
+
+export function excludeBannedCards(cards: CardProps[]) {
+  return cards.filter((card: CardProps) => {
+    if (card.includes) {
+      return !card.includes[0].banned;
+    }
+
+    return !card.banned;
+  });
 }

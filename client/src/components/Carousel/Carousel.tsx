@@ -18,6 +18,7 @@ interface CarouselProps {
     carouselId?: string;
     canBeHidden: boolean;
     children: unknown;
+    className?: string;
 }
 
 interface CarouselState {
@@ -112,6 +113,10 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
         const { title, carouselId, canBeHidden } = this.props;
         const { isHidden } = this.state;
 
+        const carouselCn = classnames(
+            'Carousel',
+            this.props.className,
+        );
 
         const titleCn = classnames(
             'Carousel-TitleWrapper',
@@ -120,7 +125,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
         const url = carouselId && `https://yandex.ru/efir?from=efir_touch&stream_active=theme&stream_publisher=${carouselId}`;
 
         return (
-            <div className="Carousel">
+            <div className={carouselCn}>
                 {canBeHidden && <div className="Carousel-Header">
                     <div className={titleCn}>
                         {title && <Title url={url}>{title}</Title>}

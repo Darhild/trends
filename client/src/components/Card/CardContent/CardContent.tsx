@@ -1,9 +1,16 @@
 import React from 'react';
-import { CardProps } from '../../Card/Card';
+import { CardContentProps } from './../../../types/CardProps';
 import { dateUtils } from './../../../utils';
 import { ReactComponent as Like } from './../../../images/svg/like.svg';
 
-const CardContent = ({ card, content_type }: CardProps) => {
+const CardContent = ({
+        title,
+        computed_title,
+        release_date_ut,
+        release_year,
+        genres,
+        content_type,
+    }: CardContentProps) => {
     const LikeIcons = (
         <div className="Card-LikeOrNot">
             <div className="Card-Like">
@@ -19,10 +26,10 @@ const CardContent = ({ card, content_type }: CardProps) => {
         <>
             <div className="Card-Text">
                 <div className="Card-Title" >
-                    {card.computed_title}
+                    {computed_title}
                 </div>
                 <div className="Card-Subtitle">
-                    {dateUtils(card.release_date_ut)}
+                    {release_date_ut ? dateUtils(release_date_ut) : null}
                 </div>
             </div>
         </>
@@ -32,11 +39,11 @@ const CardContent = ({ card, content_type }: CardProps) => {
         <>
             <div className="Card-Text">
                 <div className="Card-Title" >
-                    {card.title}
+                    {title}
                 </div>
                 <div className="Card-Subtitle">
-                    {card.release_year || null}
-                    {card.genres ? ` · ${card.genres.toString()}` : null}
+                    {release_year || null}
+                    {genres ? ` · ${genres.toString()}` : null}
                 </div>
             </div>
             {content_type === 'vod' && LikeIcons}
