@@ -2,7 +2,7 @@ export interface CardBanned {
     banned?: boolean;
 }
 
-export interface CardCommonProps extends CardBanned {
+export interface CardCommon extends CardBanned {
     content_id: string;
     className?: string;
     supertag?: string;
@@ -30,4 +30,4 @@ export interface CardContentProps {
     genres?: string[];
 }
 
-export type CardProps = CardCommonProps & CardThumbProps & CardDetailsProps & CardContentProps;
+export type CardProps = CardCommon & CardThumbProps & CardDetailsProps & CardContentProps;
