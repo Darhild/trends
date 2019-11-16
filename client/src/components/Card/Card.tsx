@@ -29,8 +29,8 @@ export default class Card extends Component<CardProps> {
                 rel="noopener noreferrer"
             >
                 <div className={cardCn}>
-                    <CardThumb  {...this.props} content_type={content_type}/>
-                    <CardContent {...this.props} content_type={content_type}/>
+                    <CardThumb  {...this.props} content_type={content_type} />
+                    <CardContent {...this.props} content_type={content_type} />
                 </div>
             </a>
         );
