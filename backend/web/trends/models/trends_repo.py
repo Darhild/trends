@@ -53,7 +53,7 @@ class Repository:
     def read_all(self, limit, period):
         pass
 
-    def trend_record_row_to_dict(self, trend_rec):
+    def trend_record_row_to_dict(self, trend_rec, source):
         """
         Returns:
 
@@ -85,8 +85,10 @@ class Repository:
             # d['description'] = d['description'].value
             # d['bg'] = d['bg'].value
 
+            day = d.pop('day')
+            d['source'] = source
             result.append({
-                "day": d["day"],
+                "day": day,
                 "data": d}
             )
         return result
@@ -104,7 +106,7 @@ class Repository:
                 result = []
                 # Выбираем все, что вернули: строка - один день
                 for trend in rows:
-                    result += self.trend_record_row_to_dict(trend)
+                    result += self.trend_record_row_to_dict(trend, source='google')
 
                 logging.getLogger(__name__).info("google trends num rows: {0}".format(len(result)))
                 return result
@@ -123,7 +125,6 @@ class Repository:
                 result = []
                 # Выбираем все, что вернули: строка - один день
                 for trend in rows:
-                    result += self.trend_record_row_to_dict(trend)
-
+                    result += self.trend_record_row_to_dict(trend, source='efir')
                 logging.getLogger(__name__).info("efir trends num rows: {0}".format(len(result)))
                 return result
