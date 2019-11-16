@@ -35,20 +35,20 @@ class SubscribeButton extends React.Component<TypedButtonProps, SubscribeButtonS
         return (
             <div className={subscribeButtonCn} onClick={this.subscribe}>
                 {isSubscribed
-                ? <>
-                    <Checkmark className="Button-Icon"/>
-                    <span>Вы подписаны</span>
-                </>
-                : <span>Подписаться</span>}
-        </div>
+                    ? <>
+                        <Checkmark className="Button-Icon"/>
+                        <span>Вы подписаны</span>
+                    </>
+                    : <span>Подписаться</span>}
+            </div>
         );
     }
 }
 
 const AddVideoButton = ({ cn }: TypedButtonProps) => (
     <div className={cn}>
-            <Camera className="Button-Icon"/>
-            <span>Добавить видео</span>
+        <Camera className="Button-Icon"/>
+        <span>Добавить видео</span>
     </div>
 );
 
