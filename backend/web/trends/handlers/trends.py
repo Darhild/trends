@@ -24,27 +24,33 @@ def trends_handler():
 
         repo = Repository(current_app.db)
         if source == "efir":
-            resp = sort_and_limit(repo.read_content(period, tag), num_docs)
-            shuffle(resp)
+            if tag is None:
+                resp = sort_and_limit(repo.read_content(period, "common"), num_docs)
+            else:
+                resp = sort_and_limit(repo.read_content(period, tag), num_docs)
 
         elif source == "google":
-            resp = sort_and_limit(repo.read_trend(period), num_docs)
-            shuffle(resp)
-
-        else:
-            ratio_factor = 5
-            if num_docs < 20:
-                external_ratio = 3
-                internal_ratio = 1
+            if tag is None:
+                resp = sort_and_limit(repo.read_trend(period), num_docs)
             else:
-                external_ratio = num_docs // ratio_factor
-                internal_ratio = num_docs - external_ratio
+                return Response(response=json.dumps("Google do not have tags", ensure_ascii=False),
+                                status=400, mimetype='application/json')
+        else:
+            if tag is None:
+                ratio_factor = 5
+                if num_docs < 20:
+                    external_ratio = 3
+                    internal_ratio = 1
+                else:
+                    external_ratio = num_docs // ratio_factor
+                    internal_ratio = num_docs - external_ratio
 
-            efir_trends = sort(repo.read_trend(period))
-            google_trends = sort(repo.read_content(period, tag))
-            resp = merge(efir_trends, google_trends, internal_ratio, external_ratio, num_docs)
-            shuffle(resp)
-
+                efir_trends = sort(repo.read_trend(period))
+                google_trends = sort(repo.read_content(period, "common"))
+                resp = merge(efir_trends, google_trends, internal_ratio, external_ratio, num_docs)
+            else:
+                resp = sort_and_limit(repo.read_content(period, tag), num_docs)
+        shuffle(resp)
         return Response(response=json.dumps(resp, ensure_ascii=False),
                         status=200, mimetype='application/json')
 
