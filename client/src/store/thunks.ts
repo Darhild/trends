@@ -5,7 +5,7 @@ import { mapTrends } from '../utils/mappers';
 
 export const setTrendsThunk = () =>
     (dispatch: Dispatch) => fetchTrends()
-        .then((res: any) => res && res.trends ? res.trends.map(mapTrends) : [])
+        .then((res: any) => res ? res.map(mapTrends) : [])
         .then((trends: any) => dispatch(setTrends(trends)))
         .catch(() => []);
 

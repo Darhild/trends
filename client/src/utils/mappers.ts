@@ -1,3 +1,4 @@
+
 import { items } from '../blogers.json';
 
 export const mapTrends = ({ title, avatar, bg }: any) => ({
