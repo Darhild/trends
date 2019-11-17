@@ -10,9 +10,9 @@ app.get('/api/*', (req, res) => {
         .then((response) => {
             res.json(response.data)
         })
-        .catch(() => {
+        .catch( e => {
             res.status(404)
-            res.send()
+            res.send(e)
         })
 });
 
