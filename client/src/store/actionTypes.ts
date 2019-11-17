@@ -1,2 +1,5 @@
 export const SET_TRENDS = 'SET_TRENDS';
 export const SET_MAIN_FEED = 'SET_MAIN_FEED';
+export const SELECT_EXPERIMENT = 'SELECT_EXPERIMENT';
+export const SELECT_TIME = 'SELECT_TIME';
+export const SELECT_SOURCE = 'SELECT_SOURCE';
