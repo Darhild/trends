@@ -64,5 +64,6 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
-  }
+  },
+  "proxy": "http://84.201.160.40:8080"
 }
