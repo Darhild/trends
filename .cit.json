@@ -32,6 +32,7 @@
       "stderr": "line",
       "size": "t1_micro",
       "network": "SHRI_NETS",
+      "dnsNat64": true,
       "diskSize": 1,
       "routes": ["/"],
       "secrets": []
