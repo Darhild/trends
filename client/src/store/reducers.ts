@@ -19,7 +19,15 @@ const defaultState = {
     sport: seriesFeed,
     music: seriesFeed,
     games: seriesFeed,
-    channels: channels.map(({ channel_id, computed_title }: any) => ({ channelId: channel_id, title: computed_title })),
+    channels: channels.map(({
+        channel_id,
+        computed_title,
+        channel_category,
+    }: any) => ({
+            channelId: channel_id,
+            title: computed_title,
+            channelCategory: channel_category,
+        })),
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
     experiment: 'default',
     time: 7,
