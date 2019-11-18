@@ -6,8 +6,11 @@ import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
 import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
+import TrendsList from '../TrendsList/TrendsList';
 
 interface TrendsProps {
+    trendVariant: string;
+    allTrendsOnMain: boolean;
     trends: SmallCardProps[];
     category: string;
     onInitTrends(): void;
@@ -18,19 +21,37 @@ class Trends extends Component<TrendsProps> {
         this.props.onInitTrends();
     }
 
-    public render() {
-        const { trends, category } = this.props;
+    public renderItems = () => {
+        const { trends, category, trendVariant, allTrendsOnMain } = this.props;
         const url = `/${category}/trends`;
+
+        if (allTrendsOnMain) {
+            return (
+                <Carousel title="Самое популярно" margin="s">
+                    {
+                        trends.map((props, index) => (
+                            <Link className="Trends-Link" to={`${url}/${index + 1}`}>
+                                <SmallCard {...props}/>
+                            </Link>     
+                        ))
+                    }
+                </Carousel>
+            );
+        }
+
+        return (
+            <TrendsList category={category} variant={trendVariant} shortVariant />
+        );
+    }
+
+
+    public render() {
+        const { category } = this.props;
 
         return (
             <div className="Trends">
-                <Carousel title="Самое популярное" routeUrl={url} margin="s">
-                    {trends.map((props, index) =>
-                    <Link className="Trends-Link" to={`${url}/${index + 1}`}>
-                        <SmallCard {...props}/>
-                    </Link>)}
-                </Carousel>
-                <Link to={url} className="Trends-More">Показать все популярные темы</Link>
+                {this.renderItems()}
+                <Link to={`/${category}/trends`} className="Trends-More">Показать все популярные темы</Link>
             </div>
         );
     }
@@ -38,6 +59,8 @@ class Trends extends Component<TrendsProps> {
 
 
 const mapStateToProps = (state: State) => ({
+    allTrendsOnMain: state.allTrendsOnMain,
+    trendVariant: state.trendVariant,
     trends: state.trends,
 });
 

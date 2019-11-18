@@ -2,50 +2,67 @@ import React, { Component } from 'react';
 import './SettingsPage.scss';
 import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
-import { selectExperiment, selectTime, selectSource } from './../../store/actions';
+import { setTrendVariant, setTime, setSource, setAllTrendsOnMain } from './../../store/actions';
 
 interface SettingProps {
-    experiment: string;
+    allTrendsOnMain: boolean;
+    trendVariant: string;
     time: number;
     source: string;
-    onChangeSelectExperiment: (value: string) => void;
-    onChangeSelectTime: (value: number) => void;
-    onChangeSelectSource: (value: string) => void;
+    onChangeAllTrendsOnMain: (value: boolean) => void;
+    onChangeTrendVariant: (value: string) => void;
+    onChangeTime: (value: number) => void;
+    onChangeSource: (value: string) => void;
 }
 
 class SettingsPage extends Component<SettingProps> {
 
     public handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const {
-            onChangeSelectExperiment,
-            onChangeSelectTime,
-            onChangeSelectSource,
+            onChangeTrendVariant,
+            onChangeAllTrendsOnMain,
+            onChangeTime,
+            onChangeSource,
         } = this.props;
 
         if (event.target.name === 'variant') {
-            onChangeSelectExperiment(event.target.value);
+            onChangeTrendVariant(event.target.value);
+        } else if (event.target.name === 'main') {
+            onChangeAllTrendsOnMain(Boolean(Number(event.target.value)));
         } else if (event.target.name === 'time') {
-            onChangeSelectTime(Number(event.target.value));
+            onChangeTime(Number(event.target.value));
         } else if (event.target.name === 'source') {
-            onChangeSelectSource(event.target.value);
+            onChangeSource(event.target.value);
         }
     }
 
     public render() {
-        const { experiment, time, source } = this.props;
+        const { allTrendsOnMain, trendVariant, time, source } = this.props;
 
         return (
             <div className="Settings">
                 <div className="Settings-Item">
-                    <div className="Settings-Text">Выберите вариант эксперимента:</div>
+                    <div className="Settings-Text">Выберите вариант отображения карточки тренда:</div>
                     <select
                         className="Settings-Select"
                         name="variant"
-                        value={experiment}
+                        value={trendVariant}
                         onChange={this.handleChange}
                     >
-                        <option value="default">Дефолтный вариант</option>
-                        <option value="second">Вариант 2</option>
+                        <option value="default">Широкие карточки</option>
+                        <option value="second">Карточки с вынесеным описанием</option>
+                    </select>
+                </div>
+                <div className="Settings-Item">
+                    <div className="Settings-Text">Выберите вариант отображения трендов на главной:</div>
+                    <select
+                        className="Settings-Select"
+                        name="main"
+                        value={Number(allTrendsOnMain)}
+                        onChange={this.handleChange}
+                    >
+                        <option value={1} >Все тренды (карусель)</option>
+                        <option value={0} >Топ-5</option>
                     </select>
                 </div>
                 <div className="Settings-Item">
@@ -80,15 +97,17 @@ class SettingsPage extends Component<SettingProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-    experiment: state.experiment,
+    allTrendsOnMain: state.allTrendsOnMain,
+    trendVariant: state.trendVariant,
     time: state.time,
     source: state.source,
 });
 
 const mapDispatchToProps = {
-    onChangeSelectExperiment: selectExperiment,
-    onChangeSelectTime: selectTime,
-    onChangeSelectSource: selectSource,
+    onChangeAllTrendsOnMain: setAllTrendsOnMain,
+    onChangeTrendVariant: setTrendVariant,
+    onChangeTime: setTime,
+    onChangeSource: setSource,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);
