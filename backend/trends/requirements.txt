@@ -6,3 +6,4 @@ apscheduler
 pytrends
 Flask-Caching
 PyYaml
+google_images_download

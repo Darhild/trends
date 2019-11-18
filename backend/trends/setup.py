@@ -20,6 +20,7 @@ setuptools.setup(name='trends',
                      'apscheduler',
                      'pytrends',
                      'Flask-Caching',
-                     'PyYaml'
+                     'PyYaml',
+                     'google_images_download'
                  ],
                  )

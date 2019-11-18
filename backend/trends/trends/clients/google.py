@@ -3,18 +3,59 @@ import logging
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from trends.clients.prefs import RealTrendReq, cache
+from google_images_download import google_images_download
 
-GOOGLE_REQUEST_INTERVAL = 15
+GOOGLE_REQUEST_INTERVAL = 30
 GOOGLE_REQUEST_JITTER = 120
 
 
-def make_json_response():
+def add_backgrounds(trends):
+    """
+    Get backgrounds for trends
+    :param trends: list of trends as dicts
+    :return: list of trends with "bg" keys
+    """
+    titles = [trend["title"] for trend in trends]
+    logging.getLogger(__name__).\
+        debug("Titles to get background pictures", titles)
+
+    keywords_arg = ','.join(titles)
+
+    response = google_images_download.googleimagesdownload()
+    arguments = {"keywords": keywords_arg,
+                 "limit": 1,
+                 "no_download": True,
+                 "safe_search": True,
+                 "silent_mode": True,
+                 }
+
+    try:
+        path = response.download(arguments)
+        images_dict = path[0]
+    except (ValueError, OSError) as e:
+        images_dict = {}
+        logging.getLogger(__name__).\
+            debug("Can't get background images due to %s")
+
+    for trend in trends:
+        title = trend["title"]
+        if title in images_dict and len(images_dict[title]) > 0:
+            trend['bg'] = images_dict[title][0]
+        else:
+            trend['bg'] = ''
+
+    return trends
+
+
+def make_json_response(find_backgrounds=False):
     """
     Get response from google, make json of it
     :return: trends list  from google as json
     """
     trend_getter = RealTrendReq()
     today_searches_df = trend_getter.today_searches_fine(pn='RU')
+    if find_backgrounds:
+        today_searches_df = add_backgrounds(today_searches_df)
     response = json.dumps(
         {'data': today_searches_df},
         ensure_ascii=False)
@@ -28,7 +69,7 @@ def get_trends(cache_=None):
     logger = logging.getLogger(__name__)
 
     try:
-        response = make_json_response()
+        response = make_json_response(find_backgrounds=True)
         logger.debug("Got trends: %s", response)
     except Exception as e:
         logger.warning("Can't get trends from google due to %s", e)
