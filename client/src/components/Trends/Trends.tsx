@@ -20,16 +20,17 @@ class Trends extends Component<TrendsProps> {
 
     public render() {
         const { trends, category } = this.props;
+        const url = `/${category}/trends`;
 
         return (
             <div className="Trends">
-                <Carousel title="Сейчас популярно" margin="s">
+                <Carousel title="Самое популярное" linkUrl={url} margin="s">
                     {trends.map((props, index) =>
-                    <Link className="Trends-Link" to={`/${category}/trends/${index + 1}`}>
+                    <Link className="Trends-Link" to={`${url}/${index + 1}`}>
                         <SmallCard {...props}/>
                     </Link>)}
                 </Carousel>
-                <Link to={`/${category}/trends`} className="Trends-More">Показать все популярные темы</Link>
+                <Link to={url} className="Trends-More">Показать все популярные темы</Link>
             </div>
         );
     }

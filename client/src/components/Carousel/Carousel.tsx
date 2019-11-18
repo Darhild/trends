@@ -14,6 +14,7 @@ const SCROLL_SIZE = 400;
 
 interface CarouselProps {
     title?: string;
+    linkUrl?: string;
     margin: string;
     carouselId?: string;
     canBeHidden: boolean;
@@ -110,7 +111,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     }
 
     public render() {
-        const { title, carouselId, canBeHidden } = this.props;
+        const { title, linkUrl, carouselId, canBeHidden } = this.props;
         const { isHidden } = this.state;
 
         const carouselCn = classnames(
@@ -128,7 +129,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
             <div className={carouselCn}>
                 {canBeHidden && <div className="Carousel-Header">
                     <div className={titleCn}>
-                        {title && <Title url={url}>{title}</Title>}
+                        {title && <Title url={url} linkUrl={linkUrl}>{title}</Title>}
                         {isHidden &&
                             <div className="Carousel-HideInfo">Вы скрыли подборку видео из ленты</div>}
                     </div>
