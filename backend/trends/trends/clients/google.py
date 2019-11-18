@@ -16,8 +16,8 @@ def add_backgrounds(trends):
     :return: list of trends with "bg" keys
     """
     titles = [trend["title"] for trend in trends]
-    logging.getLogger(__name__).\
-        debug("Titles to get background pictures", titles)
+    logging.getLogger(__name__). \
+        debug("Titles to get background pictures: %s", titles)
 
     keywords_arg = ','.join(titles)
 
@@ -32,10 +32,13 @@ def add_backgrounds(trends):
     try:
         path = response.download(arguments)
         images_dict = path[0]
+        logging.getLogger(__name__). \
+            debug("Found background images: %s", images_dict)
+
     except (ValueError, OSError) as e:
         images_dict = {}
-        logging.getLogger(__name__).\
-            debug("Can't get background images due to %s")
+        logging.getLogger(__name__). \
+            debug("Can't get background images due to %s", e)
 
     for trend in trends:
         title = trend["title"]

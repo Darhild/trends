@@ -6,6 +6,7 @@ from trends.clients.google import get_trends
 from trends.clients.prefs import cache
 
 
+# unit tests
 @patch('trends.handlers.trends.get_trends_cached')
 def test_get_trends_mock_cache_good(mock_get, client, trends_json):
     mock_get.return_value = trends_json
@@ -42,6 +43,24 @@ def test_get_trends_from_google(mock_google_response, client, trends_json):
     get_trends(cache_=cache)
     cached_json = cache.get('trends')
     assert cached_json == trends_json
+
+
+# integration tests - with live server
+# tests can take some time,
+# and even get stuck when server is unavailable
+def test_get_trends_through_client(client):
+    cache.init_app(current_app)
+    get_trends(cache_=cache)
+    cached_json = cache.get('trends')
+    resp = client.get(url_for('trends.import_trends'))
+    get_json = resp.data
+    assert resp.status_code == 200
+    assert json.loads(resp.data) == json.loads(get_json)
+
+
+
+
+
 
 
 
