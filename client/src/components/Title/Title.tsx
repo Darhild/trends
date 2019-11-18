@@ -4,20 +4,24 @@ import './Title.scss';
 
 interface TitleProps {
     url?: string;
-    linkUrl?: string;
+    route?: boolean;
 }
+
+const TitleContent: React.FC = ({ children }) => (
+    <div className="Title">{children}</div>
+);
 
 export default class Title extends Component<TitleProps> {
     public render() {
-        const { url, linkUrl, children } = this.props;
+        const { url, route, children } = this.props;
+        if (route && url) {
+            return <Link className="Title-Link" to={url}>><TitleContent children={children}/></Link>;
+
+        }
         if (url) {
-            return <a className="Title-Link" href={url}><div className="Title">{children}</div></a>;
-        }
-        if (linkUrl) {
-            return <Link className="Title-Link" to={linkUrl}><div className="Title">{children}</div></Link>;
-
+            return <a className="Title-Link" href={url}><TitleContent children={children}/></a>;
         }
 
-        return <div className="Title">{children}</div>;
+        return <TitleContent children={children}/>;
     }
 }

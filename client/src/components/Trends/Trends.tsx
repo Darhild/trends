@@ -24,7 +24,7 @@ class Trends extends Component<TrendsProps> {
 
         return (
             <div className="Trends">
-                <Carousel title="Самое популярное" linkUrl={url} margin="s">
+                <Carousel title="Самое популярное" routeUrl={url} margin="s">
                     {trends.map((props, index) =>
                     <Link className="Trends-Link" to={`${url}/${index + 1}`}>
                         <SmallCard {...props}/>
