@@ -1,0 +1,24 @@
+.Settings {
+    margin-top: 20px;
+
+    &-Item {
+        margin-bottom: 40px;
+    }
+
+    &-Text {
+        margin-bottom: 15px;
+        color: var(--text-primary);
+    }
+
+    &-Select {  
+        padding: 4px;
+        font-size: 18px;
+        color: var(--color-border-accent);
+        background-color: transparent;
+    }
+
+    &-Input {
+        padding: 4px;
+        font-size: 18px;
+    }
+}

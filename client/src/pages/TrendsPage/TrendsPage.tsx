@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
+import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
 import TrendsList from '../../components/TrendsList/TrendsList';
+import { State } from '../../store/createStore';
 
-interface TParam { category: string; }
+interface TrendsPageProps extends RouteComponentProps<TParam> {
+    variant: string;
+}
 
-class TrendsPage extends Component<RouteComponentProps<TParam>> {
+interface TParam {
+    category: string;
+}
+
+class TrendsPage extends Component<TrendsPageProps> {
     public render() {
-        const params = queryString.parse(this.props.location.search);
         const { category } = this.props.match.params;
-        const variant = params.variant && !Array.isArray(params.variant)
-            ? params.variant
-            : 'default';
+        const { variant } = this.props;
 
         return (
             <>
@@ -23,4 +27,8 @@ class TrendsPage extends Component<RouteComponentProps<TParam>> {
     }
 }
 
-export default TrendsPage;
+const mapStateToProps = (state: State) => ({
+    variant: state.experiment,
+});
+
+export default connect(mapStateToProps)(TrendsPage);
