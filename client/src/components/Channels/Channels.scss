@@ -33,7 +33,7 @@
             @media(min-width: $screen-l) {
                 display: block;
                 padding: 16px 0;
-                padding-left: 17px;
+                padding-left: 32px;
                 font-size: 11px;
                 color: var(--text-gray);
                 letter-spacing: .8px;
@@ -55,12 +55,12 @@
 
             @media(min-width: $screen-l) {
                 margin: 0 12px;
-                padding-left: 20px;
+                padding-left: 15px;
         
                 &:first-child {
-                    padding-left: 9px;
-        
-                    & > a {
+                    margin-left: 17px;
+
+                    & > span {
                         padding: 0 10px;
                     }
                 }
