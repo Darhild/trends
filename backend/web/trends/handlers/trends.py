@@ -76,7 +76,7 @@ def feed_proxy():
 @trends.route('/api/collection', methods=['GET'], )
 def collection_proxy():
     limit = request.args.get('limit')
-    collection_id = request.args.get('collection_id ')
+    collection_id = request.args.get('collection_id')
     offset = request.args.get('offset')
 
     cr = CollectionRequest()
