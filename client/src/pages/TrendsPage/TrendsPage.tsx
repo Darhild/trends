@@ -20,7 +20,7 @@ class TrendsPage extends Component<TrendsPageProps> {
 
         return (
             <>
-                <Title>Сейчас популярно</Title>
+                <Title>Самое популярное</Title>
                 <TrendsList variant={variant} category={category}/>
             </>
         );
