@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const API_URL = 'http://84.201.160.40:8080';
+const API_URL = 'http://ether-backend.ru:8080';
 const axios = require('axios');
 
 app.use(express.static('build'));
