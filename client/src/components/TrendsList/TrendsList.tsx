@@ -23,7 +23,7 @@ class TrendsList extends Component<Props> {
             variant && `TrendsList_variant_${variant}`,
         );
 
-        const items = shortVariant ? trends.slice(1, 5) : trends;
+        const items = shortVariant ? trends.slice(0, 5) : trends;
 
         return (
             <div className={cn}>

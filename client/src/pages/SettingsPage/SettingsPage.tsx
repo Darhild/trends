@@ -17,24 +17,17 @@ interface SettingProps {
 
 class SettingsPage extends Component<SettingProps> {
 
-    public handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const {
-            onChangeTrendVariant,
-            onChangeAllTrendsOnMain,
-            onChangeTime,
-            onChangeSource,
-        } = this.props;
+    public handleChangeTrendVariant = (event: React.ChangeEvent<HTMLSelectElement>) =>
+        this.props.onChangeTrendVariant(event.target.value)
 
-        if (event.target.name === 'variant') {
-            onChangeTrendVariant(event.target.value);
-        } else if (event.target.name === 'main') {
-            onChangeAllTrendsOnMain(Boolean(Number(event.target.value)));
-        } else if (event.target.name === 'time') {
-            onChangeTime(Number(event.target.value));
-        } else if (event.target.name === 'source') {
-            onChangeSource(event.target.value);
-        }
-    }
+    public handleChangeAllTrendsOnMain = (event: React.ChangeEvent<HTMLSelectElement>) =>
+        this.props.onChangeAllTrendsOnMain(Boolean(Number(event.target.value)))
+
+    public handleChangeTime = (event: React.ChangeEvent<HTMLSelectElement>) =>
+        this.props.onChangeTime(Number(event.target.value))
+
+    public handleChangeSource = (event: React.ChangeEvent<HTMLSelectElement>) =>
+        this.props.onChangeSource(event.target.value)
 
     public render() {
         const { allTrendsOnMain, trendVariant, time, source } = this.props;
@@ -47,7 +40,7 @@ class SettingsPage extends Component<SettingProps> {
                         className="Settings-Select"
                         name="variant"
                         value={trendVariant}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeTrendVariant}
                     >
                         <option value="default">Широкие карточки</option>
                         <option value="second">Карточки с вынесеным описанием</option>
@@ -59,7 +52,7 @@ class SettingsPage extends Component<SettingProps> {
                         className="Settings-Select"
                         name="main"
                         value={Number(allTrendsOnMain)}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeAllTrendsOnMain}
                     >
                         <option value={1} >Все тренды (карусель)</option>
                         <option value={0} >Топ-5</option>
@@ -71,7 +64,7 @@ class SettingsPage extends Component<SettingProps> {
                         className="Settings-Select"
                         name="time"
                         value={time}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeTime}
                     >
                         <option value="1" >День</option>
                         <option value="7" >Неделя</option>
@@ -84,7 +77,7 @@ class SettingsPage extends Component<SettingProps> {
                         className="Settings-Select"
                         name="source"
                         value={source}
-                        onChange={this.handleChange}
+                        onChange={this.handleChangeSource}
                     >
                         <option value="efir" >Яндекс.Эфир</option>
                         <option value="google" >Google</option>

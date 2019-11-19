@@ -32,7 +32,7 @@ class Trends extends Component<TrendsProps> {
                         trends.map((props, index) => (
                             <Link className="Trends-Link" to={`${url}/${index + 1}`}>
                                 <SmallCard {...props}/>
-                            </Link>     
+                            </Link>
                         ))
                     }
                 </Carousel>
