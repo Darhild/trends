@@ -5,6 +5,7 @@
       "title": "Вашингтон Кэпиталз",
       "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_WSH.png",
       "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_WSH.png",
+      "source": "efir",
       "description": ""
     },
     {
@@ -12,6 +13,7 @@
       "title": "Регулярный чемпионат",
       "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/ava_NHL.png",
       "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/general/Cover_NHL.png",
+      "source": "efir",
       "description": ""
     },
     {
@@ -19,6 +21,7 @@
       "title": "Записи матчей",
       "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/ava_NHL.png",
       "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/general/Cover_NHL.png",
+      "source": "efir",
       "description": ""
     },
     {
@@ -26,6 +29,7 @@
       "title": "Ванкувер Кэнакс",
       "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_VAN.png",
       "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_VAN.png",
+      "source": "efir",
       "description": ""
     }
   ],
@@ -35,6 +39,7 @@
       "title": "Блогеры",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -42,6 +47,7 @@
       "title": "Авто",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": "Авто"
     },
     {
@@ -49,6 +55,7 @@
       "title": "Автомобили",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     }
   ],
@@ -58,6 +65,7 @@
       "title": "Семейное кино",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -65,6 +73,7 @@
       "title": "Зарубежные драмы",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -72,6 +81,7 @@
       "title": "Лауреаты премии «Белый слон»",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -79,6 +89,7 @@
       "title": "Новинки кино",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     }
   ],
@@ -88,6 +99,7 @@
       "title": "Семейное кино",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -95,6 +107,7 @@
       "title": "Зарубежные драмы",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -102,6 +115,7 @@
       "title": "Лауреаты премии «Белый слон»",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -109,6 +123,7 @@
       "title": "Новинки кино",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     }
   ],
@@ -118,6 +133,7 @@
       "title": "Советские мультфильмы",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -125,6 +141,7 @@
       "title": "Семейные мультфильмы",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -132,6 +149,7 @@
       "title": "Щенячий патруль",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     }
   ],
@@ -141,6 +159,7 @@
       "title": "Капитанша",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -148,6 +167,7 @@
       "title": "Бригада",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     },
     {
@@ -155,6 +175,7 @@
       "title": "Государственная граница",
       "avatar": "",
       "bg": "",
+      "source": "efir",
       "description": ""
     }
   ]
