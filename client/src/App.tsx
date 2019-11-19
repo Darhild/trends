@@ -5,6 +5,7 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
+    Redirect,
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Categories from './components/Categories/Categories';
@@ -23,9 +24,10 @@ const App: React.FC = () =>
                     <Header />
                     <Categories />
                     <div className="App-Main">
-                        <Channels />
+                        <Route exact path="/main" component={Channels} />
                         <div className="App-Content">
                             <Switch>
+                                <Redirect exact from="/" to="/main" />
                                 <Route path="/settings" component={SettingsPage} />
                                 <Route path="/:category/trends/:ratingPosition" component={OneTrendPage} />
                                 <Route path="/:category/trends" component={TrendsPage} />

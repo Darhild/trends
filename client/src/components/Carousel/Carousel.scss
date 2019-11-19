@@ -54,12 +54,21 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        @media(min-width: $screen-m) {
+            margin: 8px 0;
+        }
     }
 
     &-TitleWrapper {
         box-sizing: border-box;
         min-height: 50px;
-        padding: 8px 0;
+        padding-top: 8px;
+
+        @media(min-width: $screen-m) {
+            min-height: 32px;
+            padding-top: 0;
+        }
 
         &_hidden {
             opacity: .4;

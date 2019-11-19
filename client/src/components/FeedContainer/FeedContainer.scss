@@ -1,6 +1,12 @@
+@import './../../variables';
+
 .Feed {
 
     &-Item {
         margin-bottom: 15px;
+
+        @media(min-width: $screen-s) {
+            margin-bottom: 0;
+        }
     }
 }
