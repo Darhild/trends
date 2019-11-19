@@ -6,6 +6,10 @@
     padding-right: 4px;
     padding-left: 16px;
 
+    @media(min-width: $screen-m) {
+        padding-left: 32px;
+    }
+
     &-Item {
         display: inline-block;
         padding: 5px 6px;

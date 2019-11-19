@@ -16,6 +16,10 @@
         padding: 14px 16px;
     }
 
+    @media(min-width: $screen-m) {
+        padding: 14px 38px;
+    }
+
     &-Logo {
         font-weight: 300;        
         font-size: 28px;
