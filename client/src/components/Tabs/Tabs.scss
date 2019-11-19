@@ -1,0 +1,24 @@
+.Tabs {
+    display: none;
+
+    @media(min-width: 768px) {
+        display: flex;
+
+        &-Item {
+            margin-right: 22px;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 32px;
+            color: var(--text-faded);
+            cursor: pointer;
+
+            &_state_active {
+                color: var(--text-primary)
+            }
+
+            &-last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}

@@ -7,6 +7,7 @@ import { ReactComponent as Close } from '../../images/svg/close.svg';
 import { ReactComponent as Undo } from '../../images/svg/undo.svg';
 import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
 import Icon from '../Icon/Icon';
+import Tabs from './../Tabs/Tabs';
 import './Carousel.scss';
 
 const SCROLL_SIZE = 400;
@@ -20,6 +21,7 @@ interface CarouselProps {
     canBeHidden: boolean;
     children: unknown;
     className?: string;
+    tabs?: boolean;
 }
 
 interface CarouselState {
@@ -111,7 +113,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     }
 
     public render() {
-        const { title, routeUrl, carouselId, canBeHidden } = this.props;
+        const { title, routeUrl, carouselId, canBeHidden, tabs } = this.props;
         const { isHidden } = this.state;
 
         const carouselCn = classnames(
@@ -135,6 +137,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                         {isHidden &&
                             <div className="Carousel-HideInfo">Вы скрыли подборку видео из ленты</div>}
                     </div>
+                    {tabs && <Tabs className="Carousel-Tabs" />}
                     <Icon className="Carousel-Hide">
                         {
                             isHidden

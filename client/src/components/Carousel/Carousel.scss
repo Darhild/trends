@@ -53,7 +53,6 @@
 
     &-Header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
 
         @media(min-width: $screen-m) {
@@ -76,7 +75,12 @@
         }
     }
 
+    &-Tabs {
+        margin-left: 35px;
+    }
+
     &-Hide {
+        margin-left: auto;
         width: 13px;
     }
 
