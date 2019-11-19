@@ -1,0 +1,110 @@
+{
+  "sport": [
+    {
+      "id": "ChJoaG51a3lhbWNhYnlpaGJiaGgSA2FsbBobc3BvcnRfaG9ja2V5X2Z1bGxfdGltZV9nYW1lIAE=",
+      "title": "Записи матчей",
+      "day": 160,
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/ava_NHL.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/general/Cover_NHL.png",
+      "description": ""
+    },
+    {
+      "id": "ChFoaGl3YW55ZW1ubGpndG9oaBIDYWxsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDg0NSAB",
+      "title": "Ванкувер Кэнакс",
+      "day": 16,
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_VAN.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_VAN.png",
+      "description": ""
+    }
+  ],
+  "blogger": [
+    {
+      "id": "ChFoaGJkYXdrYWtjb211ZXFoaBIDYWxsGgdibG9nZ2VyIAE=",
+      "title": "Блогеры",
+      "day": 131,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHVlb3R5c3B5bnphYXBjaGgSA2FsbBoOdWdjX3RoZW1lX2F2dG8gAQ==",
+      "title": "Автомобили",
+      "day": 202,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "common": [
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "day": 1205,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
+      "title": "Зарубежные драмы",
+      "day": 36,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "movie": [
+    {
+      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
+      "title": "Зарубежные драмы",
+      "day": 36,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "day": 1205,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "kids": [
+    {
+      "id": "ChJoaG9uc3JoYmpyam9maGdkaGgSA2FsbBonY2FydG9vbiZjb3VudHJ5X3Vzc3Ima2lkcyZwb3N0ZXJfZXhpc3RzIAE=",
+      "title": "Советские мультфильмы",
+      "day": 85,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHpnY25idmZ6dmhqYXpiaGgSA2FsbBoyY2FydG9vbl9zZXJpZXNfaWRfNDg0OWMxNThjMjg3MGE5ZDgyMDFmYWVkZTBjNmE1MTEgAQ==",
+      "title": "Щенячий патруль",
+      "day": 79,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "series": [
+    {
+      "id": "ChJoaGt6endob3B5cXp4cm5kaGgSA2FsbBoqc2VyaWVzX2lkXzQ5YmQ2Yzg4NzkwOGFlMzhiMDk2Mzg1MjgzZmMzMWRkIAE=",
+      "title": "Капитанша",
+      "day": 80,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChFoaG11c3ZweWx2dHhzbHpoaBIDYWxsGipzZXJpZXNfaWRfNDY5ZTVlYjUwZDZjMGU3ZDg4ODQxNmI5ZmNiMWUxMDAgAQ==",
+      "title": "Бригада",
+      "day": 3,
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ]
+}

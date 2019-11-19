@@ -1,0 +1,161 @@
+{
+  "sport": [
+    {
+      "id": "ChFoaHpscXloeXhsdXpjcGVoaBIDYWxsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDg0NiAB",
+      "title": "Вашингтон Кэпиталз",
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_WSH.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_WSH.png",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGVxbXZxY2x1Z3luZ2NkaGgSA2FsbBoZc3BvcnRfaG9ja2V5X3R5cGVfcmVndWxhciAB",
+      "title": "Регулярный чемпионат",
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/ava_NHL.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/general/Cover_NHL.png",
+      "description": ""
+    },
+    {
+      "id": "ChJoaG51a3lhbWNhYnlpaGJiaGgSA2FsbBobc3BvcnRfaG9ja2V5X2Z1bGxfdGltZV9nYW1lIAE=",
+      "title": "Записи матчей",
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/ava_NHL.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/general/Cover_NHL.png",
+      "description": ""
+    },
+    {
+      "id": "ChFoaGl3YW55ZW1ubGpndG9oaBIDYWxsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDg0NSAB",
+      "title": "Ванкувер Кэнакс",
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_VAN.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_VAN.png",
+      "description": ""
+    }
+  ],
+  "blogger": [
+    {
+      "id": "ChFoaGJkYXdrYWtjb211ZXFoaBIDYWxsGgdibG9nZ2VyIAE=",
+      "title": "Блогеры",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChFoaGNyYnZkdGxqcmhueWRoaBIDYWxsGgp0aGVtZV9hdnRvIAE=",
+      "title": "Авто",
+      "avatar": "",
+      "bg": "",
+      "description": "Авто"
+    },
+    {
+      "id": "ChJoaHVlb3R5c3B5bnphYXBjaGgSA2FsbBoOdWdjX3RoZW1lX2F2dG8gAQ==",
+      "title": "Автомобили",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "common": [
+    {
+      "id": "ChFoaGlmb3d2dXpjeGx2c3doaBIDYWxsGiBtb3ZpZSZnZW5yZV9mYW1pbHkmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Семейное кино",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
+      "title": "Зарубежные драмы",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHNxc2d1aGVyeWx1YmRkaGgSA2FsbBoUZW50aXR5X2xzdGVjNTlkYjhfXzAgAQ==",
+      "title": "Лауреаты премии «Белый слон»",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "movie": [
+    {
+      "id": "ChFoaGlmb3d2dXpjeGx2c3doaBIDYWxsGiBtb3ZpZSZnZW5yZV9mYW1pbHkmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Семейное кино",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
+      "title": "Зарубежные драмы",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHNxc2d1aGVyeWx1YmRkaGgSA2FsbBoUZW50aXR5X2xzdGVjNTlkYjhfXzAgAQ==",
+      "title": "Лауреаты премии «Белый слон»",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "kids": [
+    {
+      "id": "ChJoaG9uc3JoYmpyam9maGdkaGgSA2FsbBonY2FydG9vbiZjb3VudHJ5X3Vzc3Ima2lkcyZwb3N0ZXJfZXhpc3RzIAE=",
+      "title": "Советские мультфильмы",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHVsY3R6dGlidHZidXFiaGgSA2FsbBoiY2FydG9vbiZnZW5yZV9mYW1pbHkmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Семейные мультфильмы",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHpnY25idmZ6dmhqYXpiaGgSA2FsbBoyY2FydG9vbl9zZXJpZXNfaWRfNDg0OWMxNThjMjg3MGE5ZDgyMDFmYWVkZTBjNmE1MTEgAQ==",
+      "title": "Щенячий патруль",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ],
+  "series": [
+    {
+      "id": "ChJoaGt6endob3B5cXp4cm5kaGgSA2FsbBoqc2VyaWVzX2lkXzQ5YmQ2Yzg4NzkwOGFlMzhiMDk2Mzg1MjgzZmMzMWRkIAE=",
+      "title": "Капитанша",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChFoaG11c3ZweWx2dHhzbHpoaBIDYWxsGipzZXJpZXNfaWRfNDY5ZTVlYjUwZDZjMGU3ZDg4ODQxNmI5ZmNiMWUxMDAgAQ==",
+      "title": "Бригада",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    },
+    {
+      "id": "ChJoaHJ5d3N2dXBqeXBqbnhiaGgSA2FsbBoqc2VyaWVzX2lkXzRlYjZkNWJlODJmMzMwZjU4ZTY1MTQ0NWIwNWUyMDBmIAE=",
+      "title": "Государственная граница",
+      "avatar": "",
+      "bg": "",
+      "description": ""
+    }
+  ]
+}

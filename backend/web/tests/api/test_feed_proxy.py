@@ -17,13 +17,13 @@ def test_feed_request():
 
 
 def test_feed_proxy(client):
-    data = {
+    params = {
         "offset": 0,
         "limit": 20,
         "tag": 'blogger'
     }
     resp = client.get(
-        url_for('trends.feed_proxy', **data),
+        url_for('trends.feed_proxy', **params),
     )
     assert resp.status_code == 200
 
@@ -34,7 +34,7 @@ def test_feed_proxy(client):
 
 
 @pytest.mark.parametrize(
-    ('data', 'status'), [
+    ('params', 'status'), [
         ({"offset": "0", "limit": "20", "tag": 'bla-bla', }, 200),  # nonexistent tag
         ({"limit": "20", "tag": 'blogger', }, 200),  # not offset
         ({"offset": "0", "tag": 'blogger', }, 200),  # not limit
@@ -42,8 +42,8 @@ def test_feed_proxy(client):
         ({"offset": "1256985555", "limit": "20", "tag": 'blogger', }, 200),
     ]
 )
-def test_feed_proxy_bad_request(client, data, status):
+def test_feed_proxy_bad_request(client, params, status):
     resp = client.get(
-        url_for('trends.feed_proxy', **data),
+        url_for('trends.feed_proxy', **params),
     )
     assert resp.status_code == status
