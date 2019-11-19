@@ -4,6 +4,7 @@ from flask import Blueprint, request, Response, abort, json, current_app
 
 from trends.models.trends_repo import Repository
 from trends.utils.feed_request import FeedRequest
+from trends.utils.collection_request import CollectionRequest
 from trends.utils.get_db_environ import get_environ_or_default
 from trends.utils.trend_request import handle_trends_request
 
@@ -66,6 +67,20 @@ def feed_proxy():
     # log.info('GET /api/feed?tag=%s&offset=%s&limit=%s', tag, offset, limit)
     fr = FeedRequest()
     resp = fr.get_response(tag=tag, offset=offset, limit=limit)
+    return Response(
+        json.dumps({"data": resp.json()}, ensure_ascii=False),
+        status=resp.status_code, mimetype='application/json'
+    )
+
+
+@trends.route('/api/collection', methods=['GET'], )
+def collection_proxy():
+    limit = request.args.get('limit')
+    collection_id = request.args.get('collection_id ')
+    offset = request.args.get('offset')
+
+    cr = CollectionRequest()
+    resp = cr.get_response(collection_id=collection_id, offset=offset, limit=limit)
     return Response(
         json.dumps({"data": resp.json()}, ensure_ascii=False),
         status=resp.status_code, mimetype='application/json'
