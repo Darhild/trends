@@ -1,8 +1,8 @@
 @import 'variables';
 
 .App {
+    min-width: 300px;
     overflow-x: hidden;
-
     @media screen and (min-width: $screen-m) {
 
         &-Main {
