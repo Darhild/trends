@@ -1,8 +1,10 @@
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import json
 import time
+
+# TODO по видео показывать последние видео / наиболее комментируемые
 
 from flask_caching import Cache
 
@@ -12,7 +14,6 @@ from comment_trends.external_api.carousels import CarouselsRequest
 from comment_trends.external_api.carousel import CarouselRequest
 from comment_trends.external_api.theme import ThemeRequest
 
-Counts = namedtuple('Counts', ['day', 'week', 'month'])
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
 
 # TODO вынести в конфиг
@@ -34,26 +35,45 @@ def compute_trends():
 
 
 def get_sorted_trends(tag):
-    themes = get_potential_trends(tag, config)
-    sorted_themes = sorted(themes.items(), key=lambda x: x[1].day, reverse=True)
-    result = []
-    # TODO добавить поле video_count
-    for (theme_id, theme_title), counts in sorted_themes:
+    themes, docs = get_potential_trends(tag, config)
+
+    theme_trends = sort_themes(themes)
+
+    # document_trends = sort_documents(docs)
+
+    return theme_trends
+
+
+def sort_themes(themes):
+    sorted_themes = sorted(themes.items(), key=lambda x: x[1], reverse=True)
+    theme_trends = []
+    # TODO добавить поле video_count по release date
+    # TODO первая картинка в теме / обрезать постер / яндекс апи
+    for (theme_id, theme_title), count in sorted_themes:
         theme_info = get_theme_info(theme_id)
-        result.append({
+        theme_trends.append({
             'id': theme_id,
             'title': theme_title,
-            'day': counts.day,
+            'day': count,
             'avatar': theme_info['avatar'],
             'bg': theme_info['bg'],
             'description': theme_info['description']
 
         })
+    return theme_trends
 
-    return result
 
+def sort_documents(docs):
+    document_trends = []
+    sorted_docs = sorted(docs[0].items(), key=lambda x: x[1], reverse=True)
+    for doc_id, doc_count in sorted_docs:
+        document_trends.append({'id': doc_id,
+                                'data': docs[1][doc_id]})
 
-def get_potential_trends(tag, feed_params) -> Dict[Tuple[str, str], Counts]:
+    return document_trends
+    
+
+def get_potential_trends(tag, feed_params):
 
     documents = dict()
     carousels = CarouselsRequest.get_response(tag=tag, **feed_params).get_carousels()
@@ -63,9 +83,12 @@ def get_potential_trends(tag, feed_params) -> Dict[Tuple[str, str], Counts]:
 
     doc_to_comments = get_comments(documents)
     theme_to_comments = group_comments_by_themes(documents, doc_to_comments)
-    theme_to_count = count_comments_by_themes(theme_to_comments)
 
-    return theme_to_count
+    theme_to_count = count_comments_by_themes(theme_to_comments)
+    doc_to_count = count_comments_by_docs(doc_to_comments)
+
+    doc_data = documents, doc_to_count
+    return theme_to_count, doc_data
 
 
 def get_documents_from_carousel(carousel_id, feed_params):
@@ -74,6 +97,7 @@ def get_documents_from_carousel(carousel_id, feed_params):
 
 
 def get_comments(documents):
+    # TODO получить текст топового комментария
     doc_to_comments = dict()
     for doc_id in documents:
         response = CommentsRequest.get_response(doc_id)
@@ -97,29 +121,41 @@ def group_comments_by_themes(documents, doc_to_comments) -> Dict[Tuple[str, str]
 def count_comments_by_themes(theme_to_comments):
     theme_to_count = dict()
 
+    # theme_id ~ (theme_id, theme_title)
     for theme_id in theme_to_comments:
-        # theme_id ~ (theme_id, theme_title)
-        theme_to_comments[theme_id] = [int((str(ts)[:-6])) for ts in theme_to_comments[theme_id]]
-        theme_to_count[theme_id] = count_comments(theme_to_comments[theme_id])
+        comments_ts = [int((str(ts)[:-6])) for ts in theme_to_comments[theme_id]]
+        theme_to_count[theme_id] = count_comments(comments_ts)
 
     return theme_to_count
 
 
-def count_comments(comments):
-    comments.sort(reverse=True)
+def count_comments_by_docs(doc_to_comments):
+    doc_to_count = dict()
+
+    for doc_id in doc_to_comments:
+        comments_ts = [int((str(ts)[:-6])) for ts in doc_to_comments[doc_id]]
+        doc_to_count[doc_id] = count_comments(comments_ts)
+
+    return doc_to_count
+
+
+def count_comments(comments_ts):
+    comments_ts.sort(reverse=True)
     today = datetime.today()
-    day = count_comments_from(comments, today - timedelta(days=1))
-    week = count_comments_from(comments, today - timedelta(days=7))
-    month = count_comments_from(comments, today - timedelta(days=30))
+    day_count = count_comments_from(today - timedelta(days=1), comments_ts)
+    # week = count_comments_from(today - timedelta(days=7), comments)
+    # month = count_comments_from(today - timedelta(days=30), comments)
 
-    return Counts(day=day, week=week, month=month)
+    return day_count
 
 
-def count_comments_from(comment_ts, start):
-    start = start.timestamp()
+def count_comments_from(past_date, comments_ts) -> int:
+    past_date = past_date.timestamp()
+
     count = 0
-    for timestamp in comment_ts:
-        if timestamp > start:
+    # Можно использовать бинарный поиск
+    for timestamp in comments_ts:
+        if timestamp > past_date:
             count += 1
         else:
             break
