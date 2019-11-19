@@ -7,21 +7,17 @@ interface TitleProps {
     route?: boolean;
 }
 
-const TitleContent: React.FC = ({ children }) => (
-    <div className="Title">{children}</div>
-);
-
 export default class Title extends Component<TitleProps> {
     public render() {
         const { url, route, children } = this.props;
-        if (route && url) {
-            return <Link className="Title-Link" to={url}>><TitleContent children={children}/></Link>;
+        const content = <div className="Title">{children}</div>;
 
-        }
         if (url) {
-            return <a className="Title-Link" href={url}><TitleContent children={children}/></a>;
+            return route
+                ? <Link className="Title-Link" to={url}>{content}</Link>
+                : <a className="Title-Link" href={url}>{content}</a>;
         }
 
-        return <TitleContent children={children}/>;
+        return content;
     }
 }

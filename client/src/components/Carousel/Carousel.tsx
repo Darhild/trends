@@ -131,7 +131,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
             <div className={carouselCn}>
                 {canBeHidden && <div className="Carousel-Header">
                     <div className={titleCn}>
-                        {title && <Title url={url} route={!!routeUrl}>{title}</Title>}
+                        {title && <Title url={url} route={Boolean(routeUrl)}>{title}</Title>}
                         {isHidden &&
                             <div className="Carousel-HideInfo">Вы скрыли подборку видео из ленты</div>}
                     </div>
