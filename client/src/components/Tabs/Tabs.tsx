@@ -1,34 +1,12 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Tabs.scss';
-import Tab from './Tab/Tab';
-/*
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { connect } from 'react-redux';
+import { selectPeriod } from './../../store/actions';
 
 interface TabsProps {
     className?: string;
-}
-
-export default ({ className }: TabsProps) => {
-    const tabsCn = classnames(
-        'Tabs',
-        className,
-    );
-
-    return (
-        <Tabs className={tabsCn}>
-            <TabList className="Tablist">
-                <Tab>Сегодня</Tab>
-                <Tab>Неделю</Tab>
-                <Tab>Месяц</Tab>
-            </TabList>
-        </Tabs>
-    );
-};
-*/
-
-interface TabsProps {
-    className?: string;
+    onClickSelectPeriod: (value: number) => void;
 }
 
 interface TabsState {
@@ -38,32 +16,37 @@ interface TabsState {
 
 interface TabsItem {
     id: number;
+    value: number;
     name: string;
 }
 
-export default class Tabs extends Component<TabsProps, TabsState> {
+class Tabs extends Component<TabsProps, TabsState> {
     public state = {
         tabsContent: [
             {
                 id: 1,
+                value: 1,
                 name: 'День',
             },
             {
                 id: 2,
+                value: 7,
                 name: 'Неделю',
             },
             {
                 id: 3,
+                value: 30,
                 name: 'Месяц',
             },
         ],
         activeTab: 1,
     };
 
-    public handleClick = (id: number) => {
+    public handleClick = (id: number, value: number) => {
         this.setState(() => ({
                 activeTab: id,
             }));
+        this.props.onClickSelectPeriod(value);
     }
 
     public render() {
@@ -85,7 +68,7 @@ export default class Tabs extends Component<TabsProps, TabsState> {
                                 activeTab === tab.id && 'Tabs-Item_state_active',
                                 )
                             }
-                            onClick={() => {this.handleClick(tab.id); }}
+                            onClick={() => {this.handleClick(tab.id, tab.value); }}
                         >
                             {tab.name}
                         </div>
@@ -95,4 +78,10 @@ export default class Tabs extends Component<TabsProps, TabsState> {
         );
     }
 }
+
+const mapDispatchToProps = {
+    onClickSelectPeriod: selectPeriod,
+};
+
+export default connect(null, mapDispatchToProps)(Tabs);
 

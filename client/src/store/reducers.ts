@@ -1,7 +1,7 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_TIME, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
@@ -26,7 +26,7 @@ const defaultState = {
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
     allTrendsOnMain: true,
     trendVariant: 'default',
-    time: 7,
+    period: 1,
     source: 'efir',
 };
 
@@ -104,10 +104,10 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                 ...state,
                 trendVariant: action.payload,
             };
-        case SET_TIME:
+        case SET_PERIOD:
             return {
                 ...state,
-                time: action.payload,
+                period: action.payload,
             };
         case SET_SOURCE:
             return {

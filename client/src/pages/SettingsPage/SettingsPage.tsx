@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './SettingsPage.scss';
 import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
-import { setTrendVariant, setTime, setSource, setAllTrendsOnMain } from './../../store/actions';
+import { setTrendVariant, setPeriod, setSource, setAllTrendsOnMain } from './../../store/actions';
 
 interface SettingProps {
     allTrendsOnMain: boolean;
@@ -11,7 +11,7 @@ interface SettingProps {
     source: string;
     onChangeAllTrendsOnMain: (value: boolean) => void;
     onChangeTrendVariant: (value: string) => void;
-    onChangeTime: (value: number) => void;
+    onChangePeriod: (value: number) => void;
     onChangeSource: (value: string) => void;
 }
 
@@ -24,7 +24,7 @@ class SettingsPage extends Component<SettingProps> {
         this.props.onChangeAllTrendsOnMain(Boolean(Number(event.target.value)))
 
     public handleChangeTime = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        this.props.onChangeTime(Number(event.target.value))
+        this.props.onChangePeriod(Number(event.target.value))
 
     public handleChangeSource = (event: React.ChangeEvent<HTMLSelectElement>) =>
         this.props.onChangeSource(event.target.value)
@@ -92,14 +92,14 @@ class SettingsPage extends Component<SettingProps> {
 const mapStateToProps = (state: State) => ({
     allTrendsOnMain: state.allTrendsOnMain,
     trendVariant: state.trendVariant,
-    time: state.time,
+    period: state.period,
     source: state.source,
 });
 
 const mapDispatchToProps = {
     onChangeAllTrendsOnMain: setAllTrendsOnMain,
     onChangeTrendVariant: setTrendVariant,
-    onChangeTime: setTime,
+    onChangePeriod: setPeriod,
     onChangeSource: setSource,
 };
 

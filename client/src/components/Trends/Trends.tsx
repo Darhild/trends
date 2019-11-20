@@ -13,12 +13,20 @@ interface TrendsProps {
     allTrendsOnMain: boolean;
     trends: SmallCardProps[];
     category: string;
-    onInitTrends(): void;
+    period: number;
+    onSetTrends(period?: number): void;
 }
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        this.props.onInitTrends();
+        this.props.onSetTrends();
+    }
+
+    public componentDidUpdate(prevProps: TrendsProps) {
+        const { period } = this.props;
+        if (period !== prevProps.period) {
+            this.props.onSetTrends(period);
+        }
     }
 
     public renderItems = () => {
@@ -57,16 +65,15 @@ class Trends extends Component<TrendsProps> {
     }
 }
 
-
 const mapStateToProps = (state: State) => ({
     allTrendsOnMain: state.allTrendsOnMain,
     trendVariant: state.trendVariant,
     trends: state.trends,
+    period: state.period,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onInitTrends: () => dispatch(setTrendsThunk()),
+    onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trends);
