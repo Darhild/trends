@@ -4,6 +4,12 @@ $_: '.TrendsList';
 
 .TrendsList {
 
+    margin-top: 8px;
+
+    @media(min-width: $screen-m) {
+        margin-top: 10px;
+    }
+
     @media(min-width: $screen-s) {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -32,6 +38,10 @@ $_: '.TrendsList';
 
     &-Item {
         margin-bottom: 8px;
+
+        @media(min-width: $screen-m) {
+            margin-bottom: 12px;
+        }
 
         &:last-child {
             margin-bottom: 0;

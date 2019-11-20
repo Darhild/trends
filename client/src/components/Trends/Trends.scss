@@ -3,10 +3,6 @@
 .Trends {
     margin-bottom: 20px;
 
-    @media(min-width: $screen-m) {
-        margin-top: 26px;
-    }
-
     &-More {
         display: block;
         margin-top: 12px;

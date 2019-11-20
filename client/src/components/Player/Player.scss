@@ -78,6 +78,10 @@
         }
     }
 
+    @media(min-width: $screen-m) {
+        margin-bottom: 26px;
+    }
+
     @media(min-width: $screen-l) {
         width: 498px;
         height: 340px;
