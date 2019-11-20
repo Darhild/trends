@@ -1,0 +1,62 @@
+{
+  "sport": [
+    {
+      "id": "ChFoaGl3YW55ZW1ubGpndG9oaBIDYWxsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDg0NSAB",
+      "title": "Ванкувер Кэнакс",
+      "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_VAN.png",
+      "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_VAN.png",
+      "source": "efir",
+      "description": ""
+    }
+  ],
+  "blogger": [
+    {
+      "id": "ChFoaGJkYXdrYWtjb211ZXFoaBIDYWxsGgdibG9nZ2VyIAE=",
+      "title": "Блогеры",
+      "avatar": "",
+      "bg": "",
+      "source": "efir",
+      "description": ""
+    }
+  ],
+  "common": [
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "avatar": "",
+      "bg": "",
+      "source": "efir",
+      "description": ""
+    }
+  ],
+  "movie": [
+    {
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "avatar": "",
+      "bg": "",
+      "source": "efir",
+      "description": ""
+    }
+  ],
+  "kids": [
+    {
+      "id": "ChJoaG9uc3JoYmpyam9maGdkaGgSA2FsbBonY2FydG9vbiZjb3VudHJ5X3Vzc3Ima2lkcyZwb3N0ZXJfZXhpc3RzIAE=",
+      "title": "Советские мультфильмы",
+      "avatar": "",
+      "bg": "",
+      "source": "efir",
+      "description": ""
+    }
+  ],
+  "series": [
+    {
+      "id": "ChFoaG11c3ZweWx2dHhzbHpoaBIDYWxsGipzZXJpZXNfaWRfNDY5ZTVlYjUwZDZjMGU3ZDg4ODQxNmI5ZmNiMWUxMDAgAQ==",
+      "title": "Бригада",
+      "avatar": "",
+      "bg": "",
+      "source": "efir",
+      "description": ""
+    }
+  ]
+}

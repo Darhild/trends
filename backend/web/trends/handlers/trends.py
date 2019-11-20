@@ -50,7 +50,7 @@ def trends_handler():
                 resp = merge(efir_trends, google_trends, internal_ratio, external_ratio, num_docs)
             else:
                 resp = sort_and_limit(repo.read_content(period, tag), num_docs)
-        shuffle(resp)
+        # shuffle(resp)
         return Response(response=json.dumps(resp, ensure_ascii=False),
                         status=200, mimetype='application/json')
 
