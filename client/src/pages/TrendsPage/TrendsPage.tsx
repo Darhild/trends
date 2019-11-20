@@ -6,7 +6,7 @@ import TrendsList from '../../components/TrendsList/TrendsList';
 import { State } from '../../store/createStore';
 
 interface TrendsPageProps extends RouteComponentProps<TParam> {
-    variant: string;
+    trendVariant: string;
 }
 
 interface TParam {
@@ -16,19 +16,19 @@ interface TParam {
 class TrendsPage extends Component<TrendsPageProps> {
     public render() {
         const { category } = this.props.match.params;
-        const { variant } = this.props;
+        const { trendVariant } = this.props;
 
         return (
             <>
                 <Title>Самое популярное</Title>
-                <TrendsList variant={variant} category={category}/>
+                <TrendsList variant={trendVariant} category={category}/>
             </>
         );
     }
 }
 
 const mapStateToProps = (state: State) => ({
-    variant: state.experiment,
+    trendVariant: state.trendVariant,
 });
 
 export default connect(mapStateToProps)(TrendsPage);

@@ -3,7 +3,7 @@ import { State } from '../store/createStore';
 import { items as seriesFeed } from '../mobile_series.json';
 import { items as blogersFeed } from '../blogers.json';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_MAIN_FEED, SELECT_EXPERIMENT, SELECT_TIME, SELECT_SOURCE } from './actionTypes';
+import { SET_TRENDS, SET_MAIN_FEED, SET_TREND_VARIANT, SET_TIME, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
@@ -29,7 +29,8 @@ const defaultState = {
             channelCategory: channel_category,
         })),
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
-    experiment: 'default',
+    allTrendsOnMain: true,
+    trendVariant: 'default',
     time: 7,
     source: 'efir',
 };
@@ -74,20 +75,25 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                 ...state,
                 main: action.payload,
             };
-        case SELECT_EXPERIMENT:
+        case SET_ALL_TRENDS_ON_MAIN:
             return {
                 ...state,
-                experiment: action.value,
+                allTrendsOnMain: action.payload,
             };
-        case SELECT_TIME:
+        case SET_TREND_VARIANT:
             return {
                 ...state,
-                time: action.value,
+                trendVariant: action.payload,
             };
-        case SELECT_SOURCE:
+        case SET_TIME:
             return {
                 ...state,
-                source: action.value,
+                time: action.payload,
+            };
+        case SET_SOURCE:
+            return {
+                ...state,
+                source: action.payload,
             };
         default:
             return state;

@@ -12,27 +12,31 @@ interface Props {
     trends: Trend[];
     variant: string;
     category: string;
+    shortVariant?: boolean;
 }
 
 class TrendsList extends Component<Props> {
     public render() {
-        const { trends, variant, category } = this.props;
+        const { trends, variant, category, shortVariant } = this.props;
         const cn = classnames(
             'TrendsList',
             variant && `TrendsList_variant_${variant}`,
         );
 
+        const items = shortVariant ? trends.slice(0, 5) : trends;
+
         return (
             <div className={cn}>
                 {
-                    trends.map((props, index) =>
-                    <Link className="TrendsList-Link TrendsList-Item" to={`/${category}/trends/${index + 1}`}>
-                        <TrendCard
-                            {...props}
-                            variant={variant}
-                            ratingPosition={index + 1}
-                        />
-                    </Link>)
+                    items.map((props, index) => (
+                        <Link className="TrendsList-Link TrendsList-Item" to={`/${category}/trends/${index + 1}`}>
+                            <TrendCard
+                                {...props}
+                                variant={variant}
+                                ratingPosition={index + 1}
+                            />
+                        </Link>
+                    ))
                 }
             </div>
         );

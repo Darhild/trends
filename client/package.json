@@ -65,5 +65,5 @@
       "pre-commit": "npm run lint"
     }
   },
-  "proxy": "http://84.201.160.40:8080"
+  "proxy": "http://ether-backend.ru:8080"
 }
