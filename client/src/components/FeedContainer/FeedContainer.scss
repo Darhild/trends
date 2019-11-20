@@ -6,6 +6,7 @@
         margin-bottom: 15px;
 
         @media(min-width: $screen-s) {
+            display: none;
             margin-bottom: 0;
         }
     }

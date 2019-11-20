@@ -65,6 +65,10 @@ $_: '.TrendCard';
 
         background: linear-gradient(180deg, rgba(0, 0, 0, .06) 28.93%, rgba(0, 0, 0, .9) 100%);
         border-radius: 6px;
+
+        .OneTrendPage_TrendCard & {
+            border-radius: 0;
+        }
     }
 
     &-Number {

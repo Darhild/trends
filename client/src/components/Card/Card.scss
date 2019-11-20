@@ -4,6 +4,14 @@
     background-color: var(--color-layout);
     border-radius: 6px;
 
+    &_type_trend {
+        background-color: transparent;
+
+        .Card-Thumb {
+            border-radius: 6px;
+        }
+    }
+
     &_width_small {
         width: 117px;
         background-color: transparent;
@@ -47,15 +55,39 @@
         }
     }
 
-    &_width_full {
+    &_width_big {
         width: 100%;
-
-        @media(min-width: $screen-s) {
-            display: none;
-        }
 
         .Card-Thumb {
             height: 184px;
+
+            @media(min-width: $screen-s) {
+                height: 104px;
+            }
+
+            @media(min-width: $screen-m) {
+                height: 140px;
+            }
+
+            @media(min-width: $screen-l) {
+                height: 210px;
+            }
+        }
+
+        .Card-Score {
+            display: none;
+        }
+    }
+
+    &_width_full {
+        width: 100%;
+
+        .Card-Thumb {
+            height: 184px;
+
+            @media(min-width: $screen-s) {
+                height: 104px;
+            }
         }
 
         .Card-Score {
@@ -133,9 +165,23 @@
     &-Content {
         display: flex;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: flex-start;
         padding: 10px 12px;
+        overflow: hidden;
         text-align: left;
+
+        &_type_trend, &_type_promo {
+            height: 67px;
+            padding: 10px 0;
+            
+            .Card-Title {
+                font-weight: 500;
+            }
+        }
+
+        &_type_blogger {
+            height: 54px;
+        }
     }
 
     &-Text {
@@ -143,7 +189,7 @@
     }
 
     &-Title {
-        max-height: 32px;
+        max-height: 35px;
         margin-bottom: 3px;
         overflow: hidden;
         font-size: 13px;

@@ -13,9 +13,9 @@ const CardThumb = ({
     }: CardProps) => {
     const poster = changeImageSize(onto_poster);
     const cardPoster = <img src={poster} className="Card-Poster" alt="" />;
-    const img = (content_type === 'vod' || content_type === 'blogger' || content_type === 'trend')
-            ? changeImageSize(thumbnail)
-            : poster;
+    const img = (content_type === 'series' || content_type === 'movie')
+            ? poster
+            : changeImageSize(thumbnail);
 
     return (
         <div className="Card-Thumb" style={{ backgroundImage: `url(${img})` }}>

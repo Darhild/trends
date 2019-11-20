@@ -20,10 +20,12 @@ const TrendDetails: React.FC< Props > = ({ desc, className, variant }) => {
         <div className={cn}>
             <div className="TrendDetails-Label">
                 <Grow className="TrendDetails-Icon" />
-                <span>Сейчас популярно</span>
+                <span className="TrendDetails-Caption">Сейчас популярно</span>
             </div>
-            <div className="TrendDetails-Title">{desc}</div>
-            <div className="TrendDetails-Count">123 видео и 2 тыс. историй</div>
+            <div className="TrendDetails-Info">
+                <div className="TrendDetails-Title">{desc}</div>
+                <div className="TrendDetails-Count">123 видео и 2 тыс. историй</div>
+            </div>
         </div>
     );
 };
