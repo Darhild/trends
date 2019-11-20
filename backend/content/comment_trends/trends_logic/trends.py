@@ -13,6 +13,7 @@ from comment_trends.external_api.comments import CommentsRequest
 from comment_trends.external_api.carousels import CarouselsRequest
 from comment_trends.external_api.carousel import CarouselRequest
 from comment_trends.external_api.theme import ThemeRequest
+from comment_trends.external_api.collection import CollectionRequest
 
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
 
@@ -48,19 +49,29 @@ def sort_themes(themes):
     sorted_themes = sorted(themes.items(), key=lambda x: x[1], reverse=True)
     theme_trends = []
     # TODO добавить поле video_count по release date
-    # TODO первая картинка в теме / обрезать постер / яндекс апи
     for (theme_id, theme_title), count in sorted_themes:
         theme_info = get_theme_info(theme_id)
+        # как вариант можно обрезать исходный постер из theme_info или использовать картинки в поиске
+        avatar = get_theme_avatar(theme_id)
         theme_trends.append({
             'id': theme_id,
             'title': theme_title,
             'day': count,
-            'avatar': theme_info['avatar'],
+            'avatar': avatar,
             'bg': theme_info['bg'],
             'description': theme_info['description']
 
         })
     return theme_trends
+
+
+def get_theme_avatar(theme_id):
+    response = CollectionRequest.get_response(collection_id=theme_id, offset=0, limit=2)
+    avatar = response.get_avatar()
+    if avatar:
+        return 'https:' + avatar
+    else:
+        return ""
 
 
 def sort_documents(docs):
@@ -139,7 +150,7 @@ def count_comments_by_docs(doc_to_comments):
     return doc_to_count
 
 
-def count_comments(comments_ts):
+def count_comments(comments_ts) -> int:
     comments_ts.sort(reverse=True)
     today = datetime.today()
     day_count = count_comments_from(today - timedelta(days=1), comments_ts)
@@ -153,7 +164,7 @@ def count_comments_from(past_date, comments_ts) -> int:
     past_date = past_date.timestamp()
 
     count = 0
-    # Можно использовать бинарный поиск
+    # Можно вместо линейного использовать бинарный поиск
     for timestamp in comments_ts:
         if timestamp > past_date:
             count += 1

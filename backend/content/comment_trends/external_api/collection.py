@@ -74,10 +74,30 @@ class CollectionData:
         except KeyError:
             return ''
 
+    def get_avatar(self):
+        avatar = ""
+        if not self.response_data:
+            return avatar
+
+        # thumbnail or onto_poster
+        try:
+            first_item = self.response_data['set'][0]
+            avatar = first_item['onto_poster']
+        except (TypeError, KeyError, IndexError):
+            pass
+
+        if not avatar:
+            try:
+                first_item = self.response_data['set'][0]
+                avatar = first_item['thumbnail']
+            except (TypeError, KeyError, IndexError):
+                pass
+
+        return avatar
+
 
 if __name__ == '__main__':
     cr_id = 'ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB'
     cr = CollectionRequest.get_response(cr_id, offset=24, limit=24)
-    print(cr.resp)
     pprint(cr.get_documents())
     print(cr.get_cache_hash())
