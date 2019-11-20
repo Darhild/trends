@@ -4,6 +4,9 @@ import SmallCard, { SmallCardProps } from '../SmallCard/SmallCard';
 import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
+import TitleWrapper from './../TitleWrapper/TitleWrapper';
+import Title from './../Title/Title';
+import Tabs from './../Tabs/Tabs';
 import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
 import TrendsList from '../TrendsList/TrendsList';
@@ -23,9 +26,9 @@ class Trends extends Component<TrendsProps> {
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
-        const { period } = this.props;
+        const { period, onSetTrends } = this.props;
         if (period !== prevProps.period) {
-            this.props.onSetTrends(period);
+            onSetTrends(period);
         }
     }
 
@@ -35,7 +38,7 @@ class Trends extends Component<TrendsProps> {
 
         if (allTrendsOnMain) {
             return (
-                <Carousel title="Самое популярное" margin="s">
+                <Carousel title="Самое популярное" margin="s" tabs>
                     {
                         trends.map((props, index) => (
                             <Link className="Trends-Link" to={`${url}/${index + 1}`}>
@@ -48,7 +51,13 @@ class Trends extends Component<TrendsProps> {
         }
 
         return (
-            <TrendsList category={category} variant={trendVariant} shortVariant />
+            <>
+                <TitleWrapper>
+                    <Title>Самое популярное</Title>
+                    <Tabs/>
+                </TitleWrapper>
+                <TrendsList category={category} variant={trendVariant} shortVariant />
+            </>
         );
     }
 

@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
+import TitleWrapper from './../../components/TitleWrapper/TitleWrapper';
+import Tabs from '../../components/Tabs/Tabs';
 import TrendsList from '../../components/TrendsList/TrendsList';
-import { State } from '../../store/createStore';
+import { State, Dispatch } from '../../store/createStore';
+import { setTrendsThunk } from '../../store/thunks';
 
 interface TrendsPageProps extends RouteComponentProps<TParam> {
     trendVariant: string;
+    period: number;
+    onSetTrends(period?: number): void;
 }
 
 interface TParam {
@@ -14,13 +19,27 @@ interface TParam {
 }
 
 class TrendsPage extends Component<TrendsPageProps> {
+    public componentDidMount() {
+        this.props.onSetTrends();
+    }
+
+    public componentDidUpdate(prevProps: TrendsPageProps) {
+        const { period, onSetTrends } = this.props;
+        if (period !== prevProps.period) {
+            onSetTrends(period);
+        }
+    }
+
     public render() {
         const { category } = this.props.match.params;
         const { trendVariant } = this.props;
 
         return (
             <>
-                <Title>Самое популярное</Title>
+                <TitleWrapper>
+                    <Title>Самое популярное</Title>
+                    <Tabs />
+                </TitleWrapper>
                 <TrendsList variant={trendVariant} category={category}/>
             </>
         );
@@ -29,6 +48,11 @@ class TrendsPage extends Component<TrendsPageProps> {
 
 const mapStateToProps = (state: State) => ({
     trendVariant: state.trendVariant,
+    period: state.period,
 });
 
-export default connect(mapStateToProps)(TrendsPage);
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TrendsPage);

@@ -61,6 +61,7 @@
     }
 
     &-TitleWrapper {
+        flex-wrap: wrap;
         box-sizing: border-box;
         min-height: 50px;
         padding-top: 8px;
@@ -70,13 +71,24 @@
             padding-top: 0;
         }
 
+        @media(min-width: $screen-m) {
+            display: flex;
+        }
+
         &_hidden {
+            display: block;
             opacity: .4;
+
+            .Carousel-Tabs {
+                display: none;
+            }
         }
     }
 
     &-Tabs {
-        margin-left: 35px;
+        @media(min-width: $screen-m) {
+            margin-left: 35px;
+        }
     }
 
     &-Hide {

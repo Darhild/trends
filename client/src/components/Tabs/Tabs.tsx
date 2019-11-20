@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Tabs.scss';
 import { connect } from 'react-redux';
-import { selectPeriod } from './../../store/actions';
+import { State } from '../../store/createStore';
+import { setPeriod } from './../../store/actions';
 
 interface TabsProps {
     className?: string;
-    onClickSelectPeriod: (value: number) => void;
+    period: number;
+    onClickSetPeriod: (value: number) => void;
 }
 
 interface TabsState {
     tabsContent: TabsItem[];
-    activeTab: number;
 }
 
 interface TabsItem {
-    id: number;
     value: number;
     name: string;
 }
@@ -24,34 +24,28 @@ class Tabs extends Component<TabsProps, TabsState> {
     public state = {
         tabsContent: [
             {
-                id: 1,
                 value: 1,
-                name: 'День',
+                name: 'Сегодня',
             },
             {
-                id: 2,
                 value: 7,
                 name: 'Неделю',
             },
             {
-                id: 3,
                 value: 30,
                 name: 'Месяц',
             },
         ],
-        activeTab: 1,
     };
 
-    public handleClick = (id: number, value: number) => {
-        this.setState(() => ({
-                activeTab: id,
-            }));
-        this.props.onClickSelectPeriod(value);
+    public handleClick = (value: number) => {
+        const { onClickSetPeriod } = this.props;
+        onClickSetPeriod(value);
     }
 
     public render() {
-        const { className } = this.props;
-        const { tabsContent, activeTab } = this.state;
+        const { className, period } = this.props;
+        const { tabsContent } = this.state;
         const tabsCn = classnames(
             'Tabs',
             className,
@@ -62,13 +56,13 @@ class Tabs extends Component<TabsProps, TabsState> {
                 {
                     tabsContent.map((tab) => (
                         <div
-                            key={tab.id}
+                            key={tab.value}
                             className={classnames(
                                 'Tabs-Item',
-                                activeTab === tab.id && 'Tabs-Item_state_active',
+                                period === tab.value && 'Tabs-Item_state_active',
                                 )
                             }
-                            onClick={() => {this.handleClick(tab.id, tab.value); }}
+                            onClick={() => {this.handleClick(tab.value); }}
                         >
                             {tab.name}
                         </div>
@@ -79,9 +73,13 @@ class Tabs extends Component<TabsProps, TabsState> {
     }
 }
 
+const mapStateToProps = (state: State) => ({
+    period: state.period,
+});
+
 const mapDispatchToProps = {
-    onClickSelectPeriod: selectPeriod,
+    onClickSetPeriod: setPeriod,
 };
 
-export default connect(null, mapDispatchToProps)(Tabs);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
 

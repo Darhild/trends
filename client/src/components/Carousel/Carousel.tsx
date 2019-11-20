@@ -134,10 +134,10 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 {canBeHidden && <div className="Carousel-Header">
                     <div className={titleCn}>
                         {title && <Title url={url} route={Boolean(routeUrl)}>{title}</Title>}
+                        {tabs && <Tabs className="Carousel-Tabs" />}
                         {isHidden &&
                             <div className="Carousel-HideInfo">Вы скрыли подборку видео из ленты</div>}
                     </div>
-                    {tabs && <Tabs className="Carousel-Tabs" />}
                     <Icon className="Carousel-Hide">
                         {
                             isHidden
