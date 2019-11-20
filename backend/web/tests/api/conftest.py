@@ -68,7 +68,26 @@ def google_data_week():
 
 @pytest.fixture
 def google_data_month():
-    return return_data('tests/data/google/out_google_month.json')
+    with open('tests/data/google/out_google_month.json') as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def mix_data_today():
+    with open('tests/data/mix/out_mix_today.json') as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def mix_data_week():
+    with open('tests/data/mix/out_mix_week.json') as f:
+        return json.load(f)
+
+
+@pytest.fixture
+def mix_data_month():
+    with open('tests/data/mix/out_mix_month.json') as f:
+        return json.load(f)
 
 
 @pytest.fixture(autouse=True)
