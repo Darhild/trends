@@ -4,12 +4,12 @@ from flask import url_for
 
 # TODO: вставить еще tag
 TAGS_FOR_EFIR = [
-        ("blogger", ),
-        ("sport", ),
-        ("movie", ),
-        ("kids", ),
-        ("series", ),
-    ]
+    ("blogger", ),
+    ("sport", ),
+    ("movie", ),
+    ("kids", ),
+    ("series", ),
+]
 
 
 def efir_with_tag(client, period, tag, efir_data):
@@ -35,10 +35,10 @@ def efir_with_tag(client, period, tag, efir_data):
 
 def efir_empty_tag(client, period, efir_data):
     params = {
-            "num_docs": 20,
-            "period": period,
-            "source": "efir",
-        }
+        "num_docs": 20,
+        "period": period,
+        "source": "efir",
+    }
     response = client.get(
         url_for('trends.trends_handler', **params),
     )
