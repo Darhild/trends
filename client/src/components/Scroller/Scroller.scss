@@ -9,6 +9,7 @@
     padding-left: 16px;
     overflow-x: scroll;
     transition: margin-left .25s linear;
+    scrollbar-width: none;
 
     &:after {
         content: '';

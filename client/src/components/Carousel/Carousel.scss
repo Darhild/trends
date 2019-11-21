@@ -10,7 +10,8 @@
         z-index: 0;
         display: flex;
         padding-top: 6px;
-        overflow-x: scroll;        
+        overflow-x: scroll;  
+        scrollbar-width: none;      
     
         @media(max-width: $screen-m) {
             margin-right: -16px;

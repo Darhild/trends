@@ -29,14 +29,17 @@ const renderList = (list: ListProps) =>
 
 const renderCarousel = (list: ListProps) =>
     (
-        <Carousel
-            title={list.title}
-            margin="s"
-            carouselId={list.carousel_id}
-            key={list.carousel_id}
-        >
-        {renderList(list)}
-        </Carousel>
+        <>
+            {!!excludeBannedCards(list.includes).length
+            && <Carousel
+                title={list.title}
+                margin="s"
+                carouselId={list.carousel_id}
+                key={list.carousel_id}
+            >
+                {renderList(list)}
+            </Carousel>}
+        </>
     );
 
 const renderCard = (card: CardProps) =>

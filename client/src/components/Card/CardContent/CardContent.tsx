@@ -69,6 +69,8 @@ const CardContent = ({
         switch (contentType) {
             case 'blogger':
                 return blogersContent;
+            case 'music':
+                return blogersContent;
             case 'trend':
                 return trendContent;
             case 'promo':
