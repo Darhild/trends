@@ -1,5 +1,7 @@
 import { CardProps } from './../types/CardProps';
 
+const formatTime = (time: number) => time < 10 ? `0${time}` : `${time}`;
+
 export function convertTime(duration: number) {
   let minutes = Math.floor(duration / 60);
   const seconds = duration - (minutes * 60);
@@ -8,16 +10,16 @@ export function convertTime(duration: number) {
     const hours = Math.floor(minutes / 60);
     minutes = minutes - (hours * 60);
 
-    return `${hours}:${minutes}:${seconds}`;
+    return `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
   } else if (minutes > 0) {
-    return `${minutes}:${seconds}`;
+    return `${formatTime(minutes)}:${formatTime(seconds)}`;
   }
 
-  return `${seconds}`;
+  return `${formatTime(seconds)}`;
 }
 
 export function dateUtils(date: number) {
-  return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+  return new Date(date * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
 export function excludeBannedCards(cards: CardProps[]) {
