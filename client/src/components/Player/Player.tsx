@@ -56,7 +56,7 @@ const mapStateToProps = (state: State) => {
         return {};
     }
 
-    const content = mainFeed[0].includes[2];
+    const content = mainFeed[0];
 
     return {
         url: content.streams.length && content.streams[0].url,

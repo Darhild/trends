@@ -16,7 +16,7 @@ const categories: Category[] = [
     },
     {
         name: 'Фильмы',
-        value: 'film',
+        value: 'movie',
     },
     {
         name: 'Сериалы',
@@ -28,7 +28,7 @@ const categories: Category[] = [
     },
     {
         name: 'Блогеры',
-        value: 'blogers',
+        value: 'blogger',
     },
     {
         name: 'Спорт',

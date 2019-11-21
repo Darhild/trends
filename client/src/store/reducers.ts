@@ -1,9 +1,7 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
-import { items as seriesFeed } from '../mobile_series.json';
-import { items as blogersFeed } from '../blogers.json';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_MAIN_FEED, SET_TREND_VARIANT, SET_TIME, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_TIME, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
@@ -12,13 +10,10 @@ interface Reducer extends redux.Reducer {
 const defaultState = {
     trends: [],
     main: [],
-    film: seriesFeed,
-    series: seriesFeed,
-    kids: seriesFeed,
-    blogers: blogersFeed,
-    sport: seriesFeed,
-    music: seriesFeed,
-    games: seriesFeed,
+    movie: [],
+    series: [],
+    kids: [],
+    blogger: [],
     channels: channels.map(({
         channel_id,
         computed_title,
@@ -70,11 +65,35 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                 ...state,
                 trends: action.payload,
             };
-        case SET_MAIN_FEED:
-            return {
-                ...state,
-                main: action.payload,
-            };
+        case SET_FEED: {
+            switch (action.tag) {
+                case 'movie':
+                    return {
+                        ...state,
+                        movie: action.payload,
+                    };
+                case 'series':
+                    return {
+                        ...state,
+                        series: action.payload,
+                    };
+                case 'blogger':
+                    return {
+                        ...state,
+                        blogger: action.payload,
+                    };
+                case 'kids':
+                    return {
+                        ...state,
+                        kids: action.payload,
+                    };
+                default:
+                    return {
+                        ...state,
+                        main: action.payload,
+                    };
+            }
+        }
         case SET_ALL_TRENDS_ON_MAIN:
             return {
                 ...state,
