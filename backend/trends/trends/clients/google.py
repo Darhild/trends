@@ -56,11 +56,12 @@ def make_json_response(find_backgrounds=False):
     :return: trends list  from google as json
     """
     trend_getter = RealTrendReq()
-    today_searches_df = trend_getter.today_searches_fine(pn='RU')
+    today_searches_df, date = trend_getter.today_searches_fine(pn='RU')
     if find_backgrounds:
         today_searches_df = add_backgrounds(today_searches_df)
     response = json.dumps(
-        {'data': today_searches_df},
+        {'data': today_searches_df,
+         'date': date},
         ensure_ascii=False)
     return response
 
