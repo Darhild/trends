@@ -23,7 +23,7 @@ def setup_logging(path=os.path.join(CURRENT_DIR, 'logging.yaml')):
         logging.basicConfig(level=logging.INFO)
 
 
-def create_app(db_url, is_start_get_trends=True):
+def create_app(is_start_get_trends=True):
     setup_logging()
     logger = logging.getLogger("trends")
     logger.debug("About to create service trends")
@@ -33,8 +33,6 @@ def create_app(db_url, is_start_get_trends=True):
     except Exception as e:
         logger.critical("Can't create service due to %s:", e)
         raise
-
-    # app.db = create_engine(db_url) #do we need db at all here?
     app.register_blueprint(trends, url_prefix='/')
 
     try:
@@ -50,10 +48,5 @@ def create_app(db_url, is_start_get_trends=True):
 
 
 if __name__ == '__main__':
-    # export DATABASE_URL=postgresql://me:hackme@0.0.0.0/trends
-    # run db
-    # docker run  --rm -e POSTGRES_DB=trends -e POSTGRES_USER=me -e POSTGRES_PASSWORD=hackme -p 5432:5432 postgres:10.7
-    # print('DATABASE_URL', os.environ['DATABASE_URL'])
-
-    app = create_app(None)  # os.environ['DATABASE_URL'])
+    app = create_app()  # os.environ['DATABASE_URL'])
     app.run(host='0.0.0.0', port=8080)
