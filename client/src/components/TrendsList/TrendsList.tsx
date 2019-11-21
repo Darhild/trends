@@ -21,6 +21,7 @@ class TrendsList extends Component<Props> {
         const cn = classnames(
             'TrendsList',
             variant && `TrendsList_variant_${variant}`,
+            shortVariant && 'TrendsList_state_short',
         );
 
         const items = shortVariant ? trends.slice(0, 5) : trends;

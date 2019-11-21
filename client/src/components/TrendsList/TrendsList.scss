@@ -36,6 +36,25 @@ $_: '.TrendsList';
         }
     }
 
+    &_state_short {
+
+        #{$_}-Item {
+            @media(min-width: $screen-s) {
+
+                &:nth-child(n+5) {
+                    display: none;
+                }
+            }
+
+            @media(min-width: $screen-l) {
+
+                &:nth-child(n+4) {
+                    display: none;
+                }
+            }
+        }
+    }
+
     &-Item {
         margin-bottom: 8px;
 
