@@ -13,18 +13,9 @@ class RealTrendReq(TrendReq):
             number *= 1000
         return number
 
-    def today_searches_fine(self, pn='RU'):
-        """Requests data from Google Daily Trends section for daily trends
-        Returns list of dicts of trends for current date"""
+    def parse_day(self, req_json):
         trends_list = list()
         keys = ('title', 'avatar', 'description', 'day')
-        forms = {'ns': 15, 'geo': pn, 'tz': '-180', 'hl': 'en-US'}
-        req_json = self._get_data(
-            url=TrendReq.TODAY_SEARCHES_URL,
-            method=TrendReq.GET_METHOD,
-            trim_chars=5,
-            params=forms
-        )['default']['trendingSearchesDays'][0]
         date = req_json['date']
         trends = req_json['trendingSearches']
         for trend in trends:
@@ -41,7 +32,21 @@ class RealTrendReq(TrendReq):
                 description = ""
             record = (title, avatar, description, rating)
             trends_list.append(dict(zip(keys, record)))
-        return trends_list
+        return trends_list, date
+
+    def today_searches_fine(self, pn='RU'):
+        """Requests data from Google Daily Trends section for daily trends
+        Returns list of dicts of trends for current date"""
+
+        forms = {'ns': 15, 'geo': pn, 'tz': '-180', 'hl': 'en-US'}
+        req_json = self._get_data(
+            url=TrendReq.TODAY_SEARCHES_URL,
+            method=TrendReq.GET_METHOD,
+            trim_chars=5,
+            params=forms
+        )['default']['trendingSearchesDays'][0]
+        data, date = self.parse_day(req_json)
+        return data, date
 
 
-cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
+cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 86400})

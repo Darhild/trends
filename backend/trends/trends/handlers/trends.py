@@ -20,6 +20,6 @@ def import_trends():
     if json is not None:
         response = Response(response=json, status=200, mimetype="application/json")
     else:
-        response = Response(response="Cache is empty", status=400)
+        response = Response(response="Cache is empty", status=202)
     logger.debug("Send to user %s", response)
     return response

@@ -19,7 +19,7 @@ def test_get_trends_mock_cache_good(mock_get, client, trends_json):
 def test_get_trends_mock_cache_bad(mock_get, client):
     mock_get.return_value = None
     resp = client.get(url_for('trends.import_trends'))
-    assert resp.status_code == 400
+    assert resp.status_code == 202
 
 
 def test_get_trends_using_cache_good(client, trends_json):
@@ -33,7 +33,7 @@ def test_get_trends_using_cache_good(client, trends_json):
 
 def test_get_trends_using_cache_bad(client):
     resp = client.get(url_for('trends.import_trends'))
-    assert resp.status_code == 400
+    assert resp.status_code == 202
 
 
 @patch('trends.clients.google.make_json_response')
