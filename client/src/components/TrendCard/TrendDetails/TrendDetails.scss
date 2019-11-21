@@ -1,3 +1,4 @@
+@import './../../../variables.scss';
 $_: '.TrendDetails';
 
 .TrendDetails {
@@ -30,6 +31,17 @@ $_: '.TrendDetails';
     .OneTrendPage_TrendCard & {
         bottom: 25px;
         padding-left: 16px;
+
+        @media(min-width: $screen-m) {
+            top: 210px;
+            display: flex;
+            align-items: center;
+            padding-left: 38px;
+
+            #{$_}-Caption {
+                display: none;
+            }
+        }
     }
 
     &-Label {
@@ -53,6 +65,10 @@ $_: '.TrendDetails';
             display: block;
             height: 32px;
             margin-bottom: 9px;
+
+            @media(min-width: $screen-m) {
+                height: 72px;
+            }
         }
     }
 
@@ -64,10 +80,22 @@ $_: '.TrendDetails';
         .OneTrendPage_TrendCard & {
             font-size: 16px;
             line-height: 20px;
+
+            @media(min-width: $screen-m) {
+                font-size: 20px;
+                line-height: 24px;
+            }
         }
     }
 
     &-Count {
         color: var(--text-gray);
+
+        @media(min-width: $screen-m) {
+            font-size: 14px;
+            line-height: 20px;
+            color: var(--text-primary);
+            opacity: .3;
+        }
     }
 }

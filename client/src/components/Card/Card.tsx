@@ -17,7 +17,8 @@ export default class Card extends Component<CardProps> {
             this.props.className,
             content_type === 'vod' && 'Card_width_full',
             content_type === 'blogger' && 'Card_width_medium',
-            content_type === 'trend' && 'Card_width_full',
+            content_type === 'trend' && ['Card_width_full', 'Card_type_trend'],
+            content_type === 'promo' && ['Card_width_big', 'Card_type_trend'],
             (content_type === 'series' || content_type === 'movie') && 'Card_width_small',
         );
 

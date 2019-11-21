@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { CardContentProps } from './../../../types/CardProps';
 import { dateUtils } from './../../../utils';
 import { ReactComponent as Like } from './../../../images/svg/like.svg';
@@ -70,13 +71,17 @@ const CardContent = ({
                 return blogersContent;
             case 'trend':
                 return trendContent;
+            case 'promo':
+                return trendContent;
             default:
                 return seriesContent;
         }
     };
 
+    const cnContent = classnames('Card-Content', `Card-Content_type_${content_type}`);
+
     return (
-        <div className="Card-Content" >
+        <div className={cnContent} >
             {content(content_type)}
         </div>
     );

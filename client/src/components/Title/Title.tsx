@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import './Title.scss';
 
 interface TitleProps {
+    cn?: string;
     url?: string;
     route?: boolean;
 }
 
 export default class Title extends Component<TitleProps> {
     public render() {
-        const { url, route, children } = this.props;
-        const content = <div className="Title">{children}</div>;
+        const { cn, url, route, children } = this.props;
+        const cnTitle = classnames('Title', cn);
+        const content = <div className={cnTitle}>{children}</div>;
 
         if (url) {
             return route
