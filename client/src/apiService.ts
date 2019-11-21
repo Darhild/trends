@@ -6,5 +6,9 @@ const api = (path: string) => axios.get(path)
 
 export const fetchTrends = () => api('/api/trends');
 
-export const fetchMainFeed = () => api('/api/feed')
-    .then((res: any) => res.data.items);
+export const fetchFeed = (tag: string) => {
+    const url = (tag === 'main') ? '/api/feed?limit=50' : `/api/feed?tag=${tag}&limit=50`;
+
+    return api(url)
+        .then((res: any) => res.data.items);
+};

@@ -1,5 +1,5 @@
-import { fetchTrends, fetchMainFeed } from '../apiService';
-import { setTrends, setMainFeed } from './actions';
+import { fetchTrends, fetchFeed } from '../apiService';
+import { setTrends, setFeed } from './actions';
 import { Dispatch } from './createStore';
 import { mapTrends } from '../utils/mappers';
 
@@ -9,11 +9,11 @@ export const setTrendsThunk = () =>
         .then((trends: any) => dispatch(setTrends(trends)))
         .catch(() => []);
 
-export const setMainFeedThunk = () =>
-    (dispatch: Dispatch) => fetchMainFeed()
+export const setFeedThunk = (tag: string) =>
+    (dispatch: Dispatch) => fetchFeed(tag)
         .then((feed: any) => {
             if (feed) {
-                dispatch(setMainFeed(feed));
+                dispatch(setFeed(feed, tag));
             }
         })
         .catch(() => []);

@@ -4,7 +4,7 @@ import Carousel from '../Carousel/Carousel';
 import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import { State, Dispatch } from '../../store/createStore';
-import { setMainFeedThunk } from '../../store/thunks';
+import { setFeedThunk } from '../../store/thunks';
 import { CardProps } from './../../types/CardProps';
 import { ListProps, ListCardProps } from './../../types/ListCardProps';
 import { excludeBannedCards } from './../../utils';
@@ -15,7 +15,7 @@ interface OwnProps {
 
 interface StateProps {
     content: ListCardProps[];
-    onInitMainFeed(): void;
+    onInitFeed(tag: string): void;
 }
 
 type FeedContainerProps = OwnProps & StateProps;
@@ -48,10 +48,14 @@ const renderCard = (card: CardProps) =>
 
 class FeedContainer extends Component<FeedContainerProps> {
     public componentDidMount() {
-        const { category, onInitMainFeed } = this.props;
+        const { category, onInitFeed } = this.props;
+        onInitFeed(category);
+    }
 
-        if (category === 'main') {
-            onInitMainFeed();
+    public componentDidUpdate(prevProps: FeedContainerProps) {
+        const { category, onInitFeed } = this.props;
+        if (category !== prevProps.category) {
+            onInitFeed(category);
         }
     }
 
@@ -74,7 +78,8 @@ const mapStateToProps = (state: State, ownProps: OwnProps) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onInitMainFeed: () => dispatch(setMainFeedThunk()),
+    onInitFeed: (tag: string) => dispatch(setFeedThunk(tag)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer);
