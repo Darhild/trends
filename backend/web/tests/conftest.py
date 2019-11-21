@@ -6,7 +6,7 @@ import pytest
 from alembic.command import upgrade as upgrade_command
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
-from sqlalchemy_utils import create_database, drop_database
+from sqlalchemy_utils import create_database, drop_database, database_exists
 from yarl import URL
 
 from trends.utils.testing import get_alembic_config
@@ -23,7 +23,8 @@ DATABASE_URL = os.getenv(
 def temp_db() -> str:
     tmp_db_name = '.'.join(['pytest'])
     tmp_db_url = str(URL(DATABASE_URL).with_path(tmp_db_name))
-    drop_database(tmp_db_url)
+    if database_exists(tmp_db_url):
+        drop_database(tmp_db_url)
     create_database(tmp_db_url)
     try:
         yield tmp_db_url

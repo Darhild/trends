@@ -19,16 +19,16 @@
   ],
   "blogger": [
     {
-      "id": "ChFoaGJkYXdrYWtjb211ZXFoaBIDYWxsGgdibG9nZ2VyIAE=",
-      "title": "Блогеры",
+      "id": "ChJoaHVlb3R5c3B5bnphYXBjaGgSA2FsbBoOdWdjX3RoZW1lX2F2dG8gAQ==",
+      "title": "Автомобили",
       "avatar": "",
       "bg": "",
       "source": "efir",
       "description": ""
     },
     {
-      "id": "ChJoaHVlb3R5c3B5bnphYXBjaGgSA2FsbBoOdWdjX3RoZW1lX2F2dG8gAQ==",
-      "title": "Автомобили",
+      "id": "ChFoaGJkYXdrYWtjb211ZXFoaBIDYWxsGgdibG9nZ2VyIAE=",
+      "title": "Блогеры",
       "avatar": "",
       "bg": "",
       "source": "efir",
@@ -55,19 +55,19 @@
   ],
   "movie": [
     {
-      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
-      "title": "Зарубежные драмы",
+      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
+      "title": "Новинки кино",
+      "source": "efir",
       "avatar": "",
       "bg": "",
-      "source": "efir",
       "description": ""
     },
     {
-      "id": "ChJoaGxsZW9lcWFlYnlnc2NjaGgSA2FsbBofbW92aWUmeWVhcl9yZWNlbnQmcG9zdGVyX2V4aXN0cyAB",
-      "title": "Новинки кино",
+      "id": "ChJoaGFvdHVoYWpsbmZ6Y2piaGgSA2FsbBpmZW50aXR5X2xzdF9zbG1DajRLQkhSbGVIUVNObk5mWTI5MWJuUnllVHBtYjNKbGFXZHVJQ1ltSUhOZloyVnVjbVU2Wm1sc2JTQW1KaUJ6WDJkbGJuSmxPbkoxZHpnd056TTNOQT09IAE=",
+      "title": "Зарубежные драмы",
+      "source": "efir",
       "avatar": "",
       "bg": "",
-      "source": "efir",
       "description": ""
     }
   ],

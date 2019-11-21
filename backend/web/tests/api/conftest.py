@@ -2,8 +2,13 @@ import json
 import datetime
 import pytest
 
+from sqlalchemy import MetaData
+
 from trends.app import create_app
-from trends.models.trends import content_table, trend_table
+from trends.models.trends import content_table, trend_table, Base
+
+
+trends_metadata = Base.metadata
 
 
 def insert_efir_in_db(temp_migrated_db_engine, file, date):
@@ -28,6 +33,11 @@ def insert_google_in_db(temp_migrated_db_engine, file, date):
                 "created_at": date
             }
             conn.execute(trend_table.insert(), **data)
+
+
+def clear_database_content(temp_migrated_db_engine, table):
+    with temp_migrated_db_engine.begin() as conn:
+        conn.execute(table.delete())
 
 
 @pytest.fixture
@@ -130,3 +140,20 @@ def insert_google_data_second_week(temp_migrated_db_engine):
     date = datetime.datetime.now() - datetime.timedelta(days=8)
     file = 'tests/data/google/input_google_second_week.json'
     insert_google_in_db(temp_migrated_db_engine, file=file, date=date)
+
+
+@pytest.fixture()
+def clear_efir_table_in_db(temp_migrated_db_engine):
+    clear_database_content(temp_migrated_db_engine, content_table)
+
+
+@pytest.fixture()
+def clear_google_table_in_db(temp_migrated_db_engine):
+    clear_database_content(temp_migrated_db_engine, trend_table)
+
+
+@pytest.fixture()
+def clear_mix_table_in_db(temp_migrated_db_engine):
+    clear_database_content(temp_migrated_db_engine, trend_table)
+    clear_database_content(temp_migrated_db_engine, content_table)
+
