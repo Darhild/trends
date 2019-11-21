@@ -15,24 +15,26 @@ from comment_trends.external_api.carousel import CarouselRequest
 from comment_trends.external_api.theme import ThemeRequest
 from comment_trends.external_api.collection import CollectionRequest
 
-cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 0})
+cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 86400})
 
 # TODO вынести в конфиг
-config = {'offset': 0, 'limit': 2, 'num_docs': 2}
+config = {'offset': 0, 'limit': 10, 'num_docs': 50}
 tags = {"movie", "series", "kids", "sport", "blogger", "common"}
 
 
-def get_trends_cached():
-    return cache.get('data')
+def get_trends_cached(field='data'):
+    return cache.get(field)
 
 
 def compute_trends():
     data = {}
     for tag in tags:
         result = get_sorted_trends(tag)
-        data[f'{tag}'] = result
+        if result:
+            data[f'{tag}'] = result
 
-    cache.set('data', json.dumps(data, ensure_ascii=False))
+    if data:
+        cache.set('data', json.dumps(data, ensure_ascii=False))
 
 
 def get_sorted_trends(tag):
@@ -49,10 +51,11 @@ def sort_themes(themes):
     sorted_themes = sorted(themes.items(), key=lambda x: x[1], reverse=True)
     theme_trends = []
     # TODO добавить поле video_count по release date
+    used_avatars = set()
     for (theme_id, theme_title), count in sorted_themes:
         theme_info = get_theme_info(theme_id)
         # как вариант можно обрезать исходный постер из theme_info или использовать картинки в поиске
-        avatar = get_theme_avatar(theme_id)
+        avatar = get_theme_avatar(theme_id, used_avatars)
         theme_trends.append({
             'id': theme_id,
             'title': theme_title,
@@ -65,10 +68,11 @@ def sort_themes(themes):
     return theme_trends
 
 
-def get_theme_avatar(theme_id):
-    response = CollectionRequest.get_response(collection_id=theme_id, offset=0, limit=2)
-    avatar = response.get_avatar()
+def get_theme_avatar(theme_id, used_avatars):
+    response = CollectionRequest.get_response(collection_id=theme_id, offset=0, limit=20)
+    avatar = response.get_avatar(used_avatars)
     if avatar:
+        used_avatars.add(avatar)
         return 'https:' + avatar
     else:
         return ""
@@ -79,6 +83,11 @@ def sort_documents(docs):
     sorted_docs = sorted(docs[0].items(), key=lambda x: x[1], reverse=True)
     for doc_id, doc_count in sorted_docs:
         document_trends.append({'id': doc_id,
+                                'title': '',
+                                'duration': '',
+                                'release_date_ut': '',
+                                'onto_poster': '',
+                                'thumbnail': '',
                                 'data': docs[1][doc_id]})
 
     return document_trends
@@ -108,11 +117,11 @@ def get_documents_from_carousel(carousel_id, feed_params):
 
 
 def get_comments(documents):
-    # TODO получить текст топового комментария
     doc_to_comments = dict()
     for doc_id in documents:
         response = CommentsRequest.get_response(doc_id)
         doc_to_comments[doc_id] = response.get_timestamps()
+        documents[doc_id]['comment'] = response.get_top_comment_text()
     return doc_to_comments
 
 

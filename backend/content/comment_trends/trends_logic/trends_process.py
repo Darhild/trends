@@ -2,8 +2,8 @@ from comment_trends.trends_logic.trends import compute_trends
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 
-REQUEST_INTERVAL = 15
-REQUEST_JITTER = 120
+REQUEST_INTERVAL = 120
+REQUEST_JITTER = 300
 
 
 def start_get_trends():

@@ -56,4 +56,5 @@ class PlayerData:
 if __name__ == '__main__':
     pr = PlayerRequest()
     result = pr.get_response("4a63d9633de4bf3b8ffe7871ba780e34")
+    pprint(result.response.json())
     pprint(result.get_themes())

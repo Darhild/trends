@@ -1,5 +1,5 @@
 from flask import Blueprint, Response
-from comment_trends.trends_logic.trends import get_trends_cached, tags
+from comment_trends.trends_logic.trends import get_trends_cached
 
 comment_trends = Blueprint('comment_trends', __name__)
 
@@ -11,4 +11,14 @@ def import_trends():
     if json is not None:
         return Response(response=json, status=200)
     else:
-        return Response(response="Cache is empty", status=400)
+        return Response(response="Cache is empty", status=202)
+
+
+@comment_trends.route('/fetch/documents', methods=['GET'])
+def import_document_trends():
+
+    json = get_trends_cached(field='documents')
+    if json is not None:
+        return Response(response=json, status=200)
+    else:
+        return Response(response="Cache is empty", status=202)

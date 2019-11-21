@@ -1,4 +1,5 @@
 import requests
+from requests import Response, ConnectionError
 from pprint import pprint
 from json import JSONDecodeError
 import logging
@@ -50,7 +51,13 @@ class CarouselsRequest:
         if cache_hash:
             params["cache_hash"] = cache_hash
 
-        response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+        try:
+            response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+        except ConnectionError:
+            response = Response()
+            carousels_logger.warning('Порвано соединение с ручкой carousels')
+            response.status_code = 500
+
         return CarouselsData(response)
 
 

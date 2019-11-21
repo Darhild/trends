@@ -74,24 +74,31 @@ class CollectionData:
         except KeyError:
             return ''
 
-    def get_avatar(self):
+    def _get_items(self):
+        try:
+            items = self.response_data['set']
+            return items
+        except (TypeError, KeyError, IndexError):
+            return []
+
+    def get_avatar(self, used_avatars):
+        items = self._get_items()
         avatar = ""
-        if not self.response_data:
+
+        if not items:
             return avatar
 
-        # thumbnail or onto_poster
-        try:
-            first_item = self.response_data['set'][0]
-            avatar = first_item['onto_poster']
-        except (TypeError, KeyError, IndexError):
-            pass
-
-        if not avatar:
+        for item in items:
             try:
-                first_item = self.response_data['set'][0]
-                avatar = first_item['thumbnail']
+                avatar = item['onto_poster']
             except (TypeError, KeyError, IndexError):
-                pass
+                try:
+                    avatar = item['thumbnail']
+                except (TypeError, KeyError, IndexError):
+                    pass
+
+            if avatar and avatar not in used_avatars:
+                break
 
         return avatar
 

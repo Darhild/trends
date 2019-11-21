@@ -44,11 +44,11 @@ class CarouselRequest:
                        "limit": f"{limit}",
                        "carousel_id": f"{carousel_id}"})
 
-        # TODO обернуть в блок try когда будет известен вид исключения
         try:
             response = requests.request("GET", cls.url, headers=cls.headers, params=params)
         except ConnectionError:
             response = Response()
+            carousel_logger.warning('Порвано соединение с ручкой carousel')
             response.status_code = 500
 
         return CarouselData(response)
