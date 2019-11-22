@@ -32,13 +32,15 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
         const firstVideos = videos && videos.slice(0, 3);
         const lastVideos = videos && videos.slice(3);
 
-        const renderCard = (vod: Vod) => (
+        const renderCard = (vod: Vod, size: string) => (
             <Card
                 content_id={vod.content_id}
+                key={vod.content_id}
                 {...getCardContent(vod)}
-                size="full"
-                background="none"
-                title={<b>{vod.title}</b>}
+                size={size}
+                bgColor="none"
+                imgView="noClipped"
+                title={<b>{vod.computed_title}</b>}
             />
         );
 
@@ -47,14 +49,14 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                 <div className="OneTrendPage-Promo">
                     {
                         firstVideos.map((vod) => (
-                            <div className="OneTrendPage-Item">{renderCard(vod)}</div>
+                            <div className="OneTrendPage-Item">{renderCard(vod, 'big')}</div>
                         ))
                     }
                 </div>
                 <div className="OneTrendPage-List">
                     {
                         lastVideos.map((vod) => (
-                            <div className="OneTrendPage-Item">{renderCard(vod)}</div>
+                            <div className="OneTrendPage-Item">{renderCard(vod, 'full')}</div>
                         ))
                     }
                 </div>
