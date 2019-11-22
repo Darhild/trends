@@ -21,7 +21,7 @@ interface CarouselProps {
     canBeHidden: boolean;
     children: unknown;
     className?: string;
-    tabs?: boolean;
+    tabs?: React.ReactNode;
 }
 
 interface CarouselState {
@@ -134,7 +134,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 {canBeHidden && <div className="Carousel-Header">
                     <div className={titleCn}>
                         {title && <Title url={url} route={Boolean(routeUrl)}>{title}</Title>}
-                        {tabs && <Tabs className="Carousel-Tabs" />}
+                        {tabs}
                         {isHidden &&
                             <div className="Carousel-HideInfo">Вы скрыли подборку видео из ленты</div>}
                     </div>

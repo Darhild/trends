@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
 import Tabs from '../../components/Tabs/Tabs';
+import tabsContent from './../../tabsContent';
 import TrendsList from '../../components/TrendsList/TrendsList';
 import { State, Dispatch } from '../../store/createStore';
 import { setTrendsThunk } from '../../store/thunks';
+import { setPeriod } from './../../store/actions';
 
 interface TrendsPageProps extends RouteComponentProps<TParam> {
     trendVariant: string;
     period: number;
     onSetTrends(period?: number): void;
+    onTabClickSetPeriod(period: number): void;
 }
 
 interface TParam {
@@ -32,13 +35,18 @@ class TrendsPage extends Component<TrendsPageProps> {
 
     public render() {
         const { category } = this.props.match.params;
-        const { trendVariant } = this.props;
+        const { trendVariant, period, onTabClickSetPeriod } = this.props;
 
         return (
             <>
                 <div className="TitleWrapper">
                     <Title cn="TitleWrapper-Item">Самое популярное</Title>
-                    <Tabs className="TitleWrapper-Item" />
+                    <Tabs
+                        className="TitleWrapper-Item"
+                        period={period}
+                        tabsContent={tabsContent}
+                        onTabClickSetValue={onTabClickSetPeriod}
+                    />
                 </div>
                 <TrendsList variant={trendVariant} category={category}/>
             </>
@@ -53,6 +61,7 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrendsPage);

@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Tabs.scss';
-import { connect } from 'react-redux';
-import { State } from '../../store/createStore';
-import { setPeriod } from './../../store/actions';
 
 interface TabsProps {
     className?: string;
     period: number;
-    onClickSetPeriod: (value: number) => void;
+    tabsContent: TabsItem[];
+    onTabClickSetValue: (value: number) => void;
 }
 
 interface TabsState {
-    tabsContent: TabsItem[];
+    activeTabValue: number;
 }
 
 interface TabsItem {
@@ -22,30 +20,19 @@ interface TabsItem {
 
 class Tabs extends Component<TabsProps, TabsState> {
     public state = {
-        tabsContent: [
-            {
-                value: 1,
-                name: 'Сегодня',
-            },
-            {
-                value: 7,
-                name: 'Неделю',
-            },
-            {
-                value: 30,
-                name: 'Месяц',
-            },
-        ],
+        activeTabValue: this.props.period,
     };
 
-    public handleClick = (value: number) => {
-        const { onClickSetPeriod } = this.props;
-        onClickSetPeriod(value);
+    public onTabClick = (value: number) => {
+        const { onTabClickSetValue } = this.props;
+        this.setState({
+            activeTabValue: value,
+        });
+        onTabClickSetValue(value);
     }
 
     public render() {
-        const { className, period } = this.props;
-        const { tabsContent } = this.state;
+        const { className, period, tabsContent } = this.props;
         const tabsCn = classnames(
             'Tabs',
             className,
@@ -62,7 +49,7 @@ class Tabs extends Component<TabsProps, TabsState> {
                                 period === tab.value && 'Tabs-Item_state_active',
                                 )
                             }
-                            onClick={() => this.handleClick(tab.value) }
+                            onClick={() => this.onTabClick(tab.value) }
                         >
                             {tab.name}
                         </div>
@@ -73,13 +60,5 @@ class Tabs extends Component<TabsProps, TabsState> {
     }
 }
 
-const mapStateToProps = (state: State) => ({
-    period: state.period,
-});
-
-const mapDispatchToProps = {
-    onClickSetPeriod: setPeriod,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tabs);
+export default Tabs;
 

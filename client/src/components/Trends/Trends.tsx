@@ -6,8 +6,10 @@ import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
 import Title from './../Title/Title';
 import Tabs from './../Tabs/Tabs';
+import tabsContent from './../../tabsContent';
 import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
+import { setPeriod } from './../../store/actions';
 import TrendsList from '../TrendsList/TrendsList';
 
 interface TrendsProps {
@@ -17,6 +19,7 @@ interface TrendsProps {
     category: string;
     period: number;
     onSetTrends(period?: number): void;
+    onTabClickSetPeriod(period: number): void;
 }
 
 class Trends extends Component<TrendsProps> {
@@ -33,12 +36,21 @@ class Trends extends Component<TrendsProps> {
     }
 
     public renderItems = () => {
-        const { trends, category, trendVariant, allTrendsOnMain } = this.props;
+        const { trends, category, trendVariant, allTrendsOnMain, period, onTabClickSetPeriod } = this.props;
         const url = `/${category}/trends`;
+
+        const trendsTabs = (
+            <Tabs
+                className="Carousel-Tabs"
+                period={period}
+                tabsContent={tabsContent}
+                onTabClickSetValue={onTabClickSetPeriod}
+            />
+        );
 
         if (allTrendsOnMain) {
             return (
-                <Carousel title="Самое популярное" margin="s" tabs>
+                <Carousel title="Самое популярное" margin="s" tabs={trendsTabs}>
                     {
                         trends.map((props, index) => (
                             <Link className="Trends-Link" to={`${url}/${index + 1}`}>
@@ -54,13 +66,17 @@ class Trends extends Component<TrendsProps> {
             <>
                 <div className="TitleWrapper">
                     <Title cn="TitleWrapper-Item">Самое популярное</Title>
-                    <Tabs className="TitleWrapper-Item"/>
+                    <Tabs
+                        className="TitleWrapper-Item"
+                        period={period}
+                        tabsContent={tabsContent}
+                        onTabClickSetValue={onTabClickSetPeriod}
+                    />
                 </div>
                 <TrendsList category={category} variant={trendVariant} shortVariant />
             </>
         );
     }
-
 
     public render() {
         const { category } = this.props;
@@ -83,6 +99,7 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trends);
