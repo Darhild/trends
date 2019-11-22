@@ -9,10 +9,11 @@ export interface Props {
     rightContent?: React.ReactNode;
     className?: string;
     img?: string;
+    imgView?: string;
     size?: string;
     content_id: string;
     poster?: string;
-    background?: string;
+    bgColor?: string;
 }
 
 const changeImageSize = (image: string | undefined) => image && image.replace(/\/orig/, '/400x300');
@@ -49,16 +50,22 @@ export default class Card extends Component<Props> {
             size = 'medium',
             content_id,
             img,
+            imgView,
             details,
             poster,
-            background,
+            bgColor,
         } = this.props;
 
         const cardCn = classnames(
             'Card',
             `Card_size_${size}`,
-            background && `Card_bg_${background}`,
+            bgColor && `Card_bgColor_${bgColor}`,
             className,
+        );
+
+        const thumbCn = classnames(
+            'Card-Thumb',
+            imgView && `Card-Thumb_view_${imgView}`,
         );
 
         return (
@@ -68,7 +75,10 @@ export default class Card extends Component<Props> {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <div className="Card-Thumb" style={{ backgroundImage: img ? `url(${changeImageSize(img)})` : '' }}>
+                <div
+                    className={thumbCn}
+                    style={{ backgroundImage: img ? `url(${changeImageSize(img)})` : '' }}
+                >
                     {
                         poster && <img src={changeImageSize(poster)} className="Card-Poster" alt="" />
                     }
