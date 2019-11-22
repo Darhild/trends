@@ -1,19 +1,25 @@
 import React from 'react';
 import { ReactComponent as Like } from '../../images/svg/like.svg';
 import { ReactComponent as Next } from '../../images/svg/next.svg';
-import { State } from '../../store/createStore';
-import { connect } from 'react-redux';
 import './Player.scss';
 
 
 interface PlayerProps {
     url?: string;
-    preview: string;
-    title: string;
-    blogger: any;
+    preview?: string;
+    title?: string;
+    blogger?: any;
 }
 
 class Player extends React.Component<PlayerProps> {
+    public static defaultProps = {
+        url: 'https://strm.yandex.ru/vh-ott-converted/ott-content/481883744-4279c3b744c498bbb5beedf09a8debcf/master_quality.m3u8',
+        // tslint:disable-next-line:max-line-length
+        preview: '//avatars.mds.yandex.net/get-vh/175796/13996069488215590475-ZFAyqdyKUVMfn2k2elQJAA-1528154905/400x300',
+        title: 'Области тьмы',
+        blogger: '',
+    };
+
     public render() {
         const { url, preview, title, blogger } = this.props;
         if (!url) {
@@ -50,20 +56,4 @@ class Player extends React.Component<PlayerProps> {
     }
 }
 
-const mapStateToProps = (state: State) => {
-    const mainFeed = state.main;
-    if (!mainFeed.length) {
-        return {};
-    }
-
-    const content = mainFeed[0];
-
-    return {
-        url: content.streams.length && content.streams[0].url,
-        preview: content.thumbnail,
-        blogger: content.blogger,
-        title: content.title,
-    };
-};
-
-export default connect(mapStateToProps)(Player);
+export default Player;
