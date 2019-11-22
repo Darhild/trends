@@ -7,7 +7,6 @@ import { ReactComponent as Close } from '../../images/svg/close.svg';
 import { ReactComponent as Undo } from '../../images/svg/undo.svg';
 import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
 import Icon from '../Icon/Icon';
-import Tabs from './../Tabs/Tabs';
 import './Carousel.scss';
 
 const SCROLL_SIZE = 400;

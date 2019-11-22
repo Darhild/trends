@@ -50,7 +50,7 @@ class Trends extends Component<TrendsProps> {
 
         if (allTrendsOnMain) {
             return (
-                <Carousel title="Самое популярное" margin="s" tabs={trendsTabs}>
+                <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
                         trends.map((props, index) => (
                             <Link className="Trends-Link" to={`${url}/${index + 1}`}>
@@ -64,7 +64,7 @@ class Trends extends Component<TrendsProps> {
 
         return (
             <>
-                <Title cn="Trends-Title">Самое популярное</Title>
+                <Title cn="Trends-Title" url={url}>Самое популярное</Title>
                 <Tabs
                     period={period}
                     tabsContent={tabsContent}
