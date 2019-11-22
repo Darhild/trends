@@ -72,9 +72,9 @@ class SettingsPage extends Component<SettingProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-    allTrendsOnMain: state.allTrendsOnMain,
-    trendVariant: state.trendVariant,
-    source: state.source,
+    allTrendsOnMain: state.settings.allTrendsOnMain,
+    trendVariant: state.settings.trendVariant,
+    source: state.settings.source,
 });
 
 const mapDispatchToProps = {

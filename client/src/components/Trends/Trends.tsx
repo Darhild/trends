@@ -99,11 +99,11 @@ class Trends extends Component<TrendsProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-    allTrendsOnMain: state.allTrendsOnMain,
-    trendVariant: state.trendVariant,
+    allTrendsOnMain: state.settings.allTrendsOnMain,
+    trendVariant: state.settings.trendVariant,
     trends: state.trends,
-    period: state.period,
-    source: state.source,
+    period: state.settings.period,
+    source: state.settings.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
