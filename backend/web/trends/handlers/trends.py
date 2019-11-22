@@ -6,7 +6,7 @@ from trends.models.trends_repo import Repository
 from trends.utils.feed_request import FeedRequest
 from trends.utils.collection_request import CollectionRequest
 from trends.utils.get_db_environ import get_environ_or_default
-from trends.utils.trend_request import handle_trends_request
+from trends.utils.trend_request import handle_trends_request, handle_videos_request
 
 from trends.handlers.trends_algs import sort, sort_and_limit, merge
 from random import shuffle
@@ -57,6 +57,30 @@ def trends_handler():
 
     except Exception as e:
         abort(500, str(e))  # не очень секьюрно
+
+
+@trends.route('/api/trends/videos', methods=['GET'])
+def videos_handler():
+    tag, num_docs, period = handle_videos_request(request)
+    print(tag, num_docs, period)
+
+    try:
+        logging.getLogger(__name__).info("New request, tag:{0}, num_docs:{1}, period:{2}".
+                                         format(tag, num_docs, period))
+
+        # repo = Repository(current_app.db)
+        with open('mock_videos.json') as f:
+            resp = json.load(f)['data']
+        # if tag is None:
+        #      resp = sort_and_limit(repo.read_videos(period, "common"), num_docs)
+        # else:
+        #     resp = sort_and_limit(repo.read_videos(period, tag), num_docs)
+        shuffle(resp)
+        return Response(response=json.dumps({"data": resp}, ensure_ascii=False),
+                        status=200, mimetype='application/json')
+
+    except Exception as e:
+        abort(500, str(e))
 
 
 @trends.route('/api/feed', methods=['GET'], )

@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": "ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB",
+      "title": "Какой то заголовок",
+      "duration": "256",
+      "release_date_ut": "",
+      "onto_poster": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
+      "thumbnail": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
+      "comment": "Какой-то коммент",
+      "comment_count": "125"
+    },
+    {
+      "id": "ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB",
+      "title": "Еще акой то заголовок",
+      "duration": "256",
+      "release_date_ut": "",
+      "onto_poster": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
+      "thumbnail": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_DET.png",
+      "comment": "Еще какой-то коммент",
+      "comment_count": "189"
+    }
+  ]
+}

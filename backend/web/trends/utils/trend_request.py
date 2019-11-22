@@ -11,13 +11,11 @@ def parameter_to_int(param, param_name):
     return param
 
 
-def handle_trends_request(request):
-    # непонятно проверять ли тэг на соотвествие списку тэгов
-    # или возврщаеть пустой ответ в случае несуществующего тэга
+def handle_videos_request(request):
     tag = request.args.get('tag')
 
-    if tag is None or tag == "":
-        tag = None  # oh ...
+    if tag == "":
+        tag = None
 
     num_docs = request.args.get('num_docs')
     if num_docs is None:
@@ -30,6 +28,13 @@ def handle_trends_request(request):
         period = 1
 
     period = parameter_to_int(period, 'period')
+
+    return tag, num_docs, period
+
+
+def handle_trends_request(request):
+
+    tag, num_docs, period = handle_videos_request(request)
 
     source = request.args.get('source')
     if source is None or source == '':
