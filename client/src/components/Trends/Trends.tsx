@@ -18,20 +18,21 @@ interface TrendsProps {
     trends: SmallCardProps[];
     category: string;
     period: number;
-    onSetTrends(period?: number): void;
+    source: string;
+    onSetTrends(category: string, period: number, source?: string): void;
     onTabClickSetPeriod(period: number): void;
 }
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        const { period, onSetTrends } = this.props;
-        onSetTrends(period);
+        const { category, period, source, onSetTrends } = this.props;
+        onSetTrends(category, period, source);
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
-        const { period, onSetTrends } = this.props;
-        if (period !== prevProps.period) {
-            onSetTrends(period);
+        const { category, period, source, onSetTrends } = this.props;
+        if (category !== prevProps.category || period !== prevProps.period || source !== prevProps.source) {
+            onSetTrends(category, period, source);
         }
     }
 
@@ -92,10 +93,12 @@ const mapStateToProps = (state: State) => ({
     trendVariant: state.trendVariant,
     trends: state.trends,
     period: state.period,
+    source: state.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+    onSetTrends: (category: string, period: number, source?: string) => (
+        dispatch(setTrendsThunk(category, period, source))),
     onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
 });
 
