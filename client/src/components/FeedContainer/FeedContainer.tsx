@@ -58,15 +58,16 @@ const renderCard = (vod: Vod) =>
     (
         vod.includes && vod.includes[0].banned
             ? null
-            : <Card
-                className="Feed-Item"
-                key={vod.content_id}
-                content_id={vod.content_id}
-                {...getCardContent(vod)}
-                poster={vod.onto_poster}
-                size="full"
-                rightContent={<Likes />}
-            />
+            : <div className="Feed-Item">
+                <Card
+                    key={vod.content_id}
+                    content_id={vod.content_id}
+                    {...getCardContent(vod)}
+                    poster={vod.onto_poster}
+                    size="full"
+                    rightContent={<Likes />}
+                />
+            </div>
     );
 
 class FeedContainer extends Component<FeedContainerProps> {
