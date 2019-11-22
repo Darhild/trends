@@ -78,7 +78,7 @@ class Repository:
     def insert_video(self, video_json):
         with self.db.begin() as conn:
             with conn.begin():
-                # print("repo insert video", json.loads(video_json))
+                print("repo insert video", json.loads(video_json))
                 data = [
                     {"category": key, "data": value}
                     for key, value in json.loads(video_json).items()

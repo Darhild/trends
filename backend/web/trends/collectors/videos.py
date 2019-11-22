@@ -19,7 +19,7 @@ class VideosCollector(BaseCollector):
         try:
             # print("videos collect url {0}".format(self.source_link))
             with open('mock_videos.json') as f:
-                resp = json.load(f)
+                resp = json.dumps(json.load(f))
             return self.insert_videos(resp)
             # if response.status_code == 200:
             #     return self.insert_content(response.content)

@@ -17,6 +17,9 @@ class BaseCollector:
     def insert_content(self, json):
         return self.repo.insert_content(json)
 
+    def insert_videos(self, json):
+        return self.repo.insert_video(json)
+
     def start(self):
         scheduler = BackgroundScheduler()
         scheduler.add_job(self.collect,
