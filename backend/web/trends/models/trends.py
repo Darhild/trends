@@ -21,7 +21,12 @@ metadata = MetaData(naming_convention=convention)
 @as_declarative(metadata=metadata)
 class Base:
     """Base class for all models"""
-    pass
+
+    @declared_attr
+    def created_at(cls):
+        return Column(DateTime(timezone=True),
+                      server_default=text('clock_timestamp()'),
+                      nullable=False)
 
 
 class Trend(Base):
@@ -29,7 +34,6 @@ class Trend(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     data = sa.Column(sa.JSON)
-    created_at = sa.Column(sa.DateTime)
 
 
 trend_table = Trend.__table__
@@ -42,11 +46,19 @@ class Content(Base):
     category = sa.Column(sa.String(256), nullable=False)
     data = sa.Column(sa.JSON)
 
-    @declared_attr
-    def created_at(cls):
-        return Column(DateTime(timezone=True),
-                      server_default=text('clock_timestamp()'),
-                      nullable=False)
-
 
 content_table = Content.__table__
+
+
+class Video(Base):
+    __tablename__ = 'video'
+
+    id = sa.Column(sa.Integer, primary_key=True)
+    category = sa.Column(sa.String(256), nullable=False)
+    data = sa.Column(sa.JSON)
+
+
+video_table = Video.__table__
+
+
+
