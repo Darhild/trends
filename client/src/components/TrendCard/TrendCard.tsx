@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Trend from '../../types/trend';
 import TrendDetails from './TrendDetails/TrendDetails';
 import './TrendCard.scss';
+import bgDefault from '../../images/efir_default-min.jpg';
 
 
 interface Props extends Omit<Trend, 'videos' | 'stories'> {
@@ -19,7 +20,7 @@ class TrendCard extends Component<Props> {
             variant && `TrendCard_variant_${variant}`,
             className,
         );
-        const bgUrl = img ? img : 'https://yastatic.net/s3/home/stream/branding/efir_default-min.jpg';
+        const bgUrl = img ? img : bgDefault;
 
         return (
             <div className={cn}>
