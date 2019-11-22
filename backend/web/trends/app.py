@@ -54,7 +54,7 @@ if __name__ == '__main__':
     collectors = [
         EfirCollector(
             repo,
-            get_environ_or_default('EFIR_URL', "http://{0}:8081/fetch".format(my_ip))
+            get_environ_or_default('EFIR_URL', "http://{0}:8081/fetch/themes".format(my_ip))
         ),
         GoogleCollector(
             repo,
