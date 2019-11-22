@@ -2,11 +2,14 @@ import { Vod } from '../types/FeedItem';
 
 const formatTime = (time: number) => time < 10 ? `0${time}` : `${time}`;
 
+const hour = 3600;
+const minute = 60;
+
 export function convertTime(duration: number) {
     const times: number[] = [
-        Math.floor(duration / 3600),
-        Math.floor(duration % (3600) / 60),
-        duration % 60,
+        Math.floor(duration / hour),
+        Math.floor(duration % hour / minute),
+        duration % minute,
     ];
 
     if (!times[0]) {
