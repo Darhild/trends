@@ -26,13 +26,17 @@ interface TrendsProps {
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
         const { category, period, source, onSetTrends } = this.props;
-        onSetTrends(category, period, source);
+        category === 'main'
+            ? onSetTrends(category, period, source)
+            : onSetTrends(category, period);
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
         const { category, period, source, onSetTrends } = this.props;
         if (category !== prevProps.category || period !== prevProps.period || source !== prevProps.source) {
-            onSetTrends(category, period, source);
+            category === 'main'
+                ? onSetTrends(category, period, source)
+                : onSetTrends(category, period);
         }
     }
 

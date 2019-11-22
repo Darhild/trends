@@ -4,7 +4,7 @@ const api = (path: string) => axios.get(path)
     .then((res: AxiosResponse<any>) => res.data)
     .catch(() => []);
 
-export const fetchTrends = (category: string, period: number, source?: string) => {
+export const fetchTrends = (period: number, category?: string, source?: string) => {
     const path = source
         ? `/api/trends?tag=${category}&period=${period}&source=${source}`
         : `/api/trends?tag=${category}&period=${period}`;
