@@ -6,15 +6,16 @@ import './TrendCard.scss';
 import bgDefault from '../../images/efir_default-min.jpg';
 
 
-interface Props extends Omit<Trend, 'videos' | 'stories'> {
+interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> {
     ratingPosition: number;
+    collectionLength: number;
     className?: string;
     variant?: string;
 }
 
 class TrendCard extends Component<Props> {
     public render() {
-        const { img, desc, className, variant, ratingPosition } =  this.props;
+        const { img, desc, collectionLength, className, variant, ratingPosition = 1 } =  this.props;
         const cn = classnames(
             'TrendCard',
             variant && `TrendCard_variant_${variant}`,
@@ -26,7 +27,7 @@ class TrendCard extends Component<Props> {
             <div className={cn}>
                 <div className="TrendCard-Poster" style={{ backgroundImage: `url(${bgUrl})` }}>
                 </div>
-                <TrendDetails desc={desc} variant={variant} />
+                <TrendDetails desc={desc} variant={variant} collectionLength={collectionLength}/>
                 <div className="TrendCard-Placeholder"></div>
                 <div className="TrendCard-Number">{ratingPosition}</div>
             </div>

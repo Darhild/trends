@@ -22,3 +22,10 @@ export const fetchFeed = (tag: string) => {
     return api(url)
         .then((res: any) => res.data.items);
 };
+
+export const fetchCollection = (id: string) => {
+    const url = `/api/collection?collection_id=${id}&limit=100`;
+
+    return api(url)
+        .then((res: any) => res.data.set);
+};

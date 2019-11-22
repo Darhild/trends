@@ -29,7 +29,7 @@ const App: React.FC = () =>
                             <Switch>
                                 <Redirect exact from="/" to="/main" />
                                 <Route path="/settings" component={SettingsPage} />
-                                <Route path="/:category/trends/:ratingPosition" component={OneTrendPage} />
+                                <Route path="/:category/trends/:collectionId" component={OneTrendPage} />
                                 <Route path="/:category/trends" component={TrendsPage} />
                                 <Route path="/:category?" component={Main} />
                             </Switch>

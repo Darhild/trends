@@ -1,7 +1,7 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import { SET_TRENDS, SET_FEED, SET_COLLECTION, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
@@ -94,6 +94,16 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                     };
             }
         }
+        case SET_COLLECTION:
+            const currentTrend = state.trends.find((trend) => trend.id === action.id);
+            if (currentTrend) {
+                currentTrend.collection = action.payload;
+                currentTrend.collectionLength = action.payload.length;
+            }
+
+            return {
+                ...state,
+            };
         case SET_ALL_TRENDS_ON_MAIN:
             return {
                 ...state,

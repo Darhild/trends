@@ -1,9 +1,19 @@
 import Trend from '../types/trend';
-import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import {
+    SET_TRENDS,
+    SET_FEED,
+    SET_COLLECTION,
+    SET_TREND_VARIANT,
+    SET_PERIOD,
+    SET_SOURCE,
+    SET_ALL_TRENDS_ON_MAIN,
+} from './actionTypes';
 
 export const setTrends = (payload: Trend[]) => ({ type: SET_TRENDS, payload });
 
 export const setFeed = (payload: any, tag?: string) => ({ type: SET_FEED, tag, payload });
+
+export const setCollection = (payload: any, id: string) => ({ type: SET_COLLECTION, payload, id });
 
 export const setAllTrendsOnMain = (payload: boolean) => ({ type: SET_ALL_TRENDS_ON_MAIN, payload });
 
