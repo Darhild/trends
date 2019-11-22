@@ -68,14 +68,13 @@ def videos_handler():
         logging.getLogger(__name__).info("New request, tag:{0}, num_docs:{1}, period:{2}".
                                          format(tag, num_docs, period))
 
-        # repo = Repository(current_app.db)
-        with open('mock_videos.json') as f:
-            resp = json.load(f)['data']
-        # if tag is None:
-        #      resp = sort_and_limit(repo.read_videos(period, "common"), num_docs)
-        # else:
-        #     resp = sort_and_limit(repo.read_videos(period, tag), num_docs)
-        shuffle(resp)
+        repo = Repository(current_app.db)
+
+        if tag is None:
+            resp = sort_and_limit(repo.read_videos(period, "common"), num_docs)
+        else:
+            resp = sort_and_limit(repo.read_videos(period, tag), num_docs)
+
         return Response(response=json.dumps({"data": resp}, ensure_ascii=False),
                         status=200, mimetype='application/json')
 

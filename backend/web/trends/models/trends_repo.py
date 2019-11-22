@@ -151,7 +151,7 @@ class Repository:
                 for trend in rows:
                     result.extend(self.trend_record_row_to_dict(trend, source='google'))
                 result = Repository.group_by_title(result)
-                logging.getLogger(__name__).\
+                logging.getLogger(__name__). \
                     info("google trends num rows: {0}".format(len(result)))
                 return result
 
@@ -171,15 +171,74 @@ class Repository:
                 result = []
                 # Выбираем все, что вернули: строка - один день
                 for trend in rows:
-                    result.extend(self.trend_record_row_to_dict(trend, source='efir'))
+                    result.extend(self.trend_record_row_to_dict(trend))
                 result = Repository.group_by_title(result)
-                logging.getLogger(__name__).\
+                logging.getLogger(__name__). \
+                    info("efir trends num rows: {0}".format(len(result)))
+                return result
+
+    def video_record_row_to_dict(self, video_rec):
+        """
+        Returns:
+        [
+        {
+            "day": 1,
+            "data": {...}
+        },
+        {
+            "day": 22,
+            "data": {...}
+        }
+        ]"""
+
+        result = []
+
+        for trend in video_rec[0]:
+            d = dict(trend)
+
+            # Надо ли мапить поля? Если каких то нет, то не добавлять этот тренд?
+
+            # d['id'] = d['id']
+            # d['title'] = d['title'].value
+            # d['avatar'] = d['avatar'].value
+            # d['description'] = d['description'].value
+            # d['bg'] = d['bg'].value
+            comment_count = d["comment_count"]
+            result.append({
+                "day": int(comment_count),
+                "data": d,
+                "title": d["title"]
+            }
+            )
+        return result
+
+    def read_videos(self, period, tag):
+        with self.db.begin() as conn:
+            with conn.begin():
+                print(tag)
+                p = datetime.today() - timedelta(days=period)
+                s = select([video_table.c.data]). \
+                    where(video_table.c.created_at >= p). \
+                    where(video_table.c.category == tag). \
+                    order_by(desc(video_table.c.created_at))
+
+                rows = conn.execute(s)
+
+                result = []
+                # Выбираем все, что вернули: строка - один день
+                for video in rows:
+                    result.extend(self.video_record_row_to_dict(video))
+
+
+                result = Repository.group_by_title(result)
+                logging.getLogger(__name__). \
                     info("efir trends num rows: {0}".format(len(result)))
                 return result
 
     @staticmethod
     def group_by_title(data):
         title_score = defaultdict(int)
+        print(1000 * '-')
         for d in data:
             title = d['title']
             title_score[title] += d['day']
