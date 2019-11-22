@@ -63,7 +63,7 @@ class SettingsPage extends Component<SettingProps> {
                     >
                         <option value="efir" >Яндекс.Эфир</option>
                         <option value="google" >Google</option>
-                        <option value="mix" >Mixed</option>
+                        <option value="" >Mixed</option>
                     </select>
                 </div>
             </div>

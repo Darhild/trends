@@ -12,7 +12,8 @@ import { setPeriod } from './../../store/actions';
 interface TrendsPageProps extends RouteComponentProps<TParam> {
     trendVariant: string;
     period: number;
-    onSetTrends(period?: number): void;
+    source: string;
+    onSetTrends(category: string, period: number, source?: string): void;
     onTabClickSetPeriod(period: number): void;
 }
 
@@ -22,14 +23,16 @@ interface TParam {
 
 class TrendsPage extends Component<TrendsPageProps> {
     public componentDidMount() {
-        const { period, onSetTrends } = this.props;
-        onSetTrends(period);
+        const { category } = this.props.match.params;
+        const { period, source, onSetTrends } = this.props;
+        onSetTrends(category, period, source);
     }
 
     public componentDidUpdate(prevProps: TrendsPageProps) {
-        const { period, onSetTrends } = this.props;
-        if (period !== prevProps.period) {
-            onSetTrends(period);
+        const { category } = this.props.match.params;
+        const { period, source, onSetTrends } = this.props;
+        if (period !== prevProps.period || source !== prevProps.source) {
+            onSetTrends(category, period, source);
         }
     }
 
@@ -54,10 +57,12 @@ class TrendsPage extends Component<TrendsPageProps> {
 const mapStateToProps = (state: State) => ({
     trendVariant: state.trendVariant,
     period: state.period,
+    source: state.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+    onSetTrends: (category: string, period: number, source?: string) => (
+        dispatch(setTrendsThunk(category, period, source))),
     onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
 });
 
