@@ -13,13 +13,20 @@ class EfirCollector(BaseCollector):
         self.source_link = url
 
     def collect(self):
-        logging.getLogger(__name__)\
-            .info("efir collect")
+        logging.getLogger(__name__).info("efir collect")
         try:
             # print("efir collect url {0}".format(self.source_link))
             response = requests.get(self.source_link)
-            # print("efir collect {0}".format(response.content))
-            return self.insert_content(response.content)
+
+            if response.status_code == 200:
+                return self.insert_content(response.content)
+
+            if response.status_code == 202:
+                # Do nothing
+                return
+            else:
+                raise Exception("efir returned status code: {0}".format(response.status_code))
+
         except Exception as e:
             logging.getLogger(__name__).\
                 error("failed to collect efir {0}".format(str(e)))
