@@ -15,6 +15,7 @@ interface Content {
 
 export const getCardContent = ({
     title,
+    computed_title,
     release_year,
     genres,
     supertag,
@@ -25,7 +26,7 @@ export const getCardContent = ({
     thumbnail,
 }: Vod) => {
     const content: Content = {
-        title,
+        title: computed_title || title,
         subtitle: null,
         rightContent: null,
         details: null,
