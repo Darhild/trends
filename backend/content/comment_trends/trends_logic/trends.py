@@ -96,6 +96,7 @@ def sort_documents(docs_data):
             break
 
         doc_info = get_document_info(documents[doc_id])
+        doc_info['id'] = doc_id
         doc_info['comments_count'] = doc_count
         document_trends.append(doc_info)
 
