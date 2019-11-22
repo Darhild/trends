@@ -5,29 +5,41 @@ import Card from '../Card/Card';
 import { connect } from 'react-redux';
 import { State, Dispatch } from '../../store/createStore';
 import { setFeedThunk } from '../../store/thunks';
-import { CardProps } from './../../types/CardProps';
-import { ListProps, ListCardProps } from './../../types/ListCardProps';
+import { FeedItem, Vod, Carousel as CarouselType } from '../../types/FeedItem';
 import { excludeBannedCards } from './../../utils';
+import Likes from '../Likes/Likes';
+import { getCardContent } from '../../utils/feed';
 
 interface OwnProps {
     category: string;
 }
 
 interface StateProps {
-    content: ListCardProps[];
+    content: FeedItem[];
     onInitFeed(tag: string): void;
 }
 
 type FeedContainerProps = OwnProps & StateProps;
 
-const renderList = (list: ListProps) =>
-    (
-        excludeBannedCards(list.includes).map((card: CardProps) => (
-            <Card content_type={card.supertag || 'series'} key={card.content_id} {...card}/>
-        ))
-    );
+const renderList = (list: CarouselType) => {
+    const filteredCards =  excludeBannedCards(list.includes);
 
-const renderCarousel = (list: ListProps) =>
+    return filteredCards.map((vod: Vod) => {
+        const {
+            content_id,
+        } = vod;
+
+        return (
+            <Card
+                key={content_id}
+                content_id={content_id}
+                {...getCardContent(vod)}
+            />
+        );
+    });
+};
+
+const renderCarousel = (list: CarouselType) =>
     (
         <>
             {!!excludeBannedCards(list.includes).length
@@ -42,11 +54,19 @@ const renderCarousel = (list: ListProps) =>
         </>
     );
 
-const renderCard = (card: CardProps) =>
+const renderCard = (vod: Vod) =>
     (
-        card.includes && card.includes[0].banned
+        vod.includes && vod.includes[0].banned
             ? null
-            : <Card className="Feed-Item" {...card} key={card.content_id} content_type="vod" />
+            : <Card
+                className="Feed-Item"
+                key={vod.content_id}
+                content_id={vod.content_id}
+                {...getCardContent(vod)}
+                poster={vod.onto_poster}
+                size="full"
+                rightContent={<Likes />}
+            />
     );
 
 class FeedContainer extends Component<FeedContainerProps> {
@@ -66,10 +86,10 @@ class FeedContainer extends Component<FeedContainerProps> {
         return (
             <div className="Feed">
                 {
-                    this.props.content.map((list: ListCardProps) =>
-                        list.content_type_name === 'carousel'
-                            ? renderCarousel(list)
-                            : renderCard(list))
+                    this.props.content.map((item: FeedItem) =>
+                    item.content_type_name === 'carousel'
+                        ? renderCarousel(item)
+                        : renderCard(item))
                 }
             </div>
         );

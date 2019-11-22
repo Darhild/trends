@@ -1,41 +1,82 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Card.scss';
-import CardContent from './CardContent/CardContent';
-import CardThumb from './CardThumb/CardThumb';
-import { CardProps } from './../../types/CardProps';
 
-export default class Card extends Component<CardProps> {
-    public render() {
-        const content_type = this.props.content_type;
-        const cardLinkCn = classnames(
-            'Card-Link',
-            this.props.className,
+export interface Props {
+    title?: React.ReactNode;
+    subtitle?: React.ReactNode;
+    details?: React.ReactNode;
+    rightContent?: React.ReactNode;
+    className?: string;
+    img?: string;
+    size?: string;
+    content_id: string;
+    poster?: string;
+    background?: string;
+}
+
+const changeImageSize = (image: string | undefined) => image && image.replace(/\/orig/, '/400x300');
+export default class Card extends Component<Props> {
+    public renderContent() {
+        const {
+            title,
+            subtitle,
+            rightContent,
+        } = this.props;
+
+        const titles = (
+            <>
+                {title && <div className="Card-Title" >{title}</div>}
+                {subtitle && <div className="Card-Subtitle">{subtitle}</div>}
+            </>
         );
+
+        if (rightContent) {
+            return (
+                <div className="Card-Content Card-Content_view_grid">
+                    <div className="Card-Left">{titles}</div>
+                    <div className="Card-Right">{rightContent}</div>
+                </div>
+            );
+        }
+
+        return <div className="Card-Content">{titles}</div>;
+    }
+
+    public render() {
+        const {
+            className,
+            size = 'medium',
+            content_id,
+            img,
+            details,
+            poster,
+            background,
+        } = this.props;
+
         const cardCn = classnames(
             'Card',
-            this.props.className,
-            content_type === 'vod' && 'Card_width_full',
-            (content_type === 'blogger' || content_type === 'music') && 'Card_width_medium',
-            content_type === 'trend' && ['Card_width_full', 'Card_type_trend'],
-            content_type === 'promo' && ['Card_width_big', 'Card_type_trend'],
-            (content_type === 'series'
-                || content_type === 'movie'
-                || content_type === 'kids'
-                || content_type === 'subscription') && 'Card_width_small',
+            `Card_size_${size}`,
+            background && `Card_bg_${background}`,
+            className,
         );
 
         return (
             <a
-                className={cardLinkCn}
-                href={`https://yandex.ru/efir?from=efir&stream_id=${this.props.content_id}`}
+                className={cardCn}
+                href={`https://yandex.ru/efir?from=efir&stream_id=${content_id}`}
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <div className={cardCn}>
-                    <CardThumb  {...this.props} content_type={content_type} />
-                    <CardContent {...this.props} content_type={content_type} />
+                <div className="Card-Thumb" style={{ backgroundImage: img ? `url(${changeImageSize(img)})` : '' }}>
+                    {
+                        poster && <img src={changeImageSize(poster)} className="Card-Poster" alt="" />
+                    }
+                    {
+                        details && <div className="Card-Details">{details}</div>
+                    }
                 </div>
+                {this.renderContent()}
             </a>
         );
     }
