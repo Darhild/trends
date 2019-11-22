@@ -25,7 +25,9 @@ class TrendsPage extends Component<TrendsPageProps> {
     public componentDidMount() {
         const { category } = this.props.match.params;
         const { period, source, onSetTrends } = this.props;
-        onSetTrends(category, period, source);
+        category === 'main'
+            ? onSetTrends(category, period, source)
+            : onSetTrends(category, period);
     }
 
     public componentDidUpdate(prevProps: TrendsPageProps) {
