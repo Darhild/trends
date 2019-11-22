@@ -53,7 +53,6 @@
 
     &-Header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
 
         @media(min-width: $screen-m) {
@@ -62,6 +61,7 @@
     }
 
     &-TitleWrapper {
+        flex-wrap: wrap;
         box-sizing: border-box;
         min-height: 50px;
         padding-top: 8px;
@@ -71,12 +71,28 @@
             padding-top: 0;
         }
 
+        @media(min-width: $screen-m) {
+            display: flex;
+        }
+
         &_hidden {
+            display: block;
             opacity: .4;
+
+            .Carousel-Tabs {
+                display: none;
+            }
+        }
+    }
+
+    &-Tabs {
+        @media(min-width: $screen-m) {
+            margin-left: 35px;
         }
     }
 
     &-Hide {
+        margin-left: auto;
         width: 13px;
     }
 

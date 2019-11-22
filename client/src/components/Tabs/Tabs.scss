@@ -1,0 +1,26 @@
+@import './../../variables';
+
+.Tabs {
+    display: inline-flex;
+
+    &-Item {
+        margin-right: 22px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 32px;
+        color: var(--text-faded);
+        cursor: pointer;
+
+        &_state_active {
+            color: var(--text-primary)
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        @media(min-width: $screen-m) {
+            font-size: 18px;
+        }
+    }
+}

@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import './SettingsPage.scss';
 import { connect } from 'react-redux';
 import { State } from '../../store/createStore';
-import { setTrendVariant, setTime, setSource, setAllTrendsOnMain } from './../../store/actions';
+import { setTrendVariant, setSource, setAllTrendsOnMain } from './../../store/actions';
 
 interface SettingProps {
     allTrendsOnMain: boolean;
     trendVariant: string;
-    time: number;
     source: string;
     onChangeAllTrendsOnMain: (value: boolean) => void;
     onChangeTrendVariant: (value: string) => void;
-    onChangeTime: (value: number) => void;
     onChangeSource: (value: string) => void;
 }
 
@@ -23,14 +21,11 @@ class SettingsPage extends Component<SettingProps> {
     public handleChangeAllTrendsOnMain = (event: React.ChangeEvent<HTMLSelectElement>) =>
         this.props.onChangeAllTrendsOnMain(Boolean(Number(event.target.value)))
 
-    public handleChangeTime = (event: React.ChangeEvent<HTMLSelectElement>) =>
-        this.props.onChangeTime(Number(event.target.value))
-
     public handleChangeSource = (event: React.ChangeEvent<HTMLSelectElement>) =>
         this.props.onChangeSource(event.target.value)
 
     public render() {
-        const { allTrendsOnMain, trendVariant, time, source } = this.props;
+        const { allTrendsOnMain, trendVariant, source } = this.props;
 
         return (
             <div className="Settings">
@@ -59,20 +54,7 @@ class SettingsPage extends Component<SettingProps> {
                     </select>
                 </div>
                 <div className="Settings-Item">
-                    <div className="Settings-Text">Выберите время:</div>
-                    <select
-                        className="Settings-Select"
-                        name="time"
-                        value={time}
-                        onChange={this.handleChangeTime}
-                    >
-                        <option value="1" >День</option>
-                        <option value="7" >Неделя</option>
-                        <option value="30" >Месяц</option>
-                    </select>
-                </div>
-                <div className="Settings-Item">
-                    <div className="Settings-Text">Выберите источник:</div>
+                    <div className="Settings-Text">Выберите источник трендов:</div>
                     <select
                         className="Settings-Select"
                         name="source"
@@ -92,14 +74,12 @@ class SettingsPage extends Component<SettingProps> {
 const mapStateToProps = (state: State) => ({
     allTrendsOnMain: state.allTrendsOnMain,
     trendVariant: state.trendVariant,
-    time: state.time,
     source: state.source,
 });
 
 const mapDispatchToProps = {
     onChangeAllTrendsOnMain: setAllTrendsOnMain,
     onChangeTrendVariant: setTrendVariant,
-    onChangeTime: setTime,
     onChangeSource: setSource,
 };
 

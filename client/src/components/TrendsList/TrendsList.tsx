@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Trend from '../../types/trend';
 import TrendCard from '../TrendCard/TrendCard';
-
 import './TrendsList.scss';
 
 interface Props {

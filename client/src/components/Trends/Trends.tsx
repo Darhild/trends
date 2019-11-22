@@ -4,8 +4,12 @@ import SmallCard, { SmallCardProps } from '../SmallCard/SmallCard';
 import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
+import Title from './../Title/Title';
+import Tabs from './../Tabs/Tabs';
+import tabsContent from './../../tabsContent';
 import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
+import { setPeriod } from './../../store/actions';
 import TrendsList from '../TrendsList/TrendsList';
 
 interface TrendsProps {
@@ -13,21 +17,40 @@ interface TrendsProps {
     allTrendsOnMain: boolean;
     trends: SmallCardProps[];
     category: string;
-    onInitTrends(): void;
+    period: number;
+    onSetTrends(period?: number): void;
+    onTabClickSetPeriod(period: number): void;
 }
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        this.props.onInitTrends();
+        const { period, onSetTrends } = this.props;
+        onSetTrends(period);
+    }
+
+    public componentDidUpdate(prevProps: TrendsProps) {
+        const { period, onSetTrends } = this.props;
+        if (period !== prevProps.period) {
+            onSetTrends(period);
+        }
     }
 
     public renderItems = () => {
-        const { trends, category, trendVariant, allTrendsOnMain } = this.props;
+        const { trends, category, trendVariant, allTrendsOnMain, period, onTabClickSetPeriod } = this.props;
         const url = `/${category}/trends`;
+
+        const trendsTabs = (
+            <Tabs
+                className="Carousel-Tabs"
+                period={period}
+                tabsContent={tabsContent}
+                onTabClickSetValue={onTabClickSetPeriod}
+            />
+        );
 
         if (allTrendsOnMain) {
             return (
-                <Carousel title="Самое популярное" margin="s">
+                <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
                         trends.map((props, index) => (
                             <Link className="Trends-Link" to={`${url}/${index + 1}`}>
@@ -40,10 +63,17 @@ class Trends extends Component<TrendsProps> {
         }
 
         return (
-            <TrendsList category={category} variant={trendVariant} shortVariant />
+            <>
+                <Title cn="Trends-Title" url={url}>Самое популярное</Title>
+                <Tabs
+                    period={period}
+                    tabsContent={tabsContent}
+                    onTabClickSetValue={onTabClickSetPeriod}
+                />
+                <TrendsList category={category} variant={trendVariant} shortVariant />
+            </>
         );
     }
-
 
     public render() {
         const { category } = this.props;
@@ -57,16 +87,16 @@ class Trends extends Component<TrendsProps> {
     }
 }
 
-
 const mapStateToProps = (state: State) => ({
     allTrendsOnMain: state.allTrendsOnMain,
     trendVariant: state.trendVariant,
     trends: state.trends,
+    period: state.period,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onInitTrends: () => dispatch(setTrendsThunk()),
+    onSetTrends: (period?: number) => dispatch(setTrendsThunk(period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trends);
