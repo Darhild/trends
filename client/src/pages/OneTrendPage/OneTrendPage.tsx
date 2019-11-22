@@ -23,20 +23,25 @@ interface TParam {
 interface OneTrendPageProps {
     trend: Trend | undefined;
     collection: Vod[];
-    onInitCollection: (collectionId: string) => void;
-    onInitTrends(): void;
+    period: number;
+    source: string;
+    onSetCollection: (collectionId: string) => void;
+    onSetTrends(category: string, period: number, source?: string): void;
 }
 
 class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentProps<TParam>> {
     public componentDidMount() {
-        const { trend, onInitCollection, onInitTrends } = this.props;
+        const { trend, period, source, onSetCollection, onSetTrends } = this.props;
+        const { category } = this.props.match.params;
         if (!trend) {
-            onInitTrends();
+            category === 'main'
+            ? onSetTrends(category, period, source)
+            : onSetTrends(category, period);
         }
         const { collectionId } = this.props.match.params;
         const params = queryString.parse(this.props.location.search);
         if (params.source === 'efir') {
-            onInitCollection(collectionId);
+            onSetCollection(collectionId);
         }
     }
 
@@ -121,13 +126,16 @@ const mapStateToProps = (state: State, props: RouteComponentProps<TParam>) => {
 
     return {
         trend: currentTrend,
+        period: state.settings.period,
+        source: state.settings.source,
         collection: currentTrend ? currentTrend.collection : [],
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onInitCollection: (id: string) => dispatch(setCollectionThunk(id)),
-    onInitTrends: () => dispatch(setTrendsThunk()),
+    onSetCollection: (id: string) => dispatch(setCollectionThunk(id)),
+    onSetTrends: (category: string, period: number, source?: string) => (
+        dispatch(setTrendsThunk(category, period, source))),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OneTrendPage);

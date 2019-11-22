@@ -11,35 +11,39 @@ import './TrendsList.scss';
 interface Props {
     trends: Trend[];
     variant: string;
+    period: number;
+    from: string;
     category: string;
     collectionsLength: number[];
     shortVariant?: boolean;
-    onInitCollection: (collectionId: string) => void;
-    onInitTrends(): void;
+    onSetCollection: (collectionId: string) => void;
+    onSetTrends(category: string, period: number, source?: string): void;
 }
 
 class TrendsList extends Component<Props> {
     public componentDidMount() {
-        const { trends, onInitTrends, onInitCollection } = this.props;
+        const { trends, category, period, from, onSetTrends, onSetCollection } = this.props;
         if (!trends.length) {
-            onInitTrends();
+            category === 'main'
+            ? onSetTrends(category, period, from)
+            : onSetTrends(category, period);
         } else {
             trends.forEach((trend) => {
                 const { id, source } = trend;
                 if (source === 'efir') {
-                    onInitCollection(id);
+                    onSetCollection(id);
                 }
             });
         }
     }
 
     public componentDidUpdate(prevProps: Props) {
-        const { trends, onInitCollection } = this.props;
+        const { trends, onSetCollection } = this.props;
         if (trends !== prevProps.trends) {
             trends.forEach((trend) => {
                 const { id, source } = trend;
                 if (source === 'efir') {
-                    onInitCollection(id);
+                    onSetCollection(id);
                 }
             });
         }
@@ -81,12 +85,15 @@ class TrendsList extends Component<Props> {
 
 const mapStateToProps = (state: State) => ({
     trends: state.trends,
+    period: state.settings.period,
+    from: state.settings.source,
     collectionsLength: state.trends.map((trend) => trend.collectionLength),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onInitTrends: () => dispatch(setTrendsThunk()),
-    onInitCollection: (id: string) => dispatch(setCollectionThunk(id)),
+const mapDispatchToProps = (dispatch: Dispatch) =>  ({
+        onSetTrends: (category: string, period: number, source?: string) => (
+            dispatch(setTrendsThunk(category, period, source))),
+        onSetCollection: (id: string) => dispatch(setCollectionThunk(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrendsList);
