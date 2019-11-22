@@ -19,10 +19,11 @@ class TrendCard extends Component<Props> {
             variant && `TrendCard_variant_${variant}`,
             className,
         );
+        const bgUrl = img ? img : 'https://yastatic.net/s3/home/stream/branding/efir_default-min.jpg';
 
         return (
             <div className={cn}>
-                <div className="TrendCard-Poster" style={{ backgroundImage: `url(${img})` }}>
+                <div className="TrendCard-Poster" style={{ backgroundImage: `url(${bgUrl})` }}>
                 </div>
                 <TrendDetails desc={desc} variant={variant} />
                 <div className="TrendCard-Placeholder"></div>
