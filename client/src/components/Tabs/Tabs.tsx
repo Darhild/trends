@@ -23,7 +23,7 @@ class Tabs extends Component<TabsProps, TabsState> {
         activeTabValue: this.props.period,
     };
 
-    public onTabClick = (value: number) => {
+    public handleTabClick = (value: number) => {
         const { onTabClickSetValue } = this.props;
         this.setState({
             activeTabValue: value,
@@ -49,7 +49,7 @@ class Tabs extends Component<TabsProps, TabsState> {
                                 period === tab.value && 'Tabs-Item_state_active',
                                 )
                             }
-                            onClick={() => this.onTabClick(tab.value) }
+                            onClick={() => this.handleTabClick(tab.value) }
                         >
                             {tab.name}
                         </div>

@@ -39,15 +39,12 @@ class TrendsPage extends Component<TrendsPageProps> {
 
         return (
             <>
-                <div className="TitleWrapper">
-                    <Title cn="TitleWrapper-Item">Самое популярное</Title>
-                    <Tabs
-                        className="TitleWrapper-Item"
-                        period={period}
-                        tabsContent={tabsContent}
-                        onTabClickSetValue={onTabClickSetPeriod}
-                    />
-                </div>
+                <Title cn="Trends-Title">Самое популярное</Title>
+                <Tabs
+                    period={period}
+                    tabsContent={tabsContent}
+                    onTabClickSetValue={onTabClickSetPeriod}
+                />
                 <TrendsList variant={trendVariant} category={category}/>
             </>
         );
