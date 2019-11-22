@@ -1,114 +1,127 @@
 @import './../../variables';
 
 .Card { 
+    display: block;
+    height: 100%;
+    text-align: left;
+    color: inherit;
+    text-decoration: none;
     background-color: var(--color-layout);
     border-radius: 6px;
+    cursor: pointer;
 
-    &_type_trend {
-        background-color: transparent;
+    &_bgColor {
 
-        .Card-Thumb {
-            border-radius: 6px;
+        &_none {
+            background: transparent;
         }
     }
 
-    &_width_small {
-        width: 117px;
-        background-color: transparent;
+    &_size {
 
-        @media(min-width: $screen-l) {
-            width: 162px;
-        }
-
-        .Card-Thumb {
-            height: 175px;
-            border-radius: 4px;
+        &_small {
+            width: 117px;
+            background-color: transparent;
 
             @media(min-width: $screen-l) {
-                height: 243px;
+                width: 162px;
+            }
+
+            .Card-Thumb {
+                height: 175px;
+                border-radius: 4px;
+                transition: transform 150ms;
+
+                @media(min-width: $screen-l) {
+                    height: 243px;
+                }
+            }
+        
+            .Card-Thumb:hover {
+                transform: translateY(-6px);
+            }
+
+            .Card-Content {
+                padding-right: 0;
+                padding-left: 0;
             }
         }
-    
-        .Card-Thumb:hover {
-            transform: translateY(-6px);
-        }
 
-        .Card-Content {
-            padding-right: 0;
-            padding-left: 0;
-        }
-    }
+        &_medium {
+            width: calc(((100vw - 386px)/7.5)*1.5 + 5px);
+            min-width: 180.5px;
+            max-width: 248px;
 
-    &_width_medium {
-        width: 184px;
-
-        @media(min-width: $screen-l) {
-            width: 248px;
-        }
-
-        .Card-Thumb {
-            height: 104px;
-
-            @media(min-width: $screen-l) {
-                height: 140px;
-            }
-        }
-    }
-
-    &_width_big {
-        width: 100%;
-
-        .Card-Thumb {
-            height: 184px;
-
-            @media(min-width: $screen-s) {
+            .Card-Thumb {
                 height: 104px;
-            }
 
-            @media(min-width: $screen-m) {
-                height: 140px;
-            }
-
-            @media(min-width: $screen-l) {
-                height: 210px;
+                @media(min-width: $screen-l) {
+                    height: 140px;
+                }
             }
         }
 
-        .Card-Score {
-            display: none;
+        &_big {
+            width: 100%;
+
+            .Card-Thumb {
+                height: 184px;
+
+                @media(min-width: $screen-s) {
+                    height: 104px;
+                }
+
+                @media(min-width: $screen-m) {
+                    height: 140px;
+                }
+
+                @media(min-width: $screen-l) {
+                    height: 210px;
+                }
+            }
+
+            .Card-Score {
+                display: none;
+            }
+        }
+
+        &_full {
+            width: 100%;
+
+            .Card-Thumb {
+                height: 184px;
+
+                @media(min-width: $screen-s) {
+                    height: 104px;
+                }
+            }
         }
     }
 
-    &_width_full {
-        width: 100%;
-
-        .Card-Thumb {
-            height: 184px;
-
-            @media(min-width: $screen-s) {
-                height: 104px;
-            }
-        }
-
-        .Card-Score {
-            display: none;
-        }
-    }
-    
-    &-Link {
-        display: block;
-        text-align: left;
-        color: inherit;
-        text-decoration: none;
-        cursor: pointer;    
-    }
-     
     &-Thumb {
         position: relative;
         height: 104px;
         background: center no-repeat var(--color-placeholder);
         background-size: cover;
         border-radius: 6px 6px 0 0;
+
+        &_view {
+
+            &_noClipped {
+                border-radius: 6px
+            }
+
+            &_full {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 6px;
+
+                .Card-Details {
+                    display: none;
+                }
+            }
+        }
     }  
     
     &-Poster {
@@ -126,66 +139,15 @@
         display: flex;
     }
 
-    &-Duration {
-        padding: 2px 4px;
-        font-size: 12px;
-        line-height: 16px;
-        background-color: var(--color-layout-dark);
-        border-radius: 4px;
-    }
-
-    &-Rating{
-        margin-right: 5px;
-        padding: 2px 6px;
-        font-weight: 700;
-        font-size: 11px;
-        background-color: var(--color-layout-rate);
-        border-radius: 4px;
-    }
-
-    &-Score {
-        padding: 2px 6px;
-        font-size: 11px;
-        background-color: var(--color-layout-medium);
-        border-radius: 4px;
-
-        &:before {
-            content: '';
-            position: relative;
-            top: 1px;
-            display: inline-block;
-            width: 11px;
-            height: 11px;
-            margin-right: 3px;
-            background: (url(//yastatic.net/s3/home-static/_/s/E/sMYY2M7l7Ha7UNPZlT11a3Fy0.svg) no-repeat 50% 50%);
-            background-position: 0 0;
-        }
-    }
-
     &-Content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 10px 12px;
+        padding: 8px 10px 12px;
         overflow: hidden;
         text-align: left;
 
-        &_type_trend, &_type_promo {
-            height: 67px;
-            padding: 10px 0;
-            
-            .Card-Title {
-                font-weight: 500;
-            }
+        &_view_grid{
+            display: flex;
+            justify-content: space-between;
         }
-
-        &_type_blogger {
-            height: 54px;
-        }
-    }
-
-    &-Text {
-        overflow: hidden;
     }
 
     &-Title {
@@ -195,6 +157,11 @@
         font-size: 13px;
         color: var(--text-primary);
         text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-wrap: break-word;
+        word-break: break-word;
+        hyphens: auto;
     }
 
     &-Subtitle {
@@ -204,16 +171,17 @@
         color: var(--text-subtitle);
         white-space: nowrap;
         text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
     }
 
-    &-LikeOrNot {
+    &-Left {
+        max-width: calc(100% - 76px);
+    }
+
+    &-Right {
         display: flex;
+        align-items: flex-end;
         padding-left: 10px;
     }
-
-    &-Dislike {
-        margin-left: 15px;
-        transform: rotate(180deg);
-    }    
 }
 

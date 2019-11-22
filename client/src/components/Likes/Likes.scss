@@ -1,0 +1,8 @@
+.Likes {
+    display: flex;
+
+    &-Dislike {
+        margin-left: 15px;
+        transform: rotate(180deg);
+    }
+}    

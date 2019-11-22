@@ -9,7 +9,9 @@ import Story from '../../components/Story/Story';
 import Button from '../../components/Button/Button';
 import Trend from '../../types/trend';
 import { State } from '../../store/createStore';
+import { getCardContent } from './../../utils/feed';
 import './OneTrendPage.scss';
+import { Vod } from '../../types/FeedItem';
 
 interface TParam {
     category: string;
@@ -25,13 +27,48 @@ interface OneTrendPageState {
 }
 
 class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentProps<TParam>, OneTrendPageState> {
+
+    public renderCollection(videos: Vod[]) {
+        const firstVideos = videos && videos.slice(0, 3);
+        const lastVideos = videos && videos.slice(3);
+
+        const renderCard = (vod: Vod, size: string) => (
+            <Card
+                content_id={vod.content_id}
+                key={vod.content_id}
+                {...getCardContent(vod)}
+                size={size}
+                bgColor="none"
+                imgView="noClipped"
+                title={<b>{vod.computed_title}</b>}
+            />
+        );
+
+        return (
+            <div className="OneTrendPage-Content">
+                <div className="OneTrendPage-Promo">
+                    {
+                        firstVideos.map((vod) => (
+                            <div className="OneTrendPage-Item">{renderCard(vod, 'big')}</div>
+                        ))
+                    }
+                </div>
+                <div className="OneTrendPage-List">
+                    {
+                        lastVideos.map((vod) => (
+                            <div className="OneTrendPage-Item">{renderCard(vod, 'full')}</div>
+                        ))
+                    }
+                </div>
+            </div>
+        );
+    }
+
     public render() {
         const { ratingPosition } = this.props.match.params;
         const { trends } = this.props;
         const currentTrend = trends[Number(ratingPosition) - 1];
         const { desc, img, poster, videos, stories } = currentTrend;
-        const firstVideos = videos.slice(0, 3);
-        const lastVideos = videos.slice(3);
 
         return (
             <>
@@ -52,20 +89,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                     </Carousel>
                 </div>
                 <Title cn="OneTrendPage-Title">Видео по теме</Title>
-                <div className="OneTrendPage-Content">
-                    <div className="OneTrendPage-Promo">
-                        {firstVideos.map(({ ...props }) =>
-                        <div className="OneTrendPage-Item">
-                            <Card {...props} content_type="promo"/>
-                        </div>)}
-                    </div>
-                    <div className="OneTrendPage-List">
-                        {lastVideos.map(({ ...props }) =>
-                        <div className="OneTrendPage-Item">
-                            <Card {...props} content_type="trend"/>
-                        </div>)}
-                    </div>
-                </div>
+                {videos && this.renderCollection(videos)}
             </>
         );
     }
