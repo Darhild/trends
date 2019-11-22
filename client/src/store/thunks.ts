@@ -3,8 +3,8 @@ import { setTrends, setFeed } from './actions';
 import { Dispatch } from './createStore';
 import { mapTrends } from '../utils/mappers';
 
-export const setTrendsThunk = (period?: number) =>
-    (dispatch: Dispatch) => fetchTrends(period)
+export const setTrendsThunk = (category: string, period: number, source?: string) =>
+    (dispatch: Dispatch) => fetchTrends(category, period, source)
         .then((res: any) => res ? res.map(mapTrends) : [])
         .then((trends: any) => dispatch(setTrends(trends)))
         .catch(() => []);
