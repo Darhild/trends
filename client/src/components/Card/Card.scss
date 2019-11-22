@@ -148,6 +148,10 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .OneTrendPage-Content & {
+            padding: 8px 0 12px;
+        }
     }
 
     &-Title {

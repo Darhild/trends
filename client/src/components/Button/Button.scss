@@ -24,7 +24,7 @@
 
         @media(min-width: $screen-s) {
             position: absolute;
-            top: 196px;
+            top: 178px;
             right: 142px;
             width: 150px;
             height: 36px;
@@ -34,7 +34,7 @@
 
     &_type_subscribe {
         position: absolute;
-        top: 164px;
+        top: 148px;
         width: 100%;
         padding: 10px;
         font-size: 13px;
@@ -42,7 +42,7 @@
         border-radius: 4px;
 
         @media(min-width: $screen-s) {
-            top: 196px;
+            top: 178px;
             right: 0;
             width: 134px;
         }

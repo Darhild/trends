@@ -9,6 +9,7 @@ import Carousel from '../../components/Carousel/Carousel';
 import Story from '../../components/Story/Story';
 import Button from '../../components/Button/Button';
 import Trend from '../../types/trend';
+import Duration from '../../components/Duration/Duration';
 import { State, Dispatch } from '../../store/createStore';
 import { setCollectionThunk, setTrendsThunk } from '../../store/thunks';
 import { getCardContent } from './../../utils/feed';
@@ -57,7 +58,8 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                 size={size}
                 bgColor="none"
                 imgView="noClipped"
-                title={<b>{vod.computed_title}</b>}
+                title={<div style={{ fontWeight: 500 }}>{vod.title}</div>}
+                details={<Duration duration={vod.duration} />}
             />
         );
 
@@ -84,7 +86,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
     public render() {
         const { trend, collection } = this.props;
         if (trend) {
-            const { desc, img, poster, stories } = trend;
+            const { desc, img, poster, stories, collectionLength } = trend;
 
             return (
                 <>
@@ -94,7 +96,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                             desc={desc}
                             img={img}
                             poster={poster}
-                            collectionLength={collection.length}
+                            collectionLength={collectionLength}
                             ratingPosition={1} />
                         <Button type="subscribe" />
                         <Button type="addVideo" />
@@ -110,6 +112,8 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                 </>
             );
         }
+
+        return null;
     }
 }
 

@@ -20,7 +20,7 @@ export function convertTime(duration: number) {
 }
 
 export function dateUtils(date: number) {
-    return new Date(date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
+    return new Date(date * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
 export function excludeBannedCards(cards: Vod[]) {
