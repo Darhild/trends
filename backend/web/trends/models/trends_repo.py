@@ -1,6 +1,6 @@
 import json
 
-from trends.models.trends import content_table, trend_table
+from trends.models.trends import content_table, trend_table, video_table
 from sqlalchemy import desc, cast, Date
 import logging
 from sqlalchemy.sql import select
@@ -74,6 +74,22 @@ class Repository:
                 logging.getLogger(__name__). \
                     debug("%s entry were deleted", result.rowcount)
                 conn.execute(content_table.insert(), *data)
+
+    def insert_video(self, video_json):
+        with self.db.begin() as conn:
+            with conn.begin():
+                # print("repo insert video", json.loads(video_json))
+                data = [
+                    {"category": key, "data": value}
+                    for key, value in json.loads(video_json).items()
+                ]
+                time_zero = self.get_time_zero(0)
+                delete_stmt = video_table.delete() \
+                    .where(video_table.c.created_at > time_zero)
+                result = conn.execute(delete_stmt)
+                logging.getLogger(__name__). \
+                    debug("%s entry were deleted", result.rowcount)
+                conn.execute(video_table.insert(), *data)
 
     def read_all(self, limit, period):
         pass
