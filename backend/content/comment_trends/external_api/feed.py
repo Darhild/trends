@@ -3,6 +3,8 @@ from pprint import pprint
 from json import JSONDecodeError
 import logging
 
+from comment_trends.external_api.json_parse import parse_json
+
 feed_logger = logging.getLogger(__name__)
 
 
@@ -25,14 +27,14 @@ class FeedRequest:
         "locale": "ru",
         "from": "efir",
         "service": "ya-main",
-        "disable_trackings": "1"}
+        "disable_trackings": "1",
+        "num_docs": "1"}
 
     @classmethod
     def get_response(cls, tag, offset, limit, num_docs, cache_hash=None):
 
         params = cls.query_params.copy()
-        params.update({"offset": f"{offset}",
-                       "num_docs": f"{num_docs}",
+        params.update({"offset": f"{offset}",  # "num_docs": f"{num_docs}",
                        "limit": f"{limit}"})
 
         if tag:
@@ -47,17 +49,14 @@ class FeedRequest:
 
 class FeedData:
     def __init__(self, response):
-        self.response = response
+        self.response_data = parse_json(response, logger=feed_logger)
         self.documents = dict()
 
     def _extract_documents_from_response(self):
-        try:
-            data = self.response.json()
-        except JSONDecodeError as e:
-            feed_logger.debug("%s %s", type(e), e)
+        if not self.response_data:
             return {}
 
-        for carousel in data['items']:
+        for carousel in self.response_data['items']:
             for document in carousel['includes']:
                 try:
                     content_id = document['content_id']
@@ -69,6 +68,16 @@ class FeedData:
 
         return self.documents
 
+    def _extract_carousel_ids_from_response(self):
+        carouse_ids = []
+        try:
+            for carousel in self.response_data['items']:
+                carouse_ids.append(carousel['carousel_id'])
+        except KeyError:
+            pass
+
+        return carouse_ids
+
     def get_documents(self):
         if self.documents:
             return self.documents
@@ -78,9 +87,15 @@ class FeedData:
     def get_cache_hash(self):
         pass
 
+    def get_carousels(self):
+        if not self.response_data:
+            return []
+        return self._extract_carousel_ids_from_response()
+
 
 if __name__ == '__main__':
     fr = FeedRequest()
-    result = fr.get_response(tag='movie', offset=0, limit=100, num_docs=1)
+    result = fr.get_response(tag='movie', offset=0, limit=3, num_docs=1)
     pprint(result.get_documents())
-    pprint(result.response.json())
+    pprint(result.response_data)
+    print(result.get_carousels())

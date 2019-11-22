@@ -1,7 +1,7 @@
 import requests
 import logging
 from pprint import pprint
-from comment_trends.external_api.utils import parse_json
+from comment_trends.external_api.json_parse import parse_json
 
 comments_logger = logging.getLogger(__name__)
 comments_logger.exc_info = False

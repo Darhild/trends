@@ -24,7 +24,7 @@ def setup_logging(path=os.path.join(CURRENT_DIR, 'logging.yaml')):
         logging.basicConfig(level=logging.INFO)
 
 
-def create_app(db_url, is_start_get_trends=True):
+def create_app(is_start_get_trends=True):
     setup_logging()
     logger = logging.getLogger("comment_trends")
     logger.debug("About to create service content")
@@ -37,5 +37,5 @@ def create_app(db_url, is_start_get_trends=True):
 
 
 if __name__ == '__main__':
-    app_ = create_app(None)
+    app_ = create_app()
     app_.run(host='0.0.0.0', port=8080)

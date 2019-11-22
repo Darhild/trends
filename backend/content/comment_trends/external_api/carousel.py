@@ -1,7 +1,7 @@
 import requests
 from requests import ConnectionError, Response
 from pprint import pprint
-from comment_trends.external_api.utils import parse_json
+from comment_trends.external_api.json_parse import parse_json
 import logging
 
 carousel_logger = logging.getLogger(__name__)

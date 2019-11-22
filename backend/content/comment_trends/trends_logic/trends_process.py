@@ -1,9 +1,8 @@
-from comment_trends.trends_logic.trends import compute_trends
+from comment_trends.trends_logic.trends import compute_trends, trends_config
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime
 
-REQUEST_INTERVAL = 120
-REQUEST_JITTER = 300
+REQUEST_JITTER = 20
 
 
 def start_get_trends():
@@ -14,7 +13,7 @@ def start_get_trends():
     scheduler.add_job(compute_trends,
                       trigger='interval',
                       next_run_time=datetime.now(),
-                      minutes=REQUEST_INTERVAL,
+                      minutes=trends_config.get_interval(),
                       jitter=REQUEST_JITTER,
                       )
     scheduler.start()

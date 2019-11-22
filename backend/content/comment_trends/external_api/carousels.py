@@ -23,8 +23,7 @@ class CarouselsRequest:
         'Origin': "https://yandex.ru",
         'Accept-Encoding': "gzip, deflate, br",
         'Accept-Language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-        'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
-                      " (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
+        'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
         'Accept': "application/json, text/javascript, */*; q=0.01",
     }
 
@@ -54,6 +53,7 @@ class CarouselsRequest:
         try:
             response = requests.request("GET", cls.url, headers=cls.headers, params=params)
         except ConnectionError:
+            # req = requests.Request("GET", cls.url, headers=cls.headers, params=params)
             response = Response()
             carousels_logger.warning('Порвано соединение с ручкой carousels')
             response.status_code = 500
