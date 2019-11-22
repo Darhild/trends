@@ -37,3 +37,17 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.TitleWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+
+    &-Item {
+        margin-right: 40px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -62,7 +62,7 @@ class Tabs extends Component<TabsProps, TabsState> {
                                 period === tab.value && 'Tabs-Item_state_active',
                                 )
                             }
-                            onClick={() => {this.handleClick(tab.value); }}
+                            onClick={() => this.handleClick(tab.value) }
                         >
                             {tab.name}
                         </div>

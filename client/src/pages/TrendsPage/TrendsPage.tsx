@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import Title from '../../components/Title/Title';
-import TitleWrapper from './../../components/TitleWrapper/TitleWrapper';
 import Tabs from '../../components/Tabs/Tabs';
 import TrendsList from '../../components/TrendsList/TrendsList';
 import { State, Dispatch } from '../../store/createStore';
@@ -20,7 +19,8 @@ interface TParam {
 
 class TrendsPage extends Component<TrendsPageProps> {
     public componentDidMount() {
-        this.props.onSetTrends();
+        const { period, onSetTrends } = this.props;
+        onSetTrends(period);
     }
 
     public componentDidUpdate(prevProps: TrendsPageProps) {
@@ -36,10 +36,10 @@ class TrendsPage extends Component<TrendsPageProps> {
 
         return (
             <>
-                <TitleWrapper>
-                    <Title>Самое популярное</Title>
-                    <Tabs />
-                </TitleWrapper>
+                <div className="TitleWrapper">
+                    <Title cn="TitleWrapper-Item">Самое популярное</Title>
+                    <Tabs className="TitleWrapper-Item" />
+                </div>
                 <TrendsList variant={trendVariant} category={category}/>
             </>
         );

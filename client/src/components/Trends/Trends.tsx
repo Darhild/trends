@@ -4,7 +4,6 @@ import SmallCard, { SmallCardProps } from '../SmallCard/SmallCard';
 import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
-import TitleWrapper from './../TitleWrapper/TitleWrapper';
 import Title from './../Title/Title';
 import Tabs from './../Tabs/Tabs';
 import { connect } from 'react-redux';
@@ -22,7 +21,8 @@ interface TrendsProps {
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        this.props.onSetTrends();
+        const { period, onSetTrends } = this.props;
+        onSetTrends(period);
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
@@ -52,10 +52,10 @@ class Trends extends Component<TrendsProps> {
 
         return (
             <>
-                <TitleWrapper>
-                    <Title>Самое популярное</Title>
-                    <Tabs/>
-                </TitleWrapper>
+                <div className="TitleWrapper">
+                    <Title cn="TitleWrapper-Item">Самое популярное</Title>
+                    <Tabs className="TitleWrapper-Item"/>
+                </div>
                 <TrendsList category={category} variant={trendVariant} shortVariant />
             </>
         );
