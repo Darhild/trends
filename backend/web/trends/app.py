@@ -9,6 +9,7 @@ import os
 
 from trends.collectors.efir import EfirCollector
 from trends.collectors.google import GoogleCollector
+from trends.collectors.videos import VideosCollector
 from trends.models.trends_repo import Repository
 from trends.utils.get_db_environ import get_environ_or_default
 from flask_cors import CORS
@@ -58,7 +59,11 @@ if __name__ == '__main__':
         GoogleCollector(
             repo,
             get_environ_or_default('GOOGLE_URL', "http://{0}:8082/fetch".format(my_ip))
-        )
+        ),
+        VideosCollector(
+            repo,
+            get_environ_or_default('VIDEOS_URL', "http://{0}:8081/fetch/videos".format(my_ip))
+        ),
     ]
     for c in collectors:
         c.start()
