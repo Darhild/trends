@@ -1,6 +1,7 @@
 import requests
 from pprint import pprint
 from json import JSONDecodeError
+from requests import Response, ConnectionError
 import logging
 
 player_logger = logging.getLogger(__name__)
@@ -28,8 +29,13 @@ class PlayerRequest:
     @classmethod
     def get_response(cls, document_id):
 
-        response = requests.request("GET", cls.url + f'{document_id}.json', headers=cls.headers,
-                                    params=cls.query_params)
+        try:
+            response = requests.request("GET", cls.url + f'{document_id}.json', headers=cls.headers,
+                                        params=cls.query_params)
+        except ConnectionError as e:
+            response = Response()
+            player_logger.warning('Порвано соединение с ручкой player %s', e)
+            response.status_code = 500
         return PlayerData(response)
 
 

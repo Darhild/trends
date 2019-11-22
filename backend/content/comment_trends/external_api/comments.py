@@ -48,8 +48,7 @@ class CommentsData:
     def get_timestamps(self):
         try:
             timestamps = self.response_data['tree']['0']['children']['after']
-        except (TypeError, KeyError) as e:
-            comments_logger.debug("%s %s", type(e), e)
+        except (TypeError, KeyError):
             return []
 
         timestamps.extend(self._get_top_comment_ts())

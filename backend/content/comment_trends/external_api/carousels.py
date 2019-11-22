@@ -30,7 +30,6 @@ class CarouselsRequest:
     query_params = {
         "filter": "carousels",
         "delete_filtered": "0",
-        "synchronous_scheme": "1",
         "locale": "ru",
         "from": "efir",
         "service": "ya-main",

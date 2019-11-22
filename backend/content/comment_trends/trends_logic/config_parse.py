@@ -19,7 +19,7 @@ class Config:
             with open(self.path, 'rt') as f:
                 config = yaml.safe_load(f.read())
         except FileNotFoundError:
-            config_logger.warning('Config not found %s in', self.path)
+            config_logger.warning('Config not found in %s', self.path)
 
         for f in self.fields:
             if f not in config:
