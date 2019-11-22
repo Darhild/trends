@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple
 import json
 import time
+import logging
 
 from flask_caching import Cache
 
@@ -15,6 +16,7 @@ from comment_trends.external_api.theme import ThemeRequest
 from comment_trends.external_api.collection import CollectionRequest
 from comment_trends.trends_logic.config_parse import Config
 
+trends_logger = logging.getLogger(__name__)
 
 cache = Cache(config={'CACHE_TYPE': 'simple', "CACHE_DEFAULT_TIMEOUT": 86400})
 
@@ -31,10 +33,16 @@ def compute_trends():
     theme_trends = {}
     video_trends = {}
     for tag in tags:
+        trends_logger.info('сбор данных в разделе %s', tag)
         result = get_sorted_trends(tag)
         theme_result, video_result = result
+
+        trends_logger.info('разделе %s %s трендовых тем и %s трендовых видео', tag, len(theme_result),
+                           len(video_result))
+
         if theme_result:
             theme_trends[f'{tag}'] = theme_result
+
         if video_result:
             video_trends[f'{tag}'] = video_result
 
@@ -55,6 +63,7 @@ def get_sorted_trends(tag):
 
 def sort_themes(themes):
     sorted_themes = sorted(themes.items(), key=lambda x: x[1], reverse=True)
+    trends_logger.info('были собраны данные по %s темам', len(sorted_themes))
     theme_trends = []
     # TODO возможно добавить поле video_count по release date
     used_avatars = set()
@@ -91,6 +100,7 @@ def sort_documents(docs_data):
     document_trends = []
     documents, doc_to_count = docs_data
     sorted_docs = sorted(doc_to_count.items(), key=lambda x: x[1], reverse=True)
+    trends_logger.info('были собраны данные по %s документам', len(sorted_docs))
     for doc_id, doc_count in sorted_docs:
         if doc_count < 1:
             break
