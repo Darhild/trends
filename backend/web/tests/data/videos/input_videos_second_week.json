@@ -1,0 +1,74 @@
+{
+  "sport": [
+    {
+      "id": "iggoyUCXcYUrxuYiMpnPM8wBngS2LxvZwQxGUGLCmaQk6stcrPbNvPAHMcohRg2m8",
+      "title": "США Германия",
+      "duration": 1265,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": "Ляля",
+      "comments_count": 18
+    }
+  ],
+  "blogger": [
+    {
+      "id": "CNzuTmzMXEAubhEsQtm2SyCPynwjmgLFzJE5ZAiCZWUSpPC5uqqG9LTvRvXYhBY63",
+      "title": "Всё просто",
+      "duration": 6234,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": "Что здесь писать",
+      "comments_count": 8
+    }
+  ],
+  "common": [
+    {
+      "id": "rmAj5kJCLPd2jjZjD9T994crU79ik8qGUvDUCFD9uHePiydxhYmksbDzuh2vALR8M",
+      "title": "Утро в сосновом бору",
+      "duration": 1259,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": "Отличный пейзаж",
+      "comments_count": 12
+    }
+  ],
+  "movie": [
+    {
+      "id": "rmAj5kJCLPd2jjZjD9T994crU79ik8qGUvDUCFD9uHePiydxhYmksbDzuh2vALR8M",
+      "title": "Утро в сосновом бору",
+      "duration": 1259,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": "Отличный пейзаж",
+      "comments_count": 12
+    }
+  ],
+  "kids": [
+    {
+      "id": "S9tGNAxqArLpothxQ8hugwkmLHMcs4eDQTTwPeiPEVUbrhcJYVhpyFf3LXpSzmPW7",
+      "title": "Смурфики",
+      "duration": 1652,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": "Мультик для детей",
+      "comments_count": 14
+    }
+  ],
+  "series": [
+    {
+      "id": "rAPV5kGEG2dmGXvySJk7iAHm5yjGQtHkosj7BXuqbhsZX45Dd5vohd9u7RcH6AE9X",
+      "title": "Дальняя дорога",
+      "duration": 8956,
+      "release_date_ut": "",
+      "onto_poster": "https://avatars.mds.yandex.net/get-vh/103154/17311464665536457901-Yd4xsoSHwaCWvrPdxsTvE7Tg/orig",
+      "thumbnail": "https://avatars.mds.yandex.net/get-vh/196035/17311464665536457901-G3pyYF-GAiNjeQLtQ84VNw/orig",
+      "comment": ":)",
+      "comments_count": 10
+    }
+  ]
+}

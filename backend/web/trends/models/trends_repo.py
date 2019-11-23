@@ -235,7 +235,7 @@ class Repository:
                 for video in rows:
                     result.extend(self.video_record_row_to_dict(video))
 
-                result = Repository.group_by_title(result)
+                result = Repository.group_by_title_video(result)
                 logging.getLogger(__name__). \
                     info("efir videos num rows: {0}".format(len(result)))
                 return result
@@ -250,6 +250,22 @@ class Repository:
         result = list()
         for d in data:
             title = d['title']
+            if title not in titles:
+                titles.add(title)
+                result.append({'title': title, 'data': d['data'],  'day': title_score[title]})
+        return result
+
+    @staticmethod
+    def group_by_title_video(data):
+        title_score = defaultdict(int)
+        for d in data:
+            title = d['title']
+            title_score[title] += d['day']
+        titles = set()
+        result = list()
+        for d in data:
+            title = d['title']
+            d['data']["comments_count"] = title_score[title]
             if title not in titles:
                 titles.add(title)
                 result.append({'title': title, 'data': d['data'], 'day': title_score[title]})

@@ -76,7 +76,7 @@ def videos_handler():
         else:
             resp = sort_and_limit(repo.read_videos(period, tag), num_docs)
 
-        return Response(response=json.dumps({"data": resp}, ensure_ascii=False),
+        return Response(response=json.dumps(resp, ensure_ascii=False),
                         status=200, mimetype='application/json')
 
     except Exception as e:

@@ -3,7 +3,7 @@ import requests
 
 from trends.collectors.base import BaseCollector
 
-REQUEST_INTERVAL = 1
+REQUEST_INTERVAL = 15
 REQUEST_JITTER = 1
 
 
