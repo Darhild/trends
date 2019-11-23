@@ -1,7 +1,15 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_FEED, SET_COLLECTION, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import {
+    SET_TRENDS,
+    SET_FEED,
+    SET_COLLECTION,
+    SET_COMMENTED,
+    SET_TREND_VARIANT,
+    SET_PERIOD, SET_SOURCE,
+    SET_ALL_TRENDS_ON_MAIN,
+} from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
@@ -16,6 +24,7 @@ interface Settings {
 
 const defaultState = {
     trends: [],
+    commented: [],
     main: [],
     movie: [],
     series: [],
@@ -114,6 +123,11 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
 
             return {
                 ...state,
+            };
+        case SET_COMMENTED:
+            return {
+                ...state,
+                commented: action.payload,
             };
         case SET_ALL_TRENDS_ON_MAIN:
             return {
