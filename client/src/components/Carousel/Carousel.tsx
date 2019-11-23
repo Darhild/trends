@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import debounce from 'debounce';
 import Title from '../Title/Title';
 import scroll from 'scroll';
-import Card from '../Card/Card';
 import { ReactComponent as Close } from '../../images/svg/close.svg';
 import { ReactComponent as Undo } from '../../images/svg/undo.svg';
 import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
