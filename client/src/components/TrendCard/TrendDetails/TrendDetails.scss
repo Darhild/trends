@@ -28,6 +28,47 @@ $_: '.TrendDetails';
         }
     }
 
+    &_wide {
+        bottom: 25px;
+        padding-left: 16px;
+
+        @media(min-width: $screen-m) {
+            top: 210px;
+            display: flex;
+            align-items: center;
+            padding-left: 38px;
+
+            #{$_}-Caption {
+                display: none;
+            }
+        }
+
+        #{$_}-Label {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        #{$_}-Icon {
+            display: block;
+            height: 32px;
+            margin-bottom: 9px;
+
+            @media(min-width: $screen-m) {
+                height: 72px;
+            }
+        }
+
+        #{$_}-Title {
+            font-size: 16px;
+            line-height: 20px;
+
+            @media(min-width: $screen-m) {
+                font-size: 20px;
+                line-height: 24px;
+            }
+        }
+    }
+
     &-Label {
         display: flex;
         align-items: center;

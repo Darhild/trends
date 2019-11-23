@@ -11,27 +11,30 @@ interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> 
     collectionLength: number;
     className?: string;
     variant?: string;
-    bgBig?: boolean;
+    isWide?: boolean;
 }
 
 class TrendCard extends Component<Props> {
     public render() {
-        const { img, desc, collectionLength, className, variant, ratingPosition = 1, poster, bgBig } =  this.props;
+        const { img, desc, collectionLength, className, variant, ratingPosition = 1, poster, isWide } =  this.props;
         const cn = classnames(
             'TrendCard',
             variant && `TrendCard_variant_${variant}`,
             className,
+            isWide && 'TrendCard_wide',
         );
         let bgUrl = poster ? poster : bgDefault;
-        if (bgBig) {
+        let cnDetails;
+        if (isWide) {
             bgUrl = img ? img : bgDefault;
+            cnDetails = 'TrendDetails_wide';
         }
 
         return (
             <div className={cn}>
                 <div className="TrendCard-Poster" style={{ backgroundImage: `url(${bgUrl})` }}>
                 </div>
-                <TrendDetails desc={desc} variant={variant} collectionLength={collectionLength}/>
+                <TrendDetails desc={desc} variant={variant} collectionLength={collectionLength} className={cnDetails}/>
                 <div className="TrendCard-Placeholder"></div>
                 <div className="TrendCard-Number">{ratingPosition}</div>
             </div>
