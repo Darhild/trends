@@ -1,5 +1,5 @@
 version: 1
 tags: ["movie", "series", "kids", "sport", "blogger", "common"]
-carousels_num: 10
+carousels_num: 15
 docs_per_carousel_num: 50
 request_interval_minutes: 60

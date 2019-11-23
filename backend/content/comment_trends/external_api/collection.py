@@ -81,28 +81,25 @@ class CollectionData:
         except (TypeError, KeyError, IndexError):
             return []
 
-    def get_avatar(self, used_avatars):
+    def get_image(self, used, field):
         """
         Если все аватары были использованы, то возвращается самый последний
         """
         items = self._get_items()
-        avatar = ""
+        image = ""
         if not items:
-            return avatar
+            return image
 
         for item in items:
             try:
-                avatar = item['onto_poster']
+                image = item[field]
             except (TypeError, KeyError, IndexError):
-                try:
-                    avatar = item['thumbnail']
-                except (TypeError, KeyError, IndexError):
-                    pass
+                pass
 
-            if avatar and avatar not in used_avatars:
+            if image and image not in used:
                 break
 
-        return avatar
+        return image
 
 
 if __name__ == '__main__':

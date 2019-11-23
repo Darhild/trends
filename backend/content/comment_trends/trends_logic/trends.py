@@ -67,18 +67,21 @@ def sort_themes(themes):
     theme_trends = []
     # TODO возможно добавить поле video_count по release date
     used_avatars = set()
+    used_thumbnails = set()
     for (theme_id, theme_title), count in sorted_themes:
         if count < 1:
             break
 
         theme_info = get_theme_info(theme_id)
         # как вариант можно обрезать исходный постер из theme_info или использовать картинки в поиске
-        avatar = get_theme_avatar(theme_id, used_avatars)
+        avatar = get_theme_image(theme_id, used_avatars, field='onto_poster')
+        thumbnail = get_theme_image(theme_id, used_thumbnails, field='thumbnail')
         theme_trends.append({
             'id': theme_id,
             'title': theme_title,
             'day': count,
             'avatar': avatar,
+            'thumbnail': thumbnail,
             'bg': theme_info['bg'],
             'description': theme_info['description']
             })
@@ -86,12 +89,12 @@ def sort_themes(themes):
     return theme_trends
 
 
-def get_theme_avatar(theme_id, used_avatars):
+def get_theme_image(theme_id, used, field):
     response = CollectionRequest.get_response(collection_id=theme_id, offset=0, limit=20)
-    avatar = response.get_avatar(used_avatars)
-    if avatar:
-        used_avatars.add(avatar)
-        return 'https:' + avatar
+    image = response.get_image(used=used, field=field)
+    if image:
+        used.add(image)
+        return 'https:' + image
     else:
         return ""
 
@@ -108,6 +111,7 @@ def sort_documents(docs_data):
         doc_info = get_document_info(documents[doc_id])
         doc_info['id'] = doc_id
         doc_info['comments_count'] = doc_count
+        doc_info['day'] = doc_count
         document_trends.append(doc_info)
 
     return document_trends
@@ -128,8 +132,8 @@ def get_potential_trends(tag, feed_params):
     doc_to_comments = get_comments(documents)
     theme_to_comments = group_comments_by_themes(documents, doc_to_comments)
 
-    theme_to_count = count_comments_by_themes(theme_to_comments)
-    doc_to_count = count_comments_by_docs(doc_to_comments)
+    theme_to_count = count_comments_by_entity(theme_to_comments)
+    doc_to_count = count_comments_by_entity(doc_to_comments)
 
     doc_data = documents, doc_to_count
     return theme_to_count, doc_data
@@ -162,25 +166,15 @@ def group_comments_by_themes(documents, doc_to_comments) -> Dict[Tuple[str, str]
     return themes_to_comments
 
 
-def count_comments_by_themes(theme_to_comments):
-    theme_to_count = dict()
+def count_comments_by_entity(entity_to_comments):
+    entity_to_count = dict()
 
     # theme_id ~ (theme_id, theme_title)
-    for theme_id in theme_to_comments:
-        comments_ts = [int((str(ts)[:-6])) for ts in theme_to_comments[theme_id]]
-        theme_to_count[theme_id] = count_comments(comments_ts)
+    for entity_id in entity_to_comments:
+        comments_ts = [int((str(ts)[:-6])) for ts in entity_to_comments[entity_id]]
+        entity_to_count[entity_id] = count_comments(comments_ts)
 
-    return theme_to_count
-
-
-def count_comments_by_docs(doc_to_comments):
-    doc_to_count = dict()
-
-    for doc_id in doc_to_comments:
-        comments_ts = [int((str(ts)[:-6])) for ts in doc_to_comments[doc_id]]
-        doc_to_count[doc_id] = count_comments(comments_ts)
-
-    return doc_to_count
+    return entity_to_count
 
 
 def count_comments(comments_ts) -> int:
@@ -219,7 +213,7 @@ def get_theme_info(theme_id):
 
 def get_document_info(data):
     doc_info = {}
-    fields = ('title', 'duration', 'release_date_ut', 'onto_poster', 'thumbnail', 'comment')
+    fields = ('title', 'duration', 'onto_poster', 'thumbnail', 'comment')
     for field in fields:
         if field in data:
             doc_info[field] = data[field]
