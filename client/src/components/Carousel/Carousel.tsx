@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import debounce from 'debounce';
 import Title from '../Title/Title';
 import scroll from 'scroll';
+import Card from '../Card/Card';
 import { ReactComponent as Close } from '../../images/svg/close.svg';
 import { ReactComponent as Undo } from '../../images/svg/undo.svg';
 import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
@@ -112,7 +113,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     }
 
     public render() {
-        const { title, routeUrl, carouselId, canBeHidden, tabs } = this.props;
+        const { title, routeUrl, carouselId, canBeHidden, tabs, children } = this.props;
         const { isHidden } = this.state;
 
         const carouselCn = classnames(

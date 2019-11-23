@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FeedContainer.scss';
 import Carousel from '../Carousel/Carousel';
 import Card from '../Card/Card';
+import EmptyCards from './../EmptyCards/EmptyCards';
 import { connect } from 'react-redux';
 import { State, Dispatch } from '../../store/createStore';
 import { setFeedThunk } from '../../store/thunks';
@@ -84,10 +85,20 @@ class FeedContainer extends Component<FeedContainerProps> {
     }
 
     public render() {
+        const { category, content } = this.props;
+
+        if (!content.length) {
+            const size = (category === 'blogger') ? 'medium' : 'small';
+
+            return (
+                <EmptyCards carouselNumber={4} cardsNumber={10} cardSize={size} />
+            );
+        }
+
         return (
             <div className="Feed">
                 {
-                    this.props.content.map((item: FeedItem) =>
+                    content.map((item: FeedItem) =>
                     item.content_type_name === 'carousel'
                         ? renderCarousel(item)
                         : renderCard(item))
