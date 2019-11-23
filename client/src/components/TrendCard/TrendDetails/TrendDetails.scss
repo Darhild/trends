@@ -28,7 +28,7 @@ $_: '.TrendDetails';
         }
     }
 
-    .OneTrendPage_TrendCard & {
+    &_wide {
         bottom: 25px;
         padding-left: 16px;
 
@@ -42,26 +42,13 @@ $_: '.TrendDetails';
                 display: none;
             }
         }
-    }
 
-    &-Label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 6px;
-
-        .OneTrendPage_TrendCard & {
+        #{$_}-Label {
             display: block;
             margin-bottom: 3px;
         }
-    }
 
-    &-Icon {
-        height: 16px;
-        margin-right: 8px;
-        color: var(--color-accent-red);
-        border-radius: 50%;
-
-        .OneTrendPage_TrendCard & {
+        #{$_}-Icon {
             display: block;
             height: 32px;
             margin-bottom: 9px;
@@ -70,14 +57,8 @@ $_: '.TrendDetails';
                 height: 72px;
             }
         }
-    }
 
-    &-Title {
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 18px;
-
-        .OneTrendPage_TrendCard & {
+        #{$_}-Title {
             font-size: 16px;
             line-height: 20px;
 
@@ -86,6 +67,25 @@ $_: '.TrendDetails';
                 line-height: 24px;
             }
         }
+    }
+
+    &-Label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+
+    &-Icon {
+        height: 16px;
+        margin-right: 8px;
+        color: var(--color-accent-red);
+        border-radius: 50%;
+    }
+
+    &-Title {
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 18px;
     }
 
     &-Count {
