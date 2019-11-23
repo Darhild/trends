@@ -12,11 +12,15 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^0.20.0",
+    "humps": "^2.0.1",
+    "node-sass": "^4.13.0",
     "query-string": "^6.8.3",
     "react-tabs": "^3.0.0",
-    "scroll": "^3.0.1"
+    "scroll": "^3.0.1",
+    "stories-component": "file:../stories-component"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,7 +55,6 @@
     "hermione": "^2.13.1",
     "html-reporter": "^5.5.0",
     "husky": "^3.0.9",
-    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "^7.1.1",

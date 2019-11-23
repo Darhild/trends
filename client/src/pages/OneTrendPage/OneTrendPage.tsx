@@ -5,8 +5,6 @@ import queryString from 'query-string';
 import TrendCard from '../../components/TrendCard/TrendCard';
 import Card from '../../components/Card/Card';
 import Title from '../../components/Title/Title';
-import Carousel from '../../components/Carousel/Carousel';
-import Story from '../../components/Story/Story';
 import Button from '../../components/Button/Button';
 import Trend from '../../types/trend';
 import Duration from '../../components/Duration/Duration';
@@ -16,6 +14,8 @@ import { getCardContent } from './../../utils/feed';
 import './OneTrendPage.scss';
 import { Vod } from '../../types/FeedItem';
 import { excludeBannedCards } from '../../utils';
+import StoriesComponent from 'stories-component';
+import 'stories-component/dist/styles.css';
 
 interface TParam {
     category: string;
@@ -90,7 +90,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
     public render() {
         const { trend, collection } = this.props;
         if (trend) {
-            const { desc, img, poster, stories, commentsCount } = trend;
+            const { id, desc, img, poster, commentsCount } = trend;
 
             return (
                 <>
@@ -107,10 +107,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                         <Button type="addVideo" />
                     </div>
                     <div className="OneTrendPage-Stories">
-                        <Carousel canBeHidden={false} margin="s">
-                            {stories.map((story) =>
-                                <Story thumbnail={story.thumbnail} title={story.title}/>)}
-                        </Carousel>
+                        <StoriesComponent user={null} subject={id || desc} canAdd />
                     </div>
                     <Title cn="OneTrendPage-Title">Видео по теме</Title>
                     {collection && this.renderCollection(collection)}

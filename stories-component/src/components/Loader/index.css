@@ -1,0 +1,31 @@
+.Loader {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 10;
+}
+
+.Loader-Spinner {
+  animation: spin 1s linear 0s infinite;
+  border: 3px solid #ffffff2b;
+  border-left: 3px solid #fff;
+  border-radius: 50%; 
+  height: 48px;
+  width: 48px;
+  position: absolute;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

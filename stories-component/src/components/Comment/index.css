@@ -1,0 +1,48 @@
+.Comment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 12px 32px;
+  color: #fff;
+}
+.Comment-Row {
+  display: flex;
+  align-items: center;
+}
+.Comment-Avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+}
+.Comment-Name {
+  margin-right: 6px;
+}
+.Comment-Date {
+  color: rgba(255, 255, 255, 0.6);
+}
+.Comment-Controls {
+  padding-left: 36px;
+  display: flex;
+}
+.Comments-PhotoAnswer {
+  position: relative;
+  padding-left: 30px;
+  margin-right: 20px;
+}
+.Comments-PhotoAnswer:before {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  bottom: 0;
+  content: '';
+  display: block;
+  width: 17px;
+  height: 15px;
+  background: url("assets/photo-icon.svg") center/contain no-repeat;
+}
+.Comment-Message {
+  padding-left: 42px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  overflow-wrap: break-word;
+}

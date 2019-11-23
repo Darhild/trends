@@ -73,6 +73,10 @@
     }
 
     &-Stories {
+        position: relative;
+        z-index: 100;
+        margin-left: -17px;
+
         @media(min-width: $screen-m) {
             display: none;
         }
