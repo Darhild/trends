@@ -10,6 +10,7 @@ def group_by_title(data):
     result = list()
     for d in data:
         title = d['title']
+        d["data"]["comments_count"] = title_score["title"]
         if title not in titles:
             titles.add(title)
             result.append({'title': title, 'data': d['data'], 'day': title_score[title]})
