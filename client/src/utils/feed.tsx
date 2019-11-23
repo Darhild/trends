@@ -15,7 +15,6 @@ interface Content {
 
 export const getCardContent = ({
     title,
-    computed_title,
     release_year,
     genres,
     supertag,
@@ -26,7 +25,7 @@ export const getCardContent = ({
     thumbnail,
 }: Vod) => {
     const content: Content = {
-        title: computed_title || title,
+        title,
         subtitle: null,
         rightContent: null,
         details: null,
@@ -36,6 +35,11 @@ export const getCardContent = ({
 
     switch (supertag) {
         case 'blogger':
+            content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
+            content.details = <Duration duration={duration} />;
+            content.size = 'medium';
+            break;
+        case 'music':
             content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
             content.details = <Duration duration={duration} />;
             content.size = 'medium';

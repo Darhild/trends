@@ -1,5 +1,5 @@
-import { fetchTrends, fetchFeed } from '../apiService';
-import { setTrends, setFeed } from './actions';
+import { fetchTrends, fetchFeed, fetchCollection } from '../apiService';
+import { setTrends, setFeed, setCollection } from './actions';
 import { Dispatch } from './createStore';
 import { mapTrends } from '../utils/mappers';
 
@@ -17,3 +17,12 @@ export const setFeedThunk = (tag: string) =>
             }
         })
         .catch(() => []);
+
+export const setCollectionThunk = (id: string) =>
+        (dispatch: Dispatch) => fetchCollection(id)
+            .then((collection: any) => {
+                if (collection) {
+                    dispatch(setCollection(collection, id));
+                }
+            })
+            .catch(() => []);

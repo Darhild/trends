@@ -16,10 +16,10 @@
 
     &-Header {
         position: relative;
-        margin-bottom: 36px;
+        margin-bottom: 20px;
 
         @media(min-width: $screen-s) {
-            margin-bottom: 65px;
+            margin-bottom: 48px;
         }
     }
 
@@ -35,6 +35,10 @@
         @media(min-width: $screen-m) {
             margin-top: 10px;
             grid-template-columns: 1fr;
+        }
+
+        .Card-Content {
+            padding: 8px 0 12px;
         }
     }
 

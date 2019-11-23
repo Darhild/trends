@@ -4,7 +4,10 @@ export default interface Trend {
     poster: string;
     desc: string;
     icon?: string;
-    videos?: Vod[];
+    id: string;
+    source: string;
+    collection: Vod[];
+    collectionLength: number;
     stories: Array<{
         title: string;
         thumbnail: string;

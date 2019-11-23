@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Trends.scss';
-import SmallCard, { SmallCardProps } from '../SmallCard/SmallCard';
+import SmallCard from '../SmallCard/SmallCard';
 import { Link } from 'react-router-dom';
 import Carousel from '../Carousel/Carousel';
 import { State, Dispatch } from '../../store/createStore';
@@ -11,11 +11,12 @@ import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
 import { setPeriod } from './../../store/actions';
 import TrendsList from '../TrendsList/TrendsList';
+import Trend from '../../types/trend';
 
 interface TrendsProps {
     trendVariant: string;
     allTrendsOnMain: boolean;
-    trends: SmallCardProps[];
+    trends: Trend[];
     category: string;
     period: number;
     source: string;
@@ -57,11 +58,16 @@ class Trends extends Component<TrendsProps> {
             return (
                 <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
-                        trends.map((props, index) => (
-                            <Link className="Trends-Link" to={`${url}/${index + 1}`}>
-                                <SmallCard {...props}/>
-                            </Link>
-                        ))
+                        trends.map((props) => {
+                            const { id, desc, source } = props;
+                            const urlId = id ? id : desc;
+
+                            return (
+                                <Link className="Trends-Link" to={`${url}/${urlId}?source=${source}`}>
+                                    <SmallCard {...props}/>
+                                </Link>
+                            );
+                        })
                     }
                 </Carousel>
             );
@@ -93,11 +99,11 @@ class Trends extends Component<TrendsProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-    allTrendsOnMain: state.allTrendsOnMain,
-    trendVariant: state.trendVariant,
+    allTrendsOnMain: state.settings.allTrendsOnMain,
+    trendVariant: state.settings.trendVariant,
     trends: state.trends,
-    period: state.period,
-    source: state.source,
+    period: state.settings.period,
+    source: state.settings.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

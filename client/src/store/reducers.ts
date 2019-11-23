@@ -1,10 +1,17 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
-import { SET_TRENDS, SET_FEED, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
+import { SET_TRENDS, SET_FEED, SET_COLLECTION, SET_TREND_VARIANT, SET_PERIOD, SET_SOURCE, SET_ALL_TRENDS_ON_MAIN } from './actionTypes';
 
 interface Reducer extends redux.Reducer {
     (state: State, action: redux.AnyAction): State;
+}
+
+interface Settings {
+    allTrendsOnMain: boolean;
+    trendVariant: string;
+    period: number;
+    source: string;
 }
 
 const defaultState = {
@@ -24,39 +31,43 @@ const defaultState = {
             channelCategory: channel_category,
         })),
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
-    allTrendsOnMain: true,
-    trendVariant: 'default',
-    period: 1,
-    source: 'efir',
+    settings: {
+        allTrendsOnMain: true,
+        trendVariant: 'default',
+        period: 1,
+        source: 'efir',
+    },
 };
 
 export const saveState = (state: State) => {
     try {
-        const serialisedState = JSON.stringify(state);
-
-        window.localStorage.setItem('appState', serialisedState);
+        const serializedSettings = JSON.stringify(state.settings);
+        window.localStorage.setItem('settings', serializedSettings);
     } catch (err) {
 
         return;
     }
 };
 
-const loadStateFromLocalStorage = (state = {}) => {
+const loadStateFromLocalStorage = (settings: Settings) => {
     try {
-      const serialisedState = window.localStorage.getItem('appState');
+      const serializedSettings = window.localStorage.getItem('settings');
 
-      if (!serialisedState) {
-        return state;
+      if (!serializedSettings) {
+        return settings;
       }
 
-      return JSON.parse(serialisedState);
+      return JSON.parse(serializedSettings);
     } catch (err) {
 
-        return state;
+        return settings;
     }
 };
 
-const initialState = loadStateFromLocalStorage(defaultState);
+const initialState = {
+    ...defaultState,
+    settings: loadStateFromLocalStorage(defaultState.settings),
+};
 
 export const reducer: Reducer = (state: State = initialState, action: redux.AnyAction) => {
     switch (action.type) {
@@ -94,25 +105,47 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                     };
             }
         }
+        case SET_COLLECTION:
+            const currentTrend = state.trends.find((trend) => trend.id === action.id);
+            if (currentTrend) {
+                currentTrend.collection = action.payload;
+                currentTrend.collectionLength = action.payload.length;
+            }
+
+            return {
+                ...state,
+            };
         case SET_ALL_TRENDS_ON_MAIN:
             return {
                 ...state,
-                allTrendsOnMain: action.payload,
+                settings: {
+                    ...state.settings,
+                    allTrendsOnMain: action.payload,
+                },
             };
         case SET_TREND_VARIANT:
             return {
                 ...state,
-                trendVariant: action.payload,
+                settings: {
+                    ...state.settings,
+                    trendVariant: action.payload,
+                },
             };
         case SET_PERIOD:
             return {
                 ...state,
-                period: action.payload,
+                settings: {
+                    ...state.settings,
+                    period: action.payload,
+                },
             };
         case SET_SOURCE:
             return {
                 ...state,
-                source: action.payload,
+                settings: {
+                    ...state.settings,
+                    source: action.payload,
+                },
             };
         default:
             return state;

@@ -57,9 +57,9 @@ class TrendsPage extends Component<TrendsPageProps> {
 }
 
 const mapStateToProps = (state: State) => ({
-    trendVariant: state.trendVariant,
-    period: state.period,
-    source: state.source,
+    trendVariant: state.settings.trendVariant,
+    period: state.settings.period,
+    source: state.settings.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -7,10 +7,14 @@ import { changeImageSize } from '../../utils/images';
 export interface SmallCardProps {
     poster: string;
     desc: string;
+    source?: string;
 }
 
-const SmallCard = ({ desc, poster }: SmallCardProps) => {
-    const bg = poster ? `url(${changeImageSize(poster)})` : 'radial-gradient(137% 83.13% at 126% 113.12%, #FF0099 0%, #F78B69 100%)';
+const SmallCard = ({ desc, poster, source }: SmallCardProps) => {
+    const bg = poster
+        ? `url(${changeImageSize(poster)})`
+        : 'radial-gradient(137% 83.13% at 126% 113.12%, #FF0099 0%, #F78B69 100%)';
+    const label = (source === 'efir') ? 'Сейчас обсуждают' : 'Набирает популярность';
 
     return (
         <div className="SmallCard" style={ { backgroundImage: bg } }>
@@ -20,7 +24,7 @@ const SmallCard = ({ desc, poster }: SmallCardProps) => {
                 <span className="SmallCard-Placeholder"></span>
             </>}
             <div className="SmallCard-Footer">
-                {!poster && <div className="SmallCard-Label">Набирает популярность</div>}
+            {!poster && <div className="SmallCard-Label">{label}</div>}
                 <div className="SmallCard-Title">{desc}</div>
             </div>
         </div>
