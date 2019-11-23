@@ -25,7 +25,7 @@ def update_old(new_data, old_data):
 
     """
 
-    old_data = {item[0]: item[1] for item in old_data.items()}
+    old_data = {item[0]: item[1] for item in old_data}
 
     tags = set(new_data.keys()) | set(old_data.keys())
     updated_data = {}
