@@ -1,7 +1,11 @@
 import Trend from '../types/trend';
 import {
-    SET_TRENDS,
-    SET_FEED,
+    FETCH_TRENDS_REQUEST,
+    FETCH_TRENDS_SUCCESS,
+    FETCH_TRENDS_ERROR,
+    FETCH_FEED_REQUEST,
+    FETCH_FEED_SUCCESS,
+    FETCH_FEED_ERROR,
     SET_COLLECTION,
     SET_TREND_VARIANT,
     SET_PERIOD,
@@ -10,9 +14,17 @@ import {
     SET_COMMENTED,
 } from './actionTypes';
 
-export const setTrends = (payload: Trend[]) => ({ type: SET_TRENDS, payload });
+export const requestTrends = () => ({ type: FETCH_TRENDS_REQUEST });
 
-export const setFeed = (payload: any, tag?: string) => ({ type: SET_FEED, tag, payload });
+export const setTrends = (payload: Trend[]) => ({ type: FETCH_TRENDS_SUCCESS, payload });
+
+export const trendsErroe = () => ({ type: FETCH_TRENDS_ERROR });
+
+export const requestFeed = () => ({ type: FETCH_FEED_REQUEST });
+
+export const setFeed = (payload: any, tag?: string) => ({ type: FETCH_FEED_SUCCESS, tag, payload });
+
+export const feedError = (payload: any, tag?: string) => ({ type: FETCH_FEED_ERROR, tag, payload });
 
 export const setCollection = (payload: any, id: string) => ({ type: SET_COLLECTION, payload, id });
 

@@ -2,12 +2,17 @@ import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
 import {
-    SET_TRENDS,
-    SET_FEED,
+    FETCH_TRENDS_REQUEST,
+    FETCH_TRENDS_SUCCESS,
+    FETCH_TRENDS_ERROR,
+    FETCH_FEED_REQUEST,
+    FETCH_FEED_SUCCESS,
+    FETCH_FEED_ERROR,
     SET_COLLECTION,
     SET_COMMENTED,
     SET_TREND_VARIANT,
-    SET_PERIOD, SET_SOURCE,
+    SET_PERIOD,
+    SET_SOURCE,
     SET_ALL_TRENDS_ON_MAIN,
 } from './actionTypes';
 
@@ -23,6 +28,8 @@ interface Settings {
 }
 
 const defaultState = {
+    feedIsLoading: false,
+    trendsIsLoading: false,
     trends: [],
     commented: [],
     main: [],
@@ -80,40 +87,65 @@ const initialState = {
 
 export const reducer: Reducer = (state: State = initialState, action: redux.AnyAction) => {
     switch (action.type) {
-        case SET_TRENDS:
+        case FETCH_TRENDS_REQUEST:
+            return {
+                ...state,
+                trendsIsLoading: true,
+            };
+        case FETCH_TRENDS_SUCCESS:
             return {
                 ...state,
                 trends: action.payload,
+                trendsIsLoading: false,
             };
-        case SET_FEED: {
+        case FETCH_TRENDS_ERROR:
+        return {
+            ...state,
+            trendsIsLoading: false,
+        };
+        case FETCH_FEED_REQUEST:
+            return {
+                ...state,
+                feedIsLoading: true,
+            };
+        case FETCH_FEED_SUCCESS: {
             switch (action.tag) {
                 case 'movie':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         movie: action.payload,
                     };
                 case 'series':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         series: action.payload,
                     };
                 case 'blogger':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         blogger: action.payload,
                     };
                 case 'kids':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         kids: action.payload,
                     };
                 default:
                     return {
                         ...state,
+                        feedIsLoading: false,
                         main: action.payload,
                     };
             }
         }
+        case FETCH_FEED_ERROR: return {
+            ...state,
+            feedIsLoading: false,
+        };
         case SET_COLLECTION:
             const currentTrend = state.trends.find((trend) => trend.id === action.id);
             if (currentTrend) {

@@ -54,7 +54,19 @@ class Trends extends Component<TrendsProps> {
             />
         );
 
+        const tabs = (
+            <>
+                <Title cn="Trends-Title" url={url}>Самое популярное</Title>
+                <Tabs
+                    period={period}
+                    tabsContent={tabsContent}
+                    onTabClickSetValue={onTabClickSetPeriod}
+                />
+            </>
+        );
+
         if (allTrendsOnMain && trends.length > 0) {
+
             return (
                 <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
@@ -75,12 +87,7 @@ class Trends extends Component<TrendsProps> {
 
         return (
             <>
-                <Title cn="Trends-Title" url={url}>Самое популярное</Title>
-                <Tabs
-                    period={period}
-                    tabsContent={tabsContent}
-                    onTabClickSetValue={onTabClickSetPeriod}
-                />
+                {tabs}
                 <TrendsList category={category} variant={trendVariant} shortVariant />
             </>
         );

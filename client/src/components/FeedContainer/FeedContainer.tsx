@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FeedContainer.scss';
 import Carousel from '../Carousel/Carousel';
 import Card from '../Card/Card';
+import EmptyCards from './../EmptyCards/EmptyCards';
 import { connect } from 'react-redux';
 import { State, Dispatch } from '../../store/createStore';
 import { setFeedThunk } from '../../store/thunks';
@@ -16,6 +17,7 @@ interface OwnProps {
 
 interface StateProps {
     content: FeedItem[];
+    isLoading: boolean;
     onInitFeed(tag: string): void;
 }
 
@@ -84,10 +86,20 @@ class FeedContainer extends Component<FeedContainerProps> {
     }
 
     public render() {
+        const { category, content, isLoading } = this.props;
+
+        if (isLoading) {
+            const size = (category === 'blogger') ? 'medium' : 'small';
+
+            return (
+                <EmptyCards carouselNumber={4} cardsNumber={10} cardSize={size} />
+            );
+        }
+
         return (
             <div className="Feed">
                 {
-                    this.props.content.map((item: FeedItem) =>
+                    content.map((item: FeedItem) =>
                     item.content_type_name === 'carousel'
                         ? renderCarousel(item)
                         : renderCard(item))
@@ -99,6 +111,7 @@ class FeedContainer extends Component<FeedContainerProps> {
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => ({
     content: state[ownProps.category],
+    isLoading: state.feedIsLoading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

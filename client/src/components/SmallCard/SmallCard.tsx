@@ -5,8 +5,8 @@ import './SmallCard.scss';
 import { changeImageSize } from '../../utils/images';
 
 export interface SmallCardProps {
-    poster: string;
-    desc: string;
+    poster?: string;
+    desc?: string;
     source?: string;
 }
 

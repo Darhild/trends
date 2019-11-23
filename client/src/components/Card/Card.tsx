@@ -12,7 +12,7 @@ export interface Props {
     img?: string;
     imgView?: string;
     size?: string;
-    content_id: string;
+    content_id?: string;
     poster?: string;
     bgColor?: string;
 }
