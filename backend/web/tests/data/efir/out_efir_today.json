@@ -6,7 +6,8 @@
       "avatar": "https://yastatic.net/s3/home/stream/nhl/2019/avatars/teams/ava_VAN.png",
       "bg": "https://yastatic.net/s3/home/stream/nhl/2019/background/teams/cover_VAN.png",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 10
     }
   ],
   "blogger": [
@@ -16,7 +17,8 @@
       "avatar": "",
       "bg": "",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 50
     }
   ],
   "common": [
@@ -26,7 +28,8 @@
       "avatar": "",
       "bg": "",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 162
     }
   ],
   "movie": [
@@ -36,7 +39,8 @@
       "avatar": "",
       "bg": "",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 162
     }
   ],
   "kids": [
@@ -46,7 +50,8 @@
       "avatar": "",
       "bg": "",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 41
     }
   ],
   "series": [
@@ -56,7 +61,8 @@
       "avatar": "",
       "bg": "",
       "source": "efir",
-      "description": ""
+      "description": "",
+      "comments_count": 1
     }
   ]
 }
