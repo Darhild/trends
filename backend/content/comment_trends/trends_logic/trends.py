@@ -185,12 +185,17 @@ def count_comments_by_docs(doc_to_comments):
 
 def count_comments(comments_ts) -> int:
     comments_ts.sort(reverse=True)
-    today = datetime.today()
-    day_count = count_comments_from(today - timedelta(days=1), comments_ts)
+    # today = datetime.today()
+    day_count = count_comments_from(get_day_start(), comments_ts)
     # week = count_comments_from(today - timedelta(days=7), comments)
     # month = count_comments_from(today - timedelta(days=30), comments)
 
     return day_count
+
+
+def get_day_start():
+    now = datetime.now()
+    return now.replace(hour=0, minute=0)
 
 
 def count_comments_from(past_date, comments_ts) -> int:

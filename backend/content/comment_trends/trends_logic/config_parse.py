@@ -4,11 +4,11 @@ import yaml
 
 config_logger = logging.getLogger(__name__)
 
-CURRENT_DIR = os.path.dirname(__file__)
+PARENT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 class Config:
-    def __init__(self, path=os.path.join(CURRENT_DIR, 'trends_config.yaml')):
+    def __init__(self, path=os.path.join(PARENT_DIR, 'trends_config.yaml')):
         self.path = path
         self.fields = ('docs_per_carousel_num', 'carousels_num', 'request_interval_minutes', 'tags')
         self.config = self.read_config()
@@ -30,7 +30,7 @@ class Config:
 
     def get_tags(self):
         if not self.config:
-            return {'movie', 'series', 'common'}
+            return {"movie", "series", "kids", "sport", "blogger", "common"}
 
         return set(self.config['tags'])
 
