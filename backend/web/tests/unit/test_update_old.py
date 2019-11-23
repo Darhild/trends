@@ -9,9 +9,9 @@ import logging
         ({
              'movie': [{'id': 1, 'day': 1}, ]
          },
-         {
-             'movie': [{'id': 1, 'day': 0}, ]
-         },
+         [
+             ('movie', [{'id': 1, 'day': 0}])
+         ],
          [
              {
                  'category': 'movie',
@@ -24,9 +24,9 @@ import logging
         ({
              'movie': [{'id': 1, 'day': 0}, ]
          },
-         {
-             'movie': [{'id': 1, 'day': 1}, ]
-         },
+         [
+             ('movie', [{'id': 1, 'day': 1}, ])
+         ],
          [
              {
                  'category': 'movie',
@@ -39,9 +39,9 @@ import logging
         ({
              'movie': [{'id': 1, 'day': 10}, ]
          },
-         {
-             'movie': [{'id': 1, 'day': 1}, ]
-         },
+         [
+             ('movie', [{'id': 1, 'day': 1}, ])
+         ],
          [
              {
                  'category': 'movie',
@@ -54,9 +54,9 @@ import logging
         ({
              'movie': [{'id': 1, 'day': 10}, ]
          },
-         {
-             'movie': []
-         },
+         [
+             ('movie', [])
+         ],
          [
              {
                  'category': 'movie',
@@ -69,9 +69,9 @@ import logging
         ({
              'movie': [{'id': 2, 'day': 10}]
          },
-         {
-             'movie': [{'id': 1, 'day': 10}]
-         },
+         [
+             ('movie', [{'id': 1, 'day': 10}])
+         ],
          [
              {
                  'category': 'movie',
@@ -86,9 +86,9 @@ import logging
         ({
              'movie': []
          },
-         {
-             'movie': [{'id': 1, 'day': 10}]
-         },
+         [
+             ('movie', [{'id': 1, 'day': 10}])
+         ],
          [
              {
                  'category': 'movie',
@@ -102,9 +102,9 @@ import logging
         ({
              'movie': [{'id': 2, 'day': 10}]
          },
-         {
-             'kids': [{'id': 1, 'day': 10}]
-         },
+         [
+             ('kids', [{'id': 1, 'day': 10}])
+         ],
          [
              {
                  'category': 'movie',
