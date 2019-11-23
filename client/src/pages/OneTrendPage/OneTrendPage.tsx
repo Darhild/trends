@@ -15,6 +15,7 @@ import { setCollectionThunk, setTrendsThunk } from '../../store/thunks';
 import { getCardContent } from './../../utils/feed';
 import './OneTrendPage.scss';
 import { Vod } from '../../types/FeedItem';
+import { excludeBannedCards } from '../../utils';
 
 interface TParam {
     category: string;
@@ -47,8 +48,10 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
     }
 
     public renderCollection(videos: Vod[]) {
-        const firstVideos = videos && videos.slice(0, 3);
-        const lastVideos = videos && videos.slice(3);
+        const filteredVideos = videos && excludeBannedCards(videos);
+
+        const firstVideos = filteredVideos && filteredVideos.slice(0, 3);
+        const lastVideos = filteredVideos && filteredVideos.slice(3);
 
         const renderCard = (vod: Vod, size: string) => (
             <Card

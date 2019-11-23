@@ -1,0 +1,35 @@
+@import './../../variables';
+
+.FeedPlayer {
+    display: none; 
+    
+    @media(min-width: $screen-s) {
+        display: flex;
+    }
+
+    &-Card {
+        flex: 1;
+        margin-top: 8px;
+        
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &-Carousel {
+        display: none;
+        margin-left: 8px;
+        overflow: hidden;
+
+        @media(min-width: $screen-m) {
+            display: block;
+        }
+    }
+
+    &-Item {
+        display: flex;
+        flex-direction: column;
+        width: 253px;
+        height: 336px;
+    }
+}

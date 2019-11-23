@@ -1,0 +1,49 @@
+[
+    {
+        "img": "https://yastatic.net/s3/home/special_projects/thumbs/sofiko_desktop.png",
+        "title": "Просто о сложном",
+        "subtitle": "Человек в космосе",
+        "content_id": "4fd5e0a33bb9b1abb790528995585a06"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/2363100/980342166212008319-wlBzPkimGayfLNgL5nt8Ig-1573463302/400x300",
+        "title": "Шоу Леонида Парфёнова",
+        "subtitle": "О событиях, людях, явлениях",
+        "content_id": "4d3cf00862fb0435aa0d603ec7412a9a"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/2363100/11468020132321430729-dsm4xsqUB4MJMkGzocm9lFQ-1573824541/400x300",
+        "title": "Такая история",
+        "subtitle": "Первые почтовые ящики",
+        "content_id": "4ec6a1d9443a7349a16cde4cf38a6544"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/1483471/5942428691531066991-kgvwCMBBX4lLvzKQBYBg5A-1550506189/400x300",
+        "title": "Рик и Морти",
+        "subtitle": "Портал в четвёртый сезон открыт",
+        "content_id": "46c5df252dc1a790b82d1a00fcf44812"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/2340820/1476736419549641017-IusIJRaefAyhMqMTTd4H3Q-1570319091/400x300",
+        "title": "Хибла Герзмава, оперная певица",
+        "subtitle": "Т Фестиваль",
+        "content_id": "4d659bf5f7439f9a80b63aeb4a11df2b"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/1067189/5593766887438292904-2DABNyt0WFrxf81i3qxzJw-1543920004/400x300",
+        "title": "Москва 24",
+        "subtitle": "Прямой эфир",
+        "content_id": "41982ecac610fe988f266cfde5ad5a08"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/1549967/1433612619126868470-yNCB3aJ6DKLoSGgPF0QMag-1545685910/400x300",
+        "title": "EarthTV",
+        "subtitle": "Канал о нашей земле",
+        "content_id": "4d221c43eeb6e0b29cd7f1e8cc18de90"
+    },
+    {
+        "img": "//avatars.mds.yandex.net/get-vh/1573627/7897263378061402302-yarVFV4xdYjFmJabnDPPvQ-1566393293/400x300",
+        "title": "Международный фестиваль фейерверков. Пиротехническое шоу. День 2",
+        "content_id": "4212bbacbb974691830e3b7f83918027"
+    }
+]

@@ -9,9 +9,8 @@
     &-List {
         z-index: 0;
         display: flex;
-        padding-top: 6px;
         overflow-x: scroll;  
-        scrollbar-width: none;      
+        scrollbar-width: none;
     
         @media(max-width: $screen-m) {
             margin-right: -16px;
@@ -22,6 +21,10 @@
                 content: '';
                 flex: 0 0 16px;
             }
+        }
+
+        &_hoverable {
+            padding-top: 6px;
         }
     
         &::-webkit-scrollbar {
@@ -136,11 +139,21 @@
             &_left {
                 left: 0;
                 transform: rotate(180deg) translateX(50%);
+
+
             }
 
             &_right {
                 right: 0;
                 transform: translateX(50%);
+            }
+
+            &_left.Carousel-Arrow_inset {
+                left: 30px;
+            }
+
+            &_right.Carousel-Arrow_inset {
+                right: 30px;
             }
         }
     }    

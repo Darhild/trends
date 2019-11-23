@@ -23,6 +23,7 @@ export const getCardContent = ({
     percentage_score,
     rating_kp,
     thumbnail,
+    onto_poster,
 }: Vod) => {
     const content: Content = {
         title,
@@ -30,7 +31,7 @@ export const getCardContent = ({
         rightContent: null,
         details: null,
         size: 'small',
-        img: thumbnail,
+        img: onto_poster ? onto_poster : thumbnail,
     };
 
     switch (supertag) {
@@ -38,6 +39,7 @@ export const getCardContent = ({
             content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
             content.details = <Duration duration={duration} />;
             content.size = 'medium';
+            content.img = thumbnail;
             break;
         case 'music':
             content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;

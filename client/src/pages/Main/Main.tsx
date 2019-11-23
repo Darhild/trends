@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
-import Player from '../../components/Player/Player';
+import FeedPlayer from '../../components/FeedPlayer/FeedPlayer';
 import Trends from '../../components/Trends/Trends';
 import Commented from '../../components/Commented/Commented';
 import FeedContainer from '../../components/FeedContainer/FeedContainer';
@@ -13,7 +13,7 @@ class Main extends Component<RouteComponentProps<TParam>> {
 
         return (
             <>
-                {category === 'main' && <Player />}
+                {category === 'main' && <FeedPlayer />}
                 <Trends category={category} />
                 <Commented category={category} />
                 <FeedContainer category={category}/>
