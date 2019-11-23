@@ -1,6 +1,8 @@
 import Trend from '../types/trend';
 import {
-    SET_TRENDS,
+    FETCH_TRENDS_REQUEST,
+    FETCH_TRENDS_SUCCESS,
+    FETCH_TRENDS_ERROR,
     FETCH_FEED_REQUEST,
     FETCH_FEED_SUCCESS,
     FETCH_FEED_ERROR,
@@ -12,7 +14,11 @@ import {
     SET_COMMENTED,
 } from './actionTypes';
 
-export const setTrends = (payload: Trend[]) => ({ type: SET_TRENDS, payload });
+export const requestTrends = () => ({ type: FETCH_TRENDS_REQUEST });
+
+export const setTrends = (payload: Trend[]) => ({ type: FETCH_TRENDS_SUCCESS, payload });
+
+export const trendsErroe = () => ({ type: FETCH_TRENDS_ERROR });
 
 export const requestFeed = () => ({ type: FETCH_FEED_REQUEST });
 

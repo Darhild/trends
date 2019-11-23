@@ -2,12 +2,15 @@ import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
 import {
-    SET_TRENDS,
+    FETCH_TRENDS_REQUEST,
+    FETCH_TRENDS_SUCCESS,
+    FETCH_TRENDS_ERROR,
+    FETCH_FEED_REQUEST,
+    FETCH_FEED_SUCCESS,
+    FETCH_FEED_ERROR,
     SET_COLLECTION,
     SET_COMMENTED,
     SET_TREND_VARIANT,
-    FETCH_FEED_REQUEST,
-    FETCH_FEED_SUCCESS,
     SET_PERIOD,
     SET_SOURCE,
     SET_ALL_TRENDS_ON_MAIN,
@@ -26,6 +29,7 @@ interface Settings {
 
 const defaultState = {
     feedIsLoading: false,
+    trendsIsLoading: false,
     trends: [],
     commented: [],
     main: [],
@@ -83,11 +87,22 @@ const initialState = {
 
 export const reducer: Reducer = (state: State = initialState, action: redux.AnyAction) => {
     switch (action.type) {
-        case SET_TRENDS:
+        case FETCH_TRENDS_REQUEST:
+            return {
+                ...state,
+                trendsIsLoading: true,
+            };
+        case FETCH_TRENDS_SUCCESS:
             return {
                 ...state,
                 trends: action.payload,
+                trendsIsLoading: false,
             };
+        case FETCH_TRENDS_ERROR:
+        return {
+            ...state,
+            trendsIsLoading: false,
+        };
         case FETCH_FEED_REQUEST:
             return {
                 ...state,
@@ -127,6 +142,10 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                     };
             }
         }
+        case FETCH_FEED_ERROR: return {
+            ...state,
+            feedIsLoading: false,
+        };
         case SET_COLLECTION:
             const currentTrend = state.trends.find((trend) => trend.id === action.id);
             if (currentTrend) {

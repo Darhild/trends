@@ -1,15 +1,16 @@
 import { fetchTrends, fetchFeed, fetchCollection, fetchCommented } from '../apiService';
-import { setTrends, requestFeed, setFeed, setCommented, setCollection } from './actions';
+import { setTrends, requestFeed, setFeed, setCommented, setCollection, requestTrends } from './actions';
 import { Dispatch } from './createStore';
 import { mapTrends, mapCommented } from '../utils/mappers';
 
 export const setTrendsThunk = (category: string, period: number, source?: string) =>
     (dispatch: Dispatch) => {
+        dispatch(requestTrends());
         fetchTrends(category, period, source)
         .then((res: any) => res ? res.map(mapTrends) : [])
         .then((trends: any) => dispatch(setTrends(trends)))
         .catch(() => []);
-    }
+    };
 
 export const setFeedThunk = (tag: string) =>
     (dispatch: Dispatch) => {
@@ -21,7 +22,7 @@ export const setFeedThunk = (tag: string) =>
             }
         })
         .catch(() => []);
-    } 
+    };
 
 export const setCollectionThunk = (id: string) =>
         (dispatch: Dispatch) => fetchCollection(id)
