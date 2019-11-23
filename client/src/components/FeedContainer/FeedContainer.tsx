@@ -32,7 +32,7 @@ const renderList = (list: CarouselType) => {
         return (
             <Card
                 key={content_id}
-                content_id={content_id}
+                id={content_id}
                 {...getCardContent(vod)}
             />
         );
@@ -61,7 +61,7 @@ const renderCard = (vod: Vod) =>
             : <div className="Feed-Item">
                 <Card
                     key={vod.content_id}
-                    content_id={vod.content_id}
+                    id={vod.content_id}
                     {...getCardContent(vod)}
                     poster={vod.onto_poster}
                     size="full"

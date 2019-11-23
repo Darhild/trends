@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card with large size 1`] = `
+<a
+  className="Card Card_size_large"
+  href="https://yandex.ru/efir?from=efir&stream_id=0"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  <div
+    className="Card-Thumb"
+    style={
+      Object {
+        "backgroundImage": "",
+      }
+    }
+  />
+  <div
+    className="Card-Content"
+  />
+</a>
+`;
+
+exports[`Card with small size 1`] = `
+<a
+  className="Card Card_size_small"
+  href="https://yandex.ru/efir?from=efir&stream_id=0"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  <div
+    className="Card-Thumb"
+    style={
+      Object {
+        "backgroundImage": "",
+      }
+    }
+  />
+  <div
+    className="Card-Content"
+  />
+</a>
+`;
+
+exports[`Card without props 1`] = `
+<a
+  className="Card Card_size_medium"
+  href="https://yandex.ru/efir?from=efir&stream_id=0"
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  <div
+    className="Card-Thumb"
+    style={
+      Object {
+        "backgroundImage": "",
+      }
+    }
+  />
+  <div
+    className="Card-Content"
+  />
+</a>
+`;

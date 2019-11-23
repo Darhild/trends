@@ -52,7 +52,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
 
         const renderCard = (vod: Vod, size: string) => (
             <Card
-                content_id={vod.content_id}
+                id={vod.content_id}
                 key={vod.content_id}
                 {...getCardContent(vod)}
                 size={size}

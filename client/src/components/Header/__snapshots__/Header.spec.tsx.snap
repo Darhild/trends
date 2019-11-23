@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`subscribe Header default state 1`] = `
+<div
+  className="Header"
+>
+  <div
+    className="Header-Logo"
+  >
+    <svg>
+      logo.svg
+    </svg>
+  </div>
+  <div
+    className="Search Header-Search"
+  >
+    <div
+      className="Icon Search-Icon"
+    >
+      <svg
+        onClick={[Function]}
+      >
+        search.svg
+      </svg>
+    </div>
+    <form
+      className="Search-Form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="Search-Close"
+        onClick={[Function]}
+      />
+      <input
+        className="Search-Input"
+        onChange={[Function]}
+        placeholder="Поиск по передачам и телеканалам"
+      />
+      <button
+        className="Search-Submit"
+        type="submit"
+      >
+        Найти
+      </button>
+    </form>
+  </div>
+</div>
+`;

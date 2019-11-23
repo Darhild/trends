@@ -73,6 +73,7 @@ class Channels extends React.Component<ChannelsProps> {
         if (!channel) {
             return <ChannelsItem
                 title="Список каналов"
+                key="--"
                 url="https://yandex.ru/efir?stream_active=channels-list&from=efir" />;
         }
         const { iconUrl, position } = this.getIconProps(channel.channelId);
@@ -82,6 +83,7 @@ class Channels extends React.Component<ChannelsProps> {
             <ChannelsItem
                 title={channel.title}
                 url={url}
+                key={url}
                 iconUrl={iconUrl}
                 position={position} />
         );

@@ -30,7 +30,10 @@ class SubscribeButton extends React.Component<TypedButtonProps, SubscribeButtonS
     public render = () => {
         const { cn } = this.props;
         const { isSubscribed } = this.state;
-        const subscribeButtonCn = classnames(cn, isSubscribed && 'Button_subscribe_off');
+        const subscribeButtonCn = classnames(
+            cn,
+            isSubscribed && 'Button_subscribe_off',
+        );
 
         return (
             <div className={subscribeButtonCn} onClick={this.subscribe}>

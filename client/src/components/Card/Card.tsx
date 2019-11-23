@@ -4,6 +4,7 @@ import './Card.scss';
 import { changeImageSize } from '../../utils/images';
 
 export interface Props {
+    id: string;
     title?: React.ReactNode;
     subtitle?: React.ReactNode;
     details?: React.ReactNode;
@@ -12,7 +13,6 @@ export interface Props {
     img?: string;
     imgView?: string;
     size?: string;
-    content_id: string;
     poster?: string;
     bgColor?: string;
 }
@@ -48,7 +48,7 @@ export default class Card extends Component<Props> {
         const {
             className,
             size = 'medium',
-            content_id,
+            id,
             img,
             imgView,
             details,
@@ -71,7 +71,7 @@ export default class Card extends Component<Props> {
         return (
             <a
                 className={cardCn}
-                href={`https://yandex.ru/efir?from=efir&stream_id=${content_id}`}
+                href={`https://yandex.ru/efir?from=efir&stream_id=${id}`}
                 target="_blank"
                 rel="noopener noreferrer"
             >
