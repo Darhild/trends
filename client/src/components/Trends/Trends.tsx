@@ -54,7 +54,7 @@ class Trends extends Component<TrendsProps> {
             />
         );
 
-        if (allTrendsOnMain) {
+        if (allTrendsOnMain && trends.length > 0) {
             return (
                 <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
