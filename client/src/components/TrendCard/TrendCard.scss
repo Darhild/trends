@@ -41,6 +41,18 @@ $_: '.TrendCard';
             border-radius: 50%;
         }
     }
+
+    &_wide {
+
+        #{$_}-Poster {
+            background-position-y: center;
+            border-radius: 0;
+        }
+
+        #{$_}-Placeholder {
+            border-radius: 0;
+        }
+    }
     
     &-Poster {
         position: absolute;
@@ -48,13 +60,9 @@ $_: '.TrendCard';
         right: 0;
         bottom: 0;
         left: 0;
-        background: center no-repeat var(--color-placeholder);
+        background: top no-repeat var(--color-placeholder);
         background-size: cover;
         border-radius: 6px;
-
-        .OneTrendPage_TrendCard & {
-            border-radius: 0;
-        }
     }
 
     &-Placeholder {
@@ -65,10 +73,6 @@ $_: '.TrendCard';
 
         background: linear-gradient(180deg, rgba(0, 0, 0, .06) 28.93%, rgba(0, 0, 0, .9) 100%);
         border-radius: 6px;
-
-        .OneTrendPage_TrendCard & {
-            border-radius: 0;
-        }
     }
 
     &-Number {

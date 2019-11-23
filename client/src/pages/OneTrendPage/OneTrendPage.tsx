@@ -97,7 +97,8 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                             img={img}
                             poster={poster}
                             collectionLength={collectionLength}
-                            ratingPosition={1} />
+                            ratingPosition={1}
+                            isWide={true} />
                         <Button type="subscribe" />
                         <Button type="addVideo" />
                     </div>
