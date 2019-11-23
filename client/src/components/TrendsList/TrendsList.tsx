@@ -57,6 +57,9 @@ class TrendsList extends Component<Props> {
             shortVariant && 'TrendsList_state_short',
         );
 
+        if (!trends.length) {
+            return null;
+        }
         const items = shortVariant ? trends.slice(0, 5) : trends;
 
         return (
