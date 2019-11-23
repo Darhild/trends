@@ -3,11 +3,13 @@ import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
 import {
     SET_TRENDS,
-    SET_FEED,
     SET_COLLECTION,
     SET_COMMENTED,
     SET_TREND_VARIANT,
-    SET_PERIOD, SET_SOURCE,
+    FETCH_FEED_REQUEST,
+    FETCH_FEED_SUCCESS,
+    SET_PERIOD,
+    SET_SOURCE,
     SET_ALL_TRENDS_ON_MAIN,
 } from './actionTypes';
 
@@ -23,6 +25,7 @@ interface Settings {
 }
 
 const defaultState = {
+    feedIsLoading: false,
     trends: [],
     commented: [],
     main: [],
@@ -85,31 +88,41 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                 ...state,
                 trends: action.payload,
             };
-        case SET_FEED: {
+        case FETCH_FEED_REQUEST:
+            return {
+                ...state,
+                feedIsLoading: true,
+            };
+        case FETCH_FEED_SUCCESS: {
             switch (action.tag) {
                 case 'movie':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         movie: action.payload,
                     };
                 case 'series':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         series: action.payload,
                     };
                 case 'blogger':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         blogger: action.payload,
                     };
                 case 'kids':
                     return {
                         ...state,
+                        feedIsLoading: false,
                         kids: action.payload,
                     };
                 default:
                     return {
                         ...state,
+                        feedIsLoading: false,
                         main: action.payload,
                     };
             }

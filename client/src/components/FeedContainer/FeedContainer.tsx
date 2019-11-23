@@ -17,6 +17,7 @@ interface OwnProps {
 
 interface StateProps {
     content: FeedItem[];
+    isLoading: boolean;
     onInitFeed(tag: string): void;
 }
 
@@ -85,9 +86,9 @@ class FeedContainer extends Component<FeedContainerProps> {
     }
 
     public render() {
-        const { category, content } = this.props;
+        const { category, content, isLoading } = this.props;
 
-        if (!content.length) {
+        if (isLoading) {
             const size = (category === 'blogger') ? 'medium' : 'small';
 
             return (
@@ -110,6 +111,7 @@ class FeedContainer extends Component<FeedContainerProps> {
 
 const mapStateToProps = (state: State, ownProps: OwnProps) => ({
     content: state[ownProps.category],
+    isLoading: state.feedIsLoading,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

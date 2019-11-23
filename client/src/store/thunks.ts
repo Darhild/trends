@@ -1,22 +1,27 @@
 import { fetchTrends, fetchFeed, fetchCollection, fetchCommented } from '../apiService';
-import { setTrends, setFeed, setCollection, setCommented } from './actions';
+import { setTrends, requestFeed, setFeed, setCommented, setCollection } from './actions';
 import { Dispatch } from './createStore';
 import { mapTrends, mapCommented } from '../utils/mappers';
 
 export const setTrendsThunk = (category: string, period: number, source?: string) =>
-    (dispatch: Dispatch) => fetchTrends(category, period, source)
+    (dispatch: Dispatch) => {
+        fetchTrends(category, period, source)
         .then((res: any) => res ? res.map(mapTrends) : [])
         .then((trends: any) => dispatch(setTrends(trends)))
         .catch(() => []);
+    }
 
 export const setFeedThunk = (tag: string) =>
-    (dispatch: Dispatch) => fetchFeed(tag)
+    (dispatch: Dispatch) => {
+        dispatch(requestFeed());
+        fetchFeed(tag)
         .then((feed: any) => {
             if (feed) {
                 dispatch(setFeed(feed, tag));
             }
         })
         .catch(() => []);
+    } 
 
 export const setCollectionThunk = (id: string) =>
         (dispatch: Dispatch) => fetchCollection(id)
