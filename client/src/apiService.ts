@@ -29,3 +29,9 @@ export const fetchCollection = (id: string) => {
     return api(url)
         .then((res: any) => res.data.set);
 };
+
+export const fetchCommented = (tag: string) => {
+    const url = (tag === 'main') ? '/api/trends/videos' : `/api/trends/videos/?tag=${tag}`;
+
+    return api(url);
+};
