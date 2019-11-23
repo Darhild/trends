@@ -10,9 +10,6 @@ import { ReactComponent as Arrow } from '../../images/svg/arrow.svg';
 import Icon from '../Icon/Icon';
 import './Carousel.scss';
 
-const SCROLL_SIZE = 400;
-
-
 interface CarouselProps {
     title?: string;
     routeUrl?: string;
@@ -22,7 +19,12 @@ interface CarouselProps {
     children: unknown;
     className?: string;
     tabs?: React.ReactNode;
+    hoverPadding?: string;
+    scrollSize?: number;
+    arrowPosition?: string;
 }
+
+const SCROLL_SIZE = 400;
 
 interface CarouselState {
     isHidden: boolean;
@@ -57,14 +59,18 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     }
 
     public handleScrollLeft = () => {
+        const { scrollSize = SCROLL_SIZE } = this.props;
+
         if (this.list.current) {
-            scroll.left(this.list.current, this.list.current.scrollLeft - SCROLL_SIZE);
+            scroll.left(this.list.current, this.list.current.scrollLeft - scrollSize);
         }
     }
 
     public handleScrollRight = () => {
+        const { scrollSize = SCROLL_SIZE } = this.props;
+
         if (this.list.current) {
-            scroll.left(this.list.current, this.list.current.scrollLeft + SCROLL_SIZE);
+            scroll.left(this.list.current, this.list.current.scrollLeft + scrollSize);
         }
     }
 
@@ -73,10 +79,26 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     }
 
     public renderList = () => {
-        const { children, margin } = this.props;
+        const {
+            children,
+            margin,
+            hoverPadding,
+            arrowPosition,
+        } = this.props;
+
         const itemCn = classnames(
             'Carousel-Item',
             margin && `Carousel-Item_margin_${margin}`,
+        );
+
+        const listCn = classnames(
+            'Carousel-List',
+            hoverPadding && 'Carousel-List_hoverable',
+        );
+
+        const arrowCn = classnames(
+            'Carousel-Arrow',
+            arrowPosition && `Carousel-Arrow_${arrowPosition}`,
         );
 
         const { current } = this.list;
@@ -85,7 +107,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
 
         return  (
             <div className="Carousel-Wrapper">
-                <div ref={this.list} onScroll={this.handleScroll} className="Carousel-List">
+                <div ref={this.list} onScroll={this.handleScroll} className={listCn}>
                     {
                         React.Children.map(children, (child, num) => (
                             <div className={itemCn} key={num}>{child}</div>
@@ -94,7 +116,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 </div>
                 {
                     scrollLeft > 0  &&
-                    <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_left')}
+                    <div className={classnames(arrowCn, 'Carousel-Arrow_left')}
                         onClick={this.handleScrollLeft}
                     >
                         <Arrow />
@@ -102,7 +124,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
                 }
                 {
                     maxScrollLeft > scrollLeft &&
-                    <div className={classnames('Carousel-Arrow', 'Carousel-Arrow_right')}
+                    <div className={classnames(arrowCn, 'Carousel-Arrow_right')}
                         onClick={this.handleScrollRight}
                     >
                         <Arrow />

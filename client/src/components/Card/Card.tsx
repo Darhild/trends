@@ -15,6 +15,9 @@ export interface Props {
     content_id?: string;
     poster?: string;
     bgColor?: string;
+    withFooter?: boolean;
+    shadowed?: boolean;
+    bold?: boolean;
 }
 
 export default class Card extends Component<Props> {
@@ -23,12 +26,23 @@ export default class Card extends Component<Props> {
             title,
             subtitle,
             rightContent,
+            bold,
         } = this.props;
+
+        const titleCn = classnames(
+            'Card-Title',
+            bold && 'Card-Title_bold',
+        );
+
+        const subtitleCn = classnames(
+            'Card-Subtitle',
+            bold && 'Card-Subtitle_bold',
+        );
 
         const titles = (
             <>
-                {title && <div className="Card-Title" >{title}</div>}
-                {subtitle && <div className="Card-Subtitle">{subtitle}</div>}
+                {title && <div className={titleCn} >{title}</div>}
+                {subtitle && <div className={subtitleCn}>{subtitle}</div>}
             </>
         );
 
@@ -44,16 +58,19 @@ export default class Card extends Component<Props> {
         return <div className="Card-Content">{titles}</div>;
     }
 
+
     public render() {
         const {
             className,
             size = 'medium',
             content_id,
+            bgColor,
+            withFooter = true,
             img,
             imgView,
             details,
             poster,
-            bgColor,
+            shadowed,
         } = this.props;
 
         const cardCn = classnames(
@@ -66,7 +83,10 @@ export default class Card extends Component<Props> {
         const thumbCn = classnames(
             'Card-Thumb',
             imgView && `Card-Thumb_view_${imgView}`,
+            shadowed && 'Card-Thumb_shadowed',
         );
+
+        const background = { backgroundImage: img ? `url(${changeImageSize(img)})` : '' };
 
         return (
             <a
@@ -77,7 +97,7 @@ export default class Card extends Component<Props> {
             >
                 <div
                     className={thumbCn}
-                    style={{ backgroundImage: img ? `url(${changeImageSize(img)})` : '' }}
+                    style={background}
                 >
                     {
                         poster && <img src={changeImageSize(poster, '200x150')} className="Card-Poster" alt="" />
@@ -85,8 +105,9 @@ export default class Card extends Component<Props> {
                     {
                         details && <div className="Card-Details">{details}</div>
                     }
+                    {!withFooter && this.renderContent()}
                 </div>
-                {this.renderContent()}
+                {withFooter && this.renderContent()}
             </a>
         );
     }

@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent as Like } from '../../images/svg/like.svg';
 import { ReactComponent as Next } from '../../images/svg/next.svg';
 import './Player.scss';
+import classnames from 'classnames';
 
 
 interface PlayerProps {
@@ -9,6 +10,7 @@ interface PlayerProps {
     preview?: string;
     title?: string;
     blogger?: any;
+    className?: string;
 }
 
 class Player extends React.Component<PlayerProps> {
@@ -21,15 +23,20 @@ class Player extends React.Component<PlayerProps> {
     };
 
     public render() {
-        const { url, preview, title, blogger } = this.props;
+        const { url, preview, title, blogger, className } = this.props;
         if (!url) {
             return null;
         }
 
+        const playerCn = classnames(
+            'Player',
+            className,
+        );
+
         const src = `https://yastatic.net/yandex-video-player-iframe-api/index.html?stream_url=${url}&preview=${preview}`;
 
         return (
-            <div className="Player">
+            <div className={playerCn}>
                 <div className="Player-Container">
                     <iframe title="Player" src={src} allow="fullscreen" style={{ width: '100%', height: '100%', border: 'none' }}></iframe>
                 </div>

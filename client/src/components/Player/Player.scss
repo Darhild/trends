@@ -6,6 +6,7 @@
     @media(min-width: $screen-s) {
         display: block; 
         width: 380px;
+        min-width: 380px;
         height: 274px;
         border-radius: 6px;    
 
@@ -84,11 +85,13 @@
 
     @media(min-width: $screen-l) {
         width: 498px;
+        min-width: 498px;
         height: 340px;
     }
 
     @media(min-width: $screen-xl) {
         width: 586px;
+        min-width: 586px;
         height: 390px;
     }    
 }
