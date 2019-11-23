@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import './Card.scss';
+import { changeImageSize } from '../../utils/images';
 
 export interface Props {
     title?: React.ReactNode;
@@ -16,7 +17,6 @@ export interface Props {
     bgColor?: string;
 }
 
-const changeImageSize = (image: string | undefined) => image && image.replace(/\/orig/, '/400x300');
 export default class Card extends Component<Props> {
     public renderContent() {
         const {
@@ -80,7 +80,7 @@ export default class Card extends Component<Props> {
                     style={{ backgroundImage: img ? `url(${changeImageSize(img)})` : '' }}
                 >
                     {
-                        poster && <img src={changeImageSize(poster)} className="Card-Poster" alt="" />
+                        poster && <img src={changeImageSize(poster, '200x150')} className="Card-Poster" alt="" />
                     }
                     {
                         details && <div className="Card-Details">{details}</div>
