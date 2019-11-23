@@ -11,17 +11,21 @@ interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> 
     collectionLength: number;
     className?: string;
     variant?: string;
+    bgBig?: boolean;
 }
 
 class TrendCard extends Component<Props> {
     public render() {
-        const { img, desc, collectionLength, className, variant, ratingPosition = 1 } =  this.props;
+        const { img, desc, collectionLength, className, variant, ratingPosition = 1, poster, bgBig } =  this.props;
         const cn = classnames(
             'TrendCard',
             variant && `TrendCard_variant_${variant}`,
             className,
         );
-        const bgUrl = img ? img : bgDefault;
+        let bgUrl = poster ? poster : bgDefault;
+        if (bgBig) {
+            bgUrl = img ? img : bgDefault;
+        }
 
         return (
             <div className={cn}>

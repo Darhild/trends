@@ -21,6 +21,10 @@
         @media(min-width: $screen-s) {
             margin-bottom: 48px;
         }
+
+        .TrendCard-Poster, .TrendCard-Placeholder {
+            border-radius: 0;
+        }
     }
 
     &-Content {
