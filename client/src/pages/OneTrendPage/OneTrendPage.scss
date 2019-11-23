@@ -25,6 +25,47 @@
         .TrendCard-Poster, .TrendCard-Placeholder {
             border-radius: 0;
         }
+
+        .TrendDetails {
+            bottom: 25px;
+            padding-left: 16px;
+    
+            @media(min-width: $screen-m) {
+                top: 210px;
+                display: flex;
+                align-items: center;
+                padding-left: 38px;
+    
+                .TrendDetails-Caption {
+                    display: none;
+                }
+            }
+        }
+
+        .TrendDetails-Label {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .TrendDetails-Icon {
+            display: block;
+            height: 32px;
+            margin-bottom: 9px;
+
+            @media(min-width: $screen-m) {
+                height: 72px;
+            }
+        }
+
+        .TrendDetails-Title {
+            font-size: 16px;
+            line-height: 20px;
+
+            @media(min-width: $screen-m) {
+                font-size: 20px;
+                line-height: 24px;
+            }
+        }
     }
 
     &-Content {
