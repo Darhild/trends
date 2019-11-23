@@ -31,7 +31,7 @@ class Player extends React.Component<PlayerProps> {
         return (
             <div className="Player">
                 <div className="Player-Container">
-                    <iframe title="Player" src={src} style={{ width: '100%', height: '100%', border: 'none' }}></iframe>
+                    <iframe title="Player" src={src} allow="fullscreen" style={{ width: '100%', height: '100%', border: 'none' }}></iframe>
                 </div>
                 <div className="Player-Info">
                     {blogger && <img className="Player-Avatar" src={blogger.avatar} alt="avatar" />}
