@@ -146,7 +146,7 @@ class Repository:
                 unpacked_json = json.loads(content_json)
                 new_data = [
                     {"category": key, "data": value}
-                    for key, value in json.loads(content_json).items()
+                    for key, value in unpacked_json.items()
                 ]
 
                 time_zero = self._get_time_zero(0)
@@ -168,18 +168,23 @@ class Repository:
     def insert_video(self, video_json):
         with self.db.begin() as conn:
             with conn.begin():
-                print("repo insert video", json.loads(video_json))
-                data = [
+                #print("repo insert video", json.loads(video_json))
+                unpacked_json = json.loads(video_json)
+                new_data = [
                     {"category": key, "data": value}
-                    for key, value in json.loads(video_json).items()
+                    for key, value in unpacked_json.items()
                 ]
                 time_zero = self._get_time_zero(0)
 
                 delete_stmt = video_table.delete() \
-                    .where(video_table.c.created_at > time_zero)
+                    .where(video_table.c.created_at > time_zero)\
+                    .returning(video_table.c.category, video_table.c.data)
                 result = conn.execute(delete_stmt)
+                if result.rowcount > 0:
+                    old_data = result.fetchall()
+                    new_data = update_old(unpacked_json, old_data)
 
-                conn.execute(video_table.insert(), *data)
+                conn.execute(video_table.insert(), *new_data)
 
                 logging.getLogger(__name__). \
                     debug("%s entry were updated in video_table", result.rowcount)

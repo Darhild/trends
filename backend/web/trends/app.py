@@ -60,10 +60,10 @@ if __name__ == '__main__':
             repo,
             get_environ_or_default('GOOGLE_URL', "http://{0}:8082/fetch".format(my_ip))
         ),
-        # VideosCollector(
-        #     repo,
-        #     get_environ_or_default('VIDEOS_URL', "http://{0}:8081/fetch/videos".format(my_ip))
-        # ),
+        VideosCollector(
+            repo,
+            get_environ_or_default('VIDEOS_URL', "http://{0}:8081/fetch/videos".format(my_ip))
+        ),
     ]
     for c in collectors:
         c.start()
