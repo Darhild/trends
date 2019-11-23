@@ -23,7 +23,7 @@ class GoogleCollector(BaseCollector):
             response = requests.get(self.source_link)
 
             if response.status_code == 200:
-                return self.insert_content(response.content)
+                return self.insert_trend(response.content)
 
             if response.status_code == 202:
                 # Do nothing

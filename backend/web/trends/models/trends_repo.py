@@ -39,6 +39,7 @@ class Repository:
             return date
 
     def insert_trend(self, trend_json):
+        logging.getLogger(__name__).debug("Google trends insert")
         with self.db.begin() as conn:
             with conn.begin():
                 unpacked_json = json.loads(trend_json)
