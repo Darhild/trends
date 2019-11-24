@@ -80,13 +80,14 @@
     }
 
     @media(min-width: $screen-m) {
-        margin-bottom: 26px;
+        margin-bottom: 5px;
     }
 
     @media(min-width: $screen-l) {
         width: 498px;
         min-width: 498px;
         height: 340px;
+        margin-bottom: 10px;
     }
 
     @media(min-width: $screen-xl) {

@@ -30,6 +30,11 @@
     &-Item {
         display: flex;
         flex-direction: column;
-        height: 336px;
+        width: 253px;
+        height: 270px;
+
+        @media(min-width: $screen-l) {
+            height: 336px;
+        }
     }
 }

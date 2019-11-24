@@ -106,12 +106,6 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                         <Button type="subscribe" />
                         <Button type="addVideo" />
                     </div>
-                    <div className="OneTrendPage-Stories">
-                        <Carousel canBeHidden={false} margin="s">
-                            {stories.map((story) =>
-                                <Story thumbnail={story.thumbnail} title={story.title}/>)}
-                        </Carousel>
-                    </div>
                     <Title cn="OneTrendPage-Title">Видео по теме</Title>
                     {collection && this.renderCollection(collection)}
                 </>
