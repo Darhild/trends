@@ -17,4 +17,19 @@
         top: 3px;
         margin-right: 5px;
     }
+
+    &-Count, &-LastComment {
+        font-size: 12px;
+        line-height: 16px;
+        color: var(--text-subtitle);
+    }
+
+    &-LastComment {
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
 }

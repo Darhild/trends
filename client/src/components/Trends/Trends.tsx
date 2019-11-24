@@ -71,12 +71,13 @@ class Trends extends Component<TrendsProps> {
                 <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
                         trends.map((props) => {
-                            const { id, desc, source } = props;
+                            const { id, desc, source, poster, img } = props;
                             const urlId = id ? id : desc;
+                            const image = source === 'google' ? img : poster;
 
                             return (
                                 <Link className="Trends-Link" to={`${url}/${urlId}?source=${source}`}>
-                                    <SmallCard {...props}/>
+                                    <SmallCard {...props} poster={image}/>
                                 </Link>
                             );
                         })

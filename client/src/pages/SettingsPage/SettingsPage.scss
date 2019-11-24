@@ -1,3 +1,5 @@
+@import './../../variables.scss';
+
 .Settings {
     margin-top: 20px;
 
@@ -10,11 +12,17 @@
         color: var(--text-primary);
     }
 
-    &-Select {  
+    &-Select {
+        width: 100%;
         padding: 4px;
         font-size: 18px;
         color: var(--color-border-accent);
         background-color: transparent;
+
+        @media screen and (min-width: $screen-m) {
+            width: auto;
+            min-width: 350px;
+        }
     }
 
     &-Input {

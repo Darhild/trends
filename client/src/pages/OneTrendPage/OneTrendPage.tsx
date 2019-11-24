@@ -63,6 +63,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                 imgView="noClipped"
                 title={<div style={{ fontWeight: 500 }}>{vod.title}</div>}
                 details={<Duration duration={vod.duration} />}
+                img={vod.thumbnail}
             />
         );
 
@@ -71,7 +72,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                 <div className="OneTrendPage-Promo">
                     {
                         firstVideos.map((vod) => (
-                            <div className="OneTrendPage-Item">{renderCard(vod, 'big')}</div>
+                            <div className="OneTrendPage-Item">{renderCard(vod, 'full')}</div>
                         ))
                     }
                 </div>

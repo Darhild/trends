@@ -45,6 +45,7 @@ export const getCardContent = ({
             content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
             content.details = <Duration duration={duration} />;
             content.size = 'medium';
+            content.img = thumbnail;
             break;
         default:
             content.subtitle = `${release_year}`;

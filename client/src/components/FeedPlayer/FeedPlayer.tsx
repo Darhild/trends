@@ -17,28 +17,25 @@ const cardProps = {
 
 export default class FeedPlayer extends Component {
     public render() {
-        const items = [];
-
-        for (let i = 0; i < mainCarousel.length; i += 2) {
-            items.push(
-                <div className="FeedPlayer-Item">
-                    <Card {...cardProps} {...mainCarousel[i]}/>
-                    <Card {...cardProps} {...mainCarousel[i + 1]}/>
-                </div>,
-            );
-        }
 
         return (
             <div className = "FeedPlayer">
                 <Player className="FeedPlayer-Player"/>
                 <Carousel
                     className="FeedPlayer-Carousel"
+                    itemClass="FeedPlayer-Item"
                     canBeHidden={false}
                     scrollSize={262}
+                    rows={2}
                     margin="s"
+                    hoverPadding={false}
                     arrowPosition="inset"
                 >
-                    {items}
+                    {
+                        mainCarousel.map((props) => (
+                            <Card {...cardProps} {...props}/>
+                        ))
+                    }
                 </Carousel>
             </div>
         );

@@ -17,7 +17,7 @@ interface CommentedProps {
     category: string;
     videos: CommentedVideoProps[];
     videosPeriod: number;
-    onSetCommented: (caterory: string, period: number) => void;
+    onSetCommented: (category: string, period: number) => void;
     onTabClickSetPeriod(period: number): void;
 }
 
@@ -36,7 +36,7 @@ const CommentedSubtitle = (props: CommentedVideoProps) => {
     return (
         <>
             {lastComment && <div className="Commented-LastComment">{lastComment}</div>}
-            {commentsCount && <div className="Commented-Comments">
+            {commentsCount && <div className="Commented-Count">
                 <Bubble className="Commented-Bubble" width="16" height="15"/>
                 Еще {commentsCount} {commentUtils(commentsCount)}
             </div>}
@@ -76,7 +76,9 @@ class Commented extends React.Component<CommentedProps> {
                             <Grow className="Commented-Grow" width="28" height="28"/>
                             <Card
                                 title={props.title}
-                                subtitle={<CommentedSubtitle {...props}/>}
+                                titleClass="Card-Title_lines_one"
+                                size="big"
+                                content={<CommentedSubtitle {...props}/>}
                                 details={<Duration duration={props.duration}/>}
                                 {...props}
                             />

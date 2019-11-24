@@ -66,6 +66,7 @@ const renderCard = (vod: Vod) =>
                     content_id={vod.content_id}
                     {...getCardContent(vod)}
                     poster={vod.onto_poster}
+                    img={vod.thumbnail}
                     size="full"
                     rightContent={<Likes />}
                 />
