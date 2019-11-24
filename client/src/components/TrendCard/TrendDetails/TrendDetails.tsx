@@ -1,22 +1,23 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ReactComponent as Grow } from '../../../images/svg/grow.svg';
+import { commentUtils } from '../../../utils';
 import './TrendDetails.scss';
 
 interface Props {
     desc: string;
-    collectionLength: number;
+    commentsCount: number;
     variant?: string;
     className?: string;
 }
 
-const TrendDetails: React.FC< Props > = ({ desc, collectionLength, className, variant }) => {
+const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, variant }) => {
     const cn = classnames(
         'TrendDetails',
         variant && `TrendDetails_variant_${variant}`,
         className,
     );
-    const count = `${collectionLength} видео и 2 тыс. историй`;
+    const count = `${commentsCount} ${commentUtils(commentsCount)} и 2 тыс. историй`;
 
     return (
         <div className={cn}>

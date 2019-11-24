@@ -23,6 +23,19 @@ export function dateUtils(date: number) {
     return new Date(date * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
+export function commentUtils(count: number) {
+    switch (count % 10) {
+        case 1:
+            return 'комментарий';
+        case 2:
+        case 3:
+        case 4:
+            return 'комментария';
+        default:
+            return 'комментариев';
+    }
+}
+
 export function excludeBannedCards(cards: Vod[]) {
     return cards.filter((card: Vod) => {
         if (card.includes) {

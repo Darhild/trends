@@ -7,7 +7,7 @@ export default interface Trend {
     id: string;
     source: string;
     collection: Vod[];
-    collectionLength: number;
+    commentsCount: number;
     stories: Array<{
         title: string;
         thumbnail: string;

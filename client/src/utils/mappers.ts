@@ -2,14 +2,14 @@
 import { items } from '../blogers.json';
 import { changeImageSize } from './images';
 
-export const mapTrends = ({ title, avatar, bg, id, source }: any) => ({
+export const mapTrends = ({ title, avatar, bg, id, source, comments_count }: any) => ({
     desc: title,
     img: changeImageSize(bg),
     poster: avatar,
     id,
     source,
     collection: [],
-    collectionLength: 0,
+    commentsCount: comments_count,
     stories: items[1].includes,
 });
 
