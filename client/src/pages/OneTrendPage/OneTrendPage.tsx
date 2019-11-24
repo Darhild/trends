@@ -89,7 +89,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
     public render() {
         const { trend, collection } = this.props;
         if (trend) {
-            const { desc, img, poster, stories, collectionLength } = trend;
+            const { desc, img, poster, stories, commentsCount } = trend;
 
             return (
                 <>
@@ -99,7 +99,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                             desc={desc}
                             img={img}
                             poster={poster}
-                            collectionLength={collectionLength}
+                            commentsCount={commentsCount}
                             ratingPosition={1}
                             isWide={true} />
                         <Button type="subscribe" />

@@ -150,7 +150,7 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
             const currentTrend = state.trends.find((trend) => trend.id === action.id);
             if (currentTrend) {
                 currentTrend.collection = action.payload;
-                currentTrend.collectionLength = action.payload.length;
+                currentTrend.commentsCount = action.payload.length;
             }
 
             return {

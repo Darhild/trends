@@ -8,7 +8,7 @@ import bgDefault from '../../images/efir_default-min.jpg';
 
 interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> {
     ratingPosition: number;
-    collectionLength: number;
+    commentsCount: number;
     className?: string;
     variant?: string;
     isWide?: boolean;
@@ -16,7 +16,7 @@ interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> 
 
 class TrendCard extends Component<Props> {
     public render() {
-        const { img, desc, collectionLength, className, variant, ratingPosition = 1, poster, isWide } =  this.props;
+        const { img, desc, commentsCount, className, variant, ratingPosition = 1, poster, isWide } =  this.props;
         const cn = classnames(
             'TrendCard',
             variant && `TrendCard_variant_${variant}`,
@@ -34,7 +34,7 @@ class TrendCard extends Component<Props> {
             <div className={cn}>
                 <div className="TrendCard-Poster" style={{ backgroundImage: `url(${bgUrl})` }}>
                 </div>
-                <TrendDetails desc={desc} variant={variant} collectionLength={collectionLength} className={cnDetails}/>
+                <TrendDetails desc={desc} variant={variant} commentsCount={commentsCount} className={cnDetails}/>
                 <div className="TrendCard-Placeholder"></div>
                 <div className="TrendCard-Number">{ratingPosition}</div>
             </div>

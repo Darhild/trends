@@ -7,6 +7,7 @@ import Duration from '../Duration/Duration';
 import { connect } from 'react-redux';
 import { setCommentedThunk } from '../../store/thunks';
 import { State, Dispatch } from '../../store/createStore';
+import { commentUtils } from '../../utils';
 import './Commented.scss';
 
 interface CommentedProps {
@@ -32,7 +33,7 @@ const CommentedSubtitle = (props: CommentedVideoProps) => {
             {lastComment && <div className="Commented-LastComment">{lastComment}</div>}
             {commentsCount && <div className="Commented-Comments">
                 <Bubble className="Commented-Bubble" width="16" height="15"/>
-                Еще {commentsCount} комментария
+                Еще {commentsCount} {commentUtils(commentsCount)}
             </div>}
         </>
     );
