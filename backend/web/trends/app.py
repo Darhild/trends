@@ -3,6 +3,8 @@ from logging.config import dictConfig
 import yaml
 
 from flask import Flask
+from flask_swagger_ui import get_swaggerui_blueprint
+
 from trends.db import create_engine
 from trends.handlers.trends import trends
 import os
@@ -14,10 +16,21 @@ from trends.models.trends_repo import Repository
 from trends.utils.get_db_environ import get_environ_or_default
 from flask_cors import CORS
 
+from flask import Flask, jsonify, make_response
+
 # my_ip = "84.201.160.40"
 my_ip = "127.0.0.1"
 CURRENT_DIR = os.path.dirname(__file__)
+SWAGGER_URL = '/swagger'
 
+API_URL = '/static/swagger.yaml'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Efir Trends"
+    }
+)
 
 def setup_logging(path=os.path.join(CURRENT_DIR, 'logging.yaml')):
     try:
@@ -38,6 +51,7 @@ def create_app(db_url):
     app = Flask(__name__)
     CORS(app)
 
+
     app.db = create_engine(db_url)
     app.register_blueprint(trends, url_prefix='/')
     return app
@@ -49,6 +63,7 @@ if __name__ == '__main__':
     print('DATABASE_URL', db_url)
 
     app = create_app(db_url)
+    app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
     repo = Repository(app.db)
     collectors = [

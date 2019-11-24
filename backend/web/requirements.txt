@@ -7,3 +7,4 @@ flask_caching
 requests
 PyYaml
 flask_cors
+flask-swagger-ui

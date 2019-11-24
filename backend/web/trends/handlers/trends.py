@@ -1,7 +1,7 @@
 import logging
 import os
 
-from flask import Blueprint, request, Response, abort, json, current_app
+from flask import Blueprint, request, Response, abort, json, current_app, send_from_directory
 
 from trends.models.trends_repo import Repository
 from trends.utils.feed_request import FeedRequest
@@ -12,8 +12,14 @@ from trends.utils.trend_request import handle_trends_request, handle_videos_requ
 from trends.handlers.trends_algs import sort, sort_and_limit, merge
 from random import shuffle
 
+
 trends = Blueprint('trends', __name__)
 db_url = get_environ_or_default('DATABASE_URL', 'postgresql://me:hackme@0.0.0.0/trends')
+
+
+@trends.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory("static", path)
 
 
 @trends.route('/api/trends', methods=['GET'])

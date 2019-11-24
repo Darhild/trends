@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: Efir Trends
+  description: 'API for requesting and return Efir thends'
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: http
+tags:
+- name: trends
+  description: Returns theme trends
+- name: proxy
+  description: Proxy for Efir
+
+paths:
+  /api/trends:
+    get:
+      tags:
+      - trends
+      summary: Returns trends on theme from Efer and Google
+      parameters:
+      - name: tag
+        in: query
+        description: 'This is the name of the theme on which trends are returning. May have the following meanings: blogger, sport, movie, kids, series, common.'
+        schema:
+          type: string
+          default: common
+      - name: num_docs
+        in: query
+        description: This is the number of sections in this trend theme.
+        schema:
+          type: integer
+          default: 20
+      - name: period
+        in: query
+        description: This is the number of days for which trends return.
+        schema:
+          type: integer
+          default: 1
+      - name: source
+        in: query
+        description: 'This is the source from which trends return. Take two options: google, efir.'
+        schema:
+          type: string
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  avatar:
+                    type: string
+                  description:
+                    type: string
+                  source:
+                    type: string
+                  bg:
+                    type: string
+                  comments_count:
+                    type: integer
+        400:
+          description: Invalid input
+  /api/thends/videos:
+    get:
+      tags:
+      - trends
+      summary: Returns trending videos on theme from Efer
+      parameters:
+      - name: tag
+        in: query
+        description: 'This is the name of the theme on which trends are returning. May have the following meanings: blogger, sport, movie, kids, series, common.'
+        schema:
+          type: string
+          default: common
+      - name: num_docs
+        in: query
+        description: This is the number of sections in this trend theme.
+        schema:
+          type: integer
+          default: 20
+      - name: period
+        in: query
+        description: This is the number of days for which trends return.
+        schema:
+          type: integer
+          default: 1
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  title:
+                    type: string
+                  duration:
+                    type: integer
+                  release_date_ut:
+                    type: string
+                  onto_poster:
+                    type: string
+                  thumbnail:
+                    type: string
+                  comment:
+                    type: string
+                  comments_count:
+                    type: integer
+        400:
+          description: Invalid input
+  /api/feed:
+    get:
+      tags:
+      - proxy
+      summary: Proxy endpoint /feed
+      parameters:
+      - name: tag
+        in: query
+        description: 'This is the name of the theme on which trends are returning. May have the following meanings: blogger, sport, movie, kids, series, common.'
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: This is the number of videos in the carousel.
+        schema:
+          type: integer
+        required: true
+      - name: offset
+        in: query
+        description: This offset of pagination.
+        schema:
+          type: integer
+        required: true
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Invalid input
+  /api/collection:
+    get:
+      tags:
+      - proxy
+      summary: Proxy endpoint /collection
+      parameters:
+      - name: collection_id
+        in: query
+        description: The collection ID.
+        schema:
+          type: string
+        required: true
+      - name: limit
+        in: query
+        description: This is the number of videos in the carousel.
+        schema:
+          type: integer
+        required: true
+      - name: offset
+        in: query
+        description: This offset of pagination.
+        schema:
+          type: integer
+        required: true
+      responses:
+        200:
+          description: Ok
+        400:
+          description: Invalid input
