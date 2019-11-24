@@ -24,6 +24,10 @@ export function dateUtils(date: number) {
 }
 
 export function commentUtils(count: number) {
+    if (count % 100 > 10 && count % 100 < 15) {
+            return 'комментариев';
+    }
+
     switch (count % 10) {
         case 1:
             return 'комментарий';

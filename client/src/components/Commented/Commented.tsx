@@ -72,7 +72,7 @@ class Commented extends React.Component<CommentedProps> {
             <>
                 {!!videos.length && <Carousel title="Самые обсуждаемые видео" margin="s" tabs={trendsTabs}>
                     {videos.map((props) => (
-                        <div className="Commented-Item">
+                        <div key={props.content_id} className="Commented-Item">
                             <Grow className="Commented-Grow" width="28" height="28"/>
                             <Card
                                 title={props.title}

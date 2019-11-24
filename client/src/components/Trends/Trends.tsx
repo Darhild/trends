@@ -76,7 +76,11 @@ class Trends extends Component<TrendsProps> {
                             const image = source === 'google' ? img : poster;
 
                             return (
-                                <Link className="Trends-Link" to={`${url}/${urlId}?source=${source}`}>
+                                <Link
+                                    key={id ? id : desc}
+                                    className="Trends-Link"
+                                    to={`${url}/${urlId}?source=${source}`}
+                                >
                                     <SmallCard {...props} poster={image}/>
                                 </Link>
                             );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { State } from '../../store/createStore';
 import { connect } from 'react-redux';
 import { channelCategories } from './channelCategories';
@@ -72,6 +72,7 @@ class Channels extends React.Component<ChannelsProps> {
     public renderItem = (channel?: Channel) => {
         if (!channel) {
             return <ChannelsItem
+                key="https://yandex.ru/efir?stream_active=channels-list&from=efir"
                 title="Список каналов"
                 url="https://yandex.ru/efir?stream_active=channels-list&from=efir" />;
         }
@@ -80,6 +81,7 @@ class Channels extends React.Component<ChannelsProps> {
 
         return (
             <ChannelsItem
+                key={channel.channelId}
                 title={channel.title}
                 url={url}
                 iconUrl={iconUrl}
@@ -88,14 +90,14 @@ class Channels extends React.Component<ChannelsProps> {
     }
 
     public renderCategory = (category: ChannelCategory) => {
-        const { title } = category;
+        const { title, id } = category;
         const categoryChannels = this.getCategoryChannels(category);
 
         return (categoryChannels &&
-            <>
+            <Fragment key={id ? id : title}>
                 <div className="Channels-Category">{title}</div>
                 {categoryChannels.map(this.renderItem)}
-            </>
+            </Fragment>
         );
     }
 

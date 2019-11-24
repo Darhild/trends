@@ -33,7 +33,7 @@ export default class FeedPlayer extends Component {
                 >
                     {
                         mainCarousel.map((props) => (
-                            <Card {...cardProps} {...props}/>
+                            <Card key={props.content_id} {...cardProps} {...props}/>
                         ))
                     }
                 </Carousel>

@@ -17,7 +17,7 @@ const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, varia
         variant && `TrendDetails_variant_${variant}`,
         className,
     );
-    const count = `${commentsCount} ${commentUtils(commentsCount)} и 2 тыс. историй`;
+    const count = `${commentsCount} ${commentUtils(commentsCount)}`;
 
     return (
         <div className={cn}>
@@ -27,7 +27,7 @@ const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, varia
             </div>
             <div className="TrendDetails-Info">
                 <div className="TrendDetails-Title">{desc}</div>
-                <div className="TrendDetails-Count">{count}</div>
+                {count && <div className="TrendDetails-Count">{count}</div>}
             </div>
         </div>
     );
