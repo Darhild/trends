@@ -7,11 +7,7 @@ describe('Табы трендов корректно переключаются'
 			.waitForExist('.Tabs', 1000)
 			.click('.Tabs-Item:nth-child(2)')
 			.url('/')
-			.waitForExist('.Tabs', 1000)
-			.getText('.Tabs-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Неделю');
-			})
+			.assertText('.Tabs-Item:nth-child(2)', 'Неделю')
 			.assertView('week', '.Tabs');
 	});
 	it('на месяц', async function () {
@@ -20,11 +16,7 @@ describe('Табы трендов корректно переключаются'
 			.waitForExist('.Tabs', 1000)
 			.click('.Tabs-Item:nth-child(3)')
 			.url('/')
-			.waitForExist('.Tabs', 1000)
-			.getText('.Tabs-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Месяц');
-			})
+			.assertText('.Tabs-Item:nth-child(3)', 'Месяц')
 			.assertView('month', '.Tabs');
 	});
 });
@@ -33,11 +25,8 @@ describe('В настройках можно переключить отобра
 	it('на широкие карточки', async function () {
 		return this.browser
 			.url('/settings')
-			.waitForExist('.Settings', 500)
-			.$('.Settings-Item:nth-child(1)')
-			.selectByIndex('0')
-			.$('.Settings-Item:nth-child(2)')
-			.selectByIndex('1')
+			.selectSettings('[name="variant"]', 0)
+			.selectSettings('[name="main"]', 1)
 			.url('/')
 			.waitForExist('.Trends', 8000)
 			.assertView('trends-main-1', '.Trends', { ignoreElements: ['.TrendCard', '.Tabs'] });
@@ -45,11 +34,8 @@ describe('В настройках можно переключить отобра
 	it('на карточки с вынесенным описанием', async function () {
 		return this.browser
 			.url('/settings')
-			.waitForExist('.Settings', 500)
-			.$('.Settings-Item:nth-child(1)')
-			.selectByIndex('1')
-			.$('.Settings-Item:nth-child(2)')
-			.selectByIndex('1')
+			.selectSettings('[name="variant"]', 1)
+			.selectSettings('[name="main"]', 1)
 			.url('/')
 			.waitForExist('.Trends', 8000)
 			.assertView('trends-main-2', '.Trends', { ignoreElements: ['.TrendCard', '.Tabs'] });
@@ -60,9 +46,7 @@ describe('В настройках можно переключить отобра
 	it('на карточки с вынесенным описанием', async function () {
 		return this.browser
 			.url('/settings')
-			.waitForExist('.Settings', 500)
-			.$('.Settings-Item:nth-child(1)')
-			.selectByIndex('1')
+			.selectSettings('[name="variant"]', 1)
 			.url('/main/trends')
 			.waitForExist('.TrendsList', 8000)
 			.assertView('trends-2', '.App-Content', { ignoreElements: ['.TrendsList-Item', '.Tabs'] });

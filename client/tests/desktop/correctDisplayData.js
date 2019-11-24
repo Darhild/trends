@@ -1,54 +1,32 @@
-const assert = require('chai').assert;
-
 describe('Корректно отображается активная категория', function () {
 	it('на главной странице', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.Categories-Item_state_active', 8000)
-			.getText('.Categories-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Что посмотреть');
-			})
+			.assertText('.Categories-Item_state_active', 'Что посмотреть')
 			.assertView('main', '.Categories');
 	});
 	it('на странице фильмов', async function () {
 		return this.browser
 			.url('/movie')
-			.waitForExist('.Categories-Item_state_active', 8000)
-			.getText('.Categories-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Фильмы');
-			})
+			.assertText('.Categories-Item_state_active', 'Фильмы')
 			.assertView('movie', '.Categories');
 	});
 	it('на странице сериалов', async function () {
 		return this.browser
 			.url('/series')
-			.waitForExist('.Categories-Item_state_active', 8000)
-			.getText('.Categories-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Сериалы');
-			})
+			.assertText('.Categories-Item_state_active', 'Сериалы')
 			.assertView('series', '.Categories');
 	});
 	it('на странице мультфильмов', async function () {
 		return this.browser
 			.url('/kids')
-			.waitForExist('.Categories-Item_state_active', 8000)
-			.getText('.Categories-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Мультфильмы');
-			})
+			.assertText('.Categories-Item_state_active', 'Мультфильмы')
 			.assertView('kids', '.Categories');
 	});
 	it('на странице блогеров', async function () {
 		return this.browser
 			.url('/blogger')
-			.waitForExist('.Categories-Item_state_active', 8000)
-			.getText('.Categories-Item_state_active')
-			.then(function (text) {
-				assert.equal(text, 'Блогеры');
-			})
+			.assertText('.Categories-Item_state_active', 'Блогеры')
 			.assertView('blogger', '.Categories');
 	});
 });
@@ -77,11 +55,7 @@ describe('На главной странице корректно отображ
 	it('блок трендов', async function () {
 		return this.browser
 			.url('/settings')
-			.waitForExist('.Settings', 500)
-			.$('.Settings-Item:nth-child(1)')
-			.selectByIndex('0')
-			.$('.Settings-Item:nth-child(2)')
-			.selectByIndex('0')
+			.selectSettings('[name="variant"]', 0)
 			.url('/')
 			.waitForExist('.Trends', 8000)
 			.assertView('trends', '.Trends', { ignoreElements: ['.Carousel-Item', '.Tabs'] });;
