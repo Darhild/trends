@@ -33,8 +33,8 @@ export const setCollectionThunk = (id: string) =>
             })
             .catch(() => []);
 
-export const setCommentedThunk = (id: string) =>
-            (dispatch: Dispatch) => fetchCommented(id)
+export const setCommentedThunk = (tag: string, period: number) =>
+            (dispatch: Dispatch) => fetchCommented(tag, period)
                 .then((res: any) => res ? res.map(mapCommented) : [])
                 .then((commented: any) => {
                     if (commented) {
