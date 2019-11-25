@@ -7,11 +7,11 @@ import tabsContent from './../../tabsContent';
 import TrendsList from '../../components/TrendsList/TrendsList';
 import { State, Dispatch } from '../../store/createStore';
 import { setTrendsThunk } from '../../store/thunks';
-import { setPeriod } from './../../store/actions';
+import { setTrendsPeriod } from './../../store/actions';
 
 interface TrendsPageProps extends RouteComponentProps<TParam> {
     trendVariant: string;
-    period: number;
+    trendsPeriod: number;
     source: string;
     onSetTrends(category: string, period: number, source?: string): void;
     onTabClickSetPeriod(period: number): void;
@@ -24,29 +24,29 @@ interface TParam {
 class TrendsPage extends Component<TrendsPageProps> {
     public componentDidMount() {
         const { category } = this.props.match.params;
-        const { period, source, onSetTrends } = this.props;
+        const { trendsPeriod, source, onSetTrends } = this.props;
         category === 'main'
-            ? onSetTrends(category, period, source)
-            : onSetTrends(category, period);
+            ? onSetTrends(category, trendsPeriod, source)
+            : onSetTrends(category, trendsPeriod);
     }
 
     public componentDidUpdate(prevProps: TrendsPageProps) {
         const { category } = this.props.match.params;
-        const { period, source, onSetTrends } = this.props;
-        if (period !== prevProps.period || source !== prevProps.source) {
-            onSetTrends(category, period, source);
+        const { trendsPeriod, source, onSetTrends } = this.props;
+        if (trendsPeriod !== prevProps.trendsPeriod || source !== prevProps.source) {
+            onSetTrends(category, trendsPeriod, source);
         }
     }
 
     public render() {
         const { category } = this.props.match.params;
-        const { trendVariant, period, onTabClickSetPeriod } = this.props;
+        const { trendVariant, trendsPeriod, onTabClickSetPeriod } = this.props;
 
         return (
             <>
                 <Title cn="Trends-Title">Самое популярное</Title>
                 <Tabs
-                    period={period}
+                    period={trendsPeriod}
                     tabsContent={tabsContent}
                     onTabClickSetValue={onTabClickSetPeriod}
                 />
@@ -58,14 +58,14 @@ class TrendsPage extends Component<TrendsPageProps> {
 
 const mapStateToProps = (state: State) => ({
     trendVariant: state.settings.trendVariant,
-    period: state.settings.period,
+    trendsPeriod: state.settings.trendsPeriod,
     source: state.settings.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     onSetTrends: (category: string, period: number, source?: string) => (
         dispatch(setTrendsThunk(category, period, source))),
-    onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setTrendsPeriod(period)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TrendsPage);

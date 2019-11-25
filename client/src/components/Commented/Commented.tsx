@@ -4,7 +4,10 @@ import Card from '../Card/Card';
 import { ReactComponent as Bubble } from '../../images/svg/chat_bubble.svg';
 import { ReactComponent as Grow } from '../../images/svg/grow.svg';
 import Duration from '../Duration/Duration';
+import Tabs from '../Tabs/Tabs';
+import tabsContent from './../../tabsContent';
 import { connect } from 'react-redux';
+import { setVideosPeriod } from '../../store/actions';
 import { setCommentedThunk } from '../../store/thunks';
 import { State, Dispatch } from '../../store/createStore';
 import { commentUtils } from '../../utils';
@@ -13,7 +16,9 @@ import './Commented.scss';
 interface CommentedProps {
     category: string;
     videos: CommentedVideoProps[];
-    onSetCommented: (caterory: string) => void;
+    videosPeriod: number;
+    onSetCommented: (caterory: string, period: number) => void;
+    onTabClickSetPeriod(period: number): void;
 }
 
 interface CommentedVideoProps {
@@ -41,23 +46,31 @@ const CommentedSubtitle = (props: CommentedVideoProps) => {
 
 class Commented extends React.Component<CommentedProps> {
     public componentDidMount() {
-        const { category, onSetCommented } = this.props;
-        onSetCommented(category);
+        const { category, videosPeriod, onSetCommented } = this.props;
+        onSetCommented(category, videosPeriod);
     }
 
     public componentDidUpdate(prevProps: CommentedProps) {
-        const { category, onSetCommented } = this.props;
-        if (category !== prevProps.category) {
-            onSetCommented(category);
+        const { category, videosPeriod, onSetCommented } = this.props;
+        if (category !== prevProps.category || videosPeriod !== prevProps.videosPeriod) {
+            onSetCommented(category, videosPeriod);
         }
     }
 
     public render() {
-        const { videos } = this.props;
+        const { videos, videosPeriod, onTabClickSetPeriod } = this.props;
+        const trendsTabs = (
+            <Tabs
+                className="Carousel-Tabs"
+                period={videosPeriod}
+                tabsContent={tabsContent}
+                onTabClickSetValue={onTabClickSetPeriod}
+            />
+        );
 
         return (
             <>
-                {!!videos.length && <Carousel title="Самые обсуждаемые видео" margin="s">
+                {!!videos.length && <Carousel title="Самые обсуждаемые видео" margin="s" tabs={trendsTabs}>
                     {videos.map((props) => (
                         <div className="Commented-Item">
                             <Grow className="Commented-Grow" width="28" height="28"/>
@@ -77,11 +90,13 @@ class Commented extends React.Component<CommentedProps> {
 
 const mapStateToProps = (state: State) => ({
     videos: state.commented,
+    videosPeriod: state.settings.videosPeriod,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onSetCommented: (category: string) =>
-        dispatch(setCommentedThunk(category)),
+    onSetCommented: (category: string, period: number) =>
+        dispatch(setCommentedThunk(category, period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setVideosPeriod(period)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Commented);

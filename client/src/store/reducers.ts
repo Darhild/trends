@@ -11,7 +11,8 @@ import {
     SET_COLLECTION,
     SET_COMMENTED,
     SET_TREND_VARIANT,
-    SET_PERIOD,
+    SET_TRENDS_PERIOD,
+    SET_VIDEOS_PERIOD,
     SET_SOURCE,
     SET_ALL_TRENDS_ON_MAIN,
 } from './actionTypes';
@@ -23,7 +24,8 @@ interface Reducer extends redux.Reducer {
 interface Settings {
     allTrendsOnMain: boolean;
     trendVariant: string;
-    period: number;
+    trendsPeriod: number;
+    videosPeriod: number;
     source: string;
 }
 
@@ -50,7 +52,8 @@ const defaultState = {
     settings: {
         allTrendsOnMain: true,
         trendVariant: 'default',
-        period: 1,
+        trendsPeriod: 1,
+        videosPeriod: 1,
         source: 'efir',
     },
 };
@@ -177,12 +180,20 @@ export const reducer: Reducer = (state: State = initialState, action: redux.AnyA
                     trendVariant: action.payload,
                 },
             };
-        case SET_PERIOD:
+        case SET_TRENDS_PERIOD:
             return {
                 ...state,
                 settings: {
                     ...state.settings,
-                    period: action.payload,
+                    trendsPeriod: action.payload,
+                },
+            };
+        case SET_VIDEOS_PERIOD:
+            return {
+                ...state,
+                settings: {
+                    ...state.settings,
+                    videosPeriod: action.payload,
                 },
             };
         case SET_SOURCE:

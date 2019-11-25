@@ -30,8 +30,10 @@ export const fetchCollection = (id: string) => {
         .then((res: any) => res.data.set);
 };
 
-export const fetchCommented = (tag: string) => {
-    const url = (tag === 'main') ? '/api/trends/videos' : `/api/trends/videos/?tag=${tag}`;
+export const fetchCommented = (tag: string, period: number) => {
+    const url = (tag === 'main')
+        ? `/api/trends/videos?period=${period}`
+        : `/api/trends/videos?tag=${tag}&period=${period}`;
 
     return api(url);
 };

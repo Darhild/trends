@@ -8,7 +8,8 @@ import {
     FETCH_FEED_ERROR,
     SET_COLLECTION,
     SET_TREND_VARIANT,
-    SET_PERIOD,
+    SET_TRENDS_PERIOD,
+    SET_VIDEOS_PERIOD,
     SET_SOURCE,
     SET_ALL_TRENDS_ON_MAIN,
     SET_COMMENTED,
@@ -34,7 +35,9 @@ export const setAllTrendsOnMain = (payload: boolean) => ({ type: SET_ALL_TRENDS_
 
 export const setTrendVariant = (payload: string) => ({ type: SET_TREND_VARIANT, payload });
 
-export const setPeriod = (payload: number) => ({ type: SET_PERIOD, payload });
+export const setTrendsPeriod = (payload: number) => ({ type: SET_TRENDS_PERIOD, payload });
+
+export const setVideosPeriod = (payload: number) => ({ type: SET_VIDEOS_PERIOD, payload });
 
 export const setSource = (payload: string) => ({ type: SET_SOURCE, payload });
 

@@ -9,7 +9,7 @@ import Tabs from './../Tabs/Tabs';
 import tabsContent from './../../tabsContent';
 import { connect } from 'react-redux';
 import { setTrendsThunk } from '../../store/thunks';
-import { setPeriod } from './../../store/actions';
+import { setTrendsPeriod } from './../../store/actions';
 import TrendsList from '../TrendsList/TrendsList';
 import Trend from '../../types/trend';
 
@@ -18,7 +18,7 @@ interface TrendsProps {
     allTrendsOnMain: boolean;
     trends: Trend[];
     category: string;
-    period: number;
+    trendsPeriod: number;
     source: string;
     onSetTrends(category: string, period: number, source?: string): void;
     onTabClickSetPeriod(period: number): void;
@@ -26,29 +26,29 @@ interface TrendsProps {
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        const { category, period, source, onSetTrends } = this.props;
+        const { category, trendsPeriod, source, onSetTrends } = this.props;
         category === 'main'
-            ? onSetTrends(category, period, source)
-            : onSetTrends(category, period);
+            ? onSetTrends(category, trendsPeriod, source)
+            : onSetTrends(category, trendsPeriod);
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
-        const { category, period, source, onSetTrends } = this.props;
-        if (category !== prevProps.category || period !== prevProps.period || source !== prevProps.source) {
+        const { category, trendsPeriod, source, onSetTrends } = this.props;
+        if (category !== prevProps.category || trendsPeriod !== prevProps.trendsPeriod || source !== prevProps.source) {
             category === 'main'
-                ? onSetTrends(category, period, source)
-                : onSetTrends(category, period);
+                ? onSetTrends(category, trendsPeriod, source)
+                : onSetTrends(category, trendsPeriod);
         }
     }
 
     public renderItems = () => {
-        const { trends, category, trendVariant, allTrendsOnMain, period, onTabClickSetPeriod } = this.props;
+        const { trends, category, trendVariant, allTrendsOnMain, trendsPeriod, onTabClickSetPeriod } = this.props;
         const url = `/${category}/trends`;
 
         const trendsTabs = (
             <Tabs
                 className="Carousel-Tabs"
-                period={period}
+                period={trendsPeriod}
                 tabsContent={tabsContent}
                 onTabClickSetValue={onTabClickSetPeriod}
             />
@@ -58,7 +58,7 @@ class Trends extends Component<TrendsProps> {
             <>
                 <Title cn="Trends-Title" url={url}>Самое популярное</Title>
                 <Tabs
-                    period={period}
+                    period={trendsPeriod}
                     tabsContent={tabsContent}
                     onTabClickSetValue={onTabClickSetPeriod}
                 />
@@ -109,14 +109,14 @@ const mapStateToProps = (state: State) => ({
     allTrendsOnMain: state.settings.allTrendsOnMain,
     trendVariant: state.settings.trendVariant,
     trends: state.trends,
-    period: state.settings.period,
+    trendsPeriod: state.settings.trendsPeriod,
     source: state.settings.source,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     onSetTrends: (category: string, period: number, source?: string) => (
         dispatch(setTrendsThunk(category, period, source))),
-    onTabClickSetPeriod: (period: number) => dispatch(setPeriod(period)),
+    onTabClickSetPeriod: (period: number) => dispatch(setTrendsPeriod(period)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trends);
