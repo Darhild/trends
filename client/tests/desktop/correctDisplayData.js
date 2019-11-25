@@ -1,3 +1,5 @@
+const LOAD_TIMEOUT = 8000;
+
 describe('Корректно отображается активная категория', function () {
 	it('на главной странице', async function () {
 		return this.browser
@@ -35,21 +37,21 @@ describe('На главной странице корректно отображ
 	it('плеер', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.FeedPlayer-Player', 8000)
+			.waitForExist('.FeedPlayer-Player', LOAD_TIMEOUT)
 			.assertView('player', '.FeedPlayer-Player');
 	});
 	hermione.skip.in('chrome_screen_m', "no carousel on m width");
 	it('карусель справа от плеера', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.FeedPlayer-Carousel', 8000)
+			.waitForExist('.FeedPlayer-Carousel', LOAD_TIMEOUT)
 			.assertView('carousel', '.FeedPlayer-Carousel');
 	});
 	hermione.skip.in('chrome_screen_m', "no channels on m width");
 	it('список каналов', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.Channels', 8000)
+			.waitForExist('.Channels', LOAD_TIMEOUT)
 			.assertView('channels', '.Channels');
 	});
 	it('блок трендов', async function () {
@@ -57,13 +59,13 @@ describe('На главной странице корректно отображ
 			.url('/settings')
 			.selectSettings('[name="main"]', 0)
 			.url('/')
-			.waitForExist('.Trends', 8000)
+			.waitForExist('.Trends', LOAD_TIMEOUT)
 			.assertView('trends', '.Trends', { ignoreElements: ['.Carousel-Item', '.Tabs'] });;
 	});
 	it('карусель обсуждаемых видео', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.Commented', 8000)
+			.waitForExist('.Commented', LOAD_TIMEOUT)
 			.assertView('commented', '.Commented', { ignoreElements: ['.Carousel-Item', '.Tabs'] });
 	});
 });

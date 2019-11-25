@@ -76,7 +76,7 @@ class Commented extends React.Component<CommentedProps> {
 
         return (
             <>
-                {!!videos.length && <Carousel
+                {videos.length > 0 && <Carousel
                     className="Commented"
                     title="Самые обсуждаемые видео"
                     margin="s"
