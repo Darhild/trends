@@ -55,7 +55,7 @@ describe('На главной странице корректно отображ
 	it('блок трендов', async function () {
 		return this.browser
 			.url('/settings')
-			.selectSettings('[name="variant"]', 0)
+			.selectSettings('[name="main"]', 0)
 			.url('/')
 			.waitForExist('.Trends', 8000)
 			.assertView('trends', '.Trends', { ignoreElements: ['.Carousel-Item', '.Tabs'] });;
@@ -64,6 +64,6 @@ describe('На главной странице корректно отображ
 		return this.browser
 			.url('/')
 			.waitForExist('.Commented', 8000)
-			.assertView('commented', '.Commented', { ignoreElements: ['.Carousel-Item'] });
+			.assertView('commented', '.Commented', { ignoreElements: ['.Carousel-Item', '.Tabs'] });
 	});
 });

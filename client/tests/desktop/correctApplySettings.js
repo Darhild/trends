@@ -4,20 +4,41 @@ describe('Табы трендов корректно переключаются'
 	it('на неделю', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.Tabs', 1000)
-			.click('.Tabs-Item:nth-child(2)')
+			.waitForExist('.Trends .Tabs', 1000)
+			.click('.Trends .Tabs-Item:nth-child(2)')
 			.url('/')
-			.assertText('.Tabs-Item:nth-child(2)', 'Неделю')
-			.assertView('week', '.Tabs');
+			.assertText('.Trends .Tabs-Item:nth-child(2)', 'Неделю')
+			.assertView('trends-week', '.Trends .Tabs');
 	});
 	it('на месяц', async function () {
 		return this.browser
 			.url('/')
-			.waitForExist('.Tabs', 1000)
-			.click('.Tabs-Item:nth-child(3)')
+			.waitForExist('.Trends .Tabs', 1000)
+			.click('.Trends .Tabs-Item:nth-child(3)')
 			.url('/')
-			.assertText('.Tabs-Item:nth-child(3)', 'Месяц')
-			.assertView('month', '.Tabs');
+			.assertText('.Trends .Tabs-Item:nth-child(3)', 'Месяц')
+			.assertView('trends-month', '.Trends .Tabs');
+	});
+});
+
+describe('Табы видео корректно переключаются', function () {
+	it('на неделю', async function () {
+		return this.browser
+			.url('/')
+			.waitForExist('.Commented .Tabs', 8000)
+			.click('.Commented .Tabs-Item:nth-child(2)')
+			.url('/')
+			.assertText('.Commented .Tabs-Item:nth-child(2)', 'Неделю')
+			.assertView('videos-week', '.Commented .Tabs');
+	});
+	it('на месяц', async function () {
+		return this.browser
+			.url('/')
+			.waitForExist('.Commented .Tabs', 8000)
+			.click('.Commented .Tabs-Item:nth-child(3)')
+			.url('/')
+			.assertText('.Commented .Tabs-Item:nth-child(3)', 'Месяц')
+			.assertView('videos-month', '.Commented .Tabs');
 	});
 });
 
