@@ -25,5 +25,10 @@
         "ordered-imports": false,
         "prefer-const": true,
         "unnecessary-else": [true, { "allow-else-if": true }]
+    },
+    "linterOptions": {
+        "exclude": [
+            "./**/*.js"
+        ]
     }
 }
