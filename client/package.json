@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "node_modules\\.bin\\hermione gui",
     "eject": "react-scripts eject",
     "lint": "tslint --project tsconfig.json --format stylish && stylelint **/*.scss",
     "lint:fix": "tslint --project tsconfig.json --format stylish --fix && stylelint **/*.scss --fix"
@@ -44,8 +44,11 @@
     "@types/react-tabs": "^2.3.1",
     "@types/redux-logger": "^3.0.7",
     "@types/scroll": "^3.0.0",
+    "chai": "^4.2.0",
     "classnames": "^2.2.6",
     "debounce": "^1.2.0",
+    "hermione": "^2.13.1",
+    "html-reporter": "^5.5.0",
     "husky": "^3.0.9",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
