@@ -90,7 +90,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
     public render() {
         const { trend, collection } = this.props;
         if (trend) {
-            const { id, desc, img, poster, commentsCount } = trend;
+            const { desc, img, poster, commentsCount } = trend;
 
             return (
                 <>
@@ -107,7 +107,7 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
                         <Button type="addVideo" />
                     </div>
                     <div className="OneTrendPage-Stories">
-                        <StoriesComponent user={null} subject={id || desc} canAdd />
+                        <StoriesComponent user={null} canAdd />
                     </div>
                     <Title cn="OneTrendPage-Title">Видео по теме</Title>
                     {collection && this.renderCollection(collection)}
