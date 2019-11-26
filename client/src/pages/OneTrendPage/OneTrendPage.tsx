@@ -135,7 +135,7 @@ const mapStateToProps = (state: State, props: RouteComponentProps<TParam>) => {
 
     return {
         trend: currentTrend,
-        period: state.settings.period,
+        period: state.settings.trendsPeriod,
         source: state.settings.source,
         collection: currentTrend ? currentTrend.collection : [],
     };
