@@ -36,11 +36,6 @@ export const getCardContent = ({
 
     switch (supertag) {
         case 'blogger':
-            content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
-            content.details = <Duration duration={duration} />;
-            content.size = 'medium';
-            content.img = thumbnail;
-            break;
         case 'music':
             content.subtitle = release_date_ut ? dateUtils(release_date_ut) : null;
             content.details = <Duration duration={duration} />;
