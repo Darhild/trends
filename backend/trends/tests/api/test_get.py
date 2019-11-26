@@ -53,17 +53,5 @@ def test_get_trends_through_client(client):
     get_trends(cache_=cache)
     cached_json = cache.get('trends')
     resp = client.get(url_for('trends.import_trends'))
-    get_json = resp.data
     assert resp.status_code == 200
-    assert json.loads(resp.data) == json.loads(get_json)
-
-
-
-
-
-
-
-
-
-
-
+    assert json.loads(resp.data) == json.loads(cached_json)

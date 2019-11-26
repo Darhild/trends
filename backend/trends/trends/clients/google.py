@@ -53,6 +53,8 @@ def add_backgrounds(trends):
 def make_json_response(find_backgrounds=False):
     """
     Get response from google, make json of it
+    :param find_backgrounds:
+    do find and add backgrounds to trends data if True
     :return: trends list  from google as json
     """
     trend_getter = RealTrendReq()
@@ -68,7 +70,9 @@ def make_json_response(find_backgrounds=False):
 
 def get_trends(cache_=None):
     """
-    Gets trends from google-trend, makes json, an put then to cache
+    Gets trends from google-trend service,
+    makes json, an put it to cache
+    :param cache_ - local in-memory cache
     """
     logger = logging.getLogger(__name__)
 
@@ -88,7 +92,7 @@ def get_trends(cache_=None):
 
 def start_get_trends():
     """
-    Start sending requests to google trends
+    Starts sending requests to google trends
     """
     logger = logging.getLogger(__name__)
     scheduler = BackgroundScheduler()
@@ -115,7 +119,8 @@ def start_get_trends():
 
 def get_trends_cached(cache_):
     """
-        get treads json from cache
-        returns None if there are no key 'trends' in cache
+    get treads json from cache
+    returns None if there are no key 'trends' in cache
+    :param cache_ - local in-memory cache
     """
     return cache_.get('trends')
