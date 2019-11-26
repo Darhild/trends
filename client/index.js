@@ -1,20 +1,10 @@
 const express = require('express');
 const path = require('path');
+const setupProxy = require('./src/setupProxy.js');
 const app = express();
-const API_URL = 'http://ether-backend.ru:8080';
-const axios = require('axios');
 
 app.use(express.static('build'));
-app.get('/api/*', (req, res) => {
-    axios.get(`${API_URL}${req.originalUrl}`)
-        .then((response) => {
-            res.json(response.data)
-        })
-        .catch(() => {
-            res.status(404)
-            res.send()
-        })
-});
+setupProxy(app);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'build/index.html'))
