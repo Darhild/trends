@@ -5,8 +5,11 @@ import { changeImageSize } from '../../utils/images';
 
 export interface Props {
     title?: React.ReactNode;
+    titleClass?: string;
     subtitle?: React.ReactNode;
+    subtitleClass?: string;
     details?: React.ReactNode;
+    content?: React.ReactNode;
     rightContent?: React.ReactNode;
     className?: string;
     img?: string;
@@ -24,7 +27,10 @@ export default class Card extends Component<Props> {
     public renderContent() {
         const {
             title,
+            titleClass,
             subtitle,
+            subtitleClass,
+            content,
             rightContent,
             bold,
         } = this.props;
@@ -32,17 +38,20 @@ export default class Card extends Component<Props> {
         const titleCn = classnames(
             'Card-Title',
             bold && 'Card-Title_bold',
+            titleClass,
         );
 
         const subtitleCn = classnames(
             'Card-Subtitle',
             bold && 'Card-Subtitle_bold',
+            subtitleClass,
         );
 
         const titles = (
             <>
                 {title && <div className={titleCn} >{title}</div>}
                 {subtitle && <div className={subtitleCn}>{subtitle}</div>}
+                {content}
             </>
         );
 

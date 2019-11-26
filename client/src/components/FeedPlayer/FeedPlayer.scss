@@ -9,6 +9,7 @@
 
     &-Card {
         flex: 1;
+        width: 253px;
         margin-top: 8px;
         
         &:first-child {
@@ -29,7 +30,6 @@
     &-Item {
         display: flex;
         flex-direction: column;
-        width: 253px;
         height: 336px;
     }
 }

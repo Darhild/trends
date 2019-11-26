@@ -53,33 +53,34 @@ class OneTrendPage extends React.Component<OneTrendPageProps & RouteComponentPro
         const firstVideos = filteredVideos && filteredVideos.slice(0, 3);
         const lastVideos = filteredVideos && filteredVideos.slice(3);
 
-        const renderCard = (vod: Vod, size: string) => (
-            <Card
-                content_id={vod.content_id}
+        const renderCard = (vod: Vod) => (
+            <div
                 key={vod.content_id}
-                {...getCardContent(vod)}
-                size={size}
-                bgColor="none"
-                imgView="noClipped"
-                title={<div style={{ fontWeight: 500 }}>{vod.title}</div>}
-                details={<Duration duration={vod.duration} />}
-            />
+                className="OneTrendPage-Item"
+            >
+                <Card
+                    content_id={vod.content_id}
+                    {...getCardContent(vod)}
+                    size="full"
+                    bgColor="none"
+                    imgView="noClipped"
+                    title={<div style={{ fontWeight: 500 }}>{vod.title}</div>}
+                    details={<Duration duration={vod.duration} />}
+                    img={vod.thumbnail}
+                />
+            </div>
         );
 
         return (
             <div className="OneTrendPage-Content">
                 <div className="OneTrendPage-Promo">
                     {
-                        firstVideos.map((vod) => (
-                            <div className="OneTrendPage-Item">{renderCard(vod, 'big')}</div>
-                        ))
+                        firstVideos.map(renderCard)
                     }
                 </div>
                 <div className="OneTrendPage-List">
                     {
-                        lastVideos.map((vod) => (
-                            <div className="OneTrendPage-Item">{renderCard(vod, 'full')}</div>
-                        ))
+                        lastVideos.map(renderCard)
                     }
                 </div>
             </div>
@@ -134,7 +135,7 @@ const mapStateToProps = (state: State, props: RouteComponentProps<TParam>) => {
 
     return {
         trend: currentTrend,
-        period: state.settings.period,
+        period: state.settings.trendsPeriod,
         source: state.settings.source,
         collection: currentTrend ? currentTrend.collection : [],
     };

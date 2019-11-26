@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 import { setVideosPeriod } from '../../store/actions';
 import { setCommentedThunk } from '../../store/thunks';
 import { State, Dispatch } from '../../store/createStore';
-import { commentUtils } from '../../utils';
+import { getPlural } from '../../utils';
 import './Commented.scss';
 
 interface CommentedProps {
     category: string;
     videos: CommentedVideoProps[];
     videosPeriod: number;
-    onSetCommented: (caterory: string, period: number) => void;
+    onSetCommented: (category: string, period: number) => void;
     onTabClickSetPeriod(period: number): void;
 }
 
@@ -33,12 +33,18 @@ interface CommentedVideoProps {
 const CommentedSubtitle = (props: CommentedVideoProps) => {
     const { lastComment, commentsCount } = props;
 
+    const dictionary = {
+        one: 'комментраий',
+        few: 'комментария',
+        many: 'комментариев',
+    };
+
     return (
         <>
             {lastComment && <div className="Commented-LastComment">{lastComment}</div>}
-            {commentsCount && <div className="Commented-Comments">
+            {commentsCount && <div className="Commented-Count">
                 <Bubble className="Commented-Bubble" width="16" height="15"/>
-                Еще {commentsCount} {commentUtils(commentsCount)}
+                Еще {commentsCount} {getPlural(commentsCount, dictionary)}
             </div>}
         </>
     );
@@ -72,11 +78,13 @@ class Commented extends React.Component<CommentedProps> {
             <>
                 {!!videos.length && <Carousel title="Самые обсуждаемые видео" margin="s" tabs={trendsTabs}>
                     {videos.map((props) => (
-                        <div className="Commented-Item">
+                        <div key={props.content_id} className="Commented-Item">
                             <Grow className="Commented-Grow" width="28" height="28"/>
                             <Card
                                 title={props.title}
-                                subtitle={<CommentedSubtitle {...props}/>}
+                                titleClass="Card-Title_lines_one"
+                                size="big"
+                                content={<CommentedSubtitle {...props}/>}
                                 details={<Duration duration={props.duration}/>}
                                 {...props}
                             />

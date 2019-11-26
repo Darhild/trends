@@ -50,7 +50,10 @@ class TrendsList extends Component<Props> {
                         const urlId = id ? id : desc;
 
                         return (
-                            <Link className="TrendsList-Link TrendsList-Item" to={`/${category}/trends/${urlId}?source=${source}`}>
+                            <Link
+                                key={urlId}
+                                className="TrendsList-Link TrendsList-Item"
+                                to={`/${category}/trends/${urlId}?source=${source}`}>
                                 <TrendCard
                                     {...props}
                                     variant={variant}

@@ -23,10 +23,8 @@ interface StateProps {
 
 type FeedContainerProps = OwnProps & StateProps;
 
-const renderList = (list: CarouselType) => {
-    const filteredCards =  excludeBannedCards(list.includes);
-
-    return filteredCards.map((vod: Vod) => {
+const renderList = (list: Vod[]) => (
+    list.map((vod: Vod) => {
         const {
             content_id,
         } = vod;
@@ -38,34 +36,35 @@ const renderList = (list: CarouselType) => {
                 {...getCardContent(vod)}
             />
         );
-    });
-};
+    })
+);
 
-const renderCarousel = (list: CarouselType) =>
-    (
-        <>
-            {!!excludeBannedCards(list.includes).length
-            && <Carousel
-                title={list.title}
-                margin="s"
-                carouselId={list.carousel_id}
-                key={list.carousel_id}
-            >
-                {renderList(list)}
-            </Carousel>}
-        </>
+const renderCarousel = (list: CarouselType) => {
+    const filteredList = excludeBannedCards(list.includes);
+
+    return (
+        filteredList.length &&
+        <Carousel
+            title={list.title}
+            margin="s"
+            carouselId={list.carousel_id}
+            key={list.carousel_id}
+        >
+            {renderList(filteredList)}
+        </Carousel>
     );
+};
 
 const renderCard = (vod: Vod) =>
     (
         vod.includes && vod.includes[0].banned
             ? null
-            : <div className="Feed-Item">
+            : <div key={vod.content_id} className="Feed-Item">
                 <Card
-                    key={vod.content_id}
                     content_id={vod.content_id}
                     {...getCardContent(vod)}
                     poster={vod.onto_poster}
+                    img={vod.thumbnail}
                     size="full"
                     rightContent={<Likes />}
                 />

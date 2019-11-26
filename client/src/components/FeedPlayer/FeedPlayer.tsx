@@ -7,7 +7,6 @@ import Card from '../Card/Card';
 
 const cardProps = {
     withFooter: false,
-    hoverPadding: false,
     className: 'FeedPlayer-Card',
     imgView: 'full',
     size: 'none',
@@ -17,28 +16,25 @@ const cardProps = {
 
 export default class FeedPlayer extends Component {
     public render() {
-        const items = [];
-
-        for (let i = 0; i < mainCarousel.length; i += 2) {
-            items.push(
-                <div className="FeedPlayer-Item">
-                    <Card {...cardProps} {...mainCarousel[i]}/>
-                    <Card {...cardProps} {...mainCarousel[i + 1]}/>
-                </div>,
-            );
-        }
 
         return (
             <div className = "FeedPlayer">
                 <Player className="FeedPlayer-Player"/>
                 <Carousel
                     className="FeedPlayer-Carousel"
+                    itemClass="FeedPlayer-Item"
                     canBeHidden={false}
                     scrollSize={262}
+                    rows={2}
                     margin="s"
+                    isHoverable={false}
                     arrowPosition="inset"
                 >
-                    {items}
+                    {
+                        mainCarousel.map((props) => (
+                            <Card key={props.content_id} {...cardProps} {...props}/>
+                        ))
+                    }
                 </Carousel>
             </div>
         );

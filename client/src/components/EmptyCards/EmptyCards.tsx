@@ -25,12 +25,10 @@ const EmptyCards = ({ carouselNumber, cardsNumber, cardSize }: EmptyCardsProps )
     return (
         <>
             {
-                carouselArr.map(() => (
-                    <Carousel margin="s" canBeHidden={false}>
+                carouselArr.map((item, index) => (
+                    <Carousel key={index} margin="s" canBeHidden={false}>
                         {
-                            cardsArr.map(() => (
-                                <Card size={cardSize} />
-                            ))
+                            cardsArr.map((el, i) => <Card key={i} size={cardSize} />)
                         }
                     </Carousel>
                 ))

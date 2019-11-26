@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { ReactComponent as Grow } from '../../../images/svg/grow.svg';
-import { commentUtils } from '../../../utils';
+import { getPlural } from '../../../utils';
 import './TrendDetails.scss';
 
 interface Props {
@@ -17,7 +17,14 @@ const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, varia
         variant && `TrendDetails_variant_${variant}`,
         className,
     );
-    const count = `${commentsCount} ${commentUtils(commentsCount)} и 2 тыс. историй`;
+
+    const dictionary = {
+        one: 'комментраий',
+        few: 'комментария',
+        many: 'комментариев',
+    };
+
+    const count = `${commentsCount} ${getPlural(commentsCount, dictionary)}`;
 
     return (
         <div className={cn}>
@@ -27,7 +34,7 @@ const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, varia
             </div>
             <div className="TrendDetails-Info">
                 <div className="TrendDetails-Title">{desc}</div>
-                <div className="TrendDetails-Count">{count}</div>
+                {count && <div className="TrendDetails-Count">{count}</div>}
             </div>
         </div>
     );

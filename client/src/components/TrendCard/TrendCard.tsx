@@ -16,17 +16,17 @@ interface Props extends Omit<Trend, 'id' | 'source' | 'collection' | 'stories'> 
 
 class TrendCard extends Component<Props> {
     public render() {
-        const { img, desc, commentsCount, className, variant, ratingPosition = 1, poster, isWide } =  this.props;
+        const { img, desc, commentsCount, className, variant, ratingPosition = 1, isWide } =  this.props;
         const cn = classnames(
             'TrendCard',
             variant && `TrendCard_variant_${variant}`,
             className,
             isWide && 'TrendCard_wide',
         );
-        let bgUrl = poster ? poster : bgDefault;
+        const bgUrl = img || bgDefault;
         let cnDetails;
+
         if (isWide) {
-            bgUrl = img ? img : bgDefault;
             cnDetails = 'TrendDetails_wide';
         }
 

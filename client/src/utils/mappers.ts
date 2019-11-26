@@ -2,9 +2,9 @@
 import { items } from '../blogers.json';
 import { changeImageSize } from './images';
 
-export const mapTrends = ({ title, avatar, bg, id, source, comments_count }: any) => ({
+export const mapTrends = ({ title, avatar, bg, thumbnail, id, source, comments_count }: any) => ({
     desc: title,
-    img: changeImageSize(bg),
+    img: changeImageSize(thumbnail || bg),
     poster: avatar,
     id,
     source,
