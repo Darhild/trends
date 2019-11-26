@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { setVideosPeriod } from '../../store/actions';
 import { setCommentedThunk } from '../../store/thunks';
 import { State, Dispatch } from '../../store/createStore';
-import { commentUtils } from '../../utils';
+import { getPlural } from '../../utils';
 import './Commented.scss';
 
 interface CommentedProps {
@@ -33,12 +33,18 @@ interface CommentedVideoProps {
 const CommentedSubtitle = (props: CommentedVideoProps) => {
     const { lastComment, commentsCount } = props;
 
+    const dictionary = {
+        one: 'комментраий',
+        few: 'комментария',
+        many: 'комментариев',
+    };
+
     return (
         <>
             {lastComment && <div className="Commented-LastComment">{lastComment}</div>}
             {commentsCount && <div className="Commented-Count">
                 <Bubble className="Commented-Bubble" width="16" height="15"/>
-                Еще {commentsCount} {commentUtils(commentsCount)}
+                Еще {commentsCount} {getPlural(commentsCount, dictionary)}
             </div>}
         </>
     );

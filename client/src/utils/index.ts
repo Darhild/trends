@@ -23,21 +23,29 @@ export function dateUtils(date: number) {
     return new Date(date * 1000).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
 }
 
-export function commentUtils(count: number) {
-    if (count % 100 > 10 && count % 100 < 15) {
-            return 'комментариев';
+interface Dictionary {
+    one: string;
+    few: string;
+    many: string;
+}
+
+export function getPlural(count: number, { one, few, many }: Dictionary) {
+    const num = Math.abs(count);
+    let remainder = num % 100;
+
+    if (remainder >= 5 && remainder <= 20) {
+      return many;
     }
 
-    switch (count % 10) {
-        case 1:
-            return 'комментарий';
-        case 2:
-        case 3:
-        case 4:
-            return 'комментария';
-        default:
-            return 'комментариев';
+    remainder = num % 10;
+    if (remainder === 1) {
+      return one;
     }
+    if (remainder >= 2 && remainder <= 4) {
+      return few;
+    }
+
+    return many;
 }
 
 export function excludeBannedCards(cards: Vod[]) {
