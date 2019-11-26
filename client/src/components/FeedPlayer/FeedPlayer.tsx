@@ -7,7 +7,6 @@ import Card from '../Card/Card';
 
 const cardProps = {
     withFooter: false,
-    hoverPadding: false,
     className: 'FeedPlayer-Card',
     imgView: 'full',
     size: 'none',
@@ -28,7 +27,7 @@ export default class FeedPlayer extends Component {
                     scrollSize={262}
                     rows={2}
                     margin="s"
-                    hoverPadding={false}
+                    isHoverable={false}
                     arrowPosition="inset"
                 >
                     {

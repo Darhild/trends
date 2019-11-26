@@ -19,7 +19,7 @@ interface CarouselProps {
     className?: string;
     itemClass?: string;
     tabs?: React.ReactNode;
-    hoverPadding?: boolean;
+    isHoverable?: boolean;
     scrollSize: number;
     arrowPosition?: string;
     rows: number;
@@ -37,7 +37,7 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
         scrollSize: 400,
         rows: 1,
         children: [],
-        hoverPadding: true,
+        isHoverable: true,
     };
 
     public state = {
@@ -106,13 +106,13 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
 
     public renderList = () => {
         const {
-            hoverPadding,
+            isHoverable,
             arrowPosition,
         } = this.props;
 
         const listCn = classnames(
             'Carousel-List',
-            hoverPadding && 'Carousel-List_hoverable',
+            isHoverable && 'Carousel-List_hoverable',
         );
 
         const arrowCn = classnames(
