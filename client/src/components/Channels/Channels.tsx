@@ -94,7 +94,7 @@ class Channels extends React.Component<ChannelsProps> {
         const categoryChannels = this.getCategoryChannels(category);
 
         return (categoryChannels &&
-            <Fragment key={id ? id : title}>
+            <Fragment key={id || title}>
                 <div className="Channels-Category">{title}</div>
                 {categoryChannels.map(this.renderItem)}
             </Fragment>

@@ -77,7 +77,7 @@ class Trends extends Component<TrendsProps> {
 
                             return (
                                 <Link
-                                    key={id ? id : desc}
+                                    key={urlId}
                                     className="Trends-Link"
                                     to={`${url}/${urlId}?source=${source}`}
                                 >

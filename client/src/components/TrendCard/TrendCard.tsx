@@ -23,7 +23,7 @@ class TrendCard extends Component<Props> {
             className,
             isWide && 'TrendCard_wide',
         );
-        const bgUrl = img ? img : bgDefault;
+        const bgUrl = img || bgDefault;
         let cnDetails;
 
         if (isWide) {

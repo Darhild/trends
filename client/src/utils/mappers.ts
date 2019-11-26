@@ -4,7 +4,7 @@ import { changeImageSize } from './images';
 
 export const mapTrends = ({ title, avatar, bg, thumbnail, id, source, comments_count }: any) => ({
     desc: title,
-    img: thumbnail ? changeImageSize(thumbnail) : changeImageSize(bg),
+    img: changeImageSize(thumbnail || bg),
     poster: avatar,
     id,
     source,
