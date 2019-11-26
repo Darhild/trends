@@ -1,0 +1,57 @@
+.StoryCard {
+  position: relative;
+  width: 100px;
+  min-width: 100px;
+  height: 160px;
+  margin-right: 8px;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.46) 28.93%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  border-radius: 6px;
+  background-size: cover;
+  background-position: center;
+}
+
+.StoryCard-Type {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 28px;
+  height: 28px;
+  background: #292a39;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.StoryCard-Type_Video {
+  background: #292a39 url("assets/video-icon.svg") center no-repeat;
+  border-radius: 50%;
+}
+
+.StoryCard-Type_Popular {
+  width: 28px;
+  height: 28px;
+  background: url("assets/popular-pic.svg") top no-repeat;
+}
+
+.StoryCard-Type_Avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.StoryCard-Name {
+  padding-left: 10px;
+  position: absolute;
+  bottom: 10px;
+  font-size: 13px;
+  color: #fff;
+  text-shadow: 0px 1.35088px 0px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.StoryCardForm-FileInput {
+  display: none;
+}

@@ -1,0 +1,31 @@
+.Author {
+  display: flex;
+  align-items: center;
+}
+
+.Author-Avatar {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
+
+.Author-Info {
+  margin-left: 8px;
+}
+
+.Author-Name {
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 16px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Author-Time {
+  color: #ffffff;
+  font-size: 13px;
+  line-height: 16px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

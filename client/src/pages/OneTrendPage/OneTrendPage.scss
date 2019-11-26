@@ -73,6 +73,9 @@
     }
 
     &-Stories {
+        position: relative;
+        z-index: 100;
+
         @media(min-width: $screen-m) {
             display: none;
         }

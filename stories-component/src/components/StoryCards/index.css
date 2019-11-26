@@ -1,0 +1,23 @@
+.StoryCards {
+  background: #292b3a;
+  overflow: hidden;
+  position: relative;
+  margin: 0 -15px;
+}
+
+.StoryCards-Scroll {
+  padding: 12px 15px 35px;
+  margin-bottom: -20px;
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.StoryCards-Scroll:after {
+  content: "";
+  display: block;
+  flex-basis: 15px;
+  flex-shrink: 0;
+  margin-left: -8px;
+}
