@@ -36,5 +36,9 @@
         @media(min-width: $screen-l) {
             height: 336px;
         }
+
+        @media(min-width: $screen-xl) {
+            height: 384px;
+        } 
     }
 }

@@ -11,7 +11,7 @@ import './TrendsList.scss';
 interface Props {
     trends: Trend[];
     variant: string;
-    period: number;
+    trendsPeriod: number;
     from: string;
     category: string;
     collectionsLength: number[];
@@ -21,11 +21,11 @@ interface Props {
 
 class TrendsList extends Component<Props> {
     public componentDidMount() {
-        const { trends, category, period, from, onSetTrends } = this.props;
+        const { trends, category, trendsPeriod, from, onSetTrends } = this.props;
         if (!trends.length) {
             category === 'main'
-            ? onSetTrends(category, period, from)
-            : onSetTrends(category, period);
+            ? onSetTrends(category, trendsPeriod, from)
+            : onSetTrends(category, trendsPeriod);
         }
     }
 
@@ -71,7 +71,7 @@ class TrendsList extends Component<Props> {
 
 const mapStateToProps = (state: State) => ({
     trends: state.trends,
-    period: state.settings.period,
+    trendsPeriod: state.settings.trendsPeriod,
     from: state.settings.source,
     collectionsLength: state.trends.map((trend) => trend.commentsCount),
 });
