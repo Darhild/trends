@@ -1,6 +1,7 @@
 import * as redux from 'redux';
 import { State } from '../store/createStore';
 import { set as channels, icons as channelIcons } from '../channels.json';
+import { filterChannels, mapChannels } from '../utils/mappers';
 import {
     FETCH_TRENDS_REQUEST,
     FETCH_TRENDS_SUCCESS,
@@ -39,15 +40,7 @@ const defaultState = {
     series: [],
     kids: [],
     blogger: [],
-    channels: channels.map(({
-        channel_id,
-        computed_title,
-        channel_category,
-    }: any) => ({
-            channelId: channel_id,
-            title: computed_title,
-            channelCategory: channel_category,
-        })),
+    channels: channels.filter(filterChannels).map(mapChannels),
     channelIcons: channelIcons.map((item) => ({ position: item.position, iconUrl: item['url-white'] })),
     settings: {
         allTrendsOnMain: true,

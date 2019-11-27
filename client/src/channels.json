@@ -400,7 +400,6 @@
                 "with_sport_prediction": true,
                 "without_timeline": false,
                 "with_deep_hd": false,
-                "project_alias": "yanhl",
                 "weight": 9999
             },
             "channel_multiplex_number": 0,

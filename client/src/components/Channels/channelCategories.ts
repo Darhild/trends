@@ -43,12 +43,4 @@ export const channelCategories = [
         id: 'films',
         title: 'КИНО И СЕРИАЛЫ',
     },
-    {
-        id: 'foreign',
-        title: 'МЕЖДУНАРОДНЫЕ',
-    },
-    {
-        id: 'region',
-        title: 'РЕГИОНАЛЬНЫЕ',
-    },
 ];
