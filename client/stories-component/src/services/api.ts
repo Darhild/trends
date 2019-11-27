@@ -34,7 +34,10 @@ export async function getStory(id: string | number) {
     mode: 'cors'
   });
 
-  return camelizeKeys(await response.json()) as Story;
+  const story = camelizeKeys(await response.json()) as Story;
+  makeMappingUrl(story)
+
+  return story
 }
 
 export async function postStory(content: Blob, subject: string = 'default') {
@@ -50,11 +53,17 @@ export async function postStory(content: Blob, subject: string = 'default') {
     body: data
   });
 
-  return camelizeKeys(await response.json()) as Story;
+  const story = camelizeKeys(await response.json()) as Story;
+  makeMappingUrl(story);
+
+  return story;
 }
 
 export async function getStories(queryParams?: StoryRequestParams) {
   const stories = await apiRequest('/stories', queryParams) as Story[];
+
+  stories.forEach(makeMappingUrl)
+
   return stories.map((story) => ({
     ...story,
     isLoading: story.status !== 3,
@@ -86,4 +95,11 @@ export async function postComment(user: User, content: string, storyId: number) 
   });
 
   return camelizeKeys(await response.json());
+}
+
+function makeMappingUrl(story: Story) {
+  story.previewUrl = story.previewUrl && story.previewUrl.replace('//www.84.201.143.123.xip.io', '');
+  story.episodes.forEach((episode) => {
+    episode.contentUrl = episode.contentUrl.replace('//www.84.201.143.123.xip.io', '');
+  })
 }
