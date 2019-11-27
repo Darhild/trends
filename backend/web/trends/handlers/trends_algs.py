@@ -1,4 +1,3 @@
-
 def sort(result):
     result_data = []
     if result is None or len(result) == 0:

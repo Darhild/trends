@@ -1,7 +1,8 @@
-import requests
-from pprint import pprint
-from json import JSONDecodeError
 import logging
+from json import JSONDecodeError
+from pprint import pprint
+
+import requests
 
 from comment_trends.external_api.json_parse import parse_json
 
@@ -12,12 +13,12 @@ class FeedRequest:
     url = "https://frontend.vh.yandex.ru/v23/feed.json"
 
     headers = {
-        'Origin': "https://yandex.ru",
-        'Accept-Encoding': "gzip, deflate, br",
-        'Accept-Language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-        'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
-                      " (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-        'Accept': "application/json, text/javascript, */*; q=0.01",
+        "Origin": "https://yandex.ru",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+        " (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
     }
 
     query_params = {
@@ -28,14 +29,16 @@ class FeedRequest:
         "from": "efir",
         "service": "ya-main",
         "disable_trackings": "1",
-        "num_docs": "1"}
+        "num_docs": "1",
+    }
 
     @classmethod
     def get_response(cls, tag, offset, limit, num_docs, cache_hash=None):
 
         params = cls.query_params.copy()
-        params.update({"offset": f"{offset}",  # "num_docs": f"{num_docs}",
-                       "limit": f"{limit}"})
+        params.update(
+            {"offset": f"{offset}", "limit": f"{limit}"}  # "num_docs": f"{num_docs}",
+        )
 
         if tag:
             params["tag"] = tag
@@ -56,10 +59,10 @@ class FeedData:
         if not self.response_data:
             return {}
 
-        for carousel in self.response_data['items']:
-            for document in carousel['includes']:
+        for carousel in self.response_data["items"]:
+            for document in carousel["includes"]:
                 try:
-                    content_id = document['content_id']
+                    content_id = document["content_id"]
                 except KeyError as e:
                     feed_logger.debug("%s %s", type(e), e)
                     continue
@@ -71,8 +74,8 @@ class FeedData:
     def _extract_carousel_ids_from_response(self):
         carouse_ids = []
         try:
-            for carousel in self.response_data['items']:
-                carouse_ids.append(carousel['carousel_id'])
+            for carousel in self.response_data["items"]:
+                carouse_ids.append(carousel["carousel_id"])
         except KeyError:
             pass
 
@@ -93,9 +96,9 @@ class FeedData:
         return self._extract_carousel_ids_from_response()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     fr = FeedRequest()
-    result = fr.get_response(tag='movie', offset=0, limit=3, num_docs=1)
+    result = fr.get_response(tag="movie", offset=0, limit=3, num_docs=1)
     pprint(result.get_documents())
     pprint(result.response_data)
     print(result.get_carousels())

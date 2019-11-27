@@ -4,16 +4,18 @@ from collections import defaultdict
 def group_by_title(data):
     title_score = defaultdict(int)
     for d in data:
-        title = d['title']
-        title_score[title] += d['day']
+        title = d["title"]
+        title_score[title] += d["day"]
     titles = set()
     result = list()
     for d in data:
-        title = d['title']
+        title = d["title"]
         d["data"]["comments_count"] = title_score[title]
         if title not in titles:
             titles.add(title)
-            result.append({'title': title, 'data': d['data'], 'day': title_score[title]})
+            result.append(
+                {"title": title, "data": d["data"], "day": title_score[title]}
+            )
     return result
 
 
@@ -40,8 +42,8 @@ def update_old(new_data, old_data):
             continue
 
         # id to trend mapping
-        old_trends = {trend['id']: trend for trend in old_data[tag]}
-        new_trends = {trend['id']: trend for trend in new_data[tag]}
+        old_trends = {trend["id"]: trend for trend in old_data[tag]}
+        new_trends = {trend["id"]: trend for trend in new_data[tag]}
         trend_ids = set(new_trends.keys()) | set(old_trends.keys())
 
         for trend_id in trend_ids:
@@ -51,7 +53,7 @@ def update_old(new_data, old_data):
             elif trend_id not in new_trends:
                 updated_tag_data.append(old_trends[trend_id])
             else:
-                if new_trends[trend_id]['day'] <= old_trends[trend_id]['day']:
+                if new_trends[trend_id]["day"] <= old_trends[trend_id]["day"]:
                     updated_tag_data.append(old_trends[trend_id])
                 else:
                     updated_tag_data.append(new_trends[trend_id])
@@ -59,7 +61,6 @@ def update_old(new_data, old_data):
         updated_data[tag] = updated_tag_data
 
     updated_data = [
-        {"category": key, "data": value}
-        for key, value in updated_data.items()
+        {"category": key, "data": value} for key, value in updated_data.items()
     ]
     return updated_data

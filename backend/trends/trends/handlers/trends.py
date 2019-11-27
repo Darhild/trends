@@ -1,13 +1,14 @@
 import logging
 
 from flask import Blueprint, Response, request
+
 from trends.clients.google import get_trends_cached
 from trends.clients.prefs import cache
 
-trends = Blueprint('trends', __name__)
+trends = Blueprint("trends", __name__)
 
 
-@trends.route('/fetch', methods=['GET'])
+@trends.route("/fetch", methods=["GET"])
 def import_trends():
     """
     Get json with google trends from cache and returns it

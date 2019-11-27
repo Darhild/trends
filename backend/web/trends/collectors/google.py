@@ -10,9 +10,11 @@ REQUEST_JITTER = 1
 
 class GoogleCollector(BaseCollector):
     def __init__(self, repo, url):
-        logging.getLogger(__name__). \
-            info("google collector link {0} interval {1} jitter {2}".
-                 format(url, REQUEST_INTERVAL, REQUEST_JITTER))
+        logging.getLogger(__name__).info(
+            "google collector link {0} interval {1} jitter {2}".format(
+                url, REQUEST_INTERVAL, REQUEST_JITTER
+            )
+        )
         super().__init__(repo, REQUEST_INTERVAL, REQUEST_JITTER)
         self.source_link = url
 
@@ -29,7 +31,11 @@ class GoogleCollector(BaseCollector):
                 # Do nothing
                 return
             else:
-                raise Exception("efir returned status code: {0}".format(response.status_code))
+                raise Exception(
+                    "efir returned status code: {0}".format(response.status_code)
+                )
 
         except Exception as e:
-            logging.getLogger(__name__).error("failed to collect google {0}".format(str(e)))
+            logging.getLogger(__name__).error(
+                "failed to collect google {0}".format(str(e))
+            )

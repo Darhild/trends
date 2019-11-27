@@ -1,7 +1,9 @@
-import requests
-from pprint import pprint
-from comment_trends.external_api.json_parse import parse_json
 import logging
+from pprint import pprint
+
+import requests
+
+from comment_trends.external_api.json_parse import parse_json
 
 theme_logger = logging.getLogger(__name__)
 
@@ -11,13 +13,13 @@ class ThemeRequest:
     url = "https://frontend.vh.yandex.ru/v23/theme"
 
     headers = {
-        'Origin': "https://yandex.ru",
-        'User-Agent': "PostmanRuntime/7.19.0",
-        'Accept': "*/*",
-        'Cache-Control': "no-cache",
-        'Accept-Encoding': "gzip, deflate",
-        'Connection': "keep-alive",
-        'cache-control': "no-cache"
+        "Origin": "https://yandex.ru",
+        "User-Agent": "PostmanRuntime/7.19.0",
+        "Accept": "*/*",
+        "Cache-Control": "no-cache",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "keep-alive",
+        "cache-control": "no-cache",
     }
 
     query_params = {
@@ -25,7 +27,8 @@ class ThemeRequest:
         "locale": "ru",
         "from": "efir",
         "service": "ya-main",
-        "disable_trackings": "1"}
+        "disable_trackings": "1",
+    }
 
     @classmethod
     def get_response(cls, theme_id):
@@ -48,14 +51,14 @@ class ThemeData:
             theme_logger.debug("%s %s", type(e), e)
             content = {}
 
-        for field in ('bg', 'avatar', 'description'):
+        for field in ("bg", "avatar", "description"):
             if field not in content:
                 content[field] = ""
 
         return content
 
 
-if __name__ == '__main__':
-    tr_id = 'ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB'
+if __name__ == "__main__":
+    tr_id = "ChJoaGNjdmhibHJ1anpsbGtiaGgSF3Nwb3J0X2hvY2tleV9sZWFndWVfbmhsGhdzcG9ydF9ob2NrZXlfdGVhbV84MDgwNyAB"
     tr = ThemeRequest.get_response(tr_id)
     pprint(tr.get_info())

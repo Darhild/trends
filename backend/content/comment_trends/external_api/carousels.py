@@ -1,8 +1,9 @@
-import requests
-from requests import Response, ConnectionError
-from pprint import pprint
-from json import JSONDecodeError
 import logging
+from json import JSONDecodeError
+from pprint import pprint
+
+import requests
+from requests import ConnectionError, Response
 
 carousels_logger = logging.getLogger(__name__)
 
@@ -17,14 +18,15 @@ class CarouselsRequest:
     поскольку данная ручка в коде используется для получения id каруселей,
     числу документов присвоено минимальное значение по умолчанию
     """
+
     url = "https://frontend.vh.yandex.ru/v23/carousels_videohub.json"
 
     headers = {
-        'Origin': "https://yandex.ru",
-        'Accept-Encoding': "gzip, deflate, br",
-        'Accept-Language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-        'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
-        'Accept': "application/json, text/javascript, */*; q=0.01",
+        "Origin": "https://yandex.ru",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
     }
 
     query_params = {
@@ -34,27 +36,29 @@ class CarouselsRequest:
         "from": "efir",
         "service": "ya-main",
         "disable_trackings": "1",
-        "vitrina_limit": "1"}
+        "vitrina_limit": "1",
+    }
 
     @classmethod
     def get_response(cls, tag, offset, limit, num_docs=None, cache_hash=None):
 
         params = cls.query_params.copy()
-        params.update({"offset": f"{offset}",
-                       "limit": f"{limit}"})
+        params.update({"offset": f"{offset}", "limit": f"{limit}"})
 
-        if tag != 'common':
+        if tag != "common":
             params["tag"] = tag
 
         if cache_hash:
             params["cache_hash"] = cache_hash
 
         try:
-            response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+            response = requests.request(
+                "GET", cls.url, headers=cls.headers, params=params
+            )
         except ConnectionError:
             # req = requests.Request("GET", cls.url, headers=cls.headers, params=params)
             response = Response()
-            carousels_logger.warning('Порвано соединение с ручкой carousels')
+            carousels_logger.warning("Порвано соединение с ручкой carousels")
             response.status_code = 500
 
         return CarouselsData(response)
@@ -72,9 +76,9 @@ class CarouselsData:
             carousels_logger.debug("%s %s", type(e), e)
             return {}
 
-        for carousel in data['carousels']:
+        for carousel in data["carousels"]:
             try:
-                carousel_id = carousel['carousel_id']
+                carousel_id = carousel["carousel_id"]
             except KeyError as e:
                 carousels_logger.debug(f"%s %s", type(e), e)
                 continue
@@ -90,7 +94,7 @@ class CarouselsData:
         return self._extract_carousels_from_response()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cr = CarouselsRequest()
-    result = cr.get_response(tag='sport', offset=0, limit=100)
+    result = cr.get_response(tag="sport", offset=0, limit=100)
     pprint(result.get_carousels().keys())

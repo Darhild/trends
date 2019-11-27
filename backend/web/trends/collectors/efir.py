@@ -1,6 +1,6 @@
 import logging
-import requests
 
+import requests
 from trends.collectors.base import BaseCollector
 
 REQUEST_INTERVAL = 15
@@ -25,9 +25,11 @@ class EfirCollector(BaseCollector):
                 # Do nothing
                 return
             else:
-                raise Exception("efir returned status code: {0}".format(response.status_code))
+                raise Exception(
+                    "efir returned status code: {0}".format(response.status_code)
+                )
 
         except Exception as e:
-            logging.getLogger(__name__).\
-                error("failed to collect efir {0}".format(str(e)))
-
+            logging.getLogger(__name__).error(
+                "failed to collect efir {0}".format(str(e))
+            )

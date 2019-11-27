@@ -1,5 +1,5 @@
-import logging
 import json
+import logging
 import os
 
 import requests
@@ -28,9 +28,11 @@ class VideosCollector(BaseCollector):
                 # Do nothing
                 return
             else:
-                raise Exception("videos returned status code: {0}".format(response.status_code))
+                raise Exception(
+                    "videos returned status code: {0}".format(response.status_code)
+                )
 
         except Exception as e:
-            logging.getLogger(__name__).\
-                error("failed to collect videos {0}".format(str(e)))
-
+            logging.getLogger(__name__).error(
+                "failed to collect videos {0}".format(str(e))
+            )

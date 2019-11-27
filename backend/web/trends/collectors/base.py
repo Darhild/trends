@@ -22,12 +22,13 @@ class BaseCollector:
 
     def start(self):
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.collect,
-                          trigger='interval',
-                          next_run_time=datetime.now(),
-                          minutes=self.interval,
-                          jitter=self.jitter,
-                          )
+        scheduler.add_job(
+            self.collect,
+            trigger="interval",
+            next_run_time=datetime.now(),
+            minutes=self.interval,
+            jitter=self.jitter,
+        )
         scheduler.start()
 
     def stop(self):

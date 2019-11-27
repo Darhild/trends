@@ -1,8 +1,11 @@
+import logging
+from pprint import pprint
+
 import requests
 from requests import ConnectionError, Response
-from pprint import pprint
+
 from comment_trends.external_api.json_parse import parse_json
-import logging
+
 
 carousel_logger = logging.getLogger(__name__)
 
@@ -19,12 +22,12 @@ class CarouselRequest:
     url = "https://frontend.vh.yandex.ru/v23/carousel_videohub.json"
 
     headers = {
-        'Origin': "https://yandex.ru",
-        'Accept-Encoding': "gzip, deflate, br",
-        'Accept-Language': "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
-        'User-Agent': "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
-                      " (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
-        'Accept': "application/json, text/javascript, */*; q=0.01",
+        "Origin": "https://yandex.ru",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+        " (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
     }
 
     query_params = {
@@ -34,21 +37,28 @@ class CarouselRequest:
         "locale": "ru",
         "from": "efir",
         "service": "ya-main",
-        "disable_trackings": "1"}
+        "disable_trackings": "1",
+    }
 
     @classmethod
     def get_response(cls, carousel_id, offset, limit):
 
         params = cls.query_params.copy()
-        params.update({"offset": f"{offset}",
-                       "limit": f"{limit}",
-                       "carousel_id": f"{carousel_id}"})
+        params.update(
+            {
+                "offset": f"{offset}",
+                "limit": f"{limit}",
+                "carousel_id": f"{carousel_id}",
+            }
+        )
 
         try:
-            response = requests.request("GET", cls.url, headers=cls.headers, params=params)
+            response = requests.request(
+                "GET", cls.url, headers=cls.headers, params=params
+            )
         except ConnectionError:
             response = Response()
-            carousel_logger.warning('Порвано соединение с ручкой carousel')
+            carousel_logger.warning("Порвано соединение с ручкой carousel")
             response.status_code = 500
 
         return CarouselData(response)
@@ -63,9 +73,9 @@ class CarouselData:
         if not self.response_data:
             return {}
 
-        for document in self.response_data['set']:
+        for document in self.response_data["set"]:
             try:
-                content_id = document['content_id']
+                content_id = document["content_id"]
             except KeyError as e:
                 carousel_logger.debug("%s %s", type(e), e)
                 continue
@@ -82,13 +92,13 @@ class CarouselData:
 
     def get_cache_hash(self):
         try:
-            return self.response_data['cache_hash']
+            return self.response_data["cache_hash"]
         except KeyError:
-            return ''
+            return ""
 
 
-if __name__ == '__main__':
-    cr_id = 'ChJoaHhpbnJnbHN6Zmdra2dkaGgSBW1vdmllGiFtb3ZpZSZyZWdpb25fZXVyb3BlJnBvc3Rlcl9leGlzdHMgAQ=='
+if __name__ == "__main__":
+    cr_id = "ChJoaHhpbnJnbHN6Zmdra2dkaGgSBW1vdmllGiFtb3ZpZSZyZWdpb25fZXVyb3BlJnBvc3Rlcl9leGlzdHMgAQ=="
     cr = CarouselRequest.get_response(cr_id, offset=0, limit=100)
     pprint(cr.get_documents())
     print(cr.get_cache_hash())

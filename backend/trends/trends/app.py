@@ -1,6 +1,7 @@
 import logging
-from logging.config import dictConfig
 import os
+from logging.config import dictConfig
+
 import yaml
 from flask import Flask
 
@@ -11,19 +12,19 @@ from trends.handlers.trends import trends
 CURRENT_DIR = os.path.dirname(__file__)
 
 
-def setup_logging(path=os.path.join(CURRENT_DIR, 'logging.yaml')):
+def setup_logging(path=os.path.join(CURRENT_DIR, "logging.yaml")):
     """
     Set logging config
     :param path: path of yaml-file with logging setting
     """
     try:
-        with open(path, 'rt') as f:
+        with open(path, "rt") as f:
             config = yaml.safe_load(f.read())
             dictConfig(config)
 
     except FileNotFoundError as e:
         logging.warning(e)
-        logging.warning('Error in logging configuration. Using default')
+        logging.warning("Error in logging configuration. Using default")
         logging.basicConfig(level=logging.INFO)
 
 
@@ -42,7 +43,7 @@ def create_app(is_start_get_trends=True):
     except Exception as e:
         logger.critical("Can't create service due to %s:", e)
         raise
-    app.register_blueprint(trends, url_prefix='/')
+    app.register_blueprint(trends, url_prefix="/")
 
     try:
         cache.init_app(app)
@@ -56,6 +57,6 @@ def create_app(is_start_get_trends=True):
     return app
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = create_app()  # os.environ['DATABASE_URL'])
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host="0.0.0.0", port=8080)
