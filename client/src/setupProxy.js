@@ -18,4 +18,20 @@ module.exports = function(app) {
       changeOrigin: true,
     })
   );
+
+  app.use(
+    '/image/',
+    proxy({
+      target: STORY_URL,
+      changeOrigin: true,
+    })
+  );
+
+  app.use(
+    '/video/',
+    proxy({
+      target: STORY_URL,
+      changeOrigin: true,
+    })
+  );
 };
