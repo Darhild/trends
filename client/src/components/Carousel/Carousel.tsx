@@ -28,6 +28,7 @@ interface CarouselProps {
 interface CarouselState {
     isHidden: boolean;
     scrollLeft: number;
+    maxScrollLeft: number;
 }
 
 class Carousel extends React.Component<CarouselProps, CarouselState> {
@@ -43,14 +44,25 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
     public state = {
         isHidden: false,
         scrollLeft: 0,
+        maxScrollLeft: 100,
     };
 
     public list = React.createRef<HTMLDivElement>();
 
     public updateScrollLeft = debounce(() => {
-        if (this.list.current) {
+        const { current } = this.list;
+        if (current) {
             this.setState({
-                scrollLeft: this.list.current.scrollLeft,
+                scrollLeft: current.scrollLeft,
+            });
+        }
+    }, 150);
+
+    public updateMaxScrollLeft = debounce(() => {
+        const { current } = this.list;
+        if (current) {
+            this.setState({
+                maxScrollLeft:  current.scrollWidth - current.clientWidth,
             });
         }
     }, 150);
@@ -120,9 +132,9 @@ class Carousel extends React.Component<CarouselProps, CarouselState> {
             arrowPosition && `Carousel-Arrow_${arrowPosition}`,
         );
 
-        const { current } = this.list;
-        const maxScrollLeft = current ? current.scrollWidth - current.clientWidth : 100;
-        const scrollLeft = this.state.scrollLeft;
+        this.updateMaxScrollLeft();
+
+        const { scrollLeft, maxScrollLeft } = this.state;
 
         return  (
             <div className="Carousel-Wrapper">
