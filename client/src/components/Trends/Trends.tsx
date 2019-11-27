@@ -55,14 +55,14 @@ class Trends extends Component<TrendsProps> {
         );
 
         const tabs = (
-            <>
+            <div className="Trends-Wrapper">
                 <Title cn="Trends-Title" url={url}>Самое популярное</Title>
                 <Tabs
                     period={trendsPeriod}
                     tabsContent={tabsContent}
                     onTabClickSetValue={onTabClickSetPeriod}
                 />
-            </>
+            </div>
         );
 
         if (allTrendsOnMain && trends.length > 0) {
