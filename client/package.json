@@ -20,7 +20,7 @@
     "query-string": "^6.8.3",
     "react-tabs": "^3.0.0",
     "scroll": "^3.0.1",
-    "stories-component": "file:../stories-component"
+    "stories-component": "file:stories-component"
   },
   "eslintConfig": {
     "extends": "react-app"
