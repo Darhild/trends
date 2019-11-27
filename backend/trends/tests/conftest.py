@@ -1,9 +1,6 @@
 import os
-import uuid
-
 import pytest
-from sqlalchemy_utils import create_database, drop_database
-from yarl import URL
+
 
 TESTS_DIR = os.path.dirname(__file__)
 
