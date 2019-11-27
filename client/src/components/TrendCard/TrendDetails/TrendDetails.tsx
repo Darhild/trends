@@ -19,7 +19,7 @@ const TrendDetails: React.FC< Props > = ({ desc, commentsCount, className, varia
     );
 
     const dictionary = {
-        one: 'комментраий',
+        one: 'комментарий',
         few: 'комментария',
         many: 'комментариев',
     };
