@@ -28,7 +28,8 @@
     },
     "linterOptions": {
         "exclude": [
-            "./**/*.js"
+            "./**/*.js",
+            "stories-component/**/*"
         ]
     }
 }

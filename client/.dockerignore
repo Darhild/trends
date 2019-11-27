@@ -4,3 +4,4 @@
 !package-lock.json
 !index.js
 !src/setupProxy.js
+!stories-component
