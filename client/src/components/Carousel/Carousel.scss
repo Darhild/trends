@@ -56,7 +56,8 @@
 
     &-Header {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
+        align-items: baseline;
 
         @media(min-width: $screen-m) {
             margin: 8px 0;
@@ -96,7 +97,7 @@
 
     &-Hide {
         width: 13px;
-        margin-left: auto;
+        cursor: pointer;
     }
 
     &-HideInfo {
