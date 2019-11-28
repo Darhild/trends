@@ -1,0 +1,26 @@
+@import './../../variables';
+
+.Authorization {
+    display: none;    
+
+    @media(min-width: $screen-s) {
+        display: flex;
+        align-items: center;
+        padding-left: 25px;
+    }
+
+    &-SignIn {
+        display: none;
+        
+        @media(min-width: $screen-m) {
+            display: inline-block;
+            margin-right: 15px;
+            color: var(--text-secondary);
+            text-decoration: none;   
+        }
+
+        &:hover {
+            color: var(--text-primary);
+        }
+    }
+}

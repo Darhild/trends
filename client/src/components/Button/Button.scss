@@ -49,11 +49,26 @@
         }
     }
 
+    &_type_authorization {
+        padding: 10px 16px;
+        color: var(--text-dark);
+        background-color: var(--color-background-authorization);
+        border-radius: 3px;
+
+        &:hover {
+            background-color: var(--color-border-accent);
+        }
+    }
+
     &_subscribe_off {
         background: var(--color-background-button);
     }
 
     &-Icon {
         margin-right: 6px;
+    }
+
+    &-Text {
+        line-height: 18px;
     }
 }
