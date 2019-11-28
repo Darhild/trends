@@ -67,8 +67,6 @@ export const StoryViewer: React.FC<Props> = ({user}) => {
     ))
   `;
 
-  console.log(`StoryViewer-Stories ${selfState.isMoving ? 'StoryViewer-Stories_moving' : '' }`)
-
   return (
     <div className='StoryViewer'>
       <div

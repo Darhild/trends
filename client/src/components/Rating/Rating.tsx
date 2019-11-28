@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { ReactComponent as Star } from '../../images/svg/star.svg';
 import './Rating.scss';
 
 interface Props {
@@ -23,7 +24,7 @@ export default class Rating extends Component<Props> {
                 }
                 {
                     typeof percentage === 'number'
-                        ? <div className="Rating-Percentage">{`${percentage}%`}</div>
+                        ? <div className="Rating-Percentage"><Star className="StarIcon" />{`${percentage}%`}</div>
                         : null
                 }
             </div>

@@ -38,10 +38,11 @@ interface ChannelsItemProps {
 const ChannelsItem = ({ title, url, iconUrl, position }: ChannelsItemProps) => (
     <a className="Channels-Item" href={url}>
         <div className="Channels-Icon"
-        style={{
-            backgroundImage: iconUrl,
-            backgroundPosition: position + '% 0',
-        }}/>
+            style={{
+                backgroundImage: iconUrl,
+                backgroundPosition: position + '% 0',
+            }}
+        />
         <span className="Channels-Title">{title}</span>
     </a>
 );
@@ -85,7 +86,8 @@ class Channels extends React.Component<ChannelsProps> {
                 title={channel.title}
                 url={url}
                 iconUrl={iconUrl}
-                position={position} />
+                position={position}
+            />
         );
     }
 
