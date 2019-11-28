@@ -26,18 +26,23 @@ interface TrendsProps {
 
 class Trends extends Component<TrendsProps> {
     public componentDidMount() {
-        const { category, trendsPeriod, source, onSetTrends } = this.props;
-        category === 'main'
-            ? onSetTrends(category, trendsPeriod, source)
-            : onSetTrends(category, trendsPeriod);
+        this.setTrends();
     }
 
     public componentDidUpdate(prevProps: TrendsProps) {
-        const { category, trendsPeriod, source, onSetTrends } = this.props;
+        const { category, trendsPeriod, source } = this.props;
         if (category !== prevProps.category || trendsPeriod !== prevProps.trendsPeriod || source !== prevProps.source) {
-            category === 'main'
-                ? onSetTrends(category, trendsPeriod, source)
-                : onSetTrends(category, trendsPeriod);
+            this.setTrends();
+        }
+    }
+
+    public setTrends = () => {
+        const { category, trendsPeriod, source, onSetTrends } = this.props;
+
+        if (category === 'main') {
+            onSetTrends(category, trendsPeriod, source);
+        } else {
+            onSetTrends(category, trendsPeriod);
         }
     }
 
@@ -47,32 +52,26 @@ class Trends extends Component<TrendsProps> {
 
         const trendsTabs = (
             <Tabs
-                className="Carousel-Tabs"
                 period={trendsPeriod}
                 tabsContent={tabsContent}
                 onTabClickSetValue={onTabClickSetPeriod}
             />
         );
 
-        const tabs = (
+        const tabsWrapper = (
             <div className="Trends-Wrapper">
                 <Title cn="Trends-Title" url={url}>Самое популярное</Title>
-                <Tabs
-                    period={trendsPeriod}
-                    tabsContent={tabsContent}
-                    onTabClickSetValue={onTabClickSetPeriod}
-                />
+                {trendsTabs}
             </div>
         );
 
         if (allTrendsOnMain && trends.length > 0) {
-
             return (
                 <Carousel title="Самое популярное" margin="s" routeUrl={url} tabs={trendsTabs}>
                     {
                         trends.map((props) => {
                             const { id, desc, source, poster, img } = props;
-                            const urlId = id ? id : desc;
+                            const urlId = id || desc;
                             const image = source === 'google' ? img : poster;
 
                             return (
@@ -92,19 +91,22 @@ class Trends extends Component<TrendsProps> {
 
         return (
             <>
-                {tabs}
+                {tabsWrapper}
                 <TrendsList category={category} variant={trendVariant} shortVariant />
             </>
         );
     }
 
     public render() {
-        const { category } = this.props;
+        const { trends, category } = this.props;
 
         return (
             <div className="Trends">
                 {this.renderItems()}
-                <Link to={`/${category}/trends`} className="Trends-More">Показать все популярные темы</Link>
+                {
+                    trends.length > 0
+                        && <Link to={`/${category}/trends`} className="Trends-More">Показать все популярные темы</Link>
+                }
             </div>
         );
     }
@@ -119,8 +121,8 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    onSetTrends: (category: string, period: number, source?: string) => (
-        dispatch(setTrendsThunk(category, period, source))),
+    onSetTrends: (category: string, period: number, source?: string) =>
+        dispatch(setTrendsThunk(category, period, source)),
     onTabClickSetPeriod: (period: number) => dispatch(setTrendsPeriod(period)),
 });
 
