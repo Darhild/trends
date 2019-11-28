@@ -71,27 +71,24 @@
         padding-top: 8px;
 
         @media(min-width: $screen-m) {
+            display: flex;
             min-height: 32px;
             padding-top: 0;
-        }
-
-        @media(min-width: $screen-m) {
-            display: flex;
         }
 
         &_hidden {
             display: block;
             opacity: .4;
 
-            .Carousel-Tabs {
+            .Tabs {
                 display: none;
             }
         }
     }
 
-    &-Tabs {
+    &-Title {
         @media(min-width: $screen-m) {
-            margin-left: 40px;
+            margin-right: 40px;
         }
     }
 
