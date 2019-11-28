@@ -16,16 +16,12 @@
         background-color: var(--color-layout-medium);
         border-radius: 4px;
 
-        &:before {
-            content: '';
+        .StarIcon {
             position: relative;
             top: 1px;
-            display: inline-block;
             width: 11px;
             height: 11px;
             margin-right: 3px;
-            background: (url(//yastatic.net/s3/home-static/_/s/E/sMYY2M7l7Ha7UNPZlT11a3Fy0.svg) no-repeat 50% 50%);
-            background-position: 0 0;
         }
     }
 }

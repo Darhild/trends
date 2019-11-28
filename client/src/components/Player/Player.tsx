@@ -33,12 +33,17 @@ class Player extends React.Component<PlayerProps> {
             className,
         );
 
-        const src = `https://yastatic.net/yandex-video-player-iframe-api/index.html?stream_url=${url}&preview=${preview}`;
+        const src = `https://yastatic.net/yandex-video-player-iframe-api/index.html?stream_url=${url}&preview=${preview}&preload=false`;
 
         return (
             <div className={playerCn}>
                 <div className="Player-Container">
-                    <iframe title="Player" src={src} allow="fullscreen" style={{ width: '100%', height: '100%', border: 'none' }}></iframe>
+                    <iframe
+                        title="Player"
+                        src={src}
+                        className="Player-Iframe"
+                        allow="fullscreen"
+                    />
                 </div>
                 <div className="Player-Info">
                     {blogger && <img className="Player-Avatar" src={blogger.avatar} alt="avatar" />}
