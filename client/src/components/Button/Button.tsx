@@ -17,6 +17,10 @@ interface TypedButtonProps {
     cn: string;
 }
 
+interface ButtonsTypes {
+    [propName: string]: React.ReactElement;
+}
+
 class SubscribeButton extends React.Component<TypedButtonProps, SubscribeButtonState> {
     public state = {
         isSubscribed: false,
@@ -54,29 +58,29 @@ const AddVideoButton = ({ cn }: TypedButtonProps) => (
 );
 
 const AuthorizationButton = ({ cn }: TypedButtonProps) => (
-    <a href="https://passport.yandex.ru/auth" className={cn} target="_blank">
+    <a href="https://passport.yandex.ru/auth" className={cn} target="_blank" rel="noopener noreferrer">
         <User className="Button-Icon"/>
         <div className="Button-Text">Войти</div>
     </a>
 );
 
+
 const Button = ({ type }: ButtonProps) => {
         const buttonCn = classnames('Button', `Button_type_${type}`);
 
-        switch (type) {
-            case 'subscribe':
-                return (
-                    <SubscribeButton cn={buttonCn} />
-                );
-            case 'authorization':
-                return (
-                    <AuthorizationButton cn={buttonCn} />
-                );
-            default:
-                return (
-                    <AddVideoButton cn={buttonCn} />
-                );
-            }
+        const buttons: ButtonsTypes = {
+            subscribe: (
+                <SubscribeButton cn={buttonCn} />
+            ),
+            authorization: (
+                <AuthorizationButton cn={buttonCn} />
+            ),
+            addVideo: (
+                <AddVideoButton cn={buttonCn} />
+            ),
+        };
+
+        return buttons[type];
 };
 
 export default Button;

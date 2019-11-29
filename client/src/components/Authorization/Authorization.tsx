@@ -15,7 +15,7 @@ const Authorization = ({ className }: AuthorizationProps) => {
 
     return (
         <div className={authorizationCn}>
-            <a href="https://passport.yandex.ru/registration" target="_blank" className="Authorization-SignIn">
+            <a href="https://passport.yandex.ru/registration" target="_blank" className="Authorization-SignIn" rel="noopener noreferrer">
                 Регистрация
             </a>
             <Button type="authorization" />
